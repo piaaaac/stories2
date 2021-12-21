@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+// ------------------------------------------------------------------------
+// Fonts
+// ------------------------------------------------------------------------
+
+// Montserrat
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+// $font-sans: "Montserrat", sans-serif;
+// $font-sans: sans-serif;
+
+@mixin font-style(/* $font-fam,  */$xs, $sm, $md, $lg, $xl, $letter-sp, $line-h, $weight, $style){
+  // font-family: $font-fam;
+  font-size: $xs;
+  letter-spacing: $letter-sp;
+  line-height: $line-h;
+  font-weight: $weight;
+  font-style: $style;
+  font-stretch: normal;
+  @include media-breakpoint-up(sm) { font-size: $sm; }
+  @include media-breakpoint-up(md) { font-size: $md; }
+  @include media-breakpoint-up(lg) { font-size: $lg; }
+  @include media-breakpoint-up(xl) { font-size: $xl; }  
+}
+
+// ----------------------------------------------------------- xs --- sm --- md --- lg --- xl ---- lsp ---- lh ---- w --- style
+
+@mixin font-sans-xl {  @include font-style(/* $font-sans, */   42px,  42px,  52px,  52px,  52px,   0,       1.20em, 700,  normal); }
+@mixin font-sans-l {   @include font-style(/* $font-sans, */   20px,  20px,  25px,  25px,  25px,   0,       1.20em, 600,  normal); }
+@mixin font-sans-m {   @include font-style(/* $font-sans, */   13px,  14px,  15px,  15px,  15px,   0,       1.2em,  600,  normal); }
+@mixin font-sans-s {   @include font-style(/* $font-sans, */   11px,  11px,  11px,  11px,  11px,   0.03em,  1.3em,  400,  normal); }
+
+.font-sans-xl  { @include font-sans-xl; }
+.font-sans-l   { @include font-sans-l; }
+.font-sans-m   { @include font-sans-m; }
+.font-sans-s   { @include font-sans-s; }
+
+// -----------------------------------------------------------------------------
+// Elements
+// -----------------------------------------------------------------------------
+
+p { 
+  @include font-sans-m;
+  margin-bottom: 1em;
+}
+h1 { @include font-sans-xl; }
+h2 { @include font-sans-l; }
+h3 { @include font-sans-m; }
+h4 { @include font-sans-m; }
+h5 { @include font-sans-s; }
+h6 { @include font-sans-s; }
+
+// -----------------------------------------------------------------------------
+// Block styles
+// -----------------------------------------------------------------------------
+
+.block-sans-s,
+.block-sans-s p {
+  color: black;
+  @include font-sans-s;
+}
+
+.block-sans-m,
+.block-sans-m p {
+  color: black;
+  @include font-sans-m;
+}
+
+.block-sans-l,
+.block-sans-l p {
+  color: black;
+  @include font-sans-l;
+}
+

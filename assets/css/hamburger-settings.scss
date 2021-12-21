@@ -1,0 +1,22 @@
+// ------------------------------------------------------------------
+// via https://github.com/jonsuh/hamburgers#customization
+// ------------------------------------------------------------------
+
+$hamburger-padding-x           : 0; //15px;
+$hamburger-padding-y           : 0; //15px;
+$hamburger-active-layer-color  : white;
+$hamburger-hover-opacity       : 1;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity;
+$hamburger-layer-color         : white;
+$hamburger-layer-border-radius : 1px;
+$hamburger-layer-spacing       : 5px;
+$hamburger-layer-height        : 2px;
+$hamburger-layer-width         : 23px;
+
+// To use CSS filters as the hover effect instead of opacity,
+// set $hamburger-hover-use-filter as true and
+// change the value of $hamburger-hover-filter accordingly.
+// $hamburger-hover-use-filter   : false;
+// $hamburger-hover-filter       : opacity(50%);
+// $hamburger-active-hover-filter: $hamburger-hover-filter;
+

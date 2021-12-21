@@ -1,0 +1,9 @@
+{
+  "name": "ap-stories2",
+  "version": "1.0.0",
+  "source": "src/index.js",
+  "main": "assets/js/index.js",
+  "devDependencies": {
+    "parcel": "latest"
+  }
+}

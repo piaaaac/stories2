@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+/**
+ * via https://www.w3schools.com/howto/howto_css_switch.asp
+ * 
+ * <label>
+ *   <div class="switch small">
+ *     <input type="checkbox" onchange="handleSwitchChange(this);">
+ *     <span class="slider round"></span>
+ *   </div>
+ *   <span class="text">Do something</span>
+ * </label>
+ * 
+ * function handleSwitchChange (el) {
+ *   // use el.checked ...
+ * }
+ *
+ */
+
+$color-active: orange;
+
+$w: 55px;
+$h: 34px;
+$circle-size: 26px;
+$small-w: 34px;
+$small-h: 20px;
+$small-circle-size: 14px;
+
+label {
+  display: inline-flex; align-items: center; justify-content: flex-start;
+  .text { margin-left: 10px; }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: $w;
+  height: $h;
+  
+  input { // Hide default HTML checkbox
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  input:checked + .slider {
+    background-color: $color-active;
+  }
+  input:focus + .slider {
+    // box-shadow: 0 0 1px $color-active;
+  }
+  input:checked + .slider::before {
+    transform: translateX(#{$w - $circle-size - ($h - $circle-size)});
+  }
+
+  .slider { // The slider
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(white, 0.5);
+    transition: .2s;
+    
+    &::before {
+      position: absolute;
+      content: "";
+      height: $circle-size;
+      width: $circle-size;
+      left: #{($h - $circle-size) / 2};
+      bottom: #{($h - $circle-size) / 2};
+      background-color: white;
+      transition: .2s;
+    }
+
+    &.round { // Rounded sliders
+      border-radius: $h;
+      &::before {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &.small {
+    width: $small-w;
+    height: $small-h;
+    input:checked + .slider::before {
+      transform: translateX(#{$small-w - $small-circle-size - ($small-h - $small-circle-size)});
+    }
+    .slider {
+      &::before {
+        height: $small-circle-size;
+        width: $small-circle-size;
+        left: #{($small-h - $small-circle-size) / 2};
+        bottom: #{($small-h - $small-circle-size) / 2};
+      }
+      &.round {
+        border-radius: $small-h;
+      }
+    }
+  }
+}
+
+
+
+
