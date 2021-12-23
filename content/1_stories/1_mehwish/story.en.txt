@@ -1,0 +1,41 @@
+Title: Mehwish
+
+----
+
+Storyid: 1
+
+----
+
+Age: 25
+
+----
+
+Sex: female
+
+----
+
+Datedeparture: 2017-09-01
+
+----
+
+Datearrival: 2020-08-08
+
+----
+
+Jobdeparture: 
+
+----
+
+Jobarrival: Cleaning woman
+
+----
+
+Reasondeparture: 
+
+----
+
+Text: 
+
+----
+
+Notes: 

@@ -1,0 +1,21 @@
+title: Stories
+columns:
+  - width: 1/1
+    sections:
+
+      # meta: 
+      #   type: fields
+      #   fields:
+      #     intro:
+      #       type: textarea
+
+      items:
+        headline: Stories
+        type: pages
+        template: story
+        empty: No items
+        layout: cards
+        # img: 
+        #   cover: true
+        #   back: black
+        #   query: page.image.toFile

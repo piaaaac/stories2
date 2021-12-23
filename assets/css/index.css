@@ -633,7 +633,7 @@ label {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: grey;
+  background-color: #ddd;
   color: white; }
   body.media-open {
     overflow: hidden; }
@@ -697,6 +697,9 @@ a {
     opacity: 0.5; }
   100% {
     opacity: 0.5; } }
+svg#story-svg path {
+  fill: #F9F8FF; }
+
 nav#menu-header {
   z-index: 6;
   position: fixed;

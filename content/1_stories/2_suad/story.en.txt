@@ -1,0 +1,41 @@
+Title: Suad
+
+----
+
+Storyid: 2
+
+----
+
+Age: 49
+
+----
+
+Sex: female
+
+----
+
+Datedeparture: 2019-05-01
+
+----
+
+Datearrival: 2020-07-01
+
+----
+
+Jobdeparture: English teacher
+
+----
+
+Jobarrival: 
+
+----
+
+Reasondeparture: Personal reasons
+
+----
+
+Text: 
+
+----
+
+Notes: 

@@ -1,4 +1,49 @@
 /**
+ * Handles resize start and end
+ * @param handleStart                     (function)
+ * @param handleEnd                       (function)
+ * @param resizeOptions.delay             (number)
+ * @param resizeOptions.horizontalOnly    (bool)
+ * 
+ * EXAMPLE
+ * handleResizeStartEnd(() => {
+ *   console.log("started")
+ * }, () => {
+ *   console.log("ended")
+ * });
+ * 
+ * */
+function handleResizeStartEnd (handleStart, handleEnd, resizeOptions) {
+  var defaults = {
+    delay: 200,
+    horizontalOnly: false,
+  };
+  var options = Object.assign({}, defaults, resizeOptions);
+  window.resizeStarted = null;
+  window.resizeTimeout = null;
+  window.lastWidth = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (window.resizeStarted === null) {
+      if (options.horizontalOnly === false || options.horizontalOnly === true && window.innerWidth != window.lastWidth) {
+        handleStart();
+        window.resizeStarted = true;
+      }
+    }
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(function () {
+      if (options.horizontalOnly === false || options.horizontalOnly === true && window.innerWidth != window.lastWidth) {
+        handleEnd();
+        window.resizeStarted = null;
+        window.resizeTimeout = null;
+        window.lastWidth = window.innerWidth;
+      }
+    }, options.delay);
+  });
+}
+
+
+
+/**
  *  via p5 code
  *  https://github.com/processing/p5.js/blob/master/src/math/calculation.js
  *  dependency: apConstrain

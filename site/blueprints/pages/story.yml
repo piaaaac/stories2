@@ -1,0 +1,55 @@
+title: Story
+preset: page
+pages: false
+fields:
+  storyid:
+    label: Story ID
+    type: number
+    help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
+    translate: false
+  age:
+    label: Age
+    type: number
+    width: 1/2
+    translate: false
+  sex:
+    label: Sex
+    type: select
+    default: other
+    options:
+      male: Male
+      female: Female
+      other: Not specified
+    width: 1/2
+    translate: false
+  dateDeparture:
+    label: Date of departure
+    type: date
+    width: 1/2
+    translate: false
+  dateArrival:
+    label: date of arrival
+    type: date
+    width: 1/2
+    translate: false
+  jobDeparture:
+    label: Job at departure
+    type: text
+    width: 1/2
+  jobArrival:
+    label: Job at arrival
+    type: text
+    width: 1/2
+  reasonDeparture:
+    label: Reason of departure
+    type: text
+  text:
+    label: Text
+    type: textarea
+    size: small
+  notes:
+    label: Notes
+    type: textarea
+    size: small
+    translate: false
+
