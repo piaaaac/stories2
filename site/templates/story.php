@@ -16,6 +16,8 @@ $ass = $kirby->url("assets");
   </div>
 </div>
 
+<div id="tmp-label" style="position: absolute; bottom: 30px; left: 30px; font-size: 21px; color: black;"><?= $page->title() ?></div>
+
 <script>
 var s = new StorySvg(<?= $page->storyid()->value() ?>);
 s.readDataAndInit();

@@ -1,0 +1,41 @@
+Title: Muhammed
+
+----
+
+Storyid: 5
+
+----
+
+Age: 16
+
+----
+
+Sex: male
+
+----
+
+Datedeparture: 2018-07-01
+
+----
+
+Datearrival: 2019-07-12
+
+----
+
+Jobdeparture: 
+
+----
+
+Jobarrival: 
+
+----
+
+Reasondeparture: problems with talibans
+
+----
+
+Text: 
+
+----
+
+Notes: 

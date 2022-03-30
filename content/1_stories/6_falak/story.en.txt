@@ -1,0 +1,41 @@
+Title: Falak
+
+----
+
+Storyid: 6
+
+----
+
+Age: 12
+
+----
+
+Sex: male
+
+----
+
+Datedeparture: 2013-03-01
+
+----
+
+Datearrival: 2018-08-01
+
+----
+
+Jobdeparture: 
+
+----
+
+Jobarrival: builder
+
+----
+
+Reasondeparture: 
+
+----
+
+Text: 
+
+----
+
+Notes: 

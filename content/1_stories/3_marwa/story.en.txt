@@ -1,0 +1,41 @@
+Title: Marwa
+
+----
+
+Storyid: 3
+
+----
+
+Age: 20
+
+----
+
+Sex: female
+
+----
+
+Datedeparture: 2017-09-01
+
+----
+
+Datearrival: 2020-06-01
+
+----
+
+Jobdeparture: 
+
+----
+
+Jobarrival: 
+
+----
+
+Reasondeparture: 
+
+----
+
+Text: 
+
+----
+
+Notes: 

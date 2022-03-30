@@ -1,0 +1,41 @@
+Title: Bushra
+
+----
+
+Storyid: 4
+
+----
+
+Age: 28
+
+----
+
+Sex: female
+
+----
+
+Datedeparture: 2014-04-01
+
+----
+
+Datearrival: 2017-04-20
+
+----
+
+Jobdeparture: 
+
+----
+
+Jobarrival: cleaner
+
+----
+
+Reasondeparture: dashes
+
+----
+
+Text: 
+
+----
+
+Notes: 

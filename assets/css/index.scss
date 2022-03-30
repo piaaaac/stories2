@@ -116,9 +116,28 @@ a {
 // STORY
 // -----------------------------------------------------------------------------
 
-svg#story-svg {
-  path {
-    fill: #F9F8FF;
+div#svg-container {
+  line-height: 0;
+  svg#story-svg {
+    path.land-boundary {
+      fill: #F9F8FF;
+    }
+    path.leg-line {
+      stroke: black;
+      fill: none;
+      &[data-line-type='wheels']  {stroke-dasharray: 2px;}
+      &[data-line-type='train']   {stroke-dasharray: 4px;}
+      &[data-line-type='water']   {stroke-dasharray: 2px 4px;}
+      &[data-line-type='plane']   {stroke-dasharray: 2px 6px;}
+      &[data-line-type='walking'] {stroke-dasharray: 4px 2px;}
+      &[data-line-type='mixed']   {stroke-dasharray: 1px 3px;}
+      &[data-line-type='unknown'] {stroke-dasharray: 6px 2px;}
+    }
+    circle.leg-dot {
+      stroke: white;
+      stroke-width: 1px;
+      fill: black;
+    }
   }
 }
 
