@@ -1,0 +1,41 @@
+Title: Omar
+
+----
+
+Storyid: 7
+
+----
+
+Age: 16
+
+----
+
+Sex: male
+
+----
+
+Datedeparture: 
+
+----
+
+Datearrival: 
+
+----
+
+Jobdeparture: student
+
+----
+
+Jobarrival: student
+
+----
+
+Reasondeparture: 
+
+----
+
+Text: 
+
+----
+
+Notes: 
