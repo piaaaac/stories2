@@ -18,6 +18,7 @@ $(document).ready(function () {});
 const dataFolder = "v0-dev";
 const mapUrl = window.siteUrl +"/assets/data/world-110m.v1.json";
 const legsDataUrl = window.siteUrl +"/assets/data/"+ dataFolder +"/legs.json";
+const cacheFile = window.siteUrl +"/manual-cache.json";
 
 // -----------------------------------------------------------------------------
 // Data binding
@@ -144,6 +145,7 @@ function StorySvg (id) {
     Promise.all([
       fetch(mapUrl),
       fetch(legsDataUrl),
+      fetch(cacheFile),
     ]).then(function (responses) {
       return Promise.all(responses.map(function (response) {
         return response.json();
@@ -157,6 +159,11 @@ function StorySvg (id) {
       var legsDataStory = legsData.filter(d => parseInt(d.story_id) === parseInt(that.story_id));
       that.legs = cleanLegs(legsDataStory);
       console.log(that.legs);
+
+      that.cachedCalls = rawDatasets[2];
+      console.log(that.cachedCalls);
+      // throw "check cached calls in json format";
+      // debugger;
 
       // svg
       // this is reiterated on resize
@@ -221,11 +228,14 @@ function StorySvg (id) {
 
       const cacheKeyData = Object.assign({}, {"requestUrl": apiUrlPost}, requestData);
       const cacheKey = new URLSearchParams(cacheKeyData).toString();
-      console.log(cacheKey);
+      console.log("cacheKey:", cacheKey);
       // throw "debug the shit outta this"
+
+
 
       var requestLog = {
         "isResolved": false,
+        "isResolvedVia": null,
         "resolvedAt": null,
         "requestedAt": Math.floor(new Date()/1000),
         "requestId": requestId,
@@ -234,6 +244,32 @@ function StorySvg (id) {
         "cacheKey": cacheKey,
         "apiUrl": apiUrlPost,
       };
+
+
+      // search for cached item that matches this api call
+      var allCachedKeys = this.cachedCalls.map(e => e.cacheKey);
+      var foundIndex = allCachedKeys.indexOf(cacheKey);
+      if (foundIndex !== -1) {
+        var cacheItem = this.cachedCalls[foundIndex];
+        // console.log("~~~~~");
+        // console.log(cacheItem);
+        // console.log("~~~~~");
+        // alert("found! - ", cacheKey);
+
+        // update request log
+        requestLog.isResolved = true;
+        requestLog.isResolvedVia = "cache";
+        requestLog.resolvedAt = Math.floor(new Date()/1000);
+        this.requests.push(requestLog);
+
+        callback(cacheItem.response);
+        return;
+
+      }
+
+
+
+
       this.requests.push(requestLog);
       
       var that = this;
@@ -259,6 +295,7 @@ function StorySvg (id) {
         that.routes.push(route);
         const req = that.requests.find(r => r.requestId === requestId);
         req.isResolved = true;
+        req.isResolvedVia = "API call";
         req.resolvedAt = Math.floor(new Date()/1000);
         console.log(that.routes.length +"/"+ that.requests.length);
 
@@ -266,6 +303,11 @@ function StorySvg (id) {
           "cacheKey": cacheKey,
           "response": data,
         };
+
+        // console.log("geojson:");
+        // console.log(data);
+        // throw "check goejson"
+
         console.log("cache item", JSON.stringify(cacheItem));
 
         callback(data);

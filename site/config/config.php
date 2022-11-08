@@ -9,7 +9,7 @@ return [
   "whoops" => true,
   'languages' => true,
 
-  // "routes" => require_once 'routes.php',
+  "routes" => require_once 'routes.php',
 
   // "hooks" => require_once "hooks.php", // currently []
   

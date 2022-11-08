@@ -53,3 +53,6 @@ fields:
     size: small
     translate: false
 
+  cachedApiCalls:
+    type: textarea
+    disabled: true
