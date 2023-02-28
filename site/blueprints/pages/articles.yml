@@ -1,0 +1,21 @@
+title: Articles
+columns:
+  - width: 1/1
+    sections:
+
+      # meta: 
+      #   type: fields
+      #   fields:
+      #     intro:
+      #       type: textarea
+
+      items:
+        headline: Articles
+        type: pages
+        template: article
+        empty: No items
+        layout: cards
+        # img: 
+        #   cover: true
+        #   back: black
+        #   query: page.image.toFile

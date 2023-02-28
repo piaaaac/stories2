@@ -1,0 +1,19 @@
+title: Home
+preset: page
+fields:
+  
+  text:
+    label: Text
+    type: textarea
+    size: small
+
+  textAbout:
+    label: Text
+    type: textarea
+    size: small
+
+  textAboutAuthors:
+    label: Text
+    type: textarea
+    size: small
+

@@ -4,13 +4,37 @@
 // Fonts
 // ------------------------------------------------------------------------
 
-// Montserrat
-// @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
-// $font-sans: "Montserrat", sans-serif;
-// $font-sans: sans-serif;
+@font-face { font-family: 'S'; font-weight: 400; font-style: normal; src: url('../fonts/SabonLTStd-Roman.woff2') format('woff2'), url('../fonts/SabonLTStd-Roman.woff') format('woff'); }
+@font-face { font-family: 'S'; font-weight: 400; font-style: italic; src: url('../fonts/SabonLTStd-Italic.woff2') format('woff2'), url('../fonts/SabonLTStd-Italic.woff') format('woff'); }
+@font-face { font-family: 'S'; font-weight: 700; font-style: normal; src: url('../fonts/SabonLTStd-Bold.woff2') format('woff2'), url('../fonts/SabonLTStd-Bold.woff') format('woff'); }
+@font-face { font-family: 'S'; font-weight: 700; font-style: italic; src: url('../fonts/SabonLTStd-BoldItalic.woff2') format('woff2'), url('../fonts/SabonLTStd-BoldItalic.woff') format('woff'); }
+$font-ser: "S";
 
-@mixin font-style(/* $font-fam,  */$xs, $sm, $md, $lg, $xl, $letter-sp, $line-h, $weight, $style){
-  // font-family: $font-fam;
+@font-face { font-family: 'SS'; font-weight: 400; font-style: normal; src: url('../fonts/BasierCircle-Regular.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 500; font-style: normal; src: url('../fonts/BasierCircle-Medium.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 600; font-style: normal; src: url('../fonts/BasierCircle-SemiBold.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 700; font-style: normal; src: url('../fonts/BasierCircle-Bold.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 400; font-style: italic; src: url('../fonts/BasierCircle-RegularItalic.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 500; font-style: italic; src: url('../fonts/BasierCircle-MediumItalic.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 600; font-style: italic; src: url('../fonts/BasierCircle-SemiBoldItalic.otf') format('opentype'); }
+@font-face { font-family: 'SS'; font-weight: 700; font-style: italic; src: url('../fonts/BasierCircle-BoldItalic.otf') format('opentype'); }
+$font-san: "SS";
+
+@font-face { font-family: 'M'; font-weight: 400; font-style: normal; src: url('../fonts/BasierCircleMono-Regular.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 500; font-style: normal; src: url('../fonts/BasierCircleMono-Medium.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 600; font-style: normal; src: url('../fonts/BasierCircleMono-SemiBold.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 700; font-style: normal; src: url('../fonts/BasierCircleMono-Bold.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 400; font-style: italic; src: url('../fonts/BasierCircleMono-RegularItalic.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 500; font-style: italic; src: url('../fonts/BasierCircleMono-MediumItalic.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 600; font-style: italic; src: url('../fonts/BasierCircleMono-SemiBoldItalic.otf') format('opentype'); }
+@font-face { font-family: 'M'; font-weight: 700; font-style: italic; src: url('../fonts/BasierCircleMono-BoldItalic.otf') format('opentype'); }
+$font-mon: "M";
+
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+$font-mon: 'Martian Mono', monospace;
+
+@mixin font-style($font-fam, $xs, $sm, $md, $lg, $xl, $letter-sp, $line-h, $weight, $style){
+  font-family: $font-fam;
   font-size: $xs;
   letter-spacing: $letter-sp;
   line-height: $line-h;
@@ -25,50 +49,51 @@
 
 // ----------------------------------------------------------- xs --- sm --- md --- lg --- xl ---- lsp ---- lh ---- w --- style
 
-@mixin font-sans-xl {  @include font-style(/* $font-sans, */   42px,  42px,  52px,  52px,  52px,   0,       1.20em, 700,  normal); }
-@mixin font-sans-l {   @include font-style(/* $font-sans, */   20px,  20px,  25px,  25px,  25px,   0,       1.20em, 600,  normal); }
-@mixin font-sans-m {   @include font-style(/* $font-sans, */   13px,  14px,  15px,  15px,  15px,   0,       1.2em,  600,  normal); }
-@mixin font-sans-s {   @include font-style(/* $font-sans, */   11px,  11px,  11px,  11px,  11px,   0.03em,  1.3em,  400,  normal); }
+@mixin font-ser-400-nor-lg { @include font-style($font-ser,    32px,  32px,  32px,  32px,  32px,   0,       1.17em, 400,  normal); }
+@mixin font-mon-400-nor-sm { @include font-style($font-mon,    12px,  12px,  12px,  12px,  12px,   0,       1.46em, 400,  normal); }
 
-.font-sans-xl  { @include font-sans-xl; }
-.font-sans-l   { @include font-sans-l; }
-.font-sans-m   { @include font-sans-m; }
-.font-sans-s   { @include font-sans-s; }
+.font-ser-400-nor-lg  { @include font-ser-400-nor-lg; }
+.font-mon-400-nor-sm  { @include font-mon-400-nor-sm; }
+
+@mixin font-sans-m { font-family: monospace; }
+@mixin font-sans-m { font-family: monospace; }
+@mixin font-sans-m { font-family: monospace; }
+@mixin font-sans-xl { font-family: monospace; }
+@mixin font-sans-m { font-family: monospace; }
 
 // -----------------------------------------------------------------------------
 // Elements
 // -----------------------------------------------------------------------------
 
-p { 
-  @include font-sans-m;
-  margin-bottom: 1em;
-}
-h1 { @include font-sans-xl; }
-h2 { @include font-sans-l; }
-h3 { @include font-sans-m; }
-h4 { @include font-sans-m; }
-h5 { @include font-sans-s; }
-h6 { @include font-sans-s; }
+// p { 
+//   @include font-sans-m;
+//   margin-bottom: 1em;
+// }
+// h1 { @include font-sans-xl; }
+// h2 { @include font-sans-l; }
+// h3 { @include font-sans-m; }
+// h4 { @include font-sans-m; }
+// h5 { @include font-sans-s; }
+// h6 { @include font-sans-s; }
 
 // -----------------------------------------------------------------------------
 // Block styles
 // -----------------------------------------------------------------------------
 
-.block-sans-s,
-.block-sans-s p {
-  color: black;
-  @include font-sans-s;
+.block-font-mon-400-nor-sm,
+.block-font-mon-400-nor-sm p {
+  @include font-mon-400-nor-sm;
 }
 
-.block-sans-m,
-.block-sans-m p {
-  color: black;
-  @include font-sans-m;
-}
+// .block-sans-m,
+// .block-sans-m p {
+//   color: black;
+//   @include font-sans-m;
+// }
 
-.block-sans-l,
-.block-sans-l p {
-  color: black;
-  @include font-sans-l;
-}
+// .block-sans-l,
+// .block-sans-l p {
+//   color: black;
+//   @include font-sans-l;
+// }
 

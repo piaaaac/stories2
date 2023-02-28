@@ -6,9 +6,13 @@
 
 $button-h: 47px;
 $button-h-s: 37px;
-$menu-h: 50px;
+$menu-h: 70px;
 $border-radius: 3px;
 $space: 20px;
+
+$verdino: #ECFAF3;
+$verde: #29A468;
+$verdone: #135D4A;
 
 
 // -----------------------------------------------------------------------------
@@ -38,12 +42,7 @@ $space: 20px;
 .upper { text-transform: uppercase; }
 .lower { text-transform: none; }
 
-.space-1 { height: #{$space * 1}; }
-.space-2 { height: #{$space * 2}; }
-.space-3 { height: #{$space * 3}; }
-.space-4 { height: #{$space * 4}; }
-.space-6 { height: #{$space * 6}; }
-.space-8 { height: #{$space * 8}; }
+.space-large { height: 110px; }
 
 // -----------------------------------------------------------------------------
 // General tags & classes
@@ -59,15 +58,22 @@ $space: 20px;
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #ddd;
-  color: white;
+  background-color: $verdino;
+  color: black;
   &.media-open { overflow: hidden; }
+  @include font-ser-400-nor-lg;
 }
 
-main {}
+main {
+  margin-top: 150px;
+}
 
 hr {
-  border-top: 1px solid rgba(white, 0.3);
+  border-top: 1px solid black;
+}
+
+p {
+  margin-bottom: 0.7em;
 }
 
 a {
@@ -75,12 +81,118 @@ a {
   text-decoration-thickness: 1px;
   text-underline-offset: 10%;
   color: inherit;
-  // &:hover { color: white; }
+  transition: color 170ms;
+  &.green {
+    color: $verde;
+    text-decoration: none;
+  }
 }
 
 // -----------------------------------------------------------------------------
 // REUSABLE PIECES
 // -----------------------------------------------------------------------------
+
+// V2
+$m: 15px;
+.squares {
+  border-top: 1px solid black;
+  margin-bottom: -1px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  // border: 1px solid red;
+  .squares-wrapper {
+    left: -$m;
+    position: relative;
+    min-width: calc(100% + #{$m*2});
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .square {
+      position: relative;
+      width: calc(33.333% - 1px);
+      min-width: calc(33.333% - 1px);
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+      .square-content-wrapper {
+        padding-top: 100%;
+        // background-color: yellow;
+        .content {
+          position: absolute;
+          top: 0; bottom: 0; left: 0; right: 0;
+          padding: $m;
+          &.story {
+            .from-bot-l { position: absolute; bottom: $m; left: $m; @include font-mon-400-nor-sm; }
+            .to-bot-r { position: absolute; bottom: $m; right: $m; @include font-mon-400-nor-sm; }
+          }
+          &.article {
+            display: flex;
+            justify-content: space-between;
+            flex-flow: column nowrap;
+            .tags, .places {
+              @include font-mon-400-nor-sm;
+            }
+            .title-wrapper {
+              padding-right: 15%;
+              margin-top: 15px;
+              .title {
+                color: $verde;
+                text-decoration: none;
+              }
+            }
+            .tags {
+              text-transform: uppercase;
+              &::before {
+                display: inline-block;
+                content: "";
+                margin-right: 0.5em;
+                height: 0.8em;
+                width: 0.8em;
+                border-radius: 0.5em;
+                background-color: black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-w-btn {
+  overflow: hidden;
+  // background-color: $verdone;
+  background-color: #18725B;
+  color: white;
+  color: #BAF7CA;
+  height: $menu-h;
+  transition: background-color 170ms;
+
+  // Grain
+  // via https://www.fxhash.xyz/article/all-about-that-grain
+  // background-image: url("data:image/svg+xml,%3Csvg id='texture' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='textureFilter' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='turbulence' baseFrequency='1'%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect x='0' y='0' width='100%25' height='100%25' filter='url(%23textureFilter)' /%3E%3C/svg%3E");
+  // background-repeat: repeat repeat;
+  // background-size: 128px 128px;
+  // mix-blend-mode: multiply;
+
+  a {
+    @include font-mon-400-nor-sm;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    height: $menu-h;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &:hover {
+    background-color: #073E30;
+    a { color: #C6F5D2; }
+  }
+}
 
 .button {
   display: inline-flex; align-items: center; justify-content: center;
@@ -151,26 +263,27 @@ nav#menu-header {
   top: 0; left: 0; right: 0;
   transition: background-color 400ms, padding 400ms;
   padding: 0;
-  background-color: grey; 
+  background-color: $verdino; 
   &.top { 
-    background-color: transparent;
-    padding: 7px 0;
+    background-color: $verdino; 
+    // padding: 7px 0;
   }
   .wrapper {
     height: $menu-h;
   }
   .left {
-    @include font-sans-m;
+    @include font-ser-400-nor-lg;
     img { margin-right: 6px; }
   }
   .items {
     a.item {
       text-decoration: none;
-      margin-left: 15px;
-      @include font-sans-m;
+      text-transform: uppercase;
+      margin-left: 12px;
+      @include font-mon-400-nor-sm;
       &.active, &:hover {
-        text-decoration: underline;
         color: inherit;
+        text-decoration: underline;
       }
     }
   }
@@ -215,8 +328,7 @@ nav#menu-header {
 // ------------------------------------------------------------------------
 
 .container-fluid {
-  max-width: 940px; 
-  max-width: 1100px; 
+  max-width: 1400px;
   margin-left: auto; margin-right: auto;
   padding-left: 30px; padding-right: 30px;
   @include media-breakpoint-down(xs) {

@@ -1,25 +1,68 @@
 <?php
-$ass = $kirby->url("assets") ."/images";
+$items = [
+  (object)[
+    "text" => "Stories",
+    "url" => page("stories")->url(),
+    "uid" => page("stories")->uid(),
+    "onclick" => "",
+  ], (object)[
+    "text" => "Reading",
+    "url" => page("articles")->url(),
+    "uid" => page("articles")->uid(),
+    "onclick" => "",
+  ], (object)[
+    "text" => "About",
+    "url" => "#",
+    "uid" => "",
+    "onclick" => "about();",
+  ],
+];
 ?>
+
+<script>
+  function about () {
+    if (window.currentPage === "home") {
+      $('html, body').animate({
+        scrollTop: $("#about").offset().top
+      });
+    } else {
+      window.location = "<?= $site->url() ?>#about";
+    }
+  }
+
+  // $("#menu-header a.item").click(() => {
+  // });
+
+</script>
 
 <nav id="menu-header" class="top">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 wrapper d-flex align-items-center justify-content-between">
-
         <div class="left">
-          <a href="<?= $site->url() ?>" class="d-flex align-items-center no-u">
-            <!-- <img src="<?= $ass ?>/logo.svg" alt="Logo"> -->
-            <span>Project title</span>
-          </a>
+          <span class="d-inline">
+            <a href="<?= $site->url() ?>" class="d-flex align-items-center no-u">
+              Moving Lines
+            </a>
+            <?php if ($page->template()->name() === "story"): ?>
+              <span> / </span>
+              <span><?= $page->title() ?></span>
+            <?php endif ?>
+          </span>
         </div>
 
         <div class="right">
           <div class="items d-none d-lg-block">
-            <a class="item" href="page.php">Menu-item</a>
-            <a class="item active" href="page.php">Menu-item</a>
-            <a class="item" href="page.php">Menu-item</a>
-            <a class="item" href="page.php">Menu-item</a>
+            <?php foreach ($items as $item): 
+              // add new key to object via https://stackoverflow.com/a/32581773/2501713
+              $item->{"active"} = $page->uid() === $item->uid;
+              ?>
+              <a 
+                class="item <?= $item->active ? " active" : "" ?>" 
+                href="<?= $item->url ?>"
+                onclick="<?= $item->onclick ? $item->onclick : "" ?>"
+              ><?= $item->text ?></a>
+            <?php endforeach ?>
           </div>
           <div class="d-lg-none mt-1">
             <button class="hamburger hamburger--slider" type="button">

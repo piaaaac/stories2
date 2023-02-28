@@ -4,7 +4,8 @@
 <?= js(['assets/js/functions-polyfills.js']) ?>
 
 <!-- jQuery -->
-<script src="<?= $kirby->url('assets') ?>/lib/jquery-3.6.0.min.js"></script>
+<!-- <script src="<?= $kirby->url('assets') ?>/lib/jquery-3.6.0.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
 <!-- lodash (used for scroll debounce) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
