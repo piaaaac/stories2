@@ -3,71 +3,85 @@
 use Kirby\Cms\Api;
 use Kirby\Cms\File;
 use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
 
 return [
-    'props' => [
-        /**
-         * Sets the upload options for linked files (since 3.2.0)
-         */
-        'uploads' => function ($uploads = []) {
-            if ($uploads === false) {
-                return false;
-            }
+	'props' => [
+		/**
+		 * Sets the upload options for linked files (since 3.2.0)
+		 */
+		'uploads' => function ($uploads = []) {
+			if ($uploads === false) {
+				return false;
+			}
 
-            if (is_string($uploads) === true) {
-                $uploads = ['template' => $uploads];
-            }
+			if (is_string($uploads) === true) {
+				$uploads = ['template' => $uploads];
+			}
 
-            if (is_array($uploads) === false) {
-                $uploads = [];
-            }
+			if (is_array($uploads) === false) {
+				$uploads = [];
+			}
 
-            $template = $uploads['template'] ?? null;
+			$uploads['accept'] = '*';
 
-            if ($template) {
-                $file = new File([
-                    'filename' => 'tmp',
-                    'parent'   => $this->model(),
-                    'template' => $template
-                ]);
+			if ($template = $uploads['template'] ?? null) {
+				// get parent object for upload target
+				$parent = $this->uploadParent($uploads['parent'] ?? null);
 
-                $uploads['accept'] = $file->blueprint()->acceptMime();
-            } else {
-                $uploads['accept'] = '*';
-            }
+				if ($parent === null) {
+					throw new InvalidArgumentException('"' . $uploads['parent'] . '" could not be resolved as a valid parent for the upload');
+				}
 
-            return $uploads;
-        },
-    ],
-    'methods' => [
-        'upload' => function (Api $api, $params, Closure $map) {
-            if ($params === false) {
-                throw new Exception('Uploads are disabled for this field');
-            }
+				$file = new File([
+					'filename' => 'tmp',
+					'parent'   => $parent,
+					'template' => $template
+				]);
 
-            if ($parentQuery = ($params['parent'] ?? null)) {
-                $parent = $this->model()->query($parentQuery);
-            } else {
-                $parent = $this->model();
-            }
+				$uploads['accept'] = $file->blueprint()->acceptMime();
+			}
 
-            if (is_a($parent, 'Kirby\Cms\File') === true) {
-                $parent = $parent->parent();
-            }
+			return $uploads;
+		},
+	],
+	'methods' => [
+		'upload' => function (Api $api, $params, Closure $map) {
+			if ($params === false) {
+				throw new Exception('Uploads are disabled for this field');
+			}
 
-            return $api->upload(function ($source, $filename) use ($parent, $params, $map) {
-                $file = $parent->createFile([
-                    'source'   => $source,
-                    'template' => $params['template'] ?? null,
-                    'filename' => $filename,
-                ]);
+			$parent = $this->uploadParent($params['parent'] ?? null);
 
-                if (is_a($file, 'Kirby\Cms\File') === false) {
-                    throw new Exception('The file could not be uploaded');
-                }
+			return $api->upload(function ($source, $filename) use ($parent, $params, $map) {
+				$props = [
+					'source'   => $source,
+					'template' => $params['template'] ?? null,
+					'filename' => $filename,
+				];
 
-                return $map($file, $parent);
-            });
-        }
-    ]
+				// move the source file from the temp dir
+				$file = $parent->createFile($props, true);
+
+				if ($file instanceof File === false) {
+					throw new Exception('The file could not be uploaded');
+				}
+
+				return $map($file, $parent);
+			});
+		},
+		'uploadParent' => function (string $parentQuery = null) {
+			$parent = $this->model();
+
+			if ($parentQuery) {
+				$parent = $parent->query($parentQuery);
+			}
+
+			if ($parent instanceof File) {
+				$parent = $parent->parent();
+			}
+
+			return $parent;
+		}
+	]
 ];

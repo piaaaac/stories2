@@ -2,10 +2,6 @@ Title: Muhammed
 
 ----
 
-Storyid: 5
-
-----
-
 Age: 16
 
 ----
@@ -34,8 +30,188 @@ Reasondeparture: problems with talibans
 
 ----
 
+Departureplace: Balkh
+
+----
+
+Departurelat: 36.7
+
+----
+
+Departurelon: 67.116944
+
+----
+
+Legs:
+
+- 
+  place: Kabul
+  lat: 34.532778
+  lon: 69.165833
+  transport: bus
+  durationday: 1
+  durationhours: null
+  staydays: 3
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Kandahar
+  lat: 31.607778
+  lon: 65.705278
+  transport: ""
+  durationday: null
+  durationhours: 10
+  staydays: 1
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Nimruz
+  lat: 30.96
+  lon: 61.86
+  transport: car
+  durationday: null
+  durationhours: 10
+  staydays: 1
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Teheran
+  lat: 35.683333
+  lon: 51.416667
+  transport: car
+  durationday: 7
+  durationhours: null
+  staydays: 3
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Istanbul
+  lat: 41.016667
+  lon: 28.966667
+  transport: car
+  durationday: 10
+  durationhours: null
+  staydays: 120
+  stayhours: null
+  comments: >
+    preso la polizia 4 volte e mi ha
+    riposrtato in Turchia
+  geojsonleg: ""
+- 
+  place: Smonzi
+  lat: null
+  lon: null
+  transport: walk
+  durationday: 15
+  durationhours: null
+  staydays: 45
+  stayhours: null
+  comments: 'Mi ha preso la polizia 4 volte e mi ha riportato in Turchia: 1 mese e mezzo in prigione. "Era il Natale del 2019, questo lo ricordo…a Natale ero in galera. Mi hanno portato in comunità a poi sono partito"'
+  geojsonleg: ""
+- 
+  place: Belgrado
+  lat: 44.820556
+  lon: 20.462222
+  transport: car
+  durationday: 1
+  durationhours: null
+  staydays: 90
+  stayhours: null
+  comments: >
+    per riposare, ero stato picchiato tanto
+    mi hanno lnciato dietro i cani.
+  geojsonleg: ""
+- 
+  place: Velika Kladuša
+  lat: 45.183333
+  lon: 15.8
+  transport: bus
+  durationday: 3
+  durationhours: null
+  staydays: 4
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: confine Slovenia-Trieste (dentro Slo)
+  lat: 45.71197
+  lon: 13.84675
+  transport: walk
+  durationday: 11
+  durationhours: null
+  staydays: null
+  stayhours: null
+  comments: pushback
+  geojsonleg: ""
+- 
+  place: Velika Kladuša
+  lat: 45.183333
+  lon: 15.8
+  transport: car
+  durationday: null
+  durationhours: 8
+  staydays: 20
+  stayhours: null
+  comments: Campo (police car)
+  geojsonleg: ""
+- 
+  place: confine con Slovenia
+  lat: null
+  lon: null
+  transport: truck
+  durationday: 8
+  durationhours: null
+  staydays: null
+  stayhours: null
+  comments: Trip inside a truck
+  geojsonleg: ""
+- 
+  place: Velika Kladuša
+  lat: 45.183333
+  lon: 15.8
+  transport: car
+  durationday: null
+  durationhours: 5
+  staydays: 30
+  stayhours: null
+  comments: (police car)
+  geojsonleg: ""
+- 
+  place: 'Monfalcone '
+  lat: 45.8
+  lon: 13.533333
+  transport: truck
+  durationday: null
+  durationhours: 8
+  staydays: null
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+
+----
+
 Text: 
 
 ----
 
 Notes: 
+
+----
+
+Cachedsvg: <svg id="map" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test"><path d="M800,212.85894132873332 750.2369298521546,263.0619168003782" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M750.2369298521546,263.0619168003782 694.9415108075314,273.96191076237193" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M694.9415108075314,273.96191076237193 544.7655093695231,192.6337126767472" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M544.7655093695231,192.6337126767472 221.9326329034287,94.75971335251585" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M99.63800296589223,20.027962223175955 32.594860917629084,12.650057043509298" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M32.594860917629084,12.650057043509298 4.506962656720436,1.8143195964055898" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M4.506962656720436,1.8143195964055898 32.594860917629084,12.650057043509298" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M32.594860917629084,12.650057043509298 0,0" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path></svg>
+
+----
+
+Cachedapicalls: 
+
+----
+
+Storyid: 5
+
+----
+
+Uuid: OFcDOlnZViN0A85u

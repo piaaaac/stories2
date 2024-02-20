@@ -2,11 +2,8 @@
 
 namespace Kirby\Panel;
 
-use Kirby\Cms\Find;
-use Kirby\Exception\LogicException;
-use Kirby\Http\Uri;
-use Kirby\Toolkit\Str;
-use Throwable;
+use Closure;
+use Kirby\Http\Response;
 
 /**
  * The Dropdown response class handles Fiber
@@ -17,73 +14,58 @@ use Throwable;
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Dropdown extends Json
 {
-    protected static $key = '$dropdown';
+	protected static string $key = '$dropdown';
 
-    /**
-     * Returns the options for the changes dropdown
-     *
-     * @return array
-     */
-    public static function changes(): array
-    {
-        $kirby     = kirby();
-        $multilang = $kirby->multilang();
-        $ids       = Str::split(get('ids'));
-        $options   = [];
+	/**
+	 * Renders dropdowns
+	 */
+	public static function response($data, array $options = []): Response
+	{
+		if (is_array($data) === true) {
+			$data = [
+				'options' => array_values($data)
+			];
+		}
 
-        foreach ($ids as $id) {
-            try {
-                // parse the given ID to extract
-                // the path and an optional query
-                $uri    = new Uri($id);
-                $path   = $uri->path()->toString();
-                $query  = $uri->query();
-                $option = Find::parent($path)->panel()->dropdownOption();
+		return parent::response($data, $options);
+	}
 
-                // add the language to each option, if it is included in the query
-                // of the given ID and the language actually exists
-                if ($multilang && $query->language && $language = $kirby->language($query->language)) {
-                    $option['text'] .= ' (' . $language->code() . ')';
-                    $option['link']  .= '?language=' . $language->code();
-                }
+	/**
+	 * Routes for the dropdown
+	 */
+	public static function routes(
+		string $id,
+		string $areaId,
+		string $prefix = '',
+		Closure|array $options = []
+	): array {
+		// Handle shortcuts for dropdowns. The name is the pattern
+		// and options are defined in a Closure
+		if ($options instanceof Closure) {
+			$options = [
+				'pattern' => $id,
+				'action'  => $options
+			];
+		}
 
-                $options[] = $option;
-            } catch (Throwable $e) {
-                continue;
-            }
-        }
+		// create the full pattern with dialogs prefix
+		$pattern = trim($prefix . '/' . ($options['pattern'] ?? $id), '/');
+		$type    = str_replace('$', '', static::$key);
 
-        // the given set of ids does not match any
-        // real models. This means that the stored ids
-        // in local storage are not correct and the changes
-        // store needs to be cleared
-        if (empty($options) === true) {
-            throw new LogicException('No changes for given models');
-        }
-
-        return $options;
-    }
-
-    /**
-     * Renders dropdowns
-     *
-     * @param mixed $data
-     * @param array $options
-     * @return \Kirby\Http\Response
-     */
-    public static function response($data, array $options = [])
-    {
-        if (is_array($data) === true) {
-            $data = [
-                'options' => array_values($data)
-            ];
-        }
-
-        return parent::response($data, $options);
-    }
+		return [
+			// load event
+			[
+				'pattern' => $pattern,
+				'type'    => $type,
+				'area'    => $areaId,
+				'method'  => 'GET|POST',
+				'action'  => $options['options'] ?? $options['action']
+			]
+		];
+	}
 }

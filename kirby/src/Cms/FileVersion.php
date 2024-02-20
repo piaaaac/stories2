@@ -10,135 +10,111 @@ use Kirby\Filesystem\IsFile;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class FileVersion
 {
-    use IsFile;
+	use IsFile;
 
-    protected $modifications;
-    protected $original;
+	protected array $modifications;
+	protected $original;
 
-    /**
-     * Proxy for public properties, asset methods
-     * and content field getters
-     *
-     * @param string $method
-     * @param array $arguments
-     * @return mixed
-     */
-    public function __call(string $method, array $arguments = [])
-    {
-        // public property access
-        if (isset($this->$method) === true) {
-            return $this->$method;
-        }
+	public function __construct(array $props)
+	{
+		$this->root          = $props['root'] ?? null;
+		$this->url           = $props['url'] ?? null;
+		$this->original      = $props['original'];
+		$this->modifications = $props['modifications'] ?? [];
+	}
 
-        // asset method proxy
-        if (method_exists($this->asset(), $method)) {
-            if ($this->exists() === false) {
-                $this->save();
-            }
+	/**
+	 * Proxy for public properties, asset methods
+	 * and content field getters
+	 */
+	public function __call(string $method, array $arguments = []): mixed
+	{
+		// public property access
+		if (isset($this->$method) === true) {
+			return $this->$method;
+		}
 
-            return $this->asset()->$method(...$arguments);
-        }
+		// asset method proxy
+		if (method_exists($this->asset(), $method)) {
+			if ($this->exists() === false) {
+				$this->save();
+			}
 
-        // content fields
-        if (is_a($this->original(), 'Kirby\Cms\File') === true) {
-            return $this->original()->content()->get($method, $arguments);
-        }
-    }
+			return $this->asset()->$method(...$arguments);
+		}
 
-    /**
-     * Returns the unique ID
-     *
-     * @return string
-     */
-    public function id(): string
-    {
-        return dirname($this->original()->id()) . '/' . $this->filename();
-    }
+		// content fields
+		if ($this->original() instanceof File) {
+			return $this->original()->content()->get($method, $arguments);
+		}
+	}
 
-    /**
-     * Returns the parent Kirby App instance
-     *
-     * @return \Kirby\Cms\App
-     */
-    public function kirby()
-    {
-        return $this->original()->kirby();
-    }
+	/**
+	 * Returns the unique ID
+	 */
+	public function id(): string
+	{
+		return dirname($this->original()->id()) . '/' . $this->filename();
+	}
 
-    /**
-     * Returns an array with all applied modifications
-     *
-     * @return array
-     */
-    public function modifications(): array
-    {
-        return $this->modifications ?? [];
-    }
+	/**
+	 * Returns the parent Kirby App instance
+	 */
+	public function kirby(): App
+	{
+		return $this->original()->kirby();
+	}
 
-    /**
-     * Returns the instance of the original File object
-     *
-     * @return mixed
-     */
-    public function original()
-    {
-        return $this->original;
-    }
+	/**
+	 * Returns an array with all applied modifications
+	 */
+	public function modifications(): array
+	{
+		return $this->modifications;
+	}
 
-    /**
-     * Applies the stored modifications and
-     * saves the file on disk
-     *
-     * @return $this
-     */
-    public function save()
-    {
-        $this->kirby()->thumb(
-            $this->original()->root(),
-            $this->root(),
-            $this->modifications()
-        );
-        return $this;
-    }
+	/**
+	 * Returns the instance of the original File object
+	 */
+	public function original(): mixed
+	{
+		return $this->original;
+	}
 
-    /**
-     * Setter for modifications
-     *
-     * @param array|null $modifications
-     */
-    protected function setModifications(array $modifications = null)
-    {
-        $this->modifications = $modifications;
-    }
+	/**
+	 * Applies the stored modifications and
+	 * saves the file on disk
+	 *
+	 * @return $this
+	 */
+	public function save(): static
+	{
+		$this->kirby()->thumb(
+			$this->original()->root(),
+			$this->root(),
+			$this->modifications()
+		);
+		return $this;
+	}
 
-    /**
-     * Setter for the original File object
-     *
-     * @param $original
-     */
-    protected function setOriginal($original)
-    {
-        $this->original = $original;
-    }
 
-    /**
-     * Converts the object to an array
-     *
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $array = array_merge($this->asset()->toArray(), [
-            'modifications' => $this->modifications(),
-        ]);
+	/**
+	 * Converts the object to an array
+	 */
+	public function toArray(): array
+	{
+		$array = array_merge(
+			$this->asset()->toArray(),
+			['modifications' => $this->modifications()]
+		);
 
-        ksort($array);
+		ksort($array);
 
-        return $array;
-    }
+		return $array;
+	}
 }

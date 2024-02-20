@@ -1,2 +1,13 @@
-preset: pages
-unlisted: true
+title: Site
+
+tabs:
+
+  contents:
+    sections:
+      pages:
+        label: Pages
+        type: pages
+
+  seo: seo/site
+
+

@@ -13,253 +13,212 @@ use Kirby\Exception\InvalidArgumentException;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class PagePicker extends Picker
 {
-    /**
-     * @var \Kirby\Cms\Pages
-     */
-    protected $items;
+	// TODO: null only due to our Properties setters,
+	// remove once our implementation is better
+	protected Pages|null $items = null;
+	protected Pages|null $itemsForQuery = null;
+	protected Page|Site|null $parent;
 
-    /**
-     * @var \Kirby\Cms\Pages
-     */
-    protected $itemsForQuery;
+	/**
+	 * Extends the basic defaults
+	 */
+	public function defaults(): array
+	{
+		return array_merge(parent::defaults(), [
+			// Page ID of the selected parent. Used to navigate
+			'parent' => null,
+			// enable/disable subpage navigation
+			'subpages' => true,
+		]);
+	}
 
-    /**
-     * @var \Kirby\Cms\Page|\Kirby\Cms\Site|null
-     */
-    protected $parent;
+	/**
+	 * Returns the parent model object that
+	 * is currently selected in the page picker.
+	 * It normally starts at the site, but can
+	 * also be any subpage. When a query is given
+	 * and subpage navigation is deactivated,
+	 * there will be no model available at all.
+	 */
+	public function model(): Page|Site|null
+	{
+		// no subpages navigation = no model
+		if ($this->options['subpages'] === false) {
+			return null;
+		}
 
-    /**
-     * Extends the basic defaults
-     *
-     * @return array
-     */
-    public function defaults(): array
-    {
-        return array_merge(parent::defaults(), [
-            // Page ID of the selected parent. Used to navigate
-            'parent' => null,
-            // enable/disable subpage navigation
-            'subpages' => true,
-        ]);
-    }
+		// the model for queries is a bit more tricky to find
+		if (empty($this->options['query']) === false) {
+			return $this->modelForQuery();
+		}
 
-    /**
-     * Returns the parent model object that
-     * is currently selected in the page picker.
-     * It normally starts at the site, but can
-     * also be any subpage. When a query is given
-     * and subpage navigation is deactivated,
-     * there will be no model available at all.
-     *
-     * @return \Kirby\Cms\Page|\Kirby\Cms\Site|null
-     */
-    public function model()
-    {
-        // no subpages navigation = no model
-        if ($this->options['subpages'] === false) {
-            return null;
-        }
+		return $this->parent();
+	}
 
-        // the model for queries is a bit more tricky to find
-        if (empty($this->options['query']) === false) {
-            return $this->modelForQuery();
-        }
+	/**
+	 * Returns a model object for the given
+	 * query, depending on the parent and subpages
+	 * options.
+	 */
+	public function modelForQuery(): Page|Site|null
+	{
+		if ($this->options['subpages'] === true && empty($this->options['parent']) === false) {
+			return $this->parent();
+		}
 
-        return $this->parent();
-    }
+		return $this->items()?->parent();
+	}
 
-    /**
-     * Returns a model object for the given
-     * query, depending on the parent and subpages
-     * options.
-     *
-     * @return \Kirby\Cms\Page|\Kirby\Cms\Site|null
-     */
-    public function modelForQuery()
-    {
-        if ($this->options['subpages'] === true && empty($this->options['parent']) === false) {
-            return $this->parent();
-        }
+	/**
+	 * Returns basic information about the
+	 * parent model that is currently selected
+	 * in the page picker.
+	 */
+	public function modelToArray(Page|Site $model = null): array|null
+	{
+		if ($model === null) {
+			return null;
+		}
 
-        if ($items = $this->items()) {
-            return $items->parent();
-        }
+		// the selected model is the site. there's nothing above
+		if ($model instanceof Site) {
+			return [
+				'id'     => null,
+				'parent' => null,
+				'title'  => $model->title()->value()
+			];
+		}
 
-        return null;
-    }
+		// the top-most page has been reached
+		// the missing id indicates that there's nothing above
+		if ($model->id() === $this->start()->id()) {
+			return [
+				'id'     => null,
+				'parent' => null,
+				'title'  => $model->title()->value()
+			];
+		}
 
-    /**
-     * Returns basic information about the
-     * parent model that is currently selected
-     * in the page picker.
-     *
-     * @param \Kirby\Cms\Site|\Kirby\Cms\Page|null
-     * @return array|null
-     */
-    public function modelToArray($model = null): ?array
-    {
-        if ($model === null) {
-            return null;
-        }
+		// the model is a regular page
+		return [
+			'id'     => $model->id(),
+			'parent' => $model->parentModel()->id(),
+			'title'  => $model->title()->value()
+		];
+	}
 
-        // the selected model is the site. there's nothing above
-        if (is_a($model, 'Kirby\Cms\Site') === true) {
-            return [
-                'id'     => null,
-                'parent' => null,
-                'title'  => $model->title()->value()
-            ];
-        }
+	/**
+	 * Search all pages for the picker
+	 */
+	public function items(): Pages|null
+	{
+		// cache
+		if ($this->items !== null) {
+			return $this->items;
+		}
 
-        // the top-most page has been reached
-        // the missing id indicates that there's nothing above
-        if ($model->id() === $this->start()->id()) {
-            return [
-                'id'     => null,
-                'parent' => null,
-                'title'  => $model->title()->value()
-            ];
-        }
+		// no query? simple parent-based search for pages
+		if (empty($this->options['query']) === true) {
+			$items = $this->itemsForParent();
 
-        // the model is a regular page
-        return [
-            'id'     => $model->id(),
-            'parent' => $model->parentModel()->id(),
-            'title'  => $model->title()->value()
-        ];
-    }
+		// when subpage navigation is enabled, a parent
+		// might be passed in addition to the query.
+		// The parent then takes priority.
+		} elseif ($this->options['subpages'] === true && empty($this->options['parent']) === false) {
+			$items = $this->itemsForParent();
 
-    /**
-     * Search all pages for the picker
-     *
-     * @return \Kirby\Cms\Pages|null
-     */
-    public function items()
-    {
-        // cache
-        if ($this->items !== null) {
-            return $this->items;
-        }
+		// search by query
+		} else {
+			$items = $this->itemsForQuery();
+		}
 
-        // no query? simple parent-based search for pages
-        if (empty($this->options['query']) === true) {
-            $items = $this->itemsForParent();
+		// filter protected and hidden pages
+		$items = $items->filter('isListable', true);
 
-        // when subpage navigation is enabled, a parent
-        // might be passed in addition to the query.
-        // The parent then takes priority.
-        } elseif ($this->options['subpages'] === true && empty($this->options['parent']) === false) {
-            $items = $this->itemsForParent();
+		// search
+		$items = $this->search($items);
 
-        // search by query
-        } else {
-            $items = $this->itemsForQuery();
-        }
+		// paginate the result
+		return $this->items = $this->paginate($items);
+	}
 
-        // filter protected pages
-        $items = $items->filter('isReadable', true);
+	/**
+	 * Search for pages by parent
+	 */
+	public function itemsForParent(): Pages
+	{
+		return $this->parent()->children();
+	}
 
-        // search
-        $items = $this->search($items);
+	/**
+	 * Search for pages by query string
+	 *
+	 * @throws \Kirby\Exception\InvalidArgumentException
+	 */
+	public function itemsForQuery(): Pages
+	{
+		// cache
+		if ($this->itemsForQuery !== null) {
+			return $this->itemsForQuery;
+		}
 
-        // paginate the result
-        return $this->items = $this->paginate($items);
-    }
+		$model = $this->options['model'];
+		$items = $model->query($this->options['query']);
 
-    /**
-     * Search for pages by parent
-     *
-     * @return \Kirby\Cms\Pages
-     */
-    public function itemsForParent()
-    {
-        return $this->parent()->children();
-    }
+		// help mitigate some typical query usage issues
+		// by converting site and page objects to proper
+		// pages by returning their children
+		$items = match (true) {
+			$items instanceof Site,
+			$items instanceof Page  => $items->children(),
+			$items instanceof Pages => $items,
 
-    /**
-     * Search for pages by query string
-     *
-     * @return \Kirby\Cms\Pages
-     * @throws \Kirby\Exception\InvalidArgumentException
-     */
-    public function itemsForQuery()
-    {
-        // cache
-        if ($this->itemsForQuery !== null) {
-            return $this->itemsForQuery;
-        }
+			default => throw new InvalidArgumentException('Your query must return a set of pages')
+		};
 
-        $model = $this->options['model'];
-        $items = $model->query($this->options['query']);
+		return $this->itemsForQuery = $items;
+	}
 
-        // help mitigate some typical query usage issues
-        // by converting site and page objects to proper
-        // pages by returning their children
-        if (is_a($items, 'Kirby\Cms\Site') === true) {
-            $items = $items->children();
-        } elseif (is_a($items, 'Kirby\Cms\Page') === true) {
-            $items = $items->children();
-        } elseif (is_a($items, 'Kirby\Cms\Pages') === false) {
-            throw new InvalidArgumentException('Your query must return a set of pages');
-        }
+	/**
+	 * Returns the parent model.
+	 * The model will be used to fetch
+	 * subpages unless there's a specific
+	 * query to find pages instead.
+	 */
+	public function parent(): Page|Site
+	{
+		return $this->parent ??= $this->kirby->page($this->options['parent']) ?? $this->site;
+	}
 
-        return $this->itemsForQuery = $items;
-    }
+	/**
+	 * Calculates the top-most model (page or site)
+	 * that can be accessed when navigating
+	 * through pages.
+	 */
+	public function start(): Page|Site
+	{
+		if (empty($this->options['query']) === false) {
+			return $this->itemsForQuery()?->parent() ?? $this->site;
+		}
 
-    /**
-     * Returns the parent model.
-     * The model will be used to fetch
-     * subpages unless there's a specific
-     * query to find pages instead.
-     *
-     * @return \Kirby\Cms\Page|\Kirby\Cms\Site
-     */
-    public function parent()
-    {
-        if ($this->parent !== null) {
-            return $this->parent;
-        }
+		return $this->site;
+	}
 
-        return $this->parent = $this->kirby->page($this->options['parent']) ?? $this->site;
-    }
+	/**
+	 * Returns an associative array
+	 * with all information for the picker.
+	 * This will be passed directly to the API.
+	 */
+	public function toArray(): array
+	{
+		$array = parent::toArray();
+		$array['model'] = $this->modelToArray($this->model());
 
-    /**
-     * Calculates the top-most model (page or site)
-     * that can be accessed when navigating
-     * through pages.
-     *
-     * @return \Kirby\Cms\Page|\Kirby\Cms\Site
-     */
-    public function start()
-    {
-        if (empty($this->options['query']) === false) {
-            if ($items = $this->itemsForQuery()) {
-                return $items->parent();
-            }
-
-            return $this->site;
-        }
-
-        return $this->site;
-    }
-
-    /**
-     * Returns an associative array
-     * with all information for the picker.
-     * This will be passed directly to the API.
-     *
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $array = parent::toArray();
-        $array['model'] = $this->modelToArray($this->model());
-
-        return $array;
-    }
+		return $array;
+	}
 }

@@ -2,11 +2,11 @@ title: Story
 preset: page
 pages: false
 fields:
-  storyid:
-    label: Story ID
-    type: number
-    help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
-    translate: false
+  # storyid:
+  #   label: Story ID
+  #   type: number
+  #   help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
+  #   translate: false
   age:
     label: Age
     type: number
@@ -43,16 +43,102 @@ fields:
   reasonDeparture:
     label: Reason of departure
     type: text
-  text:
-    label: Text
-    type: textarea
-    size: small
-  notes:
-    label: Notes
-    type: textarea
-    size: small
+
+  departurePlace:
+    label: Departure place
+    type: text
+    width: 1/4
+  departureLat:
+    type: number
+    width: 1/4
+    translate: false
+  departureLon:
+    type: number
+    width: 1/4
     translate: false
 
+  legs:
+    label: Trip places
+    type: structure
+    fields:
+      place:
+        type: text
+        width: 1/4
+      country:
+        type: text
+        width: 1/4
+      lat:
+        type: number
+        width: 1/4
+        translate: false
+      lon:
+        type: number
+        width: 1/4
+        translate: false
+      transport:
+        type: select
+        options:
+          walk: walking
+          boat: boat
+          bus: bus
+          truck: truck
+          train: train
+          car: car
+          taxi: taxi
+          plane: plane
+        translate: false
+      durationDay:
+        type: number
+        label: trip duration (days)
+        width: 1/4
+        translate: false
+      durationHours:
+        type: number
+        label: trip duration (hours)
+        width: 1/4
+        translate: false
+      stayDays:
+        type: number
+        label: stay (days)
+        width: 1/4
+        translate: false
+      stayHours:
+        type: number
+        label: stay (hours)
+        width: 1/4
+        translate: false
+      comments:
+        type: textarea
+        width: 1/2
+      geojsonLeg:
+        type: textarea
+        width: 1/2
+        translate: false
+
+  text:
+    label: Text (Visible on the site)
+    type: textarea
+    size: small
+    width: 1/2
+  notes:
+    label: Notes (Internal use - will not appear on the site)
+    type: textarea
+    size: small
+    width: 1/2
+    translate: false
+
+  cachedSvg:
+    type: textarea
+    
   cachedApiCalls:
     type: textarea
     disabled: true
+
+
+
+
+
+
+
+
+

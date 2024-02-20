@@ -338,13 +338,14 @@ handleResizeStartEnd(function () {
 });
 
 function handleResizeStart () {
-  console.log(s)
-  $(s.svg.node()).remove();
+  console.log("resize started")
+  // $(s.svg.node()).remove();
 }
 
 function handleResizeEnd () {
-  s.init();
-  s.drawLine();
+  console.log("resize ended")
+  // s.init();
+  // s.drawLine();
 }
 
 // -----------------------------------------------------------------------------

@@ -14,90 +14,100 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Fieldsets extends Items
 {
-    const ITEM_CLASS = '\Kirby\Cms\Fieldset';
+	public const ITEM_CLASS = Fieldset::class;
 
-    protected static function createFieldsets($params)
-    {
-        $fieldsets = [];
-        $groups = [];
+	/**
+	 * All registered fieldsets methods
+	 */
+	public static array $methods = [];
 
-        foreach ($params as $type => $fieldset) {
-            if (is_int($type) === true && is_string($fieldset)) {
-                $type     = $fieldset;
-                $fieldset = 'blocks/' . $type;
-            }
+	protected static function createFieldsets(array $params): array
+	{
+		$fieldsets = [];
+		$groups    = [];
 
-            if ($fieldset === false) {
-                continue;
-            }
+		foreach ($params as $type => $fieldset) {
+			if (is_int($type) === true && is_string($fieldset)) {
+				$type     = $fieldset;
+				$fieldset = 'blocks/' . $type;
+			}
 
-            if ($fieldset === true) {
-                $fieldset = 'blocks/' . $type;
-            }
+			if ($fieldset === false) {
+				continue;
+			}
 
-            $fieldset = Blueprint::extend($fieldset);
+			if ($fieldset === true) {
+				$fieldset = 'blocks/' . $type;
+			}
 
-            // make sure the type is always set
-            $fieldset['type'] ??= $type;
+			$fieldset = Blueprint::extend($fieldset);
 
-            // extract groups
-            if ($fieldset['type'] === 'group') {
-                $result    = static::createFieldsets($fieldset['fieldsets'] ?? []);
-                $fieldsets = array_merge($fieldsets, $result['fieldsets']);
-                $label     = $fieldset['label'] ?? Str::ucfirst($type);
+			// make sure the type is always set
+			$fieldset['type'] ??= $type;
 
-                $groups[$type] = [
-                    'label'     => I18n::translate($label, $label),
-                    'name'      => $type,
-                    'open'      => $fieldset['open'] ?? true,
-                    'sets'      => array_column($result['fieldsets'], 'type'),
-                ];
-            } else {
-                $fieldsets[$fieldset['type']] = $fieldset;
-            }
-        }
+			// extract groups
+			if ($fieldset['type'] === 'group') {
+				$result    = static::createFieldsets($fieldset['fieldsets'] ?? []);
+				$fieldsets = array_merge($fieldsets, $result['fieldsets']);
+				$label     = $fieldset['label'] ?? Str::ucfirst($type);
 
-        return [
-            'fieldsets' => $fieldsets,
-            'groups'    => $groups
-        ];
-    }
+				$groups[$type] = [
+					'label'     => I18n::translate($label, $label),
+					'name'      => $type,
+					'open'      => $fieldset['open'] ?? true,
+					'sets'      => array_column($result['fieldsets'], 'type'),
+				];
+			} else {
+				$fieldsets[$fieldset['type']] = $fieldset;
+			}
+		}
 
-    public static function factory(array $items = null, array $params = [])
-    {
-        $items ??= option('blocks.fieldsets', [
-            'code'     => 'blocks/code',
-            'gallery'  => 'blocks/gallery',
-            'heading'  => 'blocks/heading',
-            'image'    => 'blocks/image',
-            'line'     => 'blocks/line',
-            'list'     => 'blocks/list',
-            'markdown' => 'blocks/markdown',
-            'quote'    => 'blocks/quote',
-            'text'     => 'blocks/text',
-            'video'    => 'blocks/video',
-        ]);
+		return [
+			'fieldsets' => $fieldsets,
+			'groups'    => $groups
+		];
+	}
 
-        $result = static::createFieldsets($items);
+	public static function factory(
+		array $items = null,
+		array $params = []
+	): static {
+		$items ??= App::instance()->option('blocks.fieldsets', [
+			'code'     => 'blocks/code',
+			'gallery'  => 'blocks/gallery',
+			'heading'  => 'blocks/heading',
+			'image'    => 'blocks/image',
+			'line'     => 'blocks/line',
+			'list'     => 'blocks/list',
+			'markdown' => 'blocks/markdown',
+			'quote'    => 'blocks/quote',
+			'text'     => 'blocks/text',
+			'video'    => 'blocks/video',
+		]);
 
-        return parent::factory($result['fieldsets'], ['groups' => $result['groups']] + $params);
-    }
+		$result = static::createFieldsets($items);
 
-    public function groups(): array
-    {
-        return $this->options['groups'] ?? [];
-    }
+		return parent::factory(
+			$result['fieldsets'],
+			['groups' => $result['groups']] + $params
+		);
+	}
 
-    public function toArray(?Closure $map = null): array
-    {
-        return A::map(
-            $this->data,
-            $map ?? fn ($fieldset) => $fieldset->toArray()
-        );
-    }
+	public function groups(): array
+	{
+		return $this->options['groups'] ?? [];
+	}
+
+	public function toArray(Closure|null $map = null): array
+	{
+		return A::map(
+			$this->data,
+			$map ?? fn ($fieldset) => $fieldset->toArray()
+		);
+	}
 }

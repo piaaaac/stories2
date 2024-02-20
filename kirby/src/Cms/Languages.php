@@ -11,91 +11,84 @@ use Kirby\Filesystem\F;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Languages extends Collection
 {
-    /**
-     * Creates a new collection with the given language objects
-     *
-     * @param array $objects `Kirby\Cms\Language` objects
-     * @param null $parent
-     * @throws \Kirby\Exception\DuplicateException
-     */
-    public function __construct($objects = [], $parent = null)
-    {
-        $defaults = array_filter(
-            $objects,
-            fn ($language) => $language->isDefault() === true
-        );
+	/**
+	 * All registered languages methods
+	 */
+	public static array $methods = [];
 
-        if (count($defaults) > 1) {
-            throw new DuplicateException('You cannot have multiple default languages. Please check your language config files.');
-        }
+	/**
+	 * Creates a new collection with the given language objects
+	 *
+	 * @param null $parent
+	 * @throws \Kirby\Exception\DuplicateException
+	 */
+	public function __construct(
+		array $objects = [],
+		$parent = null
+	) {
+		$defaults = array_filter(
+			$objects,
+			fn ($language) => $language->isDefault() === true
+		);
 
-        parent::__construct($objects, $parent);
-    }
+		if (count($defaults) > 1) {
+			throw new DuplicateException('You cannot have multiple default languages. Please check your language config files.');
+		}
 
-    /**
-     * Returns all language codes as array
-     *
-     * @return array
-     */
-    public function codes(): array
-    {
-        return $this->keys();
-    }
+		parent::__construct($objects, null);
+	}
 
-    /**
-     * Creates a new language with the given props
-     *
-     * @internal
-     * @param array $props
-     * @return \Kirby\Cms\Language
-     */
-    public function create(array $props)
-    {
-        return Language::create($props);
-    }
+	/**
+	 * Returns all language codes as array
+	 */
+	public function codes(): array
+	{
+		return App::instance()->multilang() ? $this->keys() : ['default'];
+	}
 
-    /**
-     * Returns the default language
-     *
-     * @return \Kirby\Cms\Language|null
-     */
-    public function default()
-    {
-        if ($language = $this->findBy('isDefault', true)) {
-            return $language;
-        } else {
-            return $this->first();
-        }
-    }
+	/**
+	 * Creates a new language with the given props
+	 * @internal
+	 */
+	public function create(array $props): Language
+	{
+		return Language::create($props);
+	}
 
-    /**
-     * Convert all defined languages to a collection
-     *
-     * @internal
-     * @return static
-     */
-    public static function load()
-    {
-        $languages = [];
-        $files     = glob(App::instance()->root('languages') . '/*.php');
+	/**
+	 * Returns the default language
+	 */
+	public function default(): Language|null
+	{
+		return $this->findBy('isDefault', true) ?? $this->first();
+	}
 
-        foreach ($files as $file) {
-            $props = F::load($file);
+	/**
+	 * Convert all defined languages to a collection
+	 * @internal
+	 */
+	public static function load(): static
+	{
+		$languages = [];
+		$files     = glob(App::instance()->root('languages') . '/*.php');
 
-            if (is_array($props) === true) {
-                // inject the language code from the filename
-                // if it does not exist
-                $props['code'] ??= F::name($file);
+		foreach ($files as $file) {
+			$props = F::load($file, allowOutput: false);
 
-                $languages[] = new Language($props);
-            }
-        }
+			if (is_array($props) === true) {
+				// inject the language code from the filename
+				// if it does not exist
+				$props['code'] ??= F::name($file);
 
-        return new static($languages);
-    }
+				$languages[] = new Language($props);
+			}
+		}
+
+		return new static($languages);
+	}
 }

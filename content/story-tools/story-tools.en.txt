@@ -1,0 +1,33 @@
+Title: Story tools
+
+----
+
+Sex: other
+
+----
+
+Datedeparture: 
+
+----
+
+Datearrival: 
+
+----
+
+Legs: 
+
+----
+
+Text: 
+
+----
+
+Notes: 
+
+----
+
+Cachedapicalls: 
+
+----
+
+Uuid: T3dfJu911CfnAOM1

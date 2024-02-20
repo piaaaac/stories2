@@ -14,54 +14,64 @@ use ReflectionFunction;
  * @package   Kirby Toolkit
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Controller
 {
-    protected $function;
+	public function __construct(protected Closure $function)
+	{
+	}
 
-    public function __construct(Closure $function)
-    {
-        $this->function = $function;
-    }
+	public function arguments(array $data = []): array
+	{
+		$info = new ReflectionFunction($this->function);
+		$args = [];
 
-    public function arguments(array $data = []): array
-    {
-        $info = new ReflectionFunction($this->function);
-        $args = [];
+		foreach ($info->getParameters() as $param) {
+			$name = $param->getName();
 
-        foreach ($info->getParameters() as $parameter) {
-            $name = $parameter->getName();
-            $args[] = $data[$name] ?? null;
-        }
+			if ($param->isVariadic() === true) {
+				// variadic ... argument collects all remaining values
+				$args += $data;
+			} elseif (isset($data[$name]) === true) {
+				// use provided argument value if available
+				$args[$name] = $data[$name];
+			} elseif ($param->isDefaultValueAvailable() === false) {
+				// use null for any other arguments that don't define
+				// a default value for themselves
+				$args[$name] = null;
+			}
+		}
 
-        return $args;
-    }
+		return $args;
+	}
 
-    public function call($bind = null, $data = [])
-    {
-        $args = $this->arguments($data);
+	public function call($bind = null, $data = [])
+	{
+		// unwrap lazy values in arguments
+		$args = $this->arguments($data);
+		$args = LazyValue::unwrap($args);
 
-        if ($bind === null) {
-            return call_user_func($this->function, ...$args);
-        }
+		if ($bind === null) {
+			return ($this->function)(...$args);
+		}
 
-        return $this->function->call($bind, ...$args);
-    }
+		return $this->function->call($bind, ...$args);
+	}
 
-    public static function load(string $file)
-    {
-        if (is_file($file) === false) {
-            return null;
-        }
+	public static function load(string $file): static|null
+	{
+		if (is_file($file) === false) {
+			return null;
+		}
 
-        $function = F::load($file);
+		$function = F::load($file);
 
-        if (is_a($function, 'Closure') === false) {
-            return null;
-        }
+		if ($function instanceof Closure === false) {
+			return null;
+		}
 
-        return new static($function);
-    }
+		return new static($function);
+	}
 }

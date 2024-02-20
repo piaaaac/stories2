@@ -1,0 +1,446 @@
+@charset "UTF-8";
+
+// -----------------------------------------------------------------------------
+// Variables
+// -----------------------------------------------------------------------------
+
+$button-h: 47px;
+$button-h-s: 37px;
+$menu-h: 70px;
+$border-radius: 3px;
+$space: 20px;
+
+$verdino: #ECFAF3;
+$verde: #29A468;
+$verdone: #135D4A;
+
+
+// -----------------------------------------------------------------------------
+// External files import
+// -----------------------------------------------------------------------------
+
+@import 'bootstrap-scss/_functions';
+@import 'bootstrap-scss/_variables';
+@import 'bootstrap-scss/mixins/_breakpoints';
+@import '_reset';
+@import '_typography';
+@import '_mixins';
+@import '_switch';
+@import 'hamburger-settings';
+@import 'hamburgers/hamburgers';
+
+// -----------------------------------------------------------------------------
+// Utilities
+// -----------------------------------------------------------------------------
+
+.color-white { color: white; }
+.color-white-50 { color: rgba(white, 0.5); }
+.bg-white { background-color: white; }
+.no-u { text-decoration: none; }
+.u-hover { text-decoration: none; &:hover { text-decoration: underline; } }
+.pointer { cursor: pointer; }
+.upper { text-transform: uppercase; }
+.lower { text-transform: none; }
+
+.space-large { height: 110px; }
+
+// -----------------------------------------------------------------------------
+// General tags & classes
+// -----------------------------------------------------------------------------
+
+* {
+  // text-rendering: auto;
+  // text-rendering: optimizeSpeed;
+  // text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision; // OK on chrome
+}
+
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  background-color: $verdino;
+  background-color: mintcream;
+  color: black;
+  &.media-open { overflow: hidden; }
+  @include font-ser-400-nor-lg;
+}
+
+main {
+  margin-top: 150px;
+  margin-top: $menu-h;
+}
+
+hr {
+  border-top: 1px solid black;
+}
+
+p {
+  margin-bottom: 0.7em;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 10%;
+  color: inherit;
+  transition: color 170ms;
+  &.green {
+    color: $verde;
+    text-decoration: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// REUSABLE PIECES
+// -----------------------------------------------------------------------------
+
+// --- article preview
+
+.article-prev {
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  .tags, .places {
+    @include font-mon-400-nor-sm;
+  }
+  .title-wrapper {
+    padding-right: 15%;
+    margin-top: 15px;
+    .title {
+      // color: $verde;
+      text-decoration: none;
+    }
+  }
+  .tags {
+    text-transform: uppercase;
+    &::before {
+      display: inline-block;
+      content: "";
+      margin-right: 0.5em;
+      height: 0.8em;
+      width: 0.8em;
+      border-radius: 0.5em;
+      background-color: black;
+    }
+  }
+}
+
+// --- story preview
+
+$m: 15px;
+.squares {
+  border-top: 1px solid black;
+  margin-bottom: -1px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  // border: 1px solid red;
+  .squares-wrapper {
+    left: -$m;
+    position: relative;
+    min-width: calc(100% + #{$m*2});
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .square {
+      position: relative;
+      width: calc(33.333% - 1px);
+      min-width: calc(33.333% - 1px);
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+      .square-content-wrapper {
+        padding-top: 100%;
+        position: relative;
+        .svg-cont {
+          width: 100%; height: 100%;
+          position: absolute;
+          top: 0; left: 0;
+          // background-color: yellow;
+          svg {
+            width: 100%; height: 100%;
+          }
+        }
+        .content {
+          position: absolute;
+          top: 0; bottom: 0; left: 0; right: 0;
+          padding: $m;
+          &.story {
+            .from-bot-l { position: absolute; bottom: $m; left: $m; @include font-mon-400-nor-sm; }
+            .to-bot-r { position: absolute; bottom: $m; right: $m; @include font-mon-400-nor-sm; }
+          }
+          // &.article {
+          //   display: flex;
+          //   justify-content: space-between;
+          //   flex-flow: column nowrap;
+          //   .tags, .places {
+          //     @include font-mon-400-nor-sm;
+          //   }
+          //   .title-wrapper {
+          //     padding-right: 15%;
+          //     margin-top: 15px;
+          //     .title {
+          //       color: $verde;
+          //       text-decoration: none;
+          //     }
+          //   }
+          //   .tags {
+          //     text-transform: uppercase;
+          //     &::before {
+          //       display: inline-block;
+          //       content: "";
+          //       margin-right: 0.5em;
+          //       height: 0.8em;
+          //       width: 0.8em;
+          //       border-radius: 0.5em;
+          //       background-color: black;
+          //     }
+          //   }
+          // }
+        }
+      }
+    }
+  }
+}
+
+.full-w-btn {
+  overflow: hidden;
+  // background-color: $verdone;
+  background-color: #18725B;
+  color: white;
+  color: #BAF7CA;
+  height: $menu-h;
+  transition: background-color 170ms;
+
+  // Grain
+  // via https://www.fxhash.xyz/article/all-about-that-grain
+  // background-image: url("data:image/svg+xml,%3Csvg id='texture' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='textureFilter' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='turbulence' baseFrequency='1'%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect x='0' y='0' width='100%25' height='100%25' filter='url(%23textureFilter)' /%3E%3C/svg%3E");
+  // background-repeat: repeat repeat;
+  // background-size: 128px 128px;
+  // mix-blend-mode: multiply;
+
+  a {
+    @include font-mon-400-nor-sm;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    height: $menu-h;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &:hover {
+    background-color: #073E30;
+    a { color: #C6F5D2; }
+  }
+}
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: $button-h;
+  border: 1px solid grey;
+  color: grey;
+  @include font-sans-m;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: $border-radius;
+  padding: 0 $space;
+  transition: background-color 400ms, color 400ms;
+  &:hover, &.active {
+    background-color: grey;
+    color: grey;
+  }
+  &.small {
+    height: $button-h-s;
+    width: auto; padding: 0 10px;
+    text-transform: none;
+  }
+}
+
+@keyframes blink {
+  0%  { opacity: 0.5; }
+  25% { opacity: 0.5; }
+  50% { opacity: 0.3; }
+  75% { opacity: 0.5; }
+  100%{ opacity: 0.5; }
+}
+
+// -----------------------------------------------------------------------------
+// STORY MAPBOX
+// -----------------------------------------------------------------------------
+
+#map-container {
+  height: 80vh;
+}
+
+// -----------------------------------------------------------------------------
+// STORY SVG
+// -----------------------------------------------------------------------------
+
+div#svg-container {
+  line-height: 0;
+  svg#story-svg {
+    path.land-boundary {
+      fill: #F9F8FF;
+    }
+    path.leg-line {
+      stroke: black;
+      fill: none;
+      &[data-line-type='wheels']  {stroke-dasharray: 2px;}
+      &[data-line-type='train']   {stroke-dasharray: 4px;}
+      &[data-line-type='water']   {stroke-dasharray: 2px 4px;}
+      &[data-line-type='plane']   {stroke-dasharray: 2px 6px;}
+      &[data-line-type='walking'] {stroke-dasharray: 4px 2px;}
+      &[data-line-type='mixed']   {stroke-dasharray: 1px 3px;}
+      &[data-line-type='unknown'] {stroke-dasharray: 6px 2px;}
+    }
+    circle.leg-dot {
+      stroke: white;
+      stroke-width: 1px;
+      fill: black;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// MENU
+// -----------------------------------------------------------------------------
+
+nav#menu-header {
+  z-index: 6;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  transition: background-color 400ms, padding 400ms;
+  padding: 0;
+  background-color: $verdino; 
+  &.top { 
+    background-color: $verdino; 
+    // padding: 7px 0;
+  }
+  .wrapper {
+    height: $menu-h;
+  }
+  .left {
+    @include font-ser-400-nor-lg;
+    img { margin-right: 6px; }
+  }
+  .items {
+    a.item {
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-left: 12px;
+      @include font-mon-400-nor-sm;
+      &.active, &:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+  a#header-low-a {
+    margin-right: 3px;
+    &:hover {
+      color: grey;
+      text-decoration: none;
+    }
+  }
+}
+#menu-xs {
+  z-index: 5;
+  position: fixed;
+  top: 0; right: -100%;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: grey;
+  padding: $menu-h 0;
+  @include transition(right 400ms);
+  @at-root body.menu-xs-open & {
+    right: 0;
+  }
+  display: flex; flex-flow: column nowrap; justify-content: center; align-items: stretch;
+
+  a.item {
+    // color: white;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    @include font-sans-xl;
+    // text-transform: uppercase;
+    &.small {
+      @include font-sans-m;
+    }
+  }
+}
+
+// ------------------------------------------------------------------------
+// Page: story-tools
+// Separate css
+// ------------------------------------------------------------------------
+
+body#story-tools {
+  background-color: rgba(0, 0, 255, 0.1);
+  .structure {
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    .left-items {
+      width: 50%;
+      .leg-item {
+        textarea {
+          width: 100%;
+          height: 200px;
+          max-width: 100%;
+          font-size: 8px;
+        }
+        button {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    .right-mapbox-preview {
+      width: 50%;
+      position: relative;
+      #mapbox-container {
+        position: fixed;
+        width: 50%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------------------
+// Layout
+// ------------------------------------------------------------------------
+
+.container-fluid {
+  max-width: 1400px;
+  margin-left: auto; margin-right: auto;
+  padding-left: 30px; padding-right: 30px;
+  @include media-breakpoint-down(xs) {
+    padding-left: 15px; padding-right: 15px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// BOOTSTRAP BREAKPOINTS
+// -----------------------------------------------------------------------------
+
+// xs ---                 Portrait phones
+// sm ---  576px and up   Small devices (landscape phones)
+// md ---  768px and up   Medium devices (tablets)
+// lg ---  992px and up   Large devices (desktops)
+// xl --- 1200px and up   Extra large devices (large desktops)
+
+// No media query necessary for xs breakpoint as it's effectively `@media (min-width: 0) { ... }`
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-only(md) { ... }
+// @include media-breakpoint-between(md, xl) { ... }
+// @include media-breakpoint-down(lg) { ... }

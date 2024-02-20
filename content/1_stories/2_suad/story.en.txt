@@ -2,10 +2,6 @@ Title: Suad
 
 ----
 
-Storyid: 2
-
-----
-
 Age: 49
 
 ----
@@ -34,8 +30,229 @@ Reasondeparture: Personal reasons
 
 ----
 
+Departureplace: Sulaymaniyah
+
+----
+
+Departurelat: 35.55
+
+----
+
+Departurelon: 45.433333
+
+----
+
+Legs:
+
+- 
+  place: Istanbul
+  lat: 41.016667
+  lon: 28.966667
+  transport: bus
+  durationday: 1
+  durationhours: null
+  staydays: 6
+  stayhours: null
+  comments: >
+    sempre in compagnia di una famiglia con
+    bambina
+  geojsonleg: ""
+- 
+  place: small town
+  lat: 42.979622
+  lon: 23.137259
+  transport: car
+  durationday: null
+  durationhours: 7
+  staydays: null
+  stayhours: 12
+  comments: ""
+  geojsonleg: ""
+- 
+  place: small town
+  lat: 45.593496
+  lon: 23.938087
+  transport: car
+  durationday: null
+  durationhours: 6
+  staydays: null
+  stayhours: 12
+  comments: ""
+  geojsonleg: ""
+- 
+  place: small town near Budapest
+  lat: 47.498333
+  lon: 19.040833
+  transport: car
+  durationday: null
+  durationhours: 8
+  staydays: 3
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Vienna
+  lat: 48.208
+  lon: 16.373064
+  transport: car
+  durationday: null
+  durationhours: 8
+  staydays: 3
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Köln
+  lat: 50.942222
+  lon: 6.957778
+  transport: car
+  durationday: null
+  durationhours: 12
+  staydays: 2
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Bruxelles
+  lat: 50.846667
+  lon: 4.351667
+  transport: train
+  durationday: null
+  durationhours: 4
+  staydays: 3
+  stayhours: null
+  comments: >
+    abbiamo chiesto asilo e ci hanno mandato
+    in un campo di accoglienza
+  geojsonleg: ""
+- 
+  place: "Manderfeld (Centre d'accueil Croix-Rouge) "
+  lat: 50.335099
+  lon: 6.340373
+  transport: bus
+  durationday: null
+  durationhours: 3
+  staydays: 395
+  stayhours: null
+  comments: no richiesta di asilo_esito negativo
+  geojsonleg: ""
+- 
+  place: Liege
+  lat: 50.633333
+  lon: 5.566667
+  transport: bus
+  durationday: null
+  durationhours: 3
+  staydays: null
+  stayhours: null
+  comments: >
+    per prendere il treno ma avevo paura per
+    covid e polizia
+  geojsonleg: ""
+- 
+  place: Maubege
+  lat: 50.283333
+  lon: 3.966667
+  transport: car
+  durationday: null
+  durationhours: 2
+  staydays: null
+  stayhours: null
+  comments: >
+    preso taxi per paura fino alla stazione
+    francese
+  geojsonleg: ""
+- 
+  place: Paris
+  lat: 48.856667
+  lon: 2.351944
+  transport: train
+  durationday: null
+  durationhours: 4.5
+  staydays: 1
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Lione
+  lat: 45.766944
+  lon: 4.834167
+  transport: train
+  durationday: null
+  durationhours: 3
+  staydays: null
+  stayhours: null
+  comments: "volevo andare in Italia ma tutti i treni per l'Italia erano occupati"
+  geojsonleg: ""
+- 
+  place: Ginevra
+  lat: 46.2
+  lon: 6.15
+  transport: train
+  durationday: null
+  durationhours: 2
+  staydays: null
+  stayhours: 8
+  comments: >
+    vestiti bene, poche valigie e la polizia
+    forse non ti ferma
+  geojsonleg: ""
+- 
+  place: Milano
+  lat: 45.466944
+  lon: 9.19
+  transport: train
+  durationday: null
+  durationhours: 6
+  staydays: null
+  stayhours: null
+  comments: >
+    ho perso la valigia con tutti i
+    documenti
+  geojsonleg: ""
+- 
+  place: Bologna
+  lat: 44.493889
+  lon: 11.342778
+  transport: train
+  durationday: null
+  durationhours: 5
+  staydays: null
+  stayhours: 8
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Trieste
+  lat: 45.650278
+  lon: 13.770278
+  transport: train
+  durationday: null
+  durationhours: 5.5
+  staydays: null
+  stayhours: null
+  comments: 'sono andata piazza libertà_ questura richiesta permesso soggiorno- campo sacro per quarantena'
+  geojsonleg: ""
+
+----
+
 Text: 
 
 ----
 
 Notes: 
+
+----
+
+Cachedsvg: <svg id="map" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test"><path d="M800,431.0282673559779 624.7764442260024,351.6232503339815" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M624.7764442260024,351.6232503339815 648.8481732460638,241.84001078504582" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M648.8481732460638,241.84001078504582 501.6438157180896,158.5783125365139" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M501.6438157180896,158.5783125365139 421.4545460420535,126.78846845517045" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M421.4545460420535,126.78846845517045 138.4446946902284,0" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M138.4446946902284,0 60.10877513171938,4.553692212379355" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M60.10877513171938,4.553692212379355 119.88639521065086,28.77533691273615" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M119.88639521065086,28.77533691273615 96.62991420200014,14.686618104114434" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M96.62991420200014,14.686618104114434 48.53623312179503,31.21176630831566" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M48.53623312179503,31.21176630831566 0,97.34352648053704" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M0,97.34352648053704 74.61202583246873,234.37774823428276" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M74.61202583246873,234.37774823428276 114.16405874297473,215.6444443642738" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M114.16405874297473,215.6444443642738 205.54205279536438,247.27012220044236" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M205.54205279536438,247.27012220044236 270.2514394006655,288.621280324827" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M270.2514394006655,288.621280324827 343.21857116453924,239.39962136027523" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path></svg>
+
+----
+
+Cachedapicalls: 
+
+----
+
+Storyid: 2
+
+----
+
+Uuid: 2GdBI74yWsvye5L0

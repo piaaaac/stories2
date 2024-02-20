@@ -2,10 +2,6 @@ Title: Falak
 
 ----
 
-Storyid: 6
-
-----
-
 Age: 12
 
 ----
@@ -34,8 +30,122 @@ Reasondeparture:
 
 ----
 
-Text: 
+Departureplace: Gujrat
+
+----
+
+Departurelat: 32.573797
+
+----
+
+Departurelon: 74.078939
+
+----
+
+Legs:
+
+- 
+  place: Lahore
+  lat: 31.549722
+  lon: 74.343611
+  transport: bus
+  durationday: null
+  durationhours: 5
+  staydays: 30
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Kota
+  lat: 34.655
+  lon: 72.1646
+  transport: bus
+  durationday: null
+  durationhours: 9
+  staydays: 90
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: unknown
+  lat: null
+  lon: null
+  transport: walk
+  durationday: null
+  durationhours: null
+  staydays: null
+  stayhours: null
+  comments: attraversato Iran in 1 mese
+  geojsonleg: ""
+- 
+  place: Istanbul
+  lat: 41.016667
+  lon: 28.966667
+  transport: ""
+  durationday: 30
+  durationhours: null
+  staydays: 1095
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Salonicco
+  lat: 40.640278
+  lon: 22.935556
+  transport: bus
+  durationday: 2
+  durationhours: null
+  staydays: null
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Belgrado
+  lat: 44.820556
+  lon: 20.462222
+  transport: walk
+  durationday: 10
+  durationhours: null
+  staydays: 150
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Trieste
+  lat: 45.650278
+  lon: 13.770278
+  transport: ""
+  durationday: 3
+  durationhours: null
+  staydays: null
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+
+----
+
+Text:
+
+Ghetiu
+campo  vicino Salonicco
+Itan
 
 ----
 
 Notes: 
+
+----
+
+Cachedsvg: <svg id="map" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test"><path d="M800,239.6720250962325 771.2215142594184,190.7030721167116" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M200.7007142895703,84.19783227118583 121.04703566501782,90.76745946213907" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M121.04703566501782,90.76745946213907 88.38138723520466,15.561785040583517" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M88.38138723520466,15.561785040583517 0,0" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path></svg>
+
+----
+
+Cachedapicalls: 
+
+----
+
+Storyid: 6
+
+----
+
+Uuid: Q6by569iJaaNvABS

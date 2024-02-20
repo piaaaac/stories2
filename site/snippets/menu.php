@@ -41,7 +41,7 @@ $items = [
       <div class="col-12 wrapper d-flex align-items-center justify-content-between">
         <div class="left">
           <span class="d-inline">
-            <a href="<?= $site->url() ?>" class="d-flex align-items-center no-u">
+            <a href="<?= $site->url() ?>" class="no-u">
               Moving Lines
             </a>
             <?php if ($page->template()->name() === "story"): ?>

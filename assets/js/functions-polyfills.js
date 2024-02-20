@@ -110,3 +110,27 @@ function breakpointIs (breakpointName, compare) {
 // console.log(breakpointIs("xs", "only"));
 // console.log(breakpointIs("md", "down"));
 // console.log(breakpointIs("lg", "up"));
+
+
+
+
+// --- Clone an object and return the clone
+// --- via https://stackoverflow.com/a/46676416
+function clone (obj) {
+  var newObj;
+  if        (obj instanceof Array){
+    newObj = [];
+  } else if (obj === null){
+    return null;
+  } else {
+    newObj = {};
+  }
+  for (var prop in obj) {
+    if(typeof obj[prop] === 'object') {
+      newObj[prop] = clone(obj[prop]);
+    } else {
+      newObj[prop] = obj[prop]
+    }
+  }
+  return newObj;
+};

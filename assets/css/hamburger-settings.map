@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "hamburger-settings.css",
+	"sources": [
+		"../css-source/hamburger-settings.scss"
+	],
+	"sourcesContent": [
+		"// ------------------------------------------------------------------\n// via https://github.com/jonsuh/hamburgers#customization\n// ------------------------------------------------------------------\n\n$hamburger-padding-x           : 0; //15px;\n$hamburger-padding-y           : 0; //15px;\n$hamburger-active-layer-color  : white;\n$hamburger-hover-opacity       : 1;\n$hamburger-active-hover-opacity: $hamburger-hover-opacity;\n$hamburger-layer-color         : white;\n$hamburger-layer-border-radius : 1px;\n$hamburger-layer-spacing       : 5px;\n$hamburger-layer-height        : 2px;\n$hamburger-layer-width         : 23px;\n\n// To use CSS filters as the hover effect instead of opacity,\n// set $hamburger-hover-use-filter as true and\n// change the value of $hamburger-hover-filter accordingly.\n// $hamburger-hover-use-filter   : false;\n// $hamburger-hover-filter       : opacity(50%);\n// $hamburger-active-hover-filter: $hamburger-hover-filter;\n\n"
+	],
+	"names": [],
+	"mappings": ""
+}

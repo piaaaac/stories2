@@ -20,40 +20,8 @@ return [
     ]
   ],
 
-  "pedroborges.meta-tags.default" => function ($page, $site) {
-
-    // default
-    $socialTitle = $site->title();
-    $socialDesc = $site->description();
-    
-    $socialImgUrl = "";
-    if ($site->socialImage()->isNotEmpty()) {
-      $socialImgUrl = $site->socialImage()->toFile()->url();
-    } 
-
-    return [
-      'title'         => $site->title() ." | ". $page->title(),
-      'meta' => [
-        'description' => $socialDesc,
-      ],
-      'link' => [
-        'canonical'   => $page->url()
-      ],
-      'og' => [
-        'type'        => 'website',
-        'title'       => $socialTitle,
-        'site_name'   => $socialTitle,
-        'image'       => $socialImgUrl,
-        'url'         => $page->url(),
-        'description' => $socialDesc,
-      ],
-      'twitter' => [
-        'card' => 'summary_large_image', // summary - summary_large_image
-        'site' => "",
-        'title' => $socialTitle,
-        'namespace:image' => $socialImgUrl,
-      ],
-    ];
-  }
-
+  // Kirby SEO plugin settings
+  'tobimori.seo.canonicalBase' => "https://movinglines.org",
+  'tobimori.seo.lang' => 'en_US',
+  
 ];

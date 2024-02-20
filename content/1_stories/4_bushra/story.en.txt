@@ -2,10 +2,6 @@ Title: Bushra
 
 ----
 
-Storyid: 4
-
-----
-
 Age: 28
 
 ----
@@ -30,7 +26,79 @@ Jobarrival: cleaner
 
 ----
 
-Reasondeparture: dashes
+Reasondeparture: partita per "dahes" con mio marito e 2 bambini
+
+----
+
+Departureplace: Sinjar
+
+----
+
+Departurelat: 36.322
+
+----
+
+Departurelon: 41.864167
+
+----
+
+Legs:
+
+- 
+  place: Zakho
+  lat: 37.143611
+  lon: 42.681911
+  transport: car
+  durationday: null
+  durationhours: 10
+  staydays: 730
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Istanbul
+  lat: 41.016667
+  lon: 28.966667
+  transport: bus
+  durationday: 1
+  durationhours: null
+  staydays: 4
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Milano
+  lat: 45.466944
+  lon: 9.19
+  transport: train
+  durationday: null
+  durationhours: null
+  staydays: 2
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Berlin
+  lat: 52.516667
+  lon: 13.383333
+  transport: train
+  durationday: null
+  durationhours: null
+  staydays: 180
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
+- 
+  place: Trieste
+  lat: 45.650278
+  lon: 13.770278
+  transport: train
+  durationday: null
+  durationhours: 2
+  staydays: null
+  stayhours: null
+  comments: ""
+  geojsonleg: ""
 
 ----
 
@@ -39,3 +107,19 @@ Text:
 ----
 
 Notes: 
+
+----
+
+Cachedsvg: <svg id="map" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test"><path d="M800,522.4783822809131 472.3926801310322,403.24833612108716" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M472.3926801310322,403.24833612108716 0,257.2228635134366" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M0,257.2228635134366 100.16348126567043,0" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path><path d="M100.16348126567043,0 109.40619064704907,250.9684816797958" style="stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;" vector-effect="non-scaling-stroke"></path></svg>
+
+----
+
+Cachedapicalls: 
+
+----
+
+Storyid: 4
+
+----
+
+Uuid: wfvdpn2XQM1Rf26Q

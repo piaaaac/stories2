@@ -12,126 +12,96 @@ use Throwable;
  * @package   Kirby Toolkit
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class View
 {
-    /**
-     * The absolute path to the view file
-     *
-     * @var string
-     */
-    protected $file;
+	/**
+	 * Creates a new view object
+	 */
+	public function __construct(
+		// The absolute path to the view file
+		protected string $file,
+		protected array $data = []
+	) {
+	}
 
-    /**
-     * The view data
-     *
-     * @var array
-     */
-    protected $data = [];
+	/**
+	 * Returns the view's data array without globals
+	 */
+	public function data(): array
+	{
+		return $this->data;
+	}
 
-    /**
-     * Creates a new view object
-     *
-     * @param string $file
-     * @param array $data
-     */
-    public function __construct(string $file, array $data = [])
-    {
-        $this->file = $file;
-        $this->data = $data;
-    }
+	/**
+	 * Checks if the template file exists
+	 */
+	public function exists(): bool
+	{
+		return is_file($this->file()) === true;
+	}
 
-    /**
-     * Returns the view's data array
-     * without globals.
-     *
-     * @return array
-     */
-    public function data(): array
-    {
-        return $this->data;
-    }
+	/**
+	 * Returns the view file
+	 */
+	public function file(): string
+	{
+		return $this->file;
+	}
 
-    /**
-     * Checks if the template file exists
-     *
-     * @return bool
-     */
-    public function exists(): bool
-    {
-        return is_file($this->file()) === true;
-    }
+	/**
+	 * Creates an error message for the missing view exception
+	 */
+	protected function missingViewMessage(): string
+	{
+		return 'The view does not exist: ' . $this->file();
+	}
 
-    /**
-     * Returns the view file
-     *
-     * @return string|false
-     */
-    public function file()
-    {
-        return $this->file;
-    }
+	/**
+	 * Renders the view
+	 */
+	public function render(): string
+	{
+		if ($this->exists() === false) {
+			throw new Exception($this->missingViewMessage());
+		}
 
-    /**
-     * Creates an error message for the missing view exception
-     *
-     * @return string
-     */
-    protected function missingViewMessage(): string
-    {
-        return 'The view does not exist: ' . $this->file();
-    }
+		ob_start();
 
-    /**
-     * Renders the view
-     *
-     * @return string
-     */
-    public function render(): string
-    {
-        if ($this->exists() === false) {
-            throw new Exception($this->missingViewMessage());
-        }
+		try {
+			F::load($this->file(), null, $this->data());
+		} catch (Throwable $e) {
+			$exception = $e;
+		}
 
-        ob_start();
+		$content = ob_get_contents();
+		ob_end_clean();
 
-        $exception = null;
-        try {
-            F::load($this->file(), null, $this->data());
-        } catch (Throwable $e) {
-            $exception = $e;
-        }
+		if (($exception ?? null) !== null) {
+			throw $exception;
+		}
 
-        $content = ob_get_contents();
-        ob_end_clean();
+		return $content;
+	}
 
-        if ($exception === null) {
-            return $content;
-        }
+	/**
+	 * @see ::render()
+	 */
+	public function toString(): string
+	{
+		return $this->render();
+	}
 
-        throw $exception;
-    }
-
-    /**
-     * Alias for View::render()
-     *
-     * @return string
-     */
-    public function toString(): string
-    {
-        return $this->render();
-    }
-
-    /**
-     * Magic string converter to enable
-     * converting view objects to string
-     *
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->render();
-    }
+	/**
+	 * Magic string converter to enable
+	 * converting view objects to string
+	 *
+	 * @see ::render()
+	 */
+	public function __toString(): string
+	{
+		return $this->render();
+	}
 }

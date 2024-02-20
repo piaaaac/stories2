@@ -1,5 +1,5 @@
 <?php
-$ass = $kirby->url("assets");
+$stories = page("stories")->children()->listed();
 ?>
 
 <?php snippet("header") ?>
@@ -11,6 +11,8 @@ $ass = $kirby->url("assets");
     </div>
   </div>
 </div>
+
+<?php snippet("stories-prev", ["stories" => $stories]) ?>
 
 <script>
   

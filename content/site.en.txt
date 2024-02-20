@@ -1,1 +1,53 @@
-Title: Stories 2
+Title: Moving Lines
+
+----
+
+Metatemplate: Moving Lines
+
+----
+
+Metadescription: A visual narrative documenting the journeys of asylum seekers who for various reasons left their hometown in search for a better life.
+
+----
+
+Ogtemplate: Moving Lines
+
+----
+
+Ogdescription: A visual narrative documenting the journeys of asylum seekers who for various reasons left their hometown in search for a better life.
+
+----
+
+Ogsitename: Moving Lines
+
+----
+
+Ogimage: - file://B4MRootxkV6BOG4L
+
+----
+
+Twittercardtype: summary_large_image
+
+----
+
+Robotsindex: true
+
+----
+
+Robotsfollow: true
+
+----
+
+Robotsarchive: true
+
+----
+
+Robotsimageindex: true
+
+----
+
+Robotssnippet: true
+
+----
+
+Socialmediaaccounts: 

@@ -1,295 +1,346 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Cms\Find;
 use Kirby\Cms\UserRules;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Panel\Field;
 use Kirby\Panel\Panel;
+use Kirby\Panel\UserTotpDisableDialog;
 use Kirby\Toolkit\Escape;
+use Kirby\Toolkit\I18n;
 
+$fields = require __DIR__ . '/../fields/dialogs.php';
 $files = require __DIR__ . '/../files/dialogs.php';
 
 return [
 
-    // create
-    'user.create' => [
-        'pattern' => 'users/create',
-        'load' => function () {
-            $kirby = kirby();
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'name'  => Field::username(),
-                        'email' => Field::email([
-                            'link'     => false,
-                            'required' => true
-                        ]),
-                        'password' => Field::password(),
-                        'language' => Field::translation([
-                            'required' => true
-                        ]),
-                        'role' => Field::role([
-                            'required' => true
-                        ])
-                    ],
-                    'submitButton' => t('create'),
-                    'value' => [
-                        'name'     => '',
-                        'email'    => '',
-                        'password' => '',
-                        'language' => $kirby->panelLanguage(),
-                        'role'     => $kirby->user()->role()->name()
-                    ]
-                ]
-            ];
-        },
-        'submit' => function () {
-            kirby()->users()->create([
-                'name'     => get('name'),
-                'email'    => get('email'),
-                'password' => get('password'),
-                'language' => get('language'),
-                'role'     => get('role')
-            ]);
-            return [
-                'event' => 'user.create'
-            ];
-        }
-    ],
+	// create
+	'user.create' => [
+		'pattern' => 'users/create',
+		'load' => function () {
+			$kirby = App::instance();
 
-    // change email
-    'user.changeEmail' => [
-        'pattern' => 'users/(:any)/changeEmail',
-        'load' => function (string $id) {
-            $user = Find::user($id);
+			// get default value for role
+			if ($role = $kirby->request()->get('role')) {
+				$role = $kirby->roles()->find($role)?->id();
+			}
 
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'email' => [
-                            'label'     => t('email'),
-                            'required'  => true,
-                            'type'      => 'email',
-                            'preselect' => true
-                        ]
-                    ],
-                    'submitButton' => t('change'),
-                    'value' => [
-                        'email' => $user->email()
-                    ]
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            Find::user($id)->changeEmail(get('email'));
-            return [
-                'event' => 'user.changeEmail'
-            ];
-        }
-    ],
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'name'  => Field::username(),
+						'email' => Field::email([
+							'link'     => false,
+							'required' => true
+						]),
+						'password'     => Field::password(),
+						'translation'  => Field::translation([
+							'required' => true
+						]),
+						'role' => Field::role([
+							'required' => true
+						])
+					],
+					'submitButton' => I18n::translate('create'),
+					'value' => [
+						'name'        => '',
+						'email'       => '',
+						'password'    => '',
+						'translation' => $kirby->panelLanguage(),
+						'role'        => $role ?? $kirby->user()->role()->name()
+					]
+				]
+			];
+		},
+		'submit' => function () {
+			$kirby = App::instance();
 
-    // change language
-    'user.changeLanguage' => [
-        'pattern' => 'users/(:any)/changeLanguage',
-        'load' => function (string $id) {
-            $user = Find::user($id);
+			$kirby->users()->create([
+				'name'     => $kirby->request()->get('name'),
+				'email'    => $kirby->request()->get('email'),
+				'password' => $kirby->request()->get('password'),
+				'language' => $kirby->request()->get('translation'),
+				'role'     => $kirby->request()->get('role')
+			]);
 
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'translation' => Field::translation(['required' => true])
-                    ],
-                    'submitButton' => t('change'),
-                    'value' => [
-                        'translation' => $user->language()
-                    ]
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            Find::user($id)->changeLanguage(get('translation'));
+			return [
+				'event' => 'user.create'
+			];
+		}
+	],
 
-            return [
-                'event'  => 'user.changeLanguage',
-                'reload' => [
-                    'globals' => '$translation'
-                ]
-            ];
-        }
-    ],
+	// change email
+	'user.changeEmail' => [
+		'pattern' => 'users/(:any)/changeEmail',
+		'load' => function (string $id) {
+			$user = Find::user($id);
 
-    // change name
-    'user.changeName' => [
-        'pattern' => 'users/(:any)/changeName',
-        'load' => function (string $id) {
-            $user = Find::user($id);
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'email' => [
+							'label'     => I18n::translate('email'),
+							'required'  => true,
+							'type'      => 'email',
+							'preselect' => true
+						]
+					],
+					'submitButton' => I18n::translate('change'),
+					'value' => [
+						'email' => $user->email()
+					]
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
 
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'name' => Field::username([
-                            'preselect' => true
-                        ])
-                    ],
-                    'submitButton' => t('rename'),
-                    'value' => [
-                        'name' => $user->name()->value()
-                    ]
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            Find::user($id)->changeName(get('name'));
+			Find::user($id)->changeEmail($request->get('email'));
 
-            return [
-                'event' => 'user.changeName'
-            ];
-        }
-    ],
+			return [
+				'event' => 'user.changeEmail'
+			];
+		}
+	],
 
-    // change password
-    'user.changePassword' => [
-        'pattern' => 'users/(:any)/changePassword',
-        'load' => function (string $id) {
-            $user = Find::user($id);
+	// change language
+	'user.changeLanguage' => [
+		'pattern' => 'users/(:any)/changeLanguage',
+		'load' => function (string $id) {
+			$user = Find::user($id);
 
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'password' => Field::password([
-                            'label' => t('user.changePassword.new'),
-                        ]),
-                        'passwordConfirmation' => Field::password([
-                            'label' => t('user.changePassword.new.confirm'),
-                        ])
-                    ],
-                    'submitButton' => t('change'),
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            $user                 = Find::user($id);
-            $password             = get('password');
-            $passwordConfirmation = get('passwordConfirmation');
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'translation' => Field::translation(['required' => true])
+					],
+					'submitButton' => I18n::translate('change'),
+					'value' => [
+						'translation' => $user->language()
+					]
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
 
-            // validate the password
-            UserRules::validPassword($user, $password ?? '');
+			Find::user($id)->changeLanguage($request->get('translation'));
 
-            // compare passwords
-            if ($password !== $passwordConfirmation) {
-                throw new InvalidArgumentException([
-                    'key' => 'user.password.notSame'
-                ]);
-            }
+			return [
+				'event'  => 'user.changeLanguage',
+				'reload' => [
+					'globals' => '$translation'
+				]
+			];
+		}
+	],
 
-            // change password if everything's fine
-            $user->changePassword($password);
+	// change name
+	'user.changeName' => [
+		'pattern' => 'users/(:any)/changeName',
+		'load' => function (string $id) {
+			$user = Find::user($id);
 
-            return [
-                'event' => 'user.changePassword'
-            ];
-        }
-    ],
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'name' => Field::username([
+							'preselect' => true
+						])
+					],
+					'submitButton' => I18n::translate('rename'),
+					'value' => [
+						'name' => $user->name()->value()
+					]
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
 
-    // change role
-    'user.changeRole' => [
-        'pattern' => 'users/(:any)/changeRole',
-        'load' => function (string $id) {
-            $user = Find::user($id);
+			Find::user($id)->changeName($request->get('name'));
 
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'role' => Field::role([
-                            'label'    => t('user.changeRole.select'),
-                            'required' => true,
-                        ])
-                    ],
-                    'submitButton' => t('user.changeRole'),
-                    'value' => [
-                        'role' => $user->role()->name()
-                    ]
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            $user = Find::user($id)->changeRole(get('role'));
+			return [
+				'event' => 'user.changeName'
+			];
+		}
+	],
 
-            return [
-                'event' => 'user.changeRole',
-                'user' => $user->toArray()
-            ];
-        }
-    ],
+	// change password
+	'user.changePassword' => [
+		'pattern' => 'users/(:any)/changePassword',
+		'load' => function (string $id) {
+			$user = Find::user($id);
 
-    // delete
-    'user.delete' => [
-        'pattern' => 'users/(:any)/delete',
-        'load' => function (string $id) {
-            $user       = Find::user($id);
-            $i18nPrefix = $user->isLoggedIn() ? 'account' : 'user';
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'password' => Field::password([
+							'label' => I18n::translate('user.changePassword.new'),
+						]),
+						'passwordConfirmation' => Field::password([
+							'label' => I18n::translate('user.changePassword.new.confirm'),
+						])
+					],
+					'submitButton' => I18n::translate('change'),
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
 
-            return [
-                'component' => 'k-remove-dialog',
-                'props' => [
-                    'text' => tt($i18nPrefix . '.delete.confirm', [
-                        'email' => Escape::html($user->email())
-                    ])
-                ]
-            ];
-        },
-        'submit' => function (string $id) {
-            $user     = Find::user($id);
-            $redirect = false;
-            $referrer = Panel::referrer();
-            $url      = $user->panel()->url(true);
+			$user                 = Find::user($id);
+			$password             = $request->get('password');
+			$passwordConfirmation = $request->get('passwordConfirmation');
 
-            $user->delete();
+			// validate the password
+			UserRules::validPassword($user, $password ?? '');
 
-            // redirect to the users view
-            // if the dialog has been opened in the user view
-            if ($referrer === $url) {
-                $redirect = '/users';
-            }
+			// compare passwords
+			if ($password !== $passwordConfirmation) {
+				throw new InvalidArgumentException([
+					'key' => 'user.password.notSame'
+				]);
+			}
 
-            // logout the user if they deleted themselves
-            if ($user->isLoggedIn()) {
-                $redirect = '/logout';
-            }
+			// change password if everything's fine
+			$user->changePassword($password);
 
-            return [
-                'event'    => 'user.delete',
-                'dispatch' => ['content/remove' => [$url]],
-                'redirect' => $redirect
-            ];
-        }
-    ],
+			return [
+				'event' => 'user.changePassword'
+			];
+		}
+	],
 
-    // change file name
-    'user.file.changeName' => [
-        'pattern' => '(users/.*?)/files/(:any)/changeName',
-        'load'    => $files['changeName']['load'],
-        'submit'  => $files['changeName']['submit'],
-    ],
+	// change role
+	'user.changeRole' => [
+		'pattern' => 'users/(:any)/changeRole',
+		'load' => function (string $id) {
+			$user = Find::user($id);
 
-    // change file sort
-    'user.file.changeSort' => [
-        'pattern' => '(users/.*?)/files/(:any)/changeSort',
-        'load'    => $files['changeSort']['load'],
-        'submit'  => $files['changeSort']['submit'],
-    ],
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields' => [
+						'role' => Field::role([
+							'label'    => I18n::translate('user.changeRole.select'),
+							'required' => true,
+						])
+					],
+					'submitButton' => I18n::translate('user.changeRole'),
+					'value' => [
+						'role' => $user->role()->name()
+					]
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
 
-    // delete file
-    'user.file.delete' => [
-        'pattern' => '(users/.*?)/files/(:any)/delete',
-        'load'    => $files['delete']['load'],
-        'submit'  => $files['delete']['submit'],
-    ]
+			$user = Find::user($id)->changeRole($request->get('role'));
 
+			return [
+				'event' => 'user.changeRole',
+				'user' => $user->toArray()
+			];
+		}
+	],
+
+	// delete
+	'user.delete' => [
+		'pattern' => 'users/(:any)/delete',
+		'load' => function (string $id) {
+			$user       = Find::user($id);
+			$i18nPrefix = $user->isLoggedIn() ? 'account' : 'user';
+
+			return [
+				'component' => 'k-remove-dialog',
+				'props' => [
+					'text' => I18n::template($i18nPrefix . '.delete.confirm', [
+						'email' => Escape::html($user->email())
+					])
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$user     = Find::user($id);
+			$redirect = false;
+			$referrer = Panel::referrer();
+			$url      = $user->panel()->url(true);
+
+			$user->delete();
+
+			// redirect to the users view
+			// if the dialog has been opened in the user view
+			if ($referrer === $url) {
+				$redirect = '/users';
+			}
+
+			// logout the user if they deleted themselves
+			if ($user->isLoggedIn()) {
+				$redirect = '/logout';
+			}
+
+			return [
+				'event'    => 'user.delete',
+				'dispatch' => ['content/remove' => [$url]],
+				'redirect' => $redirect
+			];
+		}
+	],
+
+	// user field dialogs
+	'user.fields' => [
+		'pattern' => '(users/.*?)/fields/(:any)/(:all?)',
+		'load'    => $fields['model']['load'],
+		'submit'  => $fields['model']['submit']
+	],
+
+	// change file name
+	'user.file.changeName' => [
+		'pattern' => '(users/.*?)/files/(:any)/changeName',
+		'load'    => $files['changeName']['load'],
+		'submit'  => $files['changeName']['submit'],
+	],
+
+	// change file sort
+	'user.file.changeSort' => [
+		'pattern' => '(users/.*?)/files/(:any)/changeSort',
+		'load'    => $files['changeSort']['load'],
+		'submit'  => $files['changeSort']['submit'],
+	],
+
+	// change file template
+	'user.file.changeTemplate' => [
+		'pattern' => '(users/.*?)/files/(:any)/changeTemplate',
+		'load'    => $files['changeTemplate']['load'],
+		'submit'  => $files['changeTemplate']['submit'],
+	],
+
+	// delete file
+	'user.file.delete' => [
+		'pattern' => '(users/.*?)/files/(:any)/delete',
+		'load'    => $files['delete']['load'],
+		'submit'  => $files['delete']['submit'],
+	],
+
+	// user file fields dialogs
+	'user.file.fields' => [
+		'pattern' => '(users/.*?)/files/(:any)/fields/(:any)/(:all?)',
+		'load'    => $fields['file']['load'],
+		'submit'  => $fields['file']['submit']
+	],
+
+	// user disable TOTP
+	'user.totp.disable' => [
+		'pattern' => 'users/(:any)/totp/disable',
+		'load'    => fn (string $id) => (new UserTotpDisableDialog($id))->load(),
+		'submit'  => fn (string $id) => (new UserTotpDisableDialog($id))->submit()
+	],
 ];
