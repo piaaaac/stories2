@@ -782,7 +782,7 @@ label .text {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #ECFAF3;
+  background-color: #ECFA00;
   background-color: mintcream;
   color: black;
   font-family: "Nanum Myeongjo";
@@ -1264,12 +1264,12 @@ nav#menu-header {
   right: 0;
   transition: background-color 400ms, padding 400ms;
   padding: 0;
-  background-color: #ECFAF3;
+  background-color: #ECFA00;
 }
 
 /* line 319, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header.top {
-  background-color: #ECFAF3;
+  background-color: #ECFA00;
 }
 
 /* line 323, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
