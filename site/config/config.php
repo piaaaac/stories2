@@ -8,7 +8,7 @@ return [
   "debug" => true,
   "whoops" => true,
   "languages" => true,
-  "panel.install" => true,
+  "panel.install" => false,
 
   "routes" => require_once "routes.php",
 
