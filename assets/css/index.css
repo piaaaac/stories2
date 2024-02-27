@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 /* line 7, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_reset.scss */
 *:not(i), *:not(i)::before, *:not(i)::after {
   margin: 0;
@@ -164,80 +165,10 @@ input:invalid, textarea:invalid {
   background-color: #f0dddd;
 }
 
-/* line 9, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
-.nanum-myeongjo-regular {
-  font-family: "Nanum Myeongjo", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* line 14, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
-.nanum-myeongjo-bold {
-  font-family: "Nanum Myeongjo", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 400;
-  font-style: normal;
-  src: url("../fonts/BasierCircleMono-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 500;
-  font-style: normal;
-  src: url("../fonts/BasierCircleMono-Medium.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 600;
-  font-style: normal;
-  src: url("../fonts/BasierCircleMono-SemiBold.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 700;
-  font-style: normal;
-  src: url("../fonts/BasierCircleMono-Bold.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 400;
-  font-style: italic;
-  src: url("../fonts/BasierCircleMono-RegularItalic.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 500;
-  font-style: italic;
-  src: url("../fonts/BasierCircleMono-MediumItalic.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 600;
-  font-style: italic;
-  src: url("../fonts/BasierCircleMono-SemiBoldItalic.otf") format("opentype");
-}
-
-@font-face {
-  font-family: 'M';
-  font-weight: 700;
-  font-style: italic;
-  src: url("../fonts/BasierCircleMono-BoldItalic.otf") format("opentype");
-}
-
-/* line 55, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 80, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 .font-ser-400-nor-lg {
-  font-family: "Nanum Myeongjo";
-  font-size: 32px;
+  font-family: "Crimson Pro", serif;
+  font-size: 36px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -246,37 +177,37 @@ input:invalid, textarea:invalid {
 }
 
 @media (min-width: 576px) {
-  /* line 55, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 80, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-lg {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 55, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 80, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-lg {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 55, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 80, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-lg {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 55, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 80, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-lg {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
-/* line 56, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 81, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 .font-ser-400-nor-md {
-  font-family: "Nanum Myeongjo";
-  font-size: 21px;
+  font-family: "Crimson Pro", serif;
+  font-size: 23px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -285,76 +216,76 @@ input:invalid, textarea:invalid {
 }
 
 @media (min-width: 576px) {
-  /* line 56, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 81, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-md {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 56, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 81, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-md {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 56, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 81, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-md {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 56, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 81, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-ser-400-nor-md {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
-/* line 57, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 82, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 .font-mon-400-nor-sm {
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  /* line 57, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 82, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-mon-400-nor-sm {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 57, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 82, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-mon-400-nor-sm {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 57, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 82, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-mon-400-nor-sm {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 57, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 82, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .font-mon-400-nor-sm {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
-/* line 74, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 99, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 h2 {
-  font-family: "Nanum Myeongjo";
-  font-size: 32px;
+  font-family: "Crimson Pro", serif;
+  font-size: 36px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -363,82 +294,82 @@ h2 {
 }
 
 @media (min-width: 576px) {
-  /* line 74, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 99, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   h2 {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 74, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 99, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   h2 {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 74, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 99, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   h2 {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 74, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 99, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   h2 {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
-/* line 84, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 109, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 .block-font-mon-400-nor-sm,
 .block-font-mon-400-nor-sm p {
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  /* line 84, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 109, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-mon-400-nor-sm,
   .block-font-mon-400-nor-sm p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 84, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 109, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-mon-400-nor-sm,
   .block-font-mon-400-nor-sm p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 84, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 109, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-mon-400-nor-sm,
   .block-font-mon-400-nor-sm p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 84, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 109, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-mon-400-nor-sm,
   .block-font-mon-400-nor-sm p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
-/* line 89, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+/* line 114, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
 .block-font-san-300-nor-md,
 .block-font-san-300-nor-md p {
-  font-family: "Nanum Myeongjo";
-  font-size: 21px;
+  font-family: "Crimson Pro", serif;
+  font-size: 23px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -447,34 +378,34 @@ h2 {
 }
 
 @media (min-width: 576px) {
-  /* line 89, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 114, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-san-300-nor-md,
   .block-font-san-300-nor-md p {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 89, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 114, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-san-300-nor-md,
   .block-font-san-300-nor-md p {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 89, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 114, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-san-300-nor-md,
   .block-font-san-300-nor-md p {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 89, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
+  /* line 114, ../../../../../Users/piaaaac/code/stories2/assets/css-source/_typography.scss */
   .block-font-san-300-nor-md,
   .block-font-san-300-nor-md p {
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
@@ -723,70 +654,69 @@ label .text {
   transform: translate3d(0, -14px, 0) rotate(-90deg);
 }
 
-/* line 36, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 37, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .color-white {
   color: white;
 }
 
-/* line 37, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 38, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .color-white-50 {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* line 38, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 39, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .bg-white {
   background-color: white;
 }
 
-/* line 39, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 40, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .no-u {
   text-decoration: none;
 }
 
-/* line 40, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 41, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .u-hover {
   text-decoration: none;
 }
 
-/* line 40, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 41, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .u-hover:hover {
   text-decoration: underline;
 }
 
-/* line 41, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 42, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 42, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 43, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .upper {
   text-transform: uppercase;
 }
 
-/* line 43, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 44, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .lower {
   text-transform: none;
 }
 
-/* line 45, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 46, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .space-large {
   height: 110px;
 }
 
-/* line 51, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 52, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 * {
   text-rendering: geometricPrecision;
 }
 
-/* line 58, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 59, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #ECFAF3;
   background-color: mintcream;
   color: black;
-  font-family: "Nanum Myeongjo";
-  font-size: 32px;
+  font-family: "Crimson Pro", serif;
+  font-size: 36px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -800,30 +730,30 @@ body.media-open {
 }
 
 @media (min-width: 576px) {
-  /* line 58, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 59, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   body {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 58, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 59, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   body {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 58, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 59, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   body {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 58, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 59, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   body {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
@@ -868,11 +798,11 @@ a.green {
 
 /* line 104, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .article-prev .tags, .article-prev .places {
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
@@ -880,28 +810,28 @@ a.green {
 @media (min-width: 576px) {
   /* line 104, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .article-prev .tags, .article-prev .places {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 104, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .article-prev .tags, .article-prev .places {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 104, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .article-prev .tags, .article-prev .places {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 104, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .article-prev .tags, .article-prev .places {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
@@ -999,11 +929,11 @@ a.green {
   position: absolute;
   bottom: 15px;
   left: 15px;
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
@@ -1011,28 +941,28 @@ a.green {
 @media (min-width: 576px) {
   /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
@@ -1041,11 +971,11 @@ a.green {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
@@ -1053,28 +983,28 @@ a.green {
 @media (min-width: 576px) {
   /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
@@ -1090,11 +1020,11 @@ a.green {
 
 /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .full-w-btn a {
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
   text-transform: uppercase;
@@ -1109,28 +1039,28 @@ a.green {
 @media (min-width: 576px) {
   /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
@@ -1264,12 +1194,12 @@ nav#menu-header {
   right: 0;
   transition: background-color 400ms, padding 400ms;
   padding: 0;
-  background-color: #ECFAF3;
+  background-color: mintcream;
 }
 
 /* line 319, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header.top {
-  background-color: #ECFAF3;
+  background-color: mintcream;
 }
 
 /* line 323, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
@@ -1279,8 +1209,8 @@ nav#menu-header .wrapper {
 
 /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .left {
-  font-family: "Nanum Myeongjo";
-  font-size: 32px;
+  font-family: "Crimson Pro", serif;
+  font-size: 36px;
   letter-spacing: 0;
   line-height: 1.17em;
   font-weight: 400;
@@ -1291,28 +1221,28 @@ nav#menu-header .left {
 @media (min-width: 576px) {
   /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 
@@ -1326,11 +1256,11 @@ nav#menu-header .items a.item {
   text-decoration: none;
   text-transform: uppercase;
   margin-left: 12px;
-  font-family: "Martian Mono", monospace;
-  font-size: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
@@ -1338,28 +1268,28 @@ nav#menu-header .items a.item {
 @media (min-width: 576px) {
   /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
   /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
   /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
   /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 

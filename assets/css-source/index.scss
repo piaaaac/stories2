@@ -11,6 +11,7 @@ $border-radius: 3px;
 $space: 20px;
 
 $verdino: #ECFAF3;
+$verdino: mintcream;
 $verde: #29A468;
 $verdone: #135D4A;
 
@@ -59,7 +60,6 @@ body {
   overflow-x: hidden;
   width: 100vw;
   background-color: $verdino;
-  background-color: mintcream;
   color: black;
   &.media-open { overflow: hidden; }
   @include font-ser-400-nor-lg;
