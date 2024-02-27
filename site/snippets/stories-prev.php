@@ -21,6 +21,7 @@
               ?>
               <div class="square">
                 <div class="square-content-wrapper">
+                  <div class="bg"></div>
                   <div class="svg-cont">
                     <?php if ($story->cachedSvg()->isNotEmpty()): ?>
                       <?= $story->cachedSvg()->value() ?>

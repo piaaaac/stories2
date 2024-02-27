@@ -900,6 +900,19 @@ a.green {
 }
 
 /* line 158, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+.squares .squares-wrapper .square .square-content-wrapper .bg {
+  background-image: url("../images/blurred-map.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 800ms;
+}
+
+/* line 167, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .squares .squares-wrapper .square .square-content-wrapper .svg-cont {
   width: 100%;
   height: 100%;
@@ -908,13 +921,13 @@ a.green {
   left: 0;
 }
 
-/* line 163, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .squares .squares-wrapper .square .square-content-wrapper .svg-cont svg {
   width: 100%;
   height: 100%;
 }
 
-/* line 167, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 176, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .squares .squares-wrapper .square .square-content-wrapper .content {
   position: absolute;
   top: 0;
@@ -924,7 +937,7 @@ a.green {
   padding: 15px;
 }
 
-/* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 181, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
   position: absolute;
   bottom: 15px;
@@ -939,34 +952,34 @@ a.green {
 }
 
 @media (min-width: 576px) {
-  /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 181, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
     font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 181, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
     font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 181, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
     font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 172, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 181, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
     font-size: 15px;
   }
 }
 
-/* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 182, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
   position: absolute;
   bottom: 15px;
@@ -981,34 +994,39 @@ a.green {
 }
 
 @media (min-width: 576px) {
-  /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 182, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
     font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 182, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
     font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 182, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
     font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 173, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 182, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
     font-size: 15px;
   }
 }
 
-/* line 209, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 216, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+.squares .squares-wrapper .square:hover .square-content-wrapper .bg {
+  opacity: 1;
+}
+
+/* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .full-w-btn {
   overflow: hidden;
   background-color: #18725B;
@@ -1018,7 +1036,7 @@ a.green {
   transition: background-color 170ms;
 }
 
-/* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .full-w-btn a {
   font-family: "Space Grotesk", sans-serif;
   font-size: 15px;
@@ -1037,44 +1055,44 @@ a.green {
 }
 
 @media (min-width: 576px) {
-  /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
     font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
     font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
     font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 225, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .full-w-btn a {
     font-size: 15px;
   }
 }
 
-/* line 235, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 251, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .full-w-btn:hover {
   background-color: #073E30;
 }
 
-/* line 237, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 253, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .full-w-btn:hover a {
   color: #C6F5D2;
 }
 
-/* line 241, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 257, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .button {
   display: inline-flex;
   align-items: center;
@@ -1090,13 +1108,13 @@ a.green {
   transition: background-color 400ms, color 400ms;
 }
 
-/* line 252, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 268, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .button:hover, .button.active {
   background-color: grey;
   color: grey;
 }
 
-/* line 256, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 272, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .button.small {
   height: 37px;
   width: auto;
@@ -1122,70 +1140,70 @@ a.green {
   }
 }
 
-/* line 275, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 291, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 #map-container {
   height: 80vh;
 }
 
-/* line 283, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 299, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container {
   line-height: 0;
 }
 
-/* line 286, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 302, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.land-boundary {
   fill: #F9F8FF;
 }
 
-/* line 289, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 305, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line {
   stroke: black;
   fill: none;
 }
 
-/* line 292, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 308, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='wheels'] {
   stroke-dasharray: 2px;
 }
 
-/* line 293, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 309, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='train'] {
   stroke-dasharray: 4px;
 }
 
-/* line 294, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 310, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='water'] {
   stroke-dasharray: 2px 4px;
 }
 
-/* line 295, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 311, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='plane'] {
   stroke-dasharray: 2px 6px;
 }
 
-/* line 296, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 312, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='walking'] {
   stroke-dasharray: 4px 2px;
 }
 
-/* line 297, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 313, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='mixed'] {
   stroke-dasharray: 1px 3px;
 }
 
-/* line 298, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 314, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg path.leg-line[data-line-type='unknown'] {
   stroke-dasharray: 6px 2px;
 }
 
-/* line 300, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 316, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 div#svg-container svg#story-svg circle.leg-dot {
   stroke: white;
   stroke-width: 1px;
   fill: black;
 }
 
-/* line 312, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 328, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header {
   z-index: 6;
   position: fixed;
@@ -1197,17 +1215,17 @@ nav#menu-header {
   background-color: mintcream;
 }
 
-/* line 319, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 335, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header.top {
   background-color: mintcream;
 }
 
-/* line 323, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 339, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .wrapper {
   height: 70px;
 }
 
-/* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .left {
   font-family: "Crimson Pro", serif;
   font-size: 36px;
@@ -1219,39 +1237,39 @@ nav#menu-header .left {
 }
 
 @media (min-width: 576px) {
-  /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
     font-size: 36px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
     font-size: 36px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
     font-size: 36px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 326, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .left {
     font-size: 36px;
   }
 }
 
-/* line 328, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 344, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .left img {
   margin-right: 6px;
 }
 
-/* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 347, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .items a.item {
   text-decoration: none;
   text-transform: uppercase;
@@ -1266,51 +1284,51 @@ nav#menu-header .items a.item {
 }
 
 @media (min-width: 576px) {
-  /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 347, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
     font-size: 15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 347, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
     font-size: 15px;
   }
 }
 
 @media (min-width: 992px) {
-  /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 347, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
     font-size: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 331, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 347, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   nav#menu-header .items a.item {
     font-size: 15px;
   }
 }
 
-/* line 336, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 352, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header .items a.item.active, nav#menu-header .items a.item:hover {
   color: inherit;
   text-decoration: underline;
 }
 
-/* line 342, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 358, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header a#header-low-a {
   margin-right: 3px;
 }
 
-/* line 344, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 360, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 nav#menu-header a#header-low-a:hover {
   color: grey;
   text-decoration: none;
 }
 
-/* line 350, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 366, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 #menu-xs {
   z-index: 5;
   position: fixed;
@@ -1332,12 +1350,12 @@ nav#menu-header a#header-low-a:hover {
   align-items: stretch;
 }
 
-/* line 360, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 376, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body.menu-xs-open #menu-xs {
   right: 0;
 }
 
-/* line 365, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 381, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 #menu-xs a.item {
   text-decoration: none;
   text-align: center;
@@ -1345,17 +1363,17 @@ body.menu-xs-open #menu-xs {
   font-family: monospace;
 }
 
-/* line 372, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 388, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 #menu-xs a.item.small {
   font-family: monospace;
 }
 
-/* line 383, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 399, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools {
   background-color: rgba(0, 0, 255, 0.1);
 }
 
-/* line 385, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 401, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure {
   height: 100vh;
   display: flex;
@@ -1363,12 +1381,12 @@ body#story-tools .structure {
   justify-content: space-between;
 }
 
-/* line 390, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 406, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure .left-items {
   width: 50%;
 }
 
-/* line 393, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 409, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure .left-items .leg-item textarea {
   width: 100%;
   height: 200px;
@@ -1376,27 +1394,27 @@ body#story-tools .structure .left-items .leg-item textarea {
   font-size: 8px;
 }
 
-/* line 399, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 415, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure .left-items .leg-item button {
   position: absolute;
   top: 0;
   right: 0;
 }
 
-/* line 406, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 422, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure .right-mapbox-preview {
   width: 50%;
   position: relative;
 }
 
-/* line 409, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 425, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 body#story-tools .structure .right-mapbox-preview #mapbox-container {
   position: fixed;
   width: 50%;
   height: 100%;
 }
 
-/* line 423, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+/* line 439, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
 .container-fluid {
   max-width: 1400px;
   margin-left: auto;
@@ -1406,7 +1424,7 @@ body#story-tools .structure .right-mapbox-preview #mapbox-container {
 }
 
 @media (max-width: 575.98px) {
-  /* line 423, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
+  /* line 439, ../../../../../Users/piaaaac/code/stories2/assets/css-source/index.scss */
   .container-fluid {
     padding-left: 15px;
     padding-right: 15px;
