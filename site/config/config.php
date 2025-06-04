@@ -7,9 +7,10 @@ return [
 
   "debug" => true,
   "whoops" => true,
-  'languages' => true,
+  "languages" => true,
+  "panel.install" => false,
 
-  "routes" => require_once 'routes.php',
+  "routes" => require_once "routes.php",
 
   // "hooks" => require_once "hooks.php", // currently []
   
@@ -21,7 +22,7 @@ return [
   ],
 
   // Kirby SEO plugin settings
-  'tobimori.seo.canonicalBase' => "https://movinglines.org",
-  'tobimori.seo.lang' => 'en_US',
+  "tobimori.seo.canonicalBase" => "https://movinglines.org",
+  "tobimori.seo.lang" => "en_US",
   
 ];

@@ -11,6 +11,7 @@ $border-radius: 3px;
 $space: 20px;
 
 $verdino: #ECFAF3;
+$verdino: mintcream;
 $verde: #29A468;
 $verdone: #135D4A;
 
@@ -59,7 +60,6 @@ body {
   overflow-x: hidden;
   width: 100vw;
   background-color: $verdino;
-  background-color: mintcream;
   color: black;
   &.media-open { overflow: hidden; }
   @include font-ser-400-nor-lg;
@@ -155,6 +155,15 @@ $m: 15px;
       .square-content-wrapper {
         padding-top: 100%;
         position: relative;
+        .bg {
+          // background: grey;
+          background-image: url("../images/blurred-map.jpg");
+          background-size: cover;
+          position: absolute;
+          top: 0; bottom: 0; left: 0; right: 0;
+          opacity: 0;
+          transition: opacity 800ms;
+        }
         .svg-cont {
           width: 100%; height: 100%;
           position: absolute;
@@ -200,6 +209,13 @@ $m: 15px;
           //     }
           //   }
           // }
+        }
+      }
+      &:hover {
+        .square-content-wrapper {
+          .bg {
+            opacity: 1;
+          }
         }
       }
     }

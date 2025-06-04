@@ -28,6 +28,7 @@
           <p>
             Sincerely thanks to everyone who contributed lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit. Ut in sapien magna.
           </p>
+          <p>Running on <a href="https://getkirby.com" target="_blank">Kirby</a>.</p>
         </div>
       </div>
       <div class="col-lg-4 offset-lg-4">
