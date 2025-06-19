@@ -1,144 +1,141 @@
 title: Story
-preset: page
+# preset: page
 pages: false
-fields:
-  # storyid:
-  #   label: Story ID
-  #   type: number
-  #   help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
-  #   translate: false
-  age:
-    label: Age
-    type: number
-    width: 1/2
-    translate: false
-  sex:
-    label: Sex
-    type: select
-    default: other
-    options:
-      male: Male
-      female: Female
-      other: Not specified
-    width: 1/2
-    translate: false
-  dateDeparture:
-    label: Date of departure
-    type: date
-    width: 1/2
-    translate: false
-  dateArrival:
-    label: date of arrival
-    type: date
-    width: 1/2
-    translate: false
-  jobDeparture:
-    label: Job at departure
-    type: text
-    width: 1/2
-  jobArrival:
-    label: Job at arrival
-    type: text
-    width: 1/2
-  reasonDeparture:
-    label: Reason of departure
-    type: text
-
-  departurePlace:
-    label: Departure place
-    type: text
-    width: 1/4
-  departureLat:
-    type: number
-    width: 1/4
-    translate: false
-  departureLon:
-    type: number
-    width: 1/4
-    translate: false
-
-  legs:
-    label: Trip places
-    type: structure
+sections:
+  meta1:
+    type: fields
     fields:
-      place:
-        type: text
-        width: 1/4
-      country:
-        type: text
-        width: 1/4
-      lat:
+      # storyid:
+      #   label: Story ID
+      #   type: number
+      #   help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
+      #   translate: false
+      age:
+        label: Age
         type: number
-        width: 1/4
+        width: 1/2
         translate: false
-      lon:
-        type: number
-        width: 1/4
-        translate: false
-      transport:
+      sex:
+        label: Sex
         type: select
+        default: other
         options:
-          walk: walking
-          boat: boat
-          bus: bus
-          truck: truck
-          train: train
-          car: car
-          taxi: taxi
-          plane: plane
-        translate: false
-      durationDay:
-        type: number
-        label: trip duration (days)
-        width: 1/4
-        translate: false
-      durationHours:
-        type: number
-        label: trip duration (hours)
-        width: 1/4
-        translate: false
-      stayDays:
-        type: number
-        label: stay (days)
-        width: 1/4
-        translate: false
-      stayHours:
-        type: number
-        label: stay (hours)
-        width: 1/4
-        translate: false
-      comments:
-        type: textarea
-        width: 1/2
-      geojsonLeg:
-        type: textarea
+          male: Male
+          female: Female
+          other: Not specified
         width: 1/2
         translate: false
+      dateDeparture:
+        label: Date of departure
+        type: date
+        width: 1/2
+        translate: false
+      dateArrival:
+        label: date of arrival
+        type: date
+        width: 1/2
+        translate: false
+      jobDeparture:
+        label: Job at departure
+        type: text
+        width: 1/2
+      jobArrival:
+        label: Job at arrival
+        type: text
+        width: 1/2
+      reasonDeparture:
+        label: Reason of departure
+        type: text
 
-  text:
-    label: Text (Visible on the site)
-    type: textarea
-    size: small
-    width: 1/2
-  notes:
-    label: Notes (Internal use - will not appear on the site)
-    type: textarea
-    size: small
-    width: 1/2
-    translate: false
+      departurePlace:
+        label: Departure place
+        type: text
+        width: 1/4
+      departureLat:
+        type: number
+        width: 1/4
+        translate: false
+      departureLon:
+        type: number
+        width: 1/4
+        translate: false
 
-  cachedSvg:
-    type: textarea
-    
-  cachedApiCalls:
-    type: textarea
-    disabled: true
+      legs:
+        label: Trip places
+        type: structure
+        fields:
+          place:
+            type: text
+            width: 1/4
+          country:
+            type: text
+            width: 1/4
+          lat:
+            type: number
+            width: 1/4
+            translate: false
+          lon:
+            type: number
+            width: 1/4
+            translate: false
+          transport:
+            type: select
+            options:
+              walk: walking
+              boat: boat
+              bus: bus
+              truck: truck
+              train: train
+              car: car
+              taxi: taxi
+              plane: plane
+            translate: false
+          durationDay:
+            type: number
+            label: trip duration (days)
+            width: 1/4
+            translate: false
+          durationHours:
+            type: number
+            label: trip duration (hours)
+            width: 1/4
+            translate: false
+          stayDays:
+            type: number
+            label: stay (days)
+            width: 1/4
+            translate: false
+          stayHours:
+            type: number
+            label: stay (hours)
+            width: 1/4
+            translate: false
+          comments:
+            type: textarea
+            width: 1/2
+          geojsonLeg:
+            type: textarea
+            width: 1/2
+            translate: false
 
+      text:
+        label: Text (Visible on the site)
+        type: textarea
+        size: small
+        width: 1/2
+      notes:
+        label: Notes (Internal use - will not appear on the site)
+        type: textarea
+        size: small
+        width: 1/2
+        translate: false
 
+      cachedSvg:
+        type: textarea
 
+      cachedApiCalls:
+        type: textarea
+        disabled: true
 
-
-
-
-
-
+  files:
+    type: files

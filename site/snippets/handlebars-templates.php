@@ -1,4 +1,3 @@
-
 <!-- 
 place
   isOpen:         true
@@ -16,11 +15,11 @@ place
   tripTransport:  car"
 -->
 <script id="hb-popup" type="text/x-handlebars-template">
-  <div class="story-prev pb-3 my-3">
+  <div class="story-leg-info pb-3 my-3">
     <div class="story-header">
-      <span class="location font-mon-400-nor-sm mr-3">{{place.name}}</span>
+      <span class="location font-ser-400-nor-md mr-3">{{place.name}}</span>
     </div>
-    <p class="font-mon-400-nor-sm color-grey">{{place.index}}</p>
+    <p class="font-mon-400-nor-sm color-grey">{{place.tripTransport}}</p>
   </div>
 </script>
 
@@ -53,24 +52,23 @@ titleIsLink
 
 <!-- handlebars helpers -->
 <script>
-
   // --- via https://stackoverflow.com/a/8206299
-  Handlebars.registerHelper('cleanUrl', function(url){
+  Handlebars.registerHelper('cleanUrl', function(url) {
     url = url || '';
     return url.replace(/(^\w+:|^)\/\//, '');
   });
 
-  Handlebars.registerHelper('parseAndGrab', function(string, prop){
+  Handlebars.registerHelper('parseAndGrab', function(string, prop) {
     return JSON.parse(string).prop;
   });
 
-  Handlebars.registerHelper('join', function(array, separator){
+  Handlebars.registerHelper('join', function(array, separator) {
     return array.join(separator);
   });
 
-  Handlebars.registerHelper('shorten', function(string, max){
+  Handlebars.registerHelper('shorten', function(string, max) {
     var str = string;
-    if(string.length > max){
+    if (string.length > max) {
       str = string.substring(0, max);
       var arr = str.split(" ");
       str = arr.slice(0, -1).join(" ") + "…";
@@ -80,7 +78,7 @@ titleIsLink
 
 
   // --- via https://stackoverflow.com/a/16315366/2501713
-  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+  Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
     switch (operator) {
       case '==':
         return (v1 == v2) ? options.fn(this) : options.inverse(this);
@@ -106,6 +104,4 @@ titleIsLink
         return options.inverse(this);
     }
   });
-
 </script>
-

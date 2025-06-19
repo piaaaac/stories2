@@ -10,40 +10,60 @@ $menu-h: 70px;
 $border-radius: 3px;
 $space: 20px;
 
-$verdino: #ECFAF3;
+$verdino: #ecfaf3;
 $verdino: mintcream;
-$verde: #29A468;
-$verdone: #135D4A;
-
+$verde: #29a468;
+$verdone: #135d4a;
 
 // -----------------------------------------------------------------------------
 // External files import
 // -----------------------------------------------------------------------------
 
-@import 'bootstrap-scss/_functions';
-@import 'bootstrap-scss/_variables';
-@import 'bootstrap-scss/mixins/_breakpoints';
-@import '_reset';
-@import '_typography';
-@import '_mixins';
-@import '_switch';
-@import 'hamburger-settings';
-@import 'hamburgers/hamburgers';
+@import "bootstrap-scss/_functions";
+@import "bootstrap-scss/_variables";
+@import "bootstrap-scss/mixins/_breakpoints";
+@import "_reset";
+@import "_typography";
+@import "_mixins";
+@import "_switch";
+@import "hamburger-settings";
+@import "hamburgers/hamburgers";
 
 // -----------------------------------------------------------------------------
 // Utilities
 // -----------------------------------------------------------------------------
 
-.color-white { color: white; }
-.color-white-50 { color: rgba(white, 0.5); }
-.bg-white { background-color: white; }
-.no-u { text-decoration: none; }
-.u-hover { text-decoration: none; &:hover { text-decoration: underline; } }
-.pointer { cursor: pointer; }
-.upper { text-transform: uppercase; }
-.lower { text-transform: none; }
+.color-white {
+  color: white;
+}
+.color-white-50 {
+  color: rgba(white, 0.5);
+}
+.bg-white {
+  background-color: white;
+}
+.no-u {
+  text-decoration: none;
+}
+.u-hover {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.pointer {
+  cursor: pointer;
+}
+.upper {
+  text-transform: uppercase;
+}
+.lower {
+  text-transform: none;
+}
 
-.space-large { height: 110px; }
+.space-large {
+  height: 110px;
+}
 
 // -----------------------------------------------------------------------------
 // General tags & classes
@@ -61,7 +81,9 @@ body {
   width: 100vw;
   background-color: $verdino;
   color: black;
-  &.media-open { overflow: hidden; }
+  &.media-open {
+    overflow: hidden;
+  }
   @include font-ser-400-nor-lg;
 }
 
@@ -101,7 +123,8 @@ a {
   display: flex;
   justify-content: space-between;
   flex-flow: column nowrap;
-  .tags, .places {
+  .tags,
+  .places {
     @include font-mon-400-nor-sm;
   }
   .title-wrapper {
@@ -141,7 +164,7 @@ $m: 15px;
   .squares-wrapper {
     left: -$m;
     position: relative;
-    min-width: calc(100% + #{$m*2});
+    min-width: calc(100% + #{$m * 2});
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -160,26 +183,45 @@ $m: 15px;
           background-image: url("../images/blurred-map.jpg");
           background-size: cover;
           position: absolute;
-          top: 0; bottom: 0; left: 0; right: 0;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
           opacity: 0;
           transition: opacity 800ms;
         }
         .svg-cont {
-          width: 100%; height: 100%;
+          width: 100%;
+          height: 100%;
           position: absolute;
-          top: 0; left: 0;
+          top: 0;
+          left: 0;
           // background-color: yellow;
           svg {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
           }
         }
         .content {
           position: absolute;
-          top: 0; bottom: 0; left: 0; right: 0;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
           padding: $m;
           &.story {
-            .from-bot-l { position: absolute; bottom: $m; left: $m; @include font-mon-400-nor-sm; }
-            .to-bot-r { position: absolute; bottom: $m; right: $m; @include font-mon-400-nor-sm; }
+            .from-bot-l {
+              position: absolute;
+              bottom: $m;
+              left: $m;
+              @include font-mon-400-nor-sm;
+            }
+            .to-bot-r {
+              position: absolute;
+              bottom: $m;
+              right: $m;
+              @include font-mon-400-nor-sm;
+            }
           }
           // &.article {
           //   display: flex;
@@ -225,9 +267,9 @@ $m: 15px;
 .full-w-btn {
   overflow: hidden;
   // background-color: $verdone;
-  background-color: #18725B;
+  background-color: #18725b;
   color: white;
-  color: #BAF7CA;
+  color: #baf7ca;
   height: $menu-h;
   transition: background-color 170ms;
 
@@ -249,13 +291,17 @@ $m: 15px;
     justify-content: center;
   }
   &:hover {
-    background-color: #073E30;
-    a { color: #C6F5D2; }
+    background-color: #073e30;
+    a {
+      color: #c6f5d2;
+    }
   }
 }
 
 .button {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: $button-h;
   border: 1px solid grey;
   color: grey;
@@ -265,23 +311,35 @@ $m: 15px;
   border-radius: $border-radius;
   padding: 0 $space;
   transition: background-color 400ms, color 400ms;
-  &:hover, &.active {
+  &:hover,
+  &.active {
     background-color: grey;
     color: grey;
   }
   &.small {
     height: $button-h-s;
-    width: auto; padding: 0 10px;
+    width: auto;
+    padding: 0 10px;
     text-transform: none;
   }
 }
 
 @keyframes blink {
-  0%  { opacity: 0.5; }
-  25% { opacity: 0.5; }
-  50% { opacity: 0.3; }
-  75% { opacity: 0.5; }
-  100%{ opacity: 0.5; }
+  0% {
+    opacity: 0.5;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -292,6 +350,14 @@ $m: 15px;
   height: 80vh;
 }
 
+.mapboxgl-popup-content {
+  border: 1px solid red;
+  border-radius: 10px !important;
+}
+.story-leg-info {
+  background-color: #c6f5d2;
+}
+
 // -----------------------------------------------------------------------------
 // STORY SVG
 // -----------------------------------------------------------------------------
@@ -300,18 +366,32 @@ div#svg-container {
   line-height: 0;
   svg#story-svg {
     path.land-boundary {
-      fill: #F9F8FF;
+      fill: #f9f8ff;
     }
     path.leg-line {
       stroke: black;
       fill: none;
-      &[data-line-type='wheels']  {stroke-dasharray: 2px;}
-      &[data-line-type='train']   {stroke-dasharray: 4px;}
-      &[data-line-type='water']   {stroke-dasharray: 2px 4px;}
-      &[data-line-type='plane']   {stroke-dasharray: 2px 6px;}
-      &[data-line-type='walking'] {stroke-dasharray: 4px 2px;}
-      &[data-line-type='mixed']   {stroke-dasharray: 1px 3px;}
-      &[data-line-type='unknown'] {stroke-dasharray: 6px 2px;}
+      &[data-line-type="wheels"] {
+        stroke-dasharray: 2px;
+      }
+      &[data-line-type="train"] {
+        stroke-dasharray: 4px;
+      }
+      &[data-line-type="water"] {
+        stroke-dasharray: 2px 4px;
+      }
+      &[data-line-type="plane"] {
+        stroke-dasharray: 2px 6px;
+      }
+      &[data-line-type="walking"] {
+        stroke-dasharray: 4px 2px;
+      }
+      &[data-line-type="mixed"] {
+        stroke-dasharray: 1px 3px;
+      }
+      &[data-line-type="unknown"] {
+        stroke-dasharray: 6px 2px;
+      }
     }
     circle.leg-dot {
       stroke: white;
@@ -328,12 +408,14 @@ div#svg-container {
 nav#menu-header {
   z-index: 6;
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   transition: background-color 400ms, padding 400ms;
   padding: 0;
-  background-color: $verdino; 
-  &.top { 
-    background-color: $verdino; 
+  background-color: $verdino;
+  &.top {
+    background-color: $verdino;
     // padding: 7px 0;
   }
   .wrapper {
@@ -341,7 +423,9 @@ nav#menu-header {
   }
   .left {
     @include font-ser-400-nor-lg;
-    img { margin-right: 6px; }
+    img {
+      margin-right: 6px;
+    }
   }
   .items {
     a.item {
@@ -349,7 +433,8 @@ nav#menu-header {
       text-transform: uppercase;
       margin-left: 12px;
       @include font-mon-400-nor-sm;
-      &.active, &:hover {
+      &.active,
+      &:hover {
         color: inherit;
         text-decoration: underline;
       }
@@ -366,7 +451,8 @@ nav#menu-header {
 #menu-xs {
   z-index: 5;
   position: fixed;
-  top: 0; right: -100%;
+  top: 0;
+  right: -100%;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -376,7 +462,10 @@ nav#menu-header {
   @at-root body.menu-xs-open & {
     right: 0;
   }
-  display: flex; flex-flow: column nowrap; justify-content: center; align-items: stretch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
 
   a.item {
     // color: white;
@@ -431,17 +520,19 @@ body#story-tools {
   }
 }
 
-
 // ------------------------------------------------------------------------
 // Layout
 // ------------------------------------------------------------------------
 
 .container-fluid {
   max-width: 1400px;
-  margin-left: auto; margin-right: auto;
-  padding-left: 30px; padding-right: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
   @include media-breakpoint-down(xs) {
-    padding-left: 15px; padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 

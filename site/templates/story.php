@@ -66,6 +66,7 @@ $ass = $kirby->url("assets");
     logoPosition: 'top-right',
   });
   toggleMapStyle();
+  toggleMapStyle();
 
   // --------------------------------
   // Add data
