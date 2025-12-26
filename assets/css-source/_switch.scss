@@ -17,7 +17,7 @@
  *
  */
 
-$color-active: orange;
+$color-active: $verde;
 
 $w: 55px;
 $h: 34px;
@@ -27,8 +27,12 @@ $small-h: 20px;
 $small-circle-size: 14px;
 
 label {
-  display: inline-flex; align-items: center; justify-content: flex-start;
-  .text { margin-left: 10px; }
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  .text {
+    margin-left: 10px;
+  }
 }
 
 .switch {
@@ -36,8 +40,9 @@ label {
   display: inline-block;
   width: $w;
   height: $h;
-  
-  input { // Hide default HTML checkbox
+
+  input {
+    // Hide default HTML checkbox
     opacity: 0;
     width: 0;
     height: 0;
@@ -52,16 +57,17 @@ label {
     transform: translateX(#{$w - $circle-size - ($h - $circle-size)});
   }
 
-  .slider { // The slider
+  .slider {
+    // The slider
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(white, 0.5);
-    transition: .2s;
-    
+    background-color: rgba(black, 0.2);
+    transition: 0.2s;
+
     &::before {
       position: absolute;
       content: "";
@@ -70,11 +76,13 @@ label {
       left: #{($h - $circle-size) / 2};
       bottom: #{($h - $circle-size) / 2};
       background-color: white;
-      transition: .2s;
+      transition: 0.2s;
     }
 
-    &.round { // Rounded sliders
+    &.round {
+      // Rounded sliders
       border-radius: $h;
+      // border: 1px solid black;
       &::before {
         border-radius: 50%;
       }
@@ -85,7 +93,9 @@ label {
     width: $small-w;
     height: $small-h;
     input:checked + .slider::before {
-      transform: translateX(#{$small-w - $small-circle-size - ($small-h - $small-circle-size)});
+      transform: translateX(
+        #{$small-w - $small-circle-size - ($small-h - $small-circle-size)}
+      );
     }
     .slider {
       &::before {
@@ -100,7 +110,3 @@ label {
     }
   }
 }
-
-
-
-

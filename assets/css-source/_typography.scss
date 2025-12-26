@@ -4,101 +4,137 @@
 // Fonts
 // ------------------------------------------------------------------------
 
-// $font-san: "SS";
-
-// .nanum-myeongjo-regular {
-//   font-family: "Nanum Myeongjo", serif;
-//   font-weight: 400;
-//   font-style: normal;
-// }
-// .nanum-myeongjo-bold {
-//   font-family: "Nanum Myeongjo", serif;
-//   font-weight: 700;
-//   font-style: normal;
-// }
-// $font-ser: "Nanum Myeongjo";
-
-// •••••••••••••••••••
-
-// @font-face { 
-//   font-family: 'PPCirka'; 
-//   font-weight: 450; 
-//   font-style: normal; 
-//   src: url('../fonts/PPCirka-trial/PPCirka-Variable.ttf') format('truetype');
-// }
-// $font-ser: "PPCirka";
-
-// •••••••••••••••••••
-
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 $font-ser: "Crimson Pro", serif;
 
-// •••••••••••••••••••
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/Inter-VariableFont_opsz-wght.ttf") format("truetype");
+  font-weight: 100 900; /* Range supported by the variable font */
+  font-style: normal;
+  font-display: swap;
+}
+$font-sans: "Inter", sans-serif;
 
-// @font-face { font-family: 'M'; font-weight: 400; font-style: normal; src: url('../fonts/BasierCircleMono-Regular.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 500; font-style: normal; src: url('../fonts/BasierCircleMono-Medium.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 600; font-style: normal; src: url('../fonts/BasierCircleMono-SemiBold.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 700; font-style: normal; src: url('../fonts/BasierCircleMono-Bold.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 400; font-style: italic; src: url('../fonts/BasierCircleMono-RegularItalic.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 500; font-style: italic; src: url('../fonts/BasierCircleMono-MediumItalic.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 600; font-style: italic; src: url('../fonts/BasierCircleMono-SemiBoldItalic.otf') format('opentype'); }
-// @font-face { font-family: 'M'; font-weight: 700; font-style: italic; src: url('../fonts/BasierCircleMono-BoldItalic.otf') format('opentype'); }
-// $font-mon: "M";
-
-// @import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
-// $font-mon: 'Martian Mono', monospace;
-
-// @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
-// $font-mon: "Red Hat Mono", monospace;
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-$font-mon: "Space Grotesk", sans-serif;
-
-
-
-@mixin font-style($font-fam, $xs, $sm, $md, $lg, $xl, $letter-sp, $line-h, $weight, $style){
+@mixin font-style($font-fam, $xs, $sm, $md, $lg, $xl, $letter-sp, $line-h) {
   font-family: $font-fam;
   font-size: $xs;
   letter-spacing: $letter-sp;
   line-height: $line-h;
-  font-weight: $weight;
-  font-style: $style;
   font-stretch: normal;
-  @include media-breakpoint-up(sm) { font-size: $sm; }
-  @include media-breakpoint-up(md) { font-size: $md; }
-  @include media-breakpoint-up(lg) { font-size: $lg; }
-  @include media-breakpoint-up(xl) { font-size: $xl; }  
+  @include media-breakpoint-up(sm) {
+    font-size: $sm;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: $md;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: $lg;
+  }
+  @include media-breakpoint-up(xl) {
+    font-size: $xl;
+  }
 }
 
-// ----------------------------------------------------------- xs --- sm --- md --- lg --- xl ---- lsp ---- lh ---- w --- style
+// -----------------------------------------------------------------------------
+// Font family + size
+// -----------------------------------------------------------------------------
 
-@mixin font-ser-400-nor-lg { @include font-style($font-ser,    36px,  36px,  36px,  36px,  36px,   0,       1.17em, 400,  normal); }
-@mixin font-ser-400-nor-md { @include font-style($font-ser,    23px,  23px,  23px,  23px,  23px,   0,       1.17em, 400,  normal); }
-@mixin font-ser-600-nor-md { @include font-style($font-ser,    23px,  23px,  23px,  23px,  23px,   0,       1.17em, 600,  normal); }
-@mixin font-mon-400-nor-sm { @include font-style($font-mon,    15px,  15px,  15px,  15px,  15px,   0,       1.46em, 500,  normal); }
+@mixin font-ser-xl {
+  @include font-style(
+    $font-fam: $font-ser,
+    $xs: 44px,
+    $sm: 44px,
+    $md: 44px,
+    $lg: 44px,
+    $xl: 44px,
+    $letter-sp: -0.02em,
+    $line-h: 1.17em
+  );
+}
+.font-ser-xl {
+  @include font-ser-xl;
+}
 
-.font-ser-400-nor-lg  { @include font-ser-400-nor-lg; }
-.font-ser-400-nor-md  { @include font-ser-400-nor-md; }
-.font-mon-400-nor-sm  { @include font-mon-400-nor-sm; }
+@mixin font-ser-l {
+  @include font-style(
+    $font-fam: $font-ser,
+    $xs: 30px,
+    $sm: 30px,
+    $md: 30px,
+    $lg: 30px,
+    $xl: 30px,
+    $letter-sp: -0.02em,
+    $line-h: 1.17em
+  );
+}
+.font-ser-l {
+  @include font-ser-l;
+}
 
-@mixin font-sans-m { font-family: monospace; }
-@mixin font-sans-m { font-family: monospace; }
-@mixin font-sans-m { font-family: monospace; }
-@mixin font-sans-xl { font-family: monospace; }
-@mixin font-sans-m { font-family: monospace; }
+@mixin font-sans-s {
+  @include font-style(
+    $font-fam: $font-sans,
+    $xs: 14px,
+    $sm: 14px,
+    $md: 14px,
+    $lg: 14px,
+    $xl: 14px,
+    $letter-sp: 0,
+    $line-h: 1.46em
+  );
+}
+.font-sans-s {
+  @include font-sans-s;
+}
+
+@mixin font-sans-m {
+  @include font-style(
+    $font-fam: $font-sans,
+    $xs: 20px,
+    $sm: 20px,
+    $md: 20px,
+    $lg: 20px,
+    $xl: 20px,
+    $letter-sp: 0,
+    $line-h: 1.46em
+  );
+}
+.font-sans-m {
+  @include font-sans-m;
+}
+
+// -----------------------------------------------------------------------------
+// Full styles
+// -----------------------------------------------------------------------------
+
+@mixin font-style-label {
+  @include font-sans-m;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.font-style-label {
+  @include font-style-label;
+}
 
 // -----------------------------------------------------------------------------
 // Elements
 // -----------------------------------------------------------------------------
 
-// p { 
-//   @include font-sans-m;
-//   margin-bottom: 1em;
-// }
-// h1 { @include font-sans-xl; }
-h2 { @include font-ser-400-nor-lg; }
-// h3 { @include font-sans-m; }
-// h4 { @include font-sans-m; }
+h1 {
+  @include font-ser-xl;
+}
+h2 {
+  @include font-ser-l;
+}
+h3 {
+  @include font-sans-m;
+  font-weight: 700;
+}
+h4 {
+  @include font-style-label;
+  font-weight: 600;
+}
 // h5 { @include font-sans-s; }
 // h6 { @include font-sans-s; }
 
@@ -106,14 +142,14 @@ h2 { @include font-ser-400-nor-lg; }
 // Block styles
 // -----------------------------------------------------------------------------
 
-.block-font-mon-400-nor-sm,
-.block-font-mon-400-nor-sm p {
-  @include font-mon-400-nor-sm;
+.block-font-sans-s,
+.block-font-sans-s p {
+  @include font-sans-s;
 }
 
-.block-font-san-300-nor-md,
-.block-font-san-300-nor-md p {
-  @include font-ser-400-nor-md;
+.block-font-sans-m,
+.block-font-sans-m p {
+  @include font-sans-m;
 }
 
 // .block-sans-m,
@@ -127,4 +163,3 @@ h2 { @include font-ser-400-nor-lg; }
 //   color: black;
 //   @include font-sans-l;
 // }
-

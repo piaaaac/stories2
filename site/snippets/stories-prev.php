@@ -14,11 +14,11 @@
       <div class="position-relative">
         <div class="squares">
           <div class="squares-wrapper">
-            <?php foreach ($stories as $story): 
-              if ($story->legs()->toStructure()->isEmpty()) { 
-                continue; 
+            <?php foreach ($stories as $story):
+              if ($story->legs()->toStructure()->isEmpty()) {
+                continue;
               }
-              ?>
+            ?>
               <div class="square">
                 <div class="square-content-wrapper">
                   <div class="bg"></div>
@@ -33,13 +33,13 @@
                     -->
                   </div>
                   <div class="content story">
-                    <a class="name" href="<?= $story->url() ?>"><?= $story->title() ?></a>
+                    <a class="name font-ser-l font-w-600" href="<?= $story->url() ?>"><?= $story->title() ?></a>
                     <span class="from-bot-l"><?= $story->departurePlace()->value() ?></span>
                     <span class="to-bot-r"><?= $story->legs()->toStructure()->last()->place() ?></span>
                   </div>
                 </div>
               </div>
-            <?php endforeach ?>    
+            <?php endforeach ?>
           </div>
         </div>
       </div>
@@ -49,23 +49,12 @@
 
 
 <script>
+  const converter = new GeoJSON2SVG( /*options*/ );
+  // const svgStrings = converter.convert(geojson,options);
 
-const converter = new GeoJSON2SVG(/*options*/);
-// const svgStrings = converter.convert(geojson,options);
+  var svgs = document.querySelectorAll("svg.svg-story-prev");
 
-var svgs = document.querySelectorAll("svg.svg-story-prev");
-
-svgs.forEach((svg) => {
-  console.log(svg)
-});
-
-
+  svgs.forEach((svg) => {
+    console.log(svg)
+  });
 </script>
-
-
-
-
-
-
-
-

@@ -23,47 +23,11 @@ $verdone: #135d4a;
 @import "bootstrap-scss/_variables";
 @import "bootstrap-scss/mixins/_breakpoints";
 @import "_reset";
+@import "_utils";
 @import "_typography";
-@import "_mixins";
 @import "_switch";
 @import "hamburger-settings";
 @import "hamburgers/hamburgers";
-
-// -----------------------------------------------------------------------------
-// Utilities
-// -----------------------------------------------------------------------------
-
-.color-white {
-  color: white;
-}
-.color-white-50 {
-  color: rgba(white, 0.5);
-}
-.bg-white {
-  background-color: white;
-}
-.no-u {
-  text-decoration: none;
-}
-.u-hover {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-.pointer {
-  cursor: pointer;
-}
-.upper {
-  text-transform: uppercase;
-}
-.lower {
-  text-transform: none;
-}
-
-.space-large {
-  height: 110px;
-}
 
 // -----------------------------------------------------------------------------
 // General tags & classes
@@ -84,7 +48,7 @@ body {
   &.media-open {
     overflow: hidden;
   }
-  @include font-ser-400-nor-lg;
+  font-family: $font-sans;
 }
 
 main {
@@ -101,14 +65,14 @@ p {
 }
 
 a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 10%;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 15%;
   color: inherit;
   transition: color 170ms;
   &.green {
     color: $verde;
-    text-decoration: none;
+    text-decoration-line: none;
   }
 }
 
@@ -125,14 +89,14 @@ a {
   flex-flow: column nowrap;
   .tags,
   .places {
-    @include font-mon-400-nor-sm;
+    @include font-sans-s;
   }
   .title-wrapper {
     padding-right: 15%;
     margin-top: 15px;
     .title {
       // color: $verde;
-      text-decoration: none;
+      text-decoration-line: none;
     }
   }
   .tags {
@@ -214,13 +178,13 @@ $m: 15px;
               position: absolute;
               bottom: $m;
               left: $m;
-              @include font-mon-400-nor-sm;
+              @include font-sans-s;
             }
             .to-bot-r {
               position: absolute;
               bottom: $m;
               right: $m;
-              @include font-mon-400-nor-sm;
+              @include font-sans-s;
             }
           }
           // &.article {
@@ -228,14 +192,14 @@ $m: 15px;
           //   justify-content: space-between;
           //   flex-flow: column nowrap;
           //   .tags, .places {
-          //     @include font-mon-400-nor-sm;
+          //     @include font-sans-s;
           //   }
           //   .title-wrapper {
           //     padding-right: 15%;
           //     margin-top: 15px;
           //     .title {
           //       color: $verde;
-          //       text-decoration: none;
+          //       text-decoration-line: none;
           //     }
           //   }
           //   .tags {
@@ -281,9 +245,9 @@ $m: 15px;
   // mix-blend-mode: multiply;
 
   a {
-    @include font-mon-400-nor-sm;
+    @include font-sans-s;
     text-transform: uppercase;
-    text-decoration: none;
+    text-decoration-line: none;
     white-space: nowrap;
     height: $menu-h;
     display: flex;
@@ -307,7 +271,7 @@ $m: 15px;
   color: grey;
   @include font-sans-m;
   text-transform: uppercase;
-  text-decoration: none;
+  text-decoration-line: none;
   border-radius: $border-radius;
   padding: 0 $space;
   transition: background-color 400ms, color 400ms;
@@ -421,22 +385,25 @@ nav#menu-header {
   .wrapper {
     height: $menu-h;
   }
-  .left {
-    @include font-ser-400-nor-lg;
-    img {
-      margin-right: 6px;
-    }
+  .wrapper-subtitle {
+    height: 35px;
+    padding-bottom: 20px;
+    position: relative;
+    top: -10px;
   }
+  // .left {
+  //   @include font-ser-l;
+  //   font-weight: 700;
+  // }
   .items {
     a.item {
-      text-decoration: none;
-      text-transform: uppercase;
+      text-decoration-line: none;
       margin-left: 12px;
-      @include font-mon-400-nor-sm;
+      @include font-sans-m;
       &.active,
       &:hover {
         color: inherit;
-        text-decoration: underline;
+        text-decoration-line: underline;
       }
     }
   }
@@ -444,7 +411,7 @@ nav#menu-header {
     margin-right: 3px;
     &:hover {
       color: grey;
-      text-decoration: none;
+      text-decoration-line: none;
     }
   }
 }
@@ -458,7 +425,7 @@ nav#menu-header {
   overflow-y: scroll;
   background-color: grey;
   padding: $menu-h 0;
-  @include transition(right 400ms);
+  transition: right 400ms;
   @at-root body.menu-xs-open & {
     right: 0;
   }
@@ -469,10 +436,10 @@ nav#menu-header {
 
   a.item {
     // color: white;
-    text-decoration: none;
+    text-decoration-line: none;
     text-align: center;
     display: block;
-    @include font-sans-xl;
+    @include font-sans-m;
     // text-transform: uppercase;
     &.small {
       @include font-sans-m;

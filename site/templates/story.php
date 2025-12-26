@@ -1,8 +1,12 @@
 <?php
-$ass = $kirby->url("assets");
+$from = getFromPlace($page);
+$to = getToPlace($page);
 ?>
 
 <?php snippet("header") ?>
+
+<?php snippet("menu", ["subtitle" => "$from &rarr; $to", "showSwitch" => true]) ?>
+
 <?php snippet('handlebars-templates') ?>
 
 <section>
@@ -65,8 +69,8 @@ $ass = $kirby->url("assets");
     attributionControl: false,
     logoPosition: 'top-right',
   });
-  toggleMapStyle();
-  toggleMapStyle();
+  // toggleMapStyle();
+  // toggleMapStyle();
 
   // --------------------------------
   // Add data
@@ -95,7 +99,7 @@ $ass = $kirby->url("assets");
     })
     var bounds = getBounds(coordinates)
     map.fitBounds(bounds, {
-      padding: 20,
+      padding: 40,
     })
 
     // --- Create popups to be used later
@@ -191,6 +195,14 @@ $ass = $kirby->url("assets");
   }
 
   // --------------------------------
+  // Handle map visibility
+  // --------------------------------
+
+  // const current = localStorage.getItem("mapVisible") === "true";
+  toggleMapStyle(currentMapVisibility);
+
+
+  // --------------------------------
   // Functions
   // --------------------------------
 
@@ -201,6 +213,7 @@ $ass = $kirby->url("assets");
     var startLat = +kirbyData.departurelat;
     var startPlace = kirbyData.departureplace;
     var legs = kirbyData.legs;
+    var startPlaceIsValid = (startLon && startLat) ? true : false;
 
     // --- fit into js format
     var firstPlace = {
@@ -208,6 +221,7 @@ $ass = $kirby->url("assets");
       "lon": startLon,
       "lat": startLat,
       "index": 0,
+      "isValidPlace": startPlaceIsValid,
     }
     var places = [firstPlace];
     for (var i = 0; i < legs.length; i++) {
@@ -316,7 +330,7 @@ $ass = $kirby->url("assets");
 
     var validTripPlaces = state.storyPlaces.filter(e => (e.isValidTrip === true));
 
-    for (var i = 1; i < validTripPlaces.length; i++) {
+    for (var i = 0; i < validTripPlaces.length; i++) {
       var place = validTripPlaces[i];
       var dashArray = kirbyTransportToDashArray(place.tripTransport)
       var feature = {
@@ -383,14 +397,17 @@ $ass = $kirby->url("assets");
       .addTo(map);
   }
 
-  function toggleMapStyle() {
-    // by default sets empty style
-    if (state.currentMapStyle === mbStyleEmpty) {
+  function toggleMapStyle(bool) {
+    if (typeof bool == 'undefined') {
+      bool = true;
+    }
+    if (bool === true) {
       state.currentMapStyle = mbStyleWithBg;
     } else {
       state.currentMapStyle = mbStyleEmpty;
     }
     map.setStyle(state.currentMapStyle);
+    localStorage.setItem("mapVisible", String(bool));
   }
 
   // ----------------------------------

@@ -46,332 +46,362 @@ Legs:
 
 - 
   place: Taftan
+  country: ""
   lat: 28.948
   lon: 61.5844
   transport: bus
   durationday: 1
-  durationhours: null
+  durationhours: ""
   staydays: 2
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Qum
+  country: ""
   lat: 34.65
   lon: 50.883333
   transport: bus
   durationday: 2
-  durationhours: null
-  staydays: null
+  durationhours: ""
+  staydays: ""
   stayhours: 10
   comments: ""
   geojsonleg: ""
 - 
   place: Teheran
+  country: ""
   lat: 35.683333
   lon: 51.416667
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 10
-  staydays: null
+  staydays: ""
   stayhours: 2
   comments: ""
   geojsonleg: ""
 - 
   place: Tabriz
+  country: ""
   lat: 38.066667
   lon: 46.3
   transport: car
-  durationday: null
+  durationday: ""
   durationhours: 12
-  staydays: null
+  staydays: ""
   stayhours: 11
   comments: ""
   geojsonleg: ""
 - 
   place: Van
+  country: ""
   lat: 38.5
   lon: 43.383333
   transport: bus
   durationday: 1
-  durationhours: null
-  staydays: null
+  durationhours: ""
+  staydays: ""
   stayhours: 10
   comments: ""
   geojsonleg: ""
 - 
   place: Batman
+  country: ""
   lat: 37.883333
   lon: 41.133333
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 10
-  staydays: null
+  staydays: ""
   stayhours: 6
   comments: ""
   geojsonleg: ""
 - 
   place: Ankara
+  country: ""
   lat: 39.911
   lon: 32.8403
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 20
-  staydays: null
+  staydays: ""
   stayhours: 20
   comments: ""
   geojsonleg: ""
 - 
   place: Istanbul
+  country: ""
   lat: 41.016667
   lon: 28.966667
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 16
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Alessandrapoli
+  country: ""
   lat: 40.85
   lon: 25.866667
   transport: walk
-  durationday: null
+  durationday: ""
   durationhours: 10
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Kirke
+  country: ""
   lat: 40.975
   lon: 25.798377
   transport: walk
-  durationday: null
+  durationday: ""
   durationhours: 34
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Komotini
+  country: ""
   lat: 41.1
   lon: 25.416667
   transport: train
-  durationday: null
+  durationday: ""
   durationhours: 0.5
-  staydays: null
+  staydays: ""
   stayhours: 1
   comments: ""
   geojsonleg: ""
 - 
   place: Xanthi
+  country: ""
   lat: 41.133333
   lon: 24.883333
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 0.66
-  staydays: null
+  staydays: ""
   stayhours: 10
   comments: ""
   geojsonleg: ""
 - 
   place: Salonicco
+  country: ""
   lat: 40.640278
   lon: 22.935556
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 2.5
   staydays: 1
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Athens
+  country: ""
   lat: 37.966667
   lon: 23.716667
   transport: train
-  durationday: null
+  durationday: ""
   durationhours: 4
   staydays: 3
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Pyrgos
+  country: ""
   lat: 37.666667
   lon: 21.433333
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 11
   staydays: 270
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Athens
+  country: ""
   lat: 37.966667
   lon: 23.716667
   transport: train
-  durationday: null
+  durationday: ""
   durationhours: 11
   staydays: 3
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Salonicco
+  country: ""
   lat: 40.640278
   lon: 22.935556
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 4
   staydays: 130
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: 'Gevgelija - Refugee Camp'
+  country: ""
   lat: 41.15
   lon: 22.51
   transport: car
-  durationday: null
-  durationhours: null
+  durationday: ""
+  durationhours: ""
   staydays: 90
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: 'Skopje -  Refugee Camp'
+  country: ""
   lat: 42
   lon: 21.433333
   transport: car
-  durationday: null
-  durationhours: null
+  durationday: ""
+  durationhours: ""
   staydays: 7
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Kumonovo
+  country: ""
   lat: 42.14
   lon: 21.71
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 2
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Tabanovtse
+  country: ""
   lat: 42.214722
   lon: 21.708333
   transport: car
-  durationday: null
-  durationhours: null
-  staydays: null
+  durationday: ""
+  durationhours: ""
+  staydays: ""
   stayhours: 10
   comments: ""
   geojsonleg: ""
 - 
   place: Preševo
+  country: ""
   lat: 42.316667
   lon: 21.683333
   transport: walk
-  durationday: null
+  durationday: ""
   durationhours: 3
-  staydays: null
+  staydays: ""
   stayhours: 8
   comments: ""
   geojsonleg: ""
 - 
   place: 'Bujanovac -  Refugee  Camp'
+  country: ""
   lat: 42.466667
   lon: 21.766667
   transport: car
-  durationday: null
-  durationhours: null
+  durationday: ""
+  durationhours: ""
   staydays: 7
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Belgrado
+  country: ""
   lat: 44.820556
   lon: 20.462222
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 12
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Loznica
+  country: ""
   lat: 44.53
   lon: 19.22
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 5
   staydays: 5
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Kalesija
+  country: ""
   lat: 44.45
   lon: 18.866667
   transport: walk
   durationday: 2
-  durationhours: null
-  staydays: null
+  durationhours: ""
+  staydays: ""
   stayhours: 4
   comments: ""
   geojsonleg: ""
 - 
   place: Tuzla
+  country: ""
   lat: 44.538056
   lon: 18.676111
   transport: bus
-  durationday: null
+  durationday: ""
   durationhours: 1
   staydays: 6
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Bihac
+  country: ""
   lat: 44.816667
   lon: 15.866667
   transport: train
-  durationday: null
+  durationday: ""
   durationhours: 15
-  staydays: null
-  stayhours: null
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: 'Cazin - Sedra Refugee Camp'
+  country: ""
   lat: 44.966667
   lon: 15.933333
   transport: ""
-  durationday: null
-  durationhours: null
+  durationday: ""
+  durationhours: ""
   staydays: 365
-  stayhours: null
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 - 
   place: Trieste
+  country: ""
   lat: 45.650278
   lon: 13.770278
   transport: car
   durationday: 20
-  durationhours: null
-  staydays: null
-  stayhours: null
+  durationhours: ""
+  staydays: ""
+  stayhours: ""
   comments: ""
   geojsonleg: ""
 

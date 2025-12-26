@@ -5,6 +5,8 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <?php snippet("header") ?>
 
+<?php snippet("menu", ["subtitle" => "Stories crossing borders"]) ?>
+
 <div class="spacer py-4"></div>
 
 <?php snippet("stories-prev", ["stories" => $stories]) ?>
@@ -19,13 +21,13 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <div class="full-w-btn">
   <a href="<?= page("stories")->url() ?>">
-    <?php 
-      $text = "    See all stories →    ";
-      echo $text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text;
+    <?php
+    $text = "    See all stories →    ";
+    echo $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text;
     ?>
   </a>
 </div>
-      
+
 <div class="space-large"></div>
 
 <div class="container-fluid">
@@ -40,9 +42,9 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <div class="full-w-btn">
   <a href="<?= page("articles")->url() ?>">
-    <?php 
-      $text = "    See all resources →    ";
-      echo $text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text.$text;
+    <?php
+    $text = "    See all resources →    ";
+    echo $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text . $text;
     ?>
   </a>
 </div>
@@ -53,12 +55,12 @@ $articles = page("articles")->children()->listed()->limit(3);
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-6">
-        <div class="block-font-san-300-nor-md">
+        <div class="block-font-sans-m">
           <?= $page->textAbout()->kt() ?>
         </div>
       </div>
       <div class="col-lg-4 offset-lg-2">
-        <div class="block-font-mon-400-nor-sm">
+        <div class="block-font-sans-s">
           <?= $page->textAboutAuthors()->kt() ?>
         </div>
       </div>

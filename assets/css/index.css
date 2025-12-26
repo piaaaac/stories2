@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 *:not(i), *:not(i)::before, *:not(i)::after {
   margin: 0;
   padding: 0;
@@ -145,233 +144,459 @@ input:invalid, textarea:invalid {
   background-color: #f0dddd;
 }
 
-.font-ser-400-nor-lg {
-  font-family: "Crimson Pro", serif;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: 1.17em;
+.color-white {
+  color: white;
+}
+
+.color-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.no-u {
+  text-decoration: none;
+}
+
+.u-hover {
+  text-decoration: none;
+}
+
+.u-hover:hover {
+  text-decoration: underline;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.lower {
+  text-transform: none;
+}
+
+.space-large {
+  height: 110px;
+}
+
+.font-weight-100 {
+  font-weight: 100;
+}
+
+.font-weight-200 {
+  font-weight: 200;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.font-weight-400 {
   font-weight: 400;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.font-weight-800 {
+  font-weight: 800;
+}
+
+.font-weight-900 {
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/Inter-VariableFont_opsz-wght.ttf") format("truetype");
+  font-weight: 100 900;
+  /* Range supported by the variable font */
   font-style: normal;
+  font-display: swap;
+}
+
+.font-ser-xl {
+  font-family: "Crimson Pro", serif;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  line-height: 1.17em;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  .font-ser-400-nor-lg {
-    font-size: 36px;
+  .font-ser-xl {
+    font-size: 44px;
   }
 }
 
 @media (min-width: 768px) {
-  .font-ser-400-nor-lg {
-    font-size: 36px;
+  .font-ser-xl {
+    font-size: 44px;
   }
 }
 
 @media (min-width: 992px) {
-  .font-ser-400-nor-lg {
-    font-size: 36px;
+  .font-ser-xl {
+    font-size: 44px;
   }
 }
 
 @media (min-width: 1200px) {
-  .font-ser-400-nor-lg {
-    font-size: 36px;
+  .font-ser-xl {
+    font-size: 44px;
   }
 }
 
-.font-ser-400-nor-md {
+.font-ser-l {
   font-family: "Crimson Pro", serif;
-  font-size: 23px;
-  letter-spacing: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
   line-height: 1.17em;
-  font-weight: 400;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  .font-ser-400-nor-md {
-    font-size: 23px;
+  .font-ser-l {
+    font-size: 30px;
   }
 }
 
 @media (min-width: 768px) {
-  .font-ser-400-nor-md {
-    font-size: 23px;
+  .font-ser-l {
+    font-size: 30px;
   }
 }
 
 @media (min-width: 992px) {
-  .font-ser-400-nor-md {
-    font-size: 23px;
+  .font-ser-l {
+    font-size: 30px;
   }
 }
 
 @media (min-width: 1200px) {
-  .font-ser-400-nor-md {
-    font-size: 23px;
+  .font-ser-l {
+    font-size: 30px;
   }
 }
 
-.font-mon-400-nor-sm {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+.font-sans-s {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  .font-mon-400-nor-sm {
-    font-size: 15px;
+  .font-sans-s {
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
-  .font-mon-400-nor-sm {
-    font-size: 15px;
+  .font-sans-s {
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
-  .font-mon-400-nor-sm {
-    font-size: 15px;
+  .font-sans-s {
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
-  .font-mon-400-nor-sm {
-    font-size: 15px;
+  .font-sans-s {
+    font-size: 14px;
+  }
+}
+
+.font-sans-m {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+.font-style-label {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (min-width: 576px) {
+  .font-style-label {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .font-style-label {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .font-style-label {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .font-style-label {
+    font-size: 20px;
+  }
+}
+
+h1 {
+  font-family: "Crimson Pro", serif;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  line-height: 1.17em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  h1 {
+    font-size: 44px;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 44px;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 44px;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 44px;
   }
 }
 
 h2 {
   font-family: "Crimson Pro", serif;
-  font-size: 36px;
-  letter-spacing: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
   line-height: 1.17em;
-  font-weight: 400;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
   h2 {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 
 @media (min-width: 768px) {
   h2 {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 
 @media (min-width: 992px) {
   h2 {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 
 @media (min-width: 1200px) {
   h2 {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 
-.block-font-mon-400-nor-sm,
-.block-font-mon-400-nor-sm p {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
+  font-weight: 700;
 }
 
 @media (min-width: 576px) {
-  .block-font-mon-400-nor-sm,
-  .block-font-mon-400-nor-sm p {
-    font-size: 15px;
+  h3 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 768px) {
-  .block-font-mon-400-nor-sm,
-  .block-font-mon-400-nor-sm p {
-    font-size: 15px;
+  h3 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 992px) {
-  .block-font-mon-400-nor-sm,
-  .block-font-mon-400-nor-sm p {
-    font-size: 15px;
+  h3 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 1200px) {
-  .block-font-mon-400-nor-sm,
-  .block-font-mon-400-nor-sm p {
-    font-size: 15px;
+  h3 {
+    font-size: 20px;
   }
 }
 
-.block-font-san-300-nor-md,
-.block-font-san-300-nor-md p {
-  font-family: "Crimson Pro", serif;
-  font-size: 23px;
+h4 {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.17em;
-  font-weight: 400;
-  font-style: normal;
+  line-height: 1.46em;
   font-stretch: normal;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-weight: 600;
 }
 
 @media (min-width: 576px) {
-  .block-font-san-300-nor-md,
-  .block-font-san-300-nor-md p {
-    font-size: 23px;
+  h4 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 768px) {
-  .block-font-san-300-nor-md,
-  .block-font-san-300-nor-md p {
-    font-size: 23px;
+  h4 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 992px) {
-  .block-font-san-300-nor-md,
-  .block-font-san-300-nor-md p {
-    font-size: 23px;
+  h4 {
+    font-size: 20px;
   }
 }
 
 @media (min-width: 1200px) {
-  .block-font-san-300-nor-md,
-  .block-font-san-300-nor-md p {
-    font-size: 23px;
+  h4 {
+    font-size: 20px;
   }
 }
 
-/* USAGE 
-@include keyframes(slide-down) {
-  0% { opacity: 1; }
-  90% { opacity: 0; }
+.block-font-sans-s,
+.block-font-sans-s p {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
 }
 
-.element {
-  width: 100px;
-  height: 100px;
-  background: black;
-  @include animation('slide-down 5s 3');
+@media (min-width: 576px) {
+  .block-font-sans-s,
+  .block-font-sans-s p {
+    font-size: 14px;
+  }
 }
-*/
+
+@media (min-width: 768px) {
+  .block-font-sans-s,
+  .block-font-sans-s p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) {
+  .block-font-sans-s,
+  .block-font-sans-s p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .block-font-sans-s,
+  .block-font-sans-s p {
+    font-size: 14px;
+  }
+}
+
+.block-font-sans-m,
+.block-font-sans-m p {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  .block-font-sans-m,
+  .block-font-sans-m p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .block-font-sans-m,
+  .block-font-sans-m p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .block-font-sans-m,
+  .block-font-sans-m p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .block-font-sans-m,
+  .block-font-sans-m p {
+    font-size: 20px;
+  }
+}
+
 /**
  * via https://www.w3schools.com/howto/howto_css_switch.asp
  * 
@@ -412,7 +637,7 @@ label .text {
 }
 
 .switch input:checked + .slider {
-  background-color: orange;
+  background-color: #29a468;
 }
 
 .switch input:checked + .slider::before {
@@ -426,8 +651,8 @@ label .text {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  transition: .2s;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
 }
 
 .switch .slider::before {
@@ -438,7 +663,7 @@ label .text {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .switch .slider.round {
@@ -574,46 +799,6 @@ label .text {
   transform: translate3d(0, -14px, 0) rotate(-90deg);
 }
 
-.color-white {
-  color: white;
-}
-
-.color-white-50 {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.bg-white {
-  background-color: white;
-}
-
-.no-u {
-  text-decoration: none;
-}
-
-.u-hover {
-  text-decoration: none;
-}
-
-.u-hover:hover {
-  text-decoration: underline;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.upper {
-  text-transform: uppercase;
-}
-
-.lower {
-  text-transform: none;
-}
-
-.space-large {
-  height: 110px;
-}
-
 * {
   text-rendering: geometricPrecision;
 }
@@ -623,41 +808,11 @@ body {
   width: 100vw;
   background-color: mintcream;
   color: black;
-  font-family: "Crimson Pro", serif;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: 1.17em;
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
+  font-family: "Inter", sans-serif;
 }
 
 body.media-open {
   overflow: hidden;
-}
-
-@media (min-width: 576px) {
-  body {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 768px) {
-  body {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 992px) {
-  body {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 1200px) {
-  body {
-    font-size: 36px;
-  }
 }
 
 main {
@@ -674,16 +829,16 @@ p {
 }
 
 a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 10%;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 15%;
   color: inherit;
   transition: color 170ms;
 }
 
 a.green {
   color: #29a468;
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 .article-prev {
@@ -695,40 +850,38 @@ a.green {
 
 .article-prev .tags,
 .article-prev .places {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
   .article-prev .tags,
   .article-prev .places {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
   .article-prev .tags,
   .article-prev .places {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
   .article-prev .tags,
   .article-prev .places {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
   .article-prev .tags,
   .article-prev .places {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -738,7 +891,7 @@ a.green {
 }
 
 .article-prev .title-wrapper .title {
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 .article-prev .tags {
@@ -826,36 +979,34 @@ a.green {
   position: absolute;
   bottom: 15px;
   left: 15px;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .from-bot-l {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -863,36 +1014,34 @@ a.green {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
   .squares .squares-wrapper .square .square-content-wrapper .content.story .to-bot-r {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -910,15 +1059,13 @@ a.green {
 }
 
 .full-w-btn a {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
   text-transform: uppercase;
-  text-decoration: none;
+  text-decoration-line: none;
   white-space: nowrap;
   height: 70px;
   display: flex;
@@ -928,25 +1075,25 @@ a.green {
 
 @media (min-width: 576px) {
   .full-w-btn a {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
   .full-w-btn a {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
   .full-w-btn a {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
   .full-w-btn a {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -965,12 +1112,40 @@ a.green {
   height: 47px;
   border: 1px solid grey;
   color: grey;
-  font-family: monospace;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
   text-transform: uppercase;
-  text-decoration: none;
+  text-decoration-line: none;
   border-radius: 3px;
   padding: 0 20px;
   transition: background-color 400ms, color 400ms;
+}
+
+@media (min-width: 576px) {
+  .button {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .button {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .button {
+    font-size: 20px;
+  }
 }
 
 .button:hover, .button.active {
@@ -1082,84 +1257,50 @@ nav#menu-header .wrapper {
   height: 70px;
 }
 
-nav#menu-header .left {
-  font-family: "Crimson Pro", serif;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: 1.17em;
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@media (min-width: 576px) {
-  nav#menu-header .left {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 768px) {
-  nav#menu-header .left {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 992px) {
-  nav#menu-header .left {
-    font-size: 36px;
-  }
-}
-
-@media (min-width: 1200px) {
-  nav#menu-header .left {
-    font-size: 36px;
-  }
-}
-
-nav#menu-header .left img {
-  margin-right: 6px;
+nav#menu-header .wrapper-subtitle {
+  height: 35px;
+  padding-bottom: 20px;
+  position: relative;
+  top: -10px;
 }
 
 nav#menu-header .items a.item {
-  text-decoration: none;
-  text-transform: uppercase;
+  text-decoration-line: none;
   margin-left: 12px;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
   letter-spacing: 0;
   line-height: 1.46em;
-  font-weight: 500;
-  font-style: normal;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
   nav#menu-header .items a.item {
-    font-size: 15px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 768px) {
   nav#menu-header .items a.item {
-    font-size: 15px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 992px) {
   nav#menu-header .items a.item {
-    font-size: 15px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 1200px) {
   nav#menu-header .items a.item {
-    font-size: 15px;
+    font-size: 20px;
   }
 }
 
 nav#menu-header .items a.item.active, nav#menu-header .items a.item:hover {
   color: inherit;
-  text-decoration: underline;
+  text-decoration-line: underline;
 }
 
 nav#menu-header a#header-low-a {
@@ -1168,7 +1309,7 @@ nav#menu-header a#header-low-a {
 
 nav#menu-header a#header-low-a:hover {
   color: grey;
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 #menu-xs {
@@ -1181,10 +1322,6 @@ nav#menu-header a#header-low-a:hover {
   overflow-y: scroll;
   background-color: grey;
   padding: 70px 0;
-  -webkit-transition: right 400ms;
-  -moz-transition: right 400ms;
-  -ms-transition: right 400ms;
-  -o-transition: right 400ms;
   transition: right 400ms;
   display: flex;
   flex-flow: column nowrap;
@@ -1197,14 +1334,70 @@ body.menu-xs-open #menu-xs {
 }
 
 #menu-xs a.item {
-  text-decoration: none;
+  text-decoration-line: none;
   text-align: center;
   display: block;
-  font-family: monospace;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  #menu-xs a.item {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  #menu-xs a.item {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  #menu-xs a.item {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #menu-xs a.item {
+    font-size: 20px;
+  }
 }
 
 #menu-xs a.item.small {
-  font-family: monospace;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  #menu-xs a.item.small {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  #menu-xs a.item.small {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  #menu-xs a.item.small {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #menu-xs a.item.small {
+    font-size: 20px;
+  }
 }
 
 body#story-tools {
