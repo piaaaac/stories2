@@ -5,7 +5,7 @@
 // -----------------------------------------------------------------------------
 
 $button-h: 47px;
-$button-h-s: 37px;
+$button-h-s: 32px;
 $menu-h: 70px;
 $border-radius: 3px;
 $space: 20px;
@@ -268,13 +268,14 @@ $m: 15px;
   justify-content: center;
   height: $button-h;
   border: 1px solid grey;
+  cursor: pointer;
   color: grey;
   @include font-sans-m;
   text-transform: uppercase;
   text-decoration-line: none;
   border-radius: $border-radius;
   padding: 0 $space;
-  transition: background-color 400ms, color 400ms;
+  transition: background-color 200ms, color 200ms;
   &:hover,
   &.active {
     background-color: grey;
@@ -285,6 +286,29 @@ $m: 15px;
     width: auto;
     padding: 0 10px;
     text-transform: none;
+    @include font-sans-s;
+  }
+  &.green-dark {
+    background-color: $verdone;
+    color: white;
+    &:hover,
+    &.active {
+      background-color: darken($verdone, 5%);
+    }
+    &:active {
+      background-color: darken($verdone, 15%);
+    }
+  }
+  &.green-light {
+    background-color: $verde;
+    color: white;
+    &:hover,
+    &.active {
+      background-color: darken($verde, 5%);
+    }
+    &:active {
+      background-color: darken($verde, 15%);
+    }
   }
 }
 
@@ -315,11 +339,12 @@ $m: 15px;
 }
 
 .mapboxgl-popup-content {
-  border: 1px solid red;
+  // border: 1px solid red;
   border-radius: 10px !important;
+  padding: 3px 15px 3px !important;
 }
 .story-leg-info {
-  background-color: #c6f5d2;
+  // background-color: #c6f5d2;
 }
 
 // -----------------------------------------------------------------------------
@@ -482,6 +507,14 @@ body#story-tools {
         position: fixed;
         width: 50%;
         height: 100%;
+        #buttons-container {
+          z-index: 2;
+          // border: 1px solid red;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          max-width: 100%;
+        }
       }
     }
   }

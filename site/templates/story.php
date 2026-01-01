@@ -111,8 +111,8 @@ $to = getToPlace($page);
       className: "ck-map-popup",
     });
     popupHover = new mapboxgl.Popup({
-      closeButton: true,
-      closeOnClick: false,
+      closeButton: false,
+      closeOnClick: true,
       offset: 8,
       className: "ck-map-popup",
     });
@@ -138,7 +138,7 @@ $to = getToPlace($page);
     // map.on('mouseleave', 'points', function () {
     map.on('mouseout', 'points', function() {
       map.getCanvas().style.cursor = '';
-      popupHover.remove();
+      // popupHover.remove();
     });
 
     // Add source and layer whenever base style is loaded
@@ -256,6 +256,8 @@ $to = getToPlace($page);
         "tripLonTo": leg.lon,
         "tripLatTo": leg.lat,
         "tripTransport": leg.transport,
+        "geojsonLeg": leg.geojsonleg ? JSON.parse(leg.geojsonleg) : null,
+        "geojsonUse": leg.geojsonuse == "true",
       }
       places.push(place);
     }
@@ -333,19 +335,33 @@ $to = getToPlace($page);
     for (var i = 0; i < validTripPlaces.length; i++) {
       var place = validTripPlaces[i];
       var dashArray = kirbyTransportToDashArray(place.tripTransport)
+
+      var geometry = {
+        'type': 'LineString',
+        'coordinates': [
+          [place.tripLonFrom, place.tripLatFrom],
+          [place.tripLonTo, place.tripLatTo],
+        ],
+      };
+      if (legs[i].geojsonuse == "true" && legs[i].geojsonleg != "") {
+        console.log(legs[i], "using geojson for leg " + i);
+        try {
+          var geojsonLeg = JSON.parse(legs[i].geojsonleg);
+          console.log("geojsonLeg", geojsonLeg)
+          geometry = geojsonLeg.features[0].geometry;
+        } catch (e) {
+          console.error("Error parsing geojson for leg " + i, e);
+        }
+      }
+
+
       var feature = {
         'type': 'Feature',
         'properties': {},
         'properties': {
           "dasharray": dashArray,
         },
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': [
-            [place.tripLonFrom, place.tripLatFrom],
-            [place.tripLonTo, place.tripLatTo],
-          ],
-        }
+        'geometry': geometry,
       }
       mbData.data.features.push(feature);
     }

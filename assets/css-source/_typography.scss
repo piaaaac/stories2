@@ -72,6 +72,22 @@ $font-sans: "Inter", sans-serif;
   @include font-ser-l;
 }
 
+@mixin font-ser-m {
+  @include font-style(
+    $font-fam: $font-ser,
+    $xs: 24px,
+    $sm: 24px,
+    $md: 24px,
+    $lg: 24px,
+    $xl: 24px,
+    $letter-sp: -0.02em,
+    $line-h: 1.17em
+  );
+}
+.font-ser-m {
+  @include font-ser-m;
+}
+
 @mixin font-sans-s {
   @include font-style(
     $font-fam: $font-sans,

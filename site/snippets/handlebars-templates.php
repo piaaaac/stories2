@@ -15,11 +15,18 @@ place
   tripTransport:  car"
 -->
 <script id="hb-popup" type="text/x-handlebars-template">
-  <div class="story-leg-info pb-3 my-3">
+  <div class="story-leg-info pb-1 my-1">
     <div class="story-header">
-      <span class="location font-ser-400-nor-md mr-3">{{place.name}}</span>
+      <span class="location font-ser-m font-weight-600 mr-3 mb-1">{{place.name}}</span>
     </div>
-    <p class="font-mon-400-nor-sm color-grey">{{place.tripTransport}}</p>
+    
+    {{#if place.tripPlaceFrom}}
+      <p class="m-0 font-sans-s color-grey">From: {{place.tripPlaceFrom}}</p>
+    {{/if}}
+    {{#if place.tripTransport}}
+      <p class="m-0 font-sans-s color-grey">Transport: {{place.tripTransport}}</p>
+    {{/if}}
+    
   </div>
 </script>
 

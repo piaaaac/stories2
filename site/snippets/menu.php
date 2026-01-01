@@ -58,7 +58,7 @@ $items = [
             </a>
             <?php if ($page->template()->name() === "story"): ?>
               <span> / </span>
-              <span><?= $page->title() ?></span>
+              <span><?= $page->title() ?></span><span><?= $page->age()->isNotEmpty() ? ", " . $page->age() : "" ?></span>
             <?php endif ?>
           </h2>
         </div>

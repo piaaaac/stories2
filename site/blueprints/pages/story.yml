@@ -112,10 +112,13 @@ sections:
             translate: false
           comments:
             type: textarea
-            width: 1/2
           geojsonLeg:
             type: textarea
-            width: 1/2
+            width: 3/4
+            translate: false
+          geojsonUse:
+            type: toggle
+            width: 1/4
             translate: false
 
       text:
