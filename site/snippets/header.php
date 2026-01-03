@@ -1,3 +1,14 @@
+<?php
+
+/**
+ * Menu snippet
+ * 
+ * @param tallMenu – bool whether to use a tall menu header
+ *
+ */
+$tallMenu = $tallMenu ?? false;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,4 +32,4 @@
 </head>
 
 <body>
-  <main>
+  <main class="<?= $tallMenu ? 'tall-menu' : '' ?>">

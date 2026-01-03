@@ -52,8 +52,10 @@ body {
 }
 
 main {
-  margin-top: 150px;
   margin-top: $menu-h;
+  &.tall-menu {
+    margin-top: 105px;
+  }
 }
 
 hr {
@@ -334,8 +336,23 @@ $m: 15px;
 // STORY MAPBOX
 // -----------------------------------------------------------------------------
 
-#map-container {
-  height: 80vh;
+section.map-area {
+  position: relative;
+  #map-container {
+    height: 80vh;
+  }
+  .info {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    .contents {
+      width: 300px;
+      background-color: white;
+      padding: 10px 15px;
+      border-radius: 7px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
 .mapboxgl-popup-content {

@@ -26,6 +26,16 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
 
+  <!-- Turf.js -->
+  <?= js(['assets/lib/turf-6.5.0.min.js']) ?>
+
+  <!--
+  geojson2svg - https://github.com/gagan-bansal/geojson2svg
+  This creates a global variable 'GeoJSON2SVG' as a Class. 
+  -->
+  <script src="<?= $kirby->url('assets') ?>/lib/geojson2svg-master/dist/geojson2svg.min.js"></script>
+  <script src="<?= $kirby->url('assets') ?>/lib/reproject/reproject.min.js"></script>
+  <script src="<?= $kirby->url('assets') ?>/lib/proj4js/2.2.2/proj4.js"></script>
 
   <style>
     .leg-editor {
@@ -35,6 +45,13 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
 </head>
 
 <body id="story-tools">
+
+  <!---------------------------------- GEOJSON2SVG -->
+  <div>
+    <svg id="svg-map-target" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test" style="display: block;"></svg>
+    <button id="save-svg-button">Save SVG</button>
+  </div>
+  <!---------------------------------- GEOJSON2SVG -->
 
   <div class="structure">
     <div class="left-items">
@@ -123,8 +140,8 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
     // MAPBOX INIT
     // -----------------------------
 
-    var mbToken = "pk.eyJ1IjoicGlhYWFhYyIsImEiOiIxaHI5SmNnIn0.68S9KEJ3TeuhobReU_uDeQ"
-    var mbStyle = "mapbox://styles/piaaaac/clo2p2b6o00is01pf9ovp59k8"
+    const mbToken = "<?= option('mapbox.token') ?>";
+    const mbStyle = "<?= option('mapbox.style.withBg') ?>";
 
     mapboxgl.accessToken = mbToken;
     const map = new mapboxgl.Map({
@@ -177,15 +194,95 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
     });
 
 
+    // ---------------------------------- Test geojson2svg -----------------------------
 
+    const simplified = turf.simplify(geoJsonRoute, {
+      tolerance: 0.05, // adjust for more/less simplification
+      highQuality: false
+    });
 
+    // via https://rawgit.com/gagan-bansal/geojson2svg/master/examples/world.html
 
+    drawGeoJSON(simplified);
+    // drawGeoJSON(geoJsonRoute);
 
+    function drawGeoJSON(geojson) {
+      var geojson3857 = reproject.reproject(
+        geojson, 'EPSG:4326', 'EPSG:3857', proj4.defs);
+      var svgMap = document.getElementById('svg-map-target');
+      var convertor = new GeoJSON2SVG({
+        viewportSize: {
+          width: 800,
+          height: 800
+        },
+        attributes: {
+          'style': 'stroke:#006600; fill: none;stroke-width:1.5px;',
+          'vector-effect': 'non-scaling-stroke',
+        },
+        explode: false,
+      });
+      var svgElements = convertor.convert(geojson3857 /*geojson*/ );
+      // var parser = new DOMParser();
+      svgElements.forEach(function(svgStr) {
+        var svg = parseSVG(svgStr);
+        svgMap.appendChild(svg);
+      });
+    }
+    //parseSVG from http://stackoverflow.com/questions/3642035/jquerys-append-not-working-with-svg-element
+    function parseSVG(s) {
+      var div = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
+      div.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + s + '</svg>';
+      var frag = document.createDocumentFragment();
+      while (div.firstChild.firstChild)
+        frag.appendChild(div.firstChild.firstChild);
+      return frag;
+    }
+    // ---------------------------------- Test geojson2svg -----------------------------
+    // 
+    // and then...
+    // 
+    // ---------------------------------- Save SVG -------------------------------------
+    const button = document.getElementById('save-svg-button');
 
+    // Replace this with however you get your SVG string
+    function getSvgCode() {
+      // Example: SVG element in DOM
+      const svgEl = document.querySelector('#svg-map-target');
+      return svgEl ? svgEl.outerHTML : '';
+    }
 
+    button.addEventListener('click', async () => {
+      const svg = getSvgCode();
+      if (!svg) {
+        alert('No SVG found.');
+        return;
+      }
 
+      try {
+        // const res = await fetch('<?= $site->url() . "/api/save-svg" ?>', {
+        const res = await fetch('<?= url("save-story-svg") ?>', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: '<?= $storyPage->id() ?>',
+            svg: svg,
+          }),
+          credentials: 'same-origin', // if you rely on session auth
+        });
 
-
+        const json = await res.json();
+        if (json.status === 'ok') {
+          console.log('SVG saved');
+        } else {
+          console.error('Error saving SVG:', json.message);
+        }
+      } catch (err) {
+        console.error('Request failed:', err);
+      }
+    });
+    // ---------------------------------- Save SVG -------------------------------------
 
 
 

@@ -2,7 +2,7 @@
 $ass = $kirby->url("assets");
 ?>
 
-<?php snippet("header") ?>
+<?php snippet("header", ["tallMenu" => false]) ?>
 
 <?php snippet("menu", ["subtitle" => ""]) ?>
 

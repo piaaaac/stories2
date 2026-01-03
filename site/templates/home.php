@@ -3,7 +3,7 @@ $stories = page("stories")->children()->listed()->limit(6);
 $articles = page("articles")->children()->listed()->limit(3);
 ?>
 
-<?php snippet("header") ?>
+<?php snippet("header", ["tallMenu" => true]) ?>
 
 <?php snippet("menu", ["subtitle" => "Stories crossing borders"]) ?>
 

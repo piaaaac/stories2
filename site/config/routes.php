@@ -2,13 +2,80 @@
 
 return [
 
+
+
+
+  [
+    'pattern' => 'save-story-svg',
+    'method'  => 'POST',
+    'language' => false,
+    'action'  => function () {
+      // Basic auth check - adapt to your needs
+      if ($user = kirby()->user()) {
+        // get JSON body
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        $pageId  = $data['id']  ?? null;
+        $svgCode = $data['svg'] ?? null;
+
+        if (!$pageId || !$svgCode) {
+          return [
+            'status'  => 'error',
+            'message' => 'Missing page id or svg.'
+          ];
+        }
+
+        if (!$page = page($pageId)) {
+          return [
+            'status'  => 'error',
+            'message' => 'Page not found.'
+          ];
+        }
+
+        try {
+          $page->update([
+            'cachedSvg' => $svgCode
+          ]);
+
+          return [
+            'status'  => 'ok',
+            'message' => 'SVG saved.'
+          ];
+        } catch (Exception $e) {
+          return [
+            'status'  => 'error',
+            'message' => $e->getMessage()
+          ];
+        }
+      }
+
+      return [
+        'status'  => 'error',
+        'message' => 'Not authenticated.'
+      ];
+    }
+  ],
+
+
+
+
+
+  [
+    "pattern" => "testone",
+    "action"  => function ($data) {
+      return "<pre>test one</pre>";
+    }
+  ],
+
+
+
   [
     "pattern" => "add_to_json_cache",
     "action"  => function ($data) {
       // ..
       // ..
       // ..
-      return "<pre>". print_r($data) ."</pre>";
+      return "<pre>" . print_r($data) . "</pre>";
       // via https://stackoverflow.com/a/7895384/2501713
 
       $data[] = $_POST["data"];
@@ -30,17 +97,17 @@ return [
 
   [
     "pattern" => "story_cache_read/(:any)",
-    "action"  => function($slug) {
+    "action"  => function ($slug) {
       $p = page("stories/$slug");
       if (!$p) {
         return "<pre>Page $slug not found.</pre>";
       }
-      return "<pre>". print_r($p->cachedApiCalls()->value()) ."</pre>";
+      return "<pre>" . print_r($p->cachedApiCalls()->value()) . "</pre>";
     }
   ],
   [
     "pattern" => "story_cache_update/(:any)",
-    "action"  => function($slug) {
+    "action"  => function ($slug) {
       $p = page("stories/$slug");
       if (!$p) {
         return "<pre>Page $slug not found.</pre>";
@@ -55,16 +122,11 @@ return [
 
         $msg = "The page has been updated";
         return "<pre>$msg</pre>";
+      } catch (Exception $e) {
 
-      } catch(Exception $e) {
-
-        $msg = "Error: ". $e->getMessage();
+        $msg = "Error: " . $e->getMessage();
         return "<pre>$msg</pre>";
-
       }
-
-
-      
     },
     // "method" => "POST",
   ],

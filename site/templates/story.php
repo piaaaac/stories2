@@ -3,14 +3,25 @@ $from = getFromPlace($page);
 $to = getToPlace($page);
 ?>
 
-<?php snippet("header") ?>
+<?php snippet("header", ["tallMenu" => true]) ?>
 
 <?php snippet("menu", ["subtitle" => "$from &rarr; $to", "showSwitch" => true]) ?>
 
 <?php snippet('handlebars-templates') ?>
 
-<section>
+<section class="map-area">
   <div id="map-container"></div>
+  <div class="info">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="contents">
+            <h2><?= $page->title() ?></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="container-fluid">
@@ -20,10 +31,6 @@ $to = getToPlace($page);
     </div>
   </div>
 </div>
-
-<div id="tmp-label" style="position: absolute; bottom: 30px; left: 30px; font-size: 21px; color: black;"><?= $page->title() ?></div>
-
-<svg id="map" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test" style="display: none;"></svg>
 
 <script>
   // --------------------------------
@@ -38,21 +45,25 @@ $to = getToPlace($page);
     storyPlaces: getStoryPlacesFromKirbyData(kirbyData),
     openPlaceId: null,
     currentMapStyle: null,
+    activeLegIndex: null,
   }
   console.log("places", state.storyPlaces)
+
+  var paddingValues = {
+    top: 80,
+    bottom: 80,
+    left: 380,
+    right: 80
+  };
 
   // --------------------------------
   // Mapbox init
   // --------------------------------
 
   // AP
-  var mbToken = "pk.eyJ1IjoicGlhYWFhYyIsImEiOiIxaHI5SmNnIn0.68S9KEJ3TeuhobReU_uDeQ"
-  var mbStyleWithBg = "mapbox://styles/piaaaac/clo2p2b6o00is01pf9ovp59k8"
-  var mbStyleEmpty = "mapbox://styles/piaaaac/clr0wgqob019e01o37ytp8q40"
-
-  // FF
-  // mbToken = "pk.eyJ1IjoiZmVkZXJpY2FmcmFnYXBhbmUiLCJhIjoiQUtjSXNWZyJ9.MCoKTvad0nvu3AMTTMdHfw"
-  // mbStyle = "mapbox://styles/federicafragapane/cl9mvjnf0007a14me74xoz16o"
+  const mbToken = "<?= option('mapbox.token') ?>";
+  const mbStyleWithBg = "<?= option('mapbox.style.withBg') ?>";
+  const mbStyleEmpty = "<?= option('mapbox.style.empty') ?>";
 
   var popupHover, popupClick;
   var basicRouteDS = getBasicRouteDSFromState();
@@ -99,7 +110,7 @@ $to = getToPlace($page);
     })
     var bounds = getBounds(coordinates)
     map.fitBounds(bounds, {
-      padding: 40,
+      padding: paddingValues,
     })
 
     // --- Create popups to be used later
@@ -119,15 +130,11 @@ $to = getToPlace($page);
 
     // --- Handle map events
 
-
     map.on('click', 'points', function(e) {
       var data = e.features[0].properties;
+      console.log("click point", data)
       popupHover.remove();
-      if (state.openPlaceId == data.id) {
-        closeStory();
-      } else {
-        openStory(data.id);
-      }
+      highlightLeg(data.index);
     });
     // map.on('mouseenter', 'points', function (e) {
     map.on('mouseover', 'points', function(e) {
@@ -149,6 +156,64 @@ $to = getToPlace($page);
 
   });
 
+
+  function highlightLeg(id) {
+    if (state.activeLegIndex == id) {
+      id = null;
+    }
+
+    if (id === null) {
+      // All segments fully visible
+      map.setPaintProperty('route', 'line-opacity', 1);
+      map.setPaintProperty('points', 'circle-opacity', 1);
+      map.setPaintProperty('points', 'circle-stroke-opacity', 1);
+
+      var coordinates = [];
+      basicRouteDS.data.features.forEach(feature => {
+        feature.geometry.coordinates.forEach(coo => {
+          coordinates.push(coo)
+        })
+      });
+      var bounds = getBounds(coordinates)
+      map.fitBounds(bounds, {
+        padding: paddingValues,
+      });
+
+    } else {
+
+      // Highlight one segment
+
+      map.setPaintProperty('route', 'line-opacity', [
+        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
+      ]);
+      map.setPaintProperty('points', "circle-opacity", [
+        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
+      ]);
+      map.setPaintProperty('points', "circle-stroke-opacity", [
+        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
+      ]);
+
+      // Zoom to segment
+
+      var e = state.storyPlaces[id];
+      var bbox = null;
+      if (e.geojsonUse && e.geojsonLeg) {
+        bbox = turf.bbox(e.geojsonLeg);
+      } else {
+        var offset = 0.5; // degrees
+        bbox = [
+          e.tripLonFrom - offset,
+          e.tripLatFrom - offset,
+          e.tripLonTo + offset,
+          e.tripLatTo + offset,
+        ];
+      }
+      map.fitBounds(bbox, {
+        padding: paddingValues,
+      });
+    }
+    state.activeLegIndex = id;
+  }
 
   function addAdditionalSourceAndLayer() {
 
@@ -172,6 +237,13 @@ $to = getToPlace($page);
         "line-color": "#37B678",
         "line-width": 3,
         "line-dasharray": ["get", "dasharray"],
+
+        "line-opacity": [
+          "case",
+          ["==", ["get", "legIndex"], state.activeLegIndex],
+          1, // highlighted segment
+          0.1, // all others
+        ],
       }
     });
 
@@ -180,18 +252,35 @@ $to = getToPlace($page);
       type: "circle",
       source: "pointsDS",
       paint: {
-        "circle-color": "#FFF",
+        "circle-color": "#222",
         "circle-radius": ["interpolate", ["linear"],
           ["zoom"],
           3, 3,
-          6, 4,
-          18, 20,
+          6, 5,
+          9, 6,
         ],
-        // "circle-radius": ["step", ['zoom'], 4, 4, 5.5, 7, 8 ],
-        "circle-stroke-width": 1.5,
-        "circle-stroke-color": "#222",
+        "circle-stroke-width": ["interpolate", ["linear"],
+          ["zoom"],
+          3, 1,
+          6, 1.5,
+          9, 2,
+        ],
+        "circle-stroke-color": "#fff",
+        "circle-opacity": [
+          "case",
+          ["==", ["get", "legIndex"], state.activeLegIndex],
+          1, // highlighted segment
+          0.1, // all others
+        ],
+        "circle-stroke-opacity": [
+          "case",
+          ["==", ["get", "legIndex"], state.activeLegIndex],
+          1, // highlighted segment
+          0.1, // all others
+        ],
       }
     });
+    highlightLeg(null);
   }
 
   // --------------------------------
@@ -264,60 +353,6 @@ $to = getToPlace($page);
     return places;
   }
 
-  // function getPlaces_v1 () {
-
-  //   // --- data from kirby
-  //   var startLon = <?= $page->departureLon()->value() ?>;
-  //   var startLat = <?= $page->departureLat()->value() ?>;
-  //   var startPlace = `<?= $page->departurePlace()->value() ?>`;
-  //   var legs = <?= $page->legs()->toStructure()->toJson() ?>;
-
-  //   // --- fit into js format
-  //   var firstPlace = {
-  //     "name": startPlace,
-  //     "lon": startLon,
-  //     "lat": startLat,
-  //     "index": 0,
-  //   }
-  //   var places = [firstPlace];
-  //   for (var i = 0; i < legs.length; i++) {
-  //     var leg = legs[i];
-  //     var lonFrom = (i > 0) ? (legs[i-1].lon) : startLon
-  //     var latFrom = (i > 0) ? (legs[i-1].lat) : startLat
-  //     var placeFrom = (i > 0) ? (legs[i-1].place) : startPlace
-  //     var lonTo = leg.lon
-  //     var latTo = leg.lat
-
-  //     var isValidPlace = false;
-  //     var isValidTrip = false;
-  //     if (leg.lon && leg.lat) { 
-  //       isValidPlace = true;
-  //       if (lonFrom && latFrom) { 
-  //         isValidTrip = true;
-  //       }
-  //     }
-
-  //     var place = {
-  //       "name": leg.place,
-  //       "lon": leg.lon,
-  //       "lat": leg.lat,
-  //       "index": i + 1,
-  //       "isValidPlace": isValidPlace,
-  //       "isValidTrip": isValidTrip,
-  //       "tripComments": leg.comments,
-  //       "tripPlaceFrom": placeFrom,
-  //       "tripPlaceTo": leg.place,
-  //       "tripLonFrom": lonFrom,
-  //       "tripLatFrom": latFrom,
-  //       "tripLonTo": leg.lon,
-  //       "tripLatTo": leg.lat,
-  //       "tripTransport": leg.transport,
-  //     }
-  //     places.push(place);
-  //   }
-  //   return places;
-  // }
-
 
   function getBasicRouteDSFromState() {
 
@@ -354,11 +389,10 @@ $to = getToPlace($page);
         }
       }
 
-
       var feature = {
         'type': 'Feature',
-        'properties': {},
         'properties': {
+          "legIndex": place.index,
           "dasharray": dashArray,
         },
         'geometry': geometry,
@@ -369,7 +403,6 @@ $to = getToPlace($page);
     return mbData;
 
   }
-
 
   function getPointsDSFromState() {
 
@@ -382,6 +415,7 @@ $to = getToPlace($page);
         "features": validPlaces.map(function(e, i) {
           var props = clone(e);
           props.isOpen = state.openStoryId == e.id;
+          props.legIndex = e.index;
           return {
             "type": "Feature",
             "geometry": {
@@ -419,63 +453,29 @@ $to = getToPlace($page);
     }
     if (bool === true) {
       state.currentMapStyle = mbStyleWithBg;
+      map.scrollZoom.enable();
     } else {
       state.currentMapStyle = mbStyleEmpty;
+      map.scrollZoom.disable();
     }
     map.setStyle(state.currentMapStyle);
     localStorage.setItem("mapVisible", String(bool));
   }
 
-  // ----------------------------------
-  // Test geojson2svg
-  // ----------------------------------
+  // --- Keyboard
 
-  var gj = basicRouteDS.data
-  console.log("----------------")
-  console.log("Test geojson2svg")
-  console.log(gj)
-  const converter = new GeoJSON2SVG( /*options*/ );
-  const svgStrings = converter.convert(gj, /*options*/ );
-  console.log("svgStrings", svgStrings)
-
-  // via https://rawgit.com/gagan-bansal/geojson2svg/master/examples/world.html
-
-  drawGeoJSON(gj)
-
-  function drawGeoJSON(geojson) {
-    var geojson3857 = reproject.reproject(
-      geojson, 'EPSG:4326', 'EPSG:3857', proj4.defs);
-    var svgMap = document.getElementById('map');
-    var convertor = new GeoJSON2SVG({
-      viewportSize: {
-        width: 800,
-        height: 800
-      },
-      attributes: {
-        'style': 'stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;',
-        'vector-effect': 'non-scaling-stroke',
-      },
-      explode: false,
-    });
-    var svgElements = convertor.convert(geojson3857 /*geojson*/ );
-    // var parser = new DOMParser();
-    svgElements.forEach(function(svgStr) {
-      var svg = parseSVG(svgStr);
-      svgMap.appendChild(svg);
-    });
-  }
-  //parseSVG from http://stackoverflow.com/questions/3642035/jquerys-append-not-working-with-svg-element
-  function parseSVG(s) {
-    var div = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-    div.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + s + '</svg>';
-    var frag = document.createDocumentFragment();
-    while (div.firstChild.firstChild)
-      frag.appendChild(div.firstChild.firstChild);
-    return frag;
-  }
-
-
-  // ----------------------------------
+  window.addEventListener('keydown', (e) => {
+    switch (e.key) {
+      // case 'ArrowUp':
+      // case 'ArrowDown':
+      case 'ArrowLeft':
+        highlightLeg(state.activeLegIndex - 1);
+        break;
+      case 'ArrowRight':
+        highlightLeg(state.activeLegIndex + 1);
+        break;
+    }
+  });
 
   // --- Handlebars templates ---------
   // --- see https://tutorialzine.com/2015/01/learn-handlebars-in-10-minutes

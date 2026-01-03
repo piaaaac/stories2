@@ -2,7 +2,7 @@
 
 return [
 
-  
+
   // --- Kirby
 
   "debug" => true,
@@ -13,7 +13,7 @@ return [
   "routes" => require_once "routes.php",
 
   // "hooks" => require_once "hooks.php", // currently []
-  
+
   "thumbs" => [
     "presets" => [
       "default" => ["width" => 1024, "quality" => 80],
@@ -21,8 +21,14 @@ return [
     ]
   ],
 
+  // --- custom options
+  'mapbox.token'        => "pk.eyJ1IjoicGlhYWFhYyIsImEiOiIxaHI5SmNnIn0.68S9KEJ3TeuhobReU_uDeQ",
+  'mapbox.style.withBg' => "mapbox://styles/piaaaac/clo2p2b6o00is01pf9ovp59k8",
+  'mapbox.style.empty'  => "mapbox://styles/piaaaac/clr0wgqob019e01o37ytp8q40",
+
+
   // Kirby SEO plugin settings
   "tobimori.seo.canonicalBase" => "https://movinglines.org",
   "tobimori.seo.lang" => "en_US",
-  
+
 ];

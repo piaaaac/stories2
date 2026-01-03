@@ -852,8 +852,11 @@ body.media-open {
 }
 
 main {
-  margin-top: 150px;
   margin-top: 70px;
+}
+
+main.tall-menu {
+  margin-top: 105px;
 }
 
 hr {
@@ -1270,8 +1273,26 @@ a.green {
   }
 }
 
-#map-container {
+section.map-area {
+  position: relative;
+}
+
+section.map-area #map-container {
   height: 80vh;
+}
+
+section.map-area .info {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
+section.map-area .info .contents {
+  width: 300px;
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 7px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
 }
 
 .mapboxgl-popup-content {

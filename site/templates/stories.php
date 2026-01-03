@@ -2,7 +2,7 @@
 $stories = page("stories")->children()->listed();
 ?>
 
-<?php snippet("header") ?>
+<?php snippet("header", ["tallMenu" => true]) ?>
 
 <?php snippet("menu", ["subtitle" => "Stories crossing borders"]) ?>
 
