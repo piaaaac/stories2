@@ -365,7 +365,7 @@ input:invalid, textarea:invalid {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
 }
 
@@ -397,7 +397,7 @@ input:invalid, textarea:invalid {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
   text-transform: uppercase;
   font-weight: 600;
@@ -495,7 +495,7 @@ h3 {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
   font-weight: 700;
 }
@@ -528,7 +528,7 @@ h4 {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
   text-transform: uppercase;
   font-weight: 600;
@@ -601,7 +601,7 @@ h4 {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
 }
 
@@ -1155,7 +1155,7 @@ a.green {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
   text-transform: uppercase;
   text-decoration-line: none;
@@ -1232,6 +1232,7 @@ a.green {
 .button.green-dark {
   background-color: #135d4a;
   color: white;
+  border: none;
 }
 
 .button.green-dark:hover, .button.green-dark.active {
@@ -1245,6 +1246,7 @@ a.green {
 .button.green-light {
   background-color: #29a468;
   color: white;
+  border: none;
 }
 
 .button.green-light:hover, .button.green-light.active {
@@ -1287,17 +1289,115 @@ section.map-area .info {
   left: 0;
 }
 
-section.map-area .info .contents {
-  width: 300px;
+section.map-area .info #box-container .box-wrapper {
+  position: relative;
+}
+
+section.map-area .info #box-container .box-wrapper .box {
   background-color: white;
   padding: 10px 15px;
   border-radius: 7px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
 }
 
+section.map-area .info #box-container .box-wrapper .box #close-leg-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 7px 13px;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+section.map-area .info #box-container .box-wrapper .box #close-leg-button:hover {
+  opacity: 0.7;
+}
+
+section.map-area .info #box-container .box-wrapper .action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+section.map-area .info #box-container .box-wrapper .action-buttons .button {
+  flex-grow: 1;
+}
+
+.bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 3px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 1.5px;
+  margin-bottom: 5px;
+}
+
+.bar .fill {
+  height: 0;
+  border: 0;
+  border-bottom: 3px solid #29a468;
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+
+.double-dot {
+  display: inline-block;
+  position: relative;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #222;
+}
+
+.double-dot::after {
+  content: "";
+  display: block;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background-color: #222;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .mapboxgl-popup-content {
   border-radius: 10px !important;
   padding: 3px 15px 3px !important;
+}
+
+.svg-square-container {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.svg-square-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* avoid inline gaps */
+}
+
+.svg-square-container .absolute-story-info {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
 div#svg-container {
@@ -1379,7 +1479,7 @@ nav#menu-header .items a.item {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
 }
 
@@ -1449,7 +1549,7 @@ body.menu-xs-open #menu-xs {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
 }
 
@@ -1481,7 +1581,7 @@ body.menu-xs-open #menu-xs {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   letter-spacing: 0;
-  line-height: 1.46em;
+  line-height: 1.16em;
   font-stretch: normal;
 }
 

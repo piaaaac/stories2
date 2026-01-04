@@ -293,6 +293,7 @@ $m: 15px;
   &.green-dark {
     background-color: $verdone;
     color: white;
+    border: none;
     &:hover,
     &.active {
       background-color: darken($verdone, 5%);
@@ -304,6 +305,7 @@ $m: 15px;
   &.green-light {
     background-color: $verde;
     color: white;
+    border: none;
     &:hover,
     &.active {
       background-color: darken($verde, 5%);
@@ -345,13 +347,85 @@ section.map-area {
     position: absolute;
     top: 20px;
     left: 0;
-    .contents {
-      width: 300px;
-      background-color: white;
-      padding: 10px 15px;
-      border-radius: 7px;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+    #box-container {
+      .box-wrapper {
+        // <-- will contain width
+        position: relative;
+        .box {
+          // width: 300px;
+          background-color: white;
+          padding: 10px 15px;
+          border-radius: 7px;
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+          #close-leg-button {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 7px 13px;
+            font-size: 22px;
+            text-decoration: none;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+        .action-buttons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 6px;
+          .button {
+            flex-grow: 1;
+            // width: 100%;
+            // &.one-of-two {
+            //   width: calc(50% - 3px);
+            // }
+          }
+        }
+      }
     }
+  }
+}
+
+.bar {
+  $bh: 3px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: $bh;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: $bh / 2;
+  margin-bottom: 5px;
+  .fill {
+    height: 0;
+    border: 0;
+    border-bottom: $bh solid $verde;
+    border-radius: $bh / 2;
+    overflow: hidden;
+  }
+}
+
+.double-dot {
+  display: inline-block;
+  position: relative;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #222;
+  &::after {
+    content: "";
+    display: block;
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 50%;
+    background-color: #222;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -367,6 +441,36 @@ section.map-area {
 // -----------------------------------------------------------------------------
 // STORY SVG
 // -----------------------------------------------------------------------------
+
+// Newer
+
+.svg-square-container {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block; /* avoid inline gaps */
+  }
+  .absolute-story-info {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    // background-color: rgba(red, 0.1);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+}
+
+// Older
 
 div#svg-container {
   line-height: 0;

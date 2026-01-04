@@ -1,15 +1,9 @@
 title: Story
-# preset: page
 pages: false
 sections:
   meta1:
     type: fields
     fields:
-      # storyid:
-      #   label: Story ID
-      #   type: number
-      #   help: This is used to get the story data. It refers to the story ID specified in the spreadsheet.
-      #   translate: false
       age:
         label: Age
         type: number
@@ -46,17 +40,32 @@ sections:
       reasonDeparture:
         label: Reason of departure
         type: text
+        width: 1/2
+      utilLink:
+        type: info
+        width: 1/2
+        translate: false
+        text: >
+          <a href="{{ site.url }}/story-tools?story={{ page.slug }}" target="_blank" rel="noopener">
+            Edit the route
+          </a>
 
       departurePlace:
         label: Departure place
         type: text
         width: 1/4
+      departureCountry:
+        extends: fields/countrySelect
+        width: 1/4
+
       departureLat:
         type: number
+        step: .00000001
         width: 1/4
         translate: false
       departureLon:
         type: number
+        step: .00000001
         width: 1/4
         translate: false
 
@@ -68,14 +77,16 @@ sections:
             type: text
             width: 1/4
           country:
-            type: text
+            extends: fields/countrySelect
             width: 1/4
           lat:
             type: number
+            step: .00000001
             width: 1/4
             translate: false
           lon:
             type: number
+            step: .00000001
             width: 1/4
             translate: false
           transport:
@@ -133,12 +144,11 @@ sections:
         width: 1/2
         translate: false
 
-      cachedSvg:
-        type: textarea
-
-      cachedApiCalls:
-        type: textarea
-        disabled: true
-
   files:
     type: files
+
+  meta2:
+    type: fields
+    fields:
+      cachedSvg:
+        type: textarea

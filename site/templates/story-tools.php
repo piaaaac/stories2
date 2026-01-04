@@ -46,13 +46,6 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
 
 <body id="story-tools">
 
-  <!---------------------------------- GEOJSON2SVG -->
-  <div>
-    <svg id="svg-map-target" xmlns="http://www.w3.org/2000/svg" width="800" height="800" x="0" y="0" class="geojson2svg-test" style="display: block;"></svg>
-    <button id="save-svg-button">Save SVG</button>
-  </div>
-  <!---------------------------------- GEOJSON2SVG -->
-
   <div class="structure">
     <div class="left-items">
 
@@ -97,7 +90,7 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
           <div class="container-fluid">
             <div class="row">
               <div class="col-6 my-2">
-                <p><span><?= $startPlace ?></span> - <span><?= $legTo->place()->value() ?></span></p>
+                <p class="font-weight-600"><span><?= $startPlace ?></span> &rarr; <span><?= $legTo->place()->value() ?></span></p>
                 <p><a class="" href="<?= $apiCall ?>" onclick="handleApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
                 <div>
                   <label>
@@ -120,7 +113,32 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
 
       <?php endfor ?>
 
+
+      <!---------------------------------- GEOJSON2SVG -->
+      <div class="container-fluid mt-5">
+        <div class="row">
+          <div class="col-12">
+            <div class="svg-square-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="svg-map-target"
+                viewBox="0 0 800 800"
+                preserveAspectRatio="xMidYMid meet"
+                width="800"
+                height="800"
+                x="0"
+                y="0"
+                class="geojson2svg-test"
+                style="display: block;"></svg>
+            </div>
+            <a class="button small green-dark" id="save-svg-button">Save SVG</a>
+          </div>
+        </div>
+      </div>
+      <!---------------------------------- GEOJSON2SVG -->
+
     </div>
+
     <div class="right-mapbox-preview">
       <div id="mapbox-container">
         <div id="buttons-container">
@@ -209,8 +227,8 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
     function drawGeoJSON(geojson) {
       var geojson3857 = reproject.reproject(
         geojson, 'EPSG:4326', 'EPSG:3857', proj4.defs);
-      var svgMap = document.getElementById('svg-map-target');
-      var convertor = new GeoJSON2SVG({
+      var svgElement = document.getElementById('svg-map-target');
+      var converter = new GeoJSON2SVG({
         viewportSize: {
           width: 800,
           height: 800
@@ -221,12 +239,16 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
         },
         explode: false,
       });
-      var svgElements = convertor.convert(geojson3857 /*geojson*/ );
-      // var parser = new DOMParser();
+      var svgElements = converter.convert(geojson3857);
       svgElements.forEach(function(svgStr) {
         var svg = parseSVG(svgStr);
-        svgMap.appendChild(svg);
+        svgElement.appendChild(svg);
       });
+
+      const bbox = getSvgElementBBox(svgElement);
+      console.log("SVG BBOX", bbox);
+      svgElement.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+
     }
     //parseSVG from http://stackoverflow.com/questions/3642035/jquerys-append-not-working-with-svg-element
     function parseSVG(s) {
@@ -284,7 +306,30 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
     });
     // ---------------------------------- Save SVG -------------------------------------
 
-
+    function getSvgElementBBox(svgEl) {
+      // Ensure it's in the DOM; otherwise getBBox() won't work
+      let needsAttach = !document.body.contains(svgEl);
+      let temp;
+      if (needsAttach) {
+        temp = document.createElement("div");
+        temp.style.position = "absolute";
+        temp.style.left = "-9999px";
+        temp.style.top = "-9999px";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.appendChild(svgEl);
+      }
+      const bbox = svgEl.getBBox();
+      if (needsAttach) {
+        temp.remove();
+      }
+      return {
+        x: bbox.x,
+        y: bbox.y,
+        width: bbox.width,
+        height: bbox.height
+      };
+    }
 
     // -----------------------------
     // FUNCTIONS

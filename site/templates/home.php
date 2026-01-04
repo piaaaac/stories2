@@ -9,7 +9,8 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <div class="spacer py-4"></div>
 
-<?php snippet("stories-prev", ["stories" => $stories]) ?>
+<?php /* snippet("stories-prev", ["stories" => $stories]) */ ?>
+<?php snippet("stories-prev-2", ["stories" => $stories]) ?>
 
 <div class="container-fluid">
   <div class="row">

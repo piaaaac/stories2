@@ -1,13 +1,13 @@
 title: Site
 
 tabs:
-
   contents:
     sections:
       pages:
         label: Pages
         type: pages
 
+  countries:
+    extends: tabs/countries
+
   seo: seo/site
-
-

@@ -22,6 +22,10 @@ function getFromPlace($story)
     return "Unknown";
   }
 }
+function getFromCountry($story)
+{
+  return countryCode2Name($story->departureCountry()->value());
+}
 function getToPlace($story)
 {
   $legs = $story->legs()->toStructure();
@@ -29,5 +33,24 @@ function getToPlace($story)
     return $legs->last()->place();
   } else {
     return "Unknown";
+  }
+}
+function getToCountry($story)
+{
+  $legs = $story->legs()->toStructure();
+  if ($legs->count() > 0) {
+    return countryCode2Name($legs->last()->country()->value());
+  } else {
+    return "Unknown";
+  }
+}
+
+function countryCode2Name($countryCode)
+{
+  $country = site()->countries()->toStructure()->findBy("code", $countryCode);
+  if ($country) {
+    return $country->name();
+  } else {
+    return $countryCode;
   }
 }

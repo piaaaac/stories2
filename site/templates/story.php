@@ -1,11 +1,14 @@
 <?php
 $from = getFromPlace($page);
+$fromCountry = getFromCountry($page);
 $to = getToPlace($page);
+$toCountry = getToCountry($page);
+$subtitle = "$from, $fromCountry → $to, $toCountry";
 ?>
 
 <?php snippet("header", ["tallMenu" => true]) ?>
 
-<?php snippet("menu", ["subtitle" => "$from &rarr; $to", "showSwitch" => true]) ?>
+<?php snippet("menu", ["subtitle" => "$subtitle", "showSwitch" => true]) ?>
 
 <?php snippet('handlebars-templates') ?>
 
@@ -15,22 +18,12 @@ $to = getToPlace($page);
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div class="contents">
-            <h2><?= $page->title() ?></h2>
-          </div>
+          <div id="box-container"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <?= $page->text()->kt() ?>
-    </div>
-  </div>
-</div>
 
 <script>
   // --------------------------------
@@ -42,19 +35,13 @@ $to = getToPlace($page);
   console.log("kirbyData", kirbyData)
 
   var state = {
+    loadCount: 0,
     storyPlaces: getStoryPlacesFromKirbyData(kirbyData),
     openPlaceId: null,
     currentMapStyle: null,
     activeLegIndex: null,
   }
   console.log("places", state.storyPlaces)
-
-  var paddingValues = {
-    top: 80,
-    bottom: 80,
-    left: 380,
-    right: 80
-  };
 
   // --------------------------------
   // Mapbox init
@@ -65,7 +52,7 @@ $to = getToPlace($page);
   const mbStyleWithBg = "<?= option('mapbox.style.withBg') ?>";
   const mbStyleEmpty = "<?= option('mapbox.style.empty') ?>";
 
-  var popupHover, popupClick;
+  var popupHover;
   var basicRouteDS = getBasicRouteDSFromState();
   var pointsDS = getPointsDSFromState();
   console.log("basicRouteDS", basicRouteDS)
@@ -80,8 +67,6 @@ $to = getToPlace($page);
     attributionControl: false,
     logoPosition: 'top-right',
   });
-  // toggleMapStyle();
-  // toggleMapStyle();
 
   // --------------------------------
   // Add data
@@ -89,38 +74,19 @@ $to = getToPlace($page);
 
   map.on('load', () => {
 
-
     // --- Stiled attribution
     map.addControl(new mapboxgl.AttributionControl({
       compact: true,
     }), 'top-right');
 
-
-    // --- Add data sources (addAdditionalSourceAndLayer)
-    // --- Add layers       (addAdditionalSourceAndLayer)
-    addAdditionalSourceAndLayer()
+    // --- Add data + layers
+    addAdditionalSourceAndLayer();
 
     // --- fit to bounds
+    fitFullRoute();
 
-    var coordinates = [];
-    basicRouteDS.data.features.forEach(feature => {
-      feature.geometry.coordinates.forEach(coo => {
-        coordinates.push(coo)
-      })
-    })
-    var bounds = getBounds(coordinates)
-    map.fitBounds(bounds, {
-      padding: paddingValues,
-    })
+    // --- Create popup for later
 
-    // --- Create popups to be used later
-
-    popupClick = new mapboxgl.Popup({
-      closeButton: true,
-      closeOnClick: true,
-      offset: 4,
-      className: "ck-map-popup",
-    });
     popupHover = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: true,
@@ -130,100 +96,68 @@ $to = getToPlace($page);
 
     // --- Handle map events
 
+    map.on('click', 'route', function(e) {
+      var data = e.features[0].properties;
+      console.log("click point", data)
+      // popupHover.remove();
+      highlightLeg(data.index);
+    });
     map.on('click', 'points', function(e) {
       var data = e.features[0].properties;
       console.log("click point", data)
-      popupHover.remove();
+      // popupHover.remove();
       highlightLeg(data.index);
     });
     // map.on('mouseenter', 'points', function (e) {
     map.on('mouseover', 'points', function(e) {
       map.getCanvas().style.cursor = 'pointer';
-      popupClick.remove();
       mapPopup(e, popupHover);
     });
     // map.on('mouseleave', 'points', function () {
     map.on('mouseout', 'points', function() {
       map.getCanvas().style.cursor = '';
-      // popupHover.remove();
+      popupHover.remove();
     });
 
     // Add source and layer whenever base style is loaded
     map.on('style.load', () => {
       addAdditionalSourceAndLayer();
     });
-
-
   });
 
 
-  function highlightLeg(id) {
-    if (state.activeLegIndex == id) {
-      id = null;
-    }
-
-    if (id === null) {
-      // All segments fully visible
-      map.setPaintProperty('route', 'line-opacity', 1);
-      map.setPaintProperty('points', 'circle-opacity', 1);
-      map.setPaintProperty('points', 'circle-stroke-opacity', 1);
-
-      var coordinates = [];
-      basicRouteDS.data.features.forEach(feature => {
-        feature.geometry.coordinates.forEach(coo => {
-          coordinates.push(coo)
-        })
-      });
-      var bounds = getBounds(coordinates)
-      map.fitBounds(bounds, {
-        padding: paddingValues,
-      });
-
-    } else {
-
-      // Highlight one segment
-
-      map.setPaintProperty('route', 'line-opacity', [
-        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
-      ]);
-      map.setPaintProperty('points', "circle-opacity", [
-        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
-      ]);
-      map.setPaintProperty('points', "circle-stroke-opacity", [
-        'case', ['==', ['get', 'legIndex'], id], 1, 0.2
-      ]);
-
-      // Zoom to segment
-
-      var e = state.storyPlaces[id];
-      var bbox = null;
-      if (e.geojsonUse && e.geojsonLeg) {
-        bbox = turf.bbox(e.geojsonLeg);
-      } else {
-        var offset = 0.5; // degrees
-        bbox = [
-          e.tripLonFrom - offset,
-          e.tripLatFrom - offset,
-          e.tripLonTo + offset,
-          e.tripLatTo + offset,
-        ];
-      }
-      map.fitBounds(bbox, {
-        padding: paddingValues,
-      });
-    }
-    state.activeLegIndex = id;
+  function fitFullRoute() {
+    var coordinates = [];
+    basicRouteDS.data.features.forEach(feature => {
+      feature.geometry.coordinates.forEach(coo => {
+        coordinates.push(coo)
+      })
+    });
+    var bounds = getBounds(coordinates)
+    map.fitBounds(bounds, {
+      padding: paddingValues(),
+    });
   }
 
   function addAdditionalSourceAndLayer() {
+    state.loadCount++;
 
-    // --- Add data sources (addAdditionalSourceAndLayer)
-
+    // --- Add data sources
     map.addSource('routeDS', basicRouteDS);
-
     map.addSource('pointsDS', pointsDS);
 
-    // --- Add layers (addAdditionalSourceAndLayer)
+    // --- Add layers
+
+    // Only for when adding the layer
+    var lineColorRule = [
+      "case",
+      ["==", ["get", "legIndex"], state.activeLegIndex],
+      "#37B678", // match → highlight
+      "rgba(173, 173, 160, 0.5)" // otherwise → grey
+    ];
+    if (state.activeLegIndex === null) {
+      lineColorRule = "#37B678"; // highlight all
+    }
 
     map.addLayer({
       id: "route",
@@ -234,16 +168,10 @@ $to = getToPlace($page);
         // "line-cap": "round",
       },
       paint: {
-        "line-color": "#37B678",
         "line-width": 3,
         "line-dasharray": ["get", "dasharray"],
-
-        "line-opacity": [
-          "case",
-          ["==", ["get", "legIndex"], state.activeLegIndex],
-          1, // highlighted segment
-          0.1, // all others
-        ],
+        "line-color": lineColorRule,
+        "line-opacity": 1,
       }
     });
 
@@ -252,42 +180,120 @@ $to = getToPlace($page);
       type: "circle",
       source: "pointsDS",
       paint: {
-        "circle-color": "#222",
         "circle-radius": ["interpolate", ["linear"],
-          ["zoom"],
-          3, 3,
-          6, 5,
-          9, 6,
+          ["zoom"], 3, 3, 6, 5, 9, 6,
         ],
         "circle-stroke-width": ["interpolate", ["linear"],
-          ["zoom"],
-          3, 1,
-          6, 1.5,
-          9, 2,
+          ["zoom"], 3, 1, 6, 1.5, 9, 2,
         ],
-        "circle-stroke-color": "#fff",
+        "circle-color": "#fff",
+        "circle-stroke-color": "#222",
+      }
+    });
+
+    map.addLayer({
+      id: "pointsDot",
+      type: "circle",
+      source: "pointsDS",
+      paint: {
+        "circle-radius": ["interpolate", ["linear"],
+          ["zoom"], 3, 2, 6, 3, 9, 4,
+        ],
+        "circle-color": "#222",
         "circle-opacity": [
-          "case",
-          ["==", ["get", "legIndex"], state.activeLegIndex],
-          1, // highlighted segment
-          0.1, // all others
-        ],
-        "circle-stroke-opacity": [
-          "case",
-          ["==", ["get", "legIndex"], state.activeLegIndex],
-          1, // highlighted segment
-          0.1, // all others
+          "case", ["==", ["get", "legIndex"], state.activeLegIndex], 1, 0
         ],
       }
     });
-    highlightLeg(null);
+
+    if (state.loadCount == 1) {
+      highlightLeg(null, false);
+    }
   }
+
+  function highlightLeg(index, zoom = true) {
+    console.log("highlightLeg : index", index);
+    if (state.activeLegIndex == index) {
+      state.activeLegIndex = null;
+    } else if (index >= state.storyPlaces.length) {
+      state.activeLegIndex = null;
+    } else if (index < 0) {
+      state.activeLegIndex = null;
+    } else {
+      state.activeLegIndex = index;
+    }
+    console.log("...");
+    console.log("highlightLeg : state.activeLegIndex", state.activeLegIndex);
+
+
+    if (state.activeLegIndex === null) {
+      // All segments fully visible
+      map.setPaintProperty('route', 'line-color', "#37B678");
+      map.setPaintProperty('points', 'circle-color', "#fff");
+      map.setPaintProperty('points', 'circle-stroke-color', "#222");
+      map.setPaintProperty('pointsDot', 'circle-opacity', 0);
+
+      if (zoom) {
+        fitFullRoute();
+      }
+
+      // Info box
+      var markup = templateStoryInfoContents({
+        "text": "<?= $page->title() ?> travelled through !!! 21 places on foot, by car and by truck. The trip took 21 days.",
+        "name": "<?= $page->title() ?>",
+      });
+      document.querySelector("#box-container").innerHTML = markup;
+
+    } else {
+
+      // Highlight one segment
+      map.setPaintProperty('route', "line-color", [
+        "case", ["==", ["get", "legIndex"], state.activeLegIndex], "#37B678", "rgba(173, 173, 160, 0.5)",
+      ]);
+      map.setPaintProperty('points', "circle-color", "#fff");
+      map.setPaintProperty('points', "circle-stroke-color", "#222");
+      map.setPaintProperty('pointsDot', 'circle-opacity', [
+        "case", ["==", ["get", "legIndex"], state.activeLegIndex], 1, 0,
+      ]);
+
+      // Info box
+      var e = state.storyPlaces[state.activeLegIndex];
+      console.log("highlightLeg", e);
+      var markup = templateLegInfoContents({
+        "place": e,
+        "bars": {
+          "transport": 33,
+          "trip": 80,
+          "permanence": 40,
+        }
+      });
+      document.querySelector("#box-container").innerHTML = markup;
+
+      // Zoom to segment
+      if (zoom) {
+        var bbox = null;
+        if (e.geojsonUse && e.geojsonLeg) {
+          bbox = turf.bbox(e.geojsonLeg);
+        } else {
+          var offset = 0.5;
+          var west = Math.min(e.tripLonFrom, e.tripLonTo) || e.lon - offset;
+          var south = Math.min(e.tripLatFrom, e.tripLatTo) || e.lat - offset;
+          var east = Math.max(e.tripLonFrom, e.tripLonTo) || e.lon + offset;
+          var north = Math.max(e.tripLatFrom, e.tripLatTo) || e.lat + offset;
+          bbox = [west, south, east, north];
+        }
+        map.fitBounds(bbox, {
+          padding: paddingValues(),
+        });
+      }
+    }
+  }
+
 
   // --------------------------------
   // Handle map visibility
   // --------------------------------
 
-  // const current = localStorage.getItem("mapVisible") === "true";
   toggleMapStyle(currentMapVisibility);
 
 
@@ -429,6 +435,15 @@ $to = getToPlace($page);
     };
   }
 
+  function paddingValues() {
+    return {
+      top: 80,
+      bottom: 80,
+      left: state.activeLegIndex == null ? 280 : 360,
+      right: 80
+    };
+
+  }
 
   function mapPopup(e, popupObject) {
     var data = e.features[0].properties;
@@ -472,15 +487,36 @@ $to = getToPlace($page);
         highlightLeg(state.activeLegIndex - 1);
         break;
       case 'ArrowRight':
+      case 'Spacebar':
         highlightLeg(state.activeLegIndex + 1);
         break;
     }
   });
 
+  function navigationAction(action) {
+    console.log("navigation action", action);
+    switch (action) {
+      case "highlight-prev-leg":
+        highlightLeg(state.activeLegIndex - 1);
+        break;
+      case "highlight-next-leg":
+        highlightLeg(state.activeLegIndex + 1);
+        break;
+      case "close-leg":
+        highlightLeg(null);
+        break;
+      case "start-story":
+        highlightLeg(1);
+        break;
+    }
+  }
+
   // --- Handlebars templates ---------
   // --- see https://tutorialzine.com/2015/01/learn-handlebars-in-10-minutes
 
   var templatePopup = Handlebars.compile($("#hb-popup").html());
+  var templateStoryInfoContents = Handlebars.compile($("#hb-storyinfocontents").html());
+  var templateLegInfoContents = Handlebars.compile($("#hb-leginfocontents").html());
 </script>
 
-<?php snippet("footer") ?>
+<?php snippet("footer", ["markup" => false]) ?>

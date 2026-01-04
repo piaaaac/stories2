@@ -1,0 +1,19 @@
+label: Countries
+icon: globe
+
+columns:
+  - width: 1/1
+    fields:
+      countries:
+        label: Countries list
+        type: structure
+        sortBy: name asc
+        fields:
+          code:
+            label: Code
+            type: text
+            width: 1/4
+          name:
+            label: Name
+            type: text
+            width: 3/4

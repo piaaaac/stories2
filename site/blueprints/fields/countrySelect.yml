@@ -1,0 +1,16 @@
+# label: Country
+# type: select
+# options: query
+# query:
+#   fetch: site.countries.toStructure
+#   text: "{{ item.name }} ({{ item.code }})"
+#   value: "{{ item.code }}"
+
+label: Country
+type: multiselect
+max: 1
+options: query
+query:
+  fetch: site.countries.toStructure
+  text: "{{ item.name }} ({{ item.code }})"
+  value: "{{ item.code }}"
