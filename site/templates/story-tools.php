@@ -205,8 +205,8 @@ $stateLabel = [
     <div class="right-mapbox-preview">
       <div id="mapbox-container">
         <div id="buttons-container">
-          <a class="button small green-dark" href="https://geojson.io" target="_blank">Open geojson.io</a>
-          <a class="button small green-dark" onclick="showGeoJson()">GeoJson</a>
+          <a class="button small grey-light" href="https://geojson.io" target="_blank">Open geojson.io</a>
+          <!-- <a class="button small green-dark" onclick="showGeoJson()">GeoJson</a> -->
           <a class="button small green-dark border-red">Save</a>
         </div>
       </div>

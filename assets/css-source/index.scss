@@ -314,6 +314,18 @@ $m: 15px;
       background-color: darken($verde, 15%);
     }
   }
+  &.grey-light {
+    background-color: #dddddd;
+    color: black;
+    border: none;
+    &:hover,
+    &.active {
+      background-color: darken(#dddddd, 5%);
+    }
+    &:active {
+      background-color: darken(#dddddd, 15%);
+    }
+  }
 }
 
 @keyframes blink {

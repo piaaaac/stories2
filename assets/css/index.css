@@ -1274,6 +1274,20 @@ a.green {
   background-color: #1a6741;
 }
 
+.button.grey-light {
+  background-color: #dddddd;
+  color: black;
+  border: none;
+}
+
+.button.grey-light:hover, .button.grey-light.active {
+  background-color: #d0d0d0;
+}
+
+.button.grey-light:active {
+  background-color: #b7b7b7;
+}
+
 @keyframes blink {
   0% {
     opacity: 0.5;
