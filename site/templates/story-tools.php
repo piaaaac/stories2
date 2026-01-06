@@ -1,11 +1,36 @@
 <?php
-$ass = $kirby->url("assets");
+if (!$kirby->user()) {
+  die('You must log in to see this page.');
+}
 
 $storySlug = $_GET["story"];
 $storyPage = page("stories/$storySlug");
+if (!$storyPage) {
+  $storyPage = page("stories")->drafts()->findBy("slug", $storySlug);
+}
+if (!$storyPage) {
+  die('Story not found.');
+}
 $numLegs = $storyPage->legs()->toStructure()->count();
 
 $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720f62a";
+
+function getPageThumb($sp, $w = 150, $h = 150)
+{
+  $coverImage = $sp->files()->findBy("name", "cover");
+  if (!$coverImage) {
+    return "https://placehold.co/50x50/transparent/png?text=No+cover";
+  } else {
+    return
+      $coverImage->thumb(['width' => $w, 'height' => $h,/*  'crop' => true */])->url();
+  }
+}
+
+$stateLabel = [
+  "listed" => "<span class='color-listed'>●</span>", // Listed
+  "unlisted" => "<span class='color-unlisted'>●</span>", // Unlisted
+  "draft" => "<span class='color-draft'>○</span>", // Draft
+];
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +77,32 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 my-5">
-            <h1><?= $storyPage->title() ?></h1>
+            <p>
+              <a href="<?= $site->pagePanelUrl($storyPage->id(), true) ?>">↖ Edit in the panel</a>
+              &nbsp; | &nbsp;
+              <a href="<?= $storyPage->url() ?>" target="_blank">View story</a>
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <h1><?= $storyPage->title() ?></h1>
+              <a class="no-u" href="javascript:;" onclick="togglePagesList()">▼</a>
+            </div>
+            <div id="pages-list" style="display: none;">
+              <hr />
+              <?php foreach (page("stories")->childrenAndDrafts() as $sp): ?>
+                <a class="d-block hover-white-soft-bg no-u" href="<?= $site->url() ?>/story-tools?story=<?= $sp->slug() ?>">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <img src="<?= getPageThumb($sp) ?>" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                      <span class="ml-3"><?= $sp->title() ?></span>
+                    </div>
+                    <div class="font-sans-s pr-2">
+                      <?= $stateLabel[$sp->status()] ?>
+                    </div>
+                  </div>
+                </a>
+              <?php endforeach ?>
+            </div>
+            <hr />
           </div>
         </div>
       </div>
@@ -90,8 +140,12 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
           <div class="container-fluid">
             <div class="row">
               <div class="col-6 my-2">
-                <p class="font-weight-600"><span><?= $startPlace ?></span> &rarr; <span><?= $legTo->place()->value() ?></span></p>
-                <p><a class="" href="<?= $apiCall ?>" onclick="handleApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
+                <p class="font-weight-600"
+                  onmouseover="highlightLeg(<?= $i + 1 ?>);"
+                  onmouseout="highlightLeg(null);">
+                  <span><?= $startPlace ?></span> &rarr; <span><?= $legTo->place()->value() ?></span>
+                </p>
+                <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
                 <div>
                   <label>
                     <div class="switch small">
@@ -131,11 +185,20 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
                 class="geojson2svg-test"
                 style="display: block;"></svg>
             </div>
-            <a class="button small green-dark" id="save-svg-button">Save SVG</a>
+            <div class="my-2">
+              <a class="button small green-dark" id="save-svg-button">Save SVG</a>
+              <span class="font-sans-s">Homepage and other route previews on the site</span>
+            </div>
+            <div class="my-2">
+              <a class="button small green-dark" id="save-png-button">Save PNG</a>
+              <span class="font-sans-s">Previews in the panel and when sharing on social media</span>
+            </div>
           </div>
         </div>
       </div>
       <!---------------------------------- GEOJSON2SVG -->
+
+      <div class="spacer py-5"></div>
 
     </div>
 
@@ -297,14 +360,16 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
         const json = await res.json();
         if (json.status === 'ok') {
           console.log('SVG saved');
+          alert('SVG saved');
         } else {
           console.error('Error saving SVG:', json.message);
         }
       } catch (err) {
         console.error('Request failed:', err);
+        alert('SVG NOT saved. See console for details.');
       }
     });
-    // ---------------------------------- Save SVG -------------------------------------
+    // ---------------------------------- Save SVG -----------------------------
 
     function getSvgElementBBox(svgEl) {
       // Ensure it's in the DOM; otherwise getBBox() won't work
@@ -331,11 +396,110 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
       };
     }
 
+
+    // save PNG ----------------------------------------------------------------
+
+    document.getElementById("save-png-button").addEventListener("click", async () => {
+      const svgEl = document.querySelector(".svg-square-container svg");
+
+      // 1. Serialize DOM node → SVG string
+      const svgString = new XMLSerializer().serializeToString(svgEl);
+
+      // 2. Call the conversion function
+      const pngBlob = await svgStringToPngBlob(svgString);
+
+      // 3. Upload to Kirby
+      try {
+        const result = await uploadCoverViaRoute("<?= $storyPage->uid() ?>", pngBlob);
+        console.log("Uploaded!", result);
+        alert('PNG saved');
+      } catch (err) {
+        console.error(err);
+        alert('PNG NOT saved. See console for details.');
+      }
+
+      // Or Download (for testing)
+      // const url = URL.createObjectURL(pngBlob);
+      // const a = document.createElement("a");
+      // a.href = url;
+      // a.download = "export.png";
+      // a.click();
+      // URL.revokeObjectURL(url);
+    });
+
+    async function svgStringToPngBlob(svgString, {
+      width,
+      height,
+      scale = 1
+    } = {}) {
+      // 1. Create a Blob from SVG
+      const svgBlob = new Blob([svgString], {
+        type: 'image/svg+xml'
+      });
+      const url = URL.createObjectURL(svgBlob);
+
+      try {
+        // 2. Load into an <img>
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = url;
+
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+
+        const w = (width || img.width) * scale;
+        const h = (height || img.height) * scale;
+
+        // 3. Draw to canvas
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+
+        // 4. Export as PNG Blob
+        return await new Promise(resolve =>
+          canvas.toBlob(resolve, 'image/png')
+        );
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    async function uploadCoverViaRoute(slug, pngBlob) {
+      const form = new FormData();
+      form.append("file", pngBlob, "cover.png");
+
+      const res = await fetch(`/story-upload/${slug}`, {
+        method: "POST",
+        body: form
+      });
+
+      const json = await res.json();
+      console.log(json);
+    }
+
+    // save PNG ----------------------------------------------------------------
+
+
+
+
     // -----------------------------
     // FUNCTIONS
     // -----------------------------
 
-    function handleApiCall(e, contentTarget, url) {
+    function togglePagesList() {
+      var listEl = document.getElementById("pages-list");
+      if (listEl.style.display === "none") {
+        listEl.style.display = "block";
+      } else {
+        listEl.style.display = "none";
+      }
+    }
+
+    function handleRouteApiCall(e, contentTarget, url) {
       e.preventDefault();
 
       const request = new Request(url);
@@ -439,13 +603,14 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
 
         var feature = {
           'type': 'Feature',
-          'properties': {},
           'properties': {
             "dasharray": kirbyTransportToDashArray(legs[i].transport),
+            "legIndex": i + 1,
           },
           'geometry': geometry,
         }
         geoJson.features.push(feature);
+        console.log("feature", feature)
       }
 
       return geoJson;
@@ -455,6 +620,19 @@ $openrouteservice_apikey = "5b3ce3597851110001cf624837bcd0c908f0494794652a5a7720
 
     }
 
+
+    function highlightLeg(index) {
+      if (index === null) {
+        // All segments fully visible
+        map.setPaintProperty('route', 'line-color', "#37B678");
+      } else {
+        // Dim all segments except the active one
+        map.setPaintProperty('route', "line-color", [
+          "case", ["==", ["get", "legIndex"], index], "#37B678", "rgba(173, 173, 160, 0.5)",
+        ]);
+      }
+
+    }
 
     function handleSwitchChange(el) {
       // use el.checked ...

@@ -212,7 +212,6 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
   }
 
   function highlightLeg(index, zoom = true) {
-    console.log("highlightLeg : index", index);
     if (state.activeLegIndex == index) {
       state.activeLegIndex = null;
     } else if (index >= state.storyPlaces.length) {
@@ -222,9 +221,6 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     } else {
       state.activeLegIndex = index;
     }
-    console.log("...");
-    console.log("highlightLeg : state.activeLegIndex", state.activeLegIndex);
-
 
     if (state.activeLegIndex === null) {
       // All segments fully visible

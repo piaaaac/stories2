@@ -2,8 +2,7 @@ title: Stories
 columns:
   - width: 1/1
     sections:
-
-      # meta: 
+      # meta:
       #   type: fields
       #   fields:
       #     intro:
@@ -15,7 +14,9 @@ columns:
         template: story
         empty: No items
         layout: cards
-        # img: 
-        #   cover: true
-        #   back: black
-        #   query: page.image.toFile
+        image:
+          back: mintcream
+          ratio: 4/3
+        img:
+          query: page.image.findBy("name", "cover")
+          # cover: true

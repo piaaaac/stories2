@@ -152,6 +152,18 @@ input:invalid, textarea:invalid {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.color-listed {
+  color: #a8d451;
+}
+
+.color-draft {
+  color: #ec5655;
+}
+
+.color-unlisted {
+  color: #64a1de;
+}
+
 .bg-white {
   background-color: white;
 }
@@ -182,6 +194,11 @@ input:invalid, textarea:invalid {
 
 .border-red {
   border: 1px solid red !important;
+}
+
+.hover-white-soft-bg:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: black !important;
 }
 
 .space-large {

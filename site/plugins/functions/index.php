@@ -1,5 +1,28 @@
 <?php
 
+// ---------------------------------------------
+// Site methods
+// ---------------------------------------------
+// 
+Kirby::plugin('biatch/site-methods', [
+  'siteMethods' => [
+    'pagePanelUrl' => function ($id, $includeDrafts = false) {
+      $p = page($id);
+      if (!$p && $includeDrafts) {
+        $parentId = dirname($id);
+        $pp = page($parentId);
+        if ($pp) {
+          $p = $pp->drafts()->find($id);
+        }
+      }
+      if (!$p) {
+        return 'Page not found.';
+      }
+      return $p->panel()->url();
+    }
+  ]
+]);
+
 /**
  * Die and inspect variable
  */

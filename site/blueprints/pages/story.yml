@@ -46,8 +46,8 @@ sections:
         width: 1/2
         translate: false
         text: >
-          <a href="{{ site.url }}/story-tools?story={{ page.slug }}" target="_blank" rel="noopener">
-            Edit the route
+          <a href="{{ site.url }}/story-tools?story={{ page.slug }}" rel="noopener">
+            Route editor ↗
           </a>
 
       departurePlace:

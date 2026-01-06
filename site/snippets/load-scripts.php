@@ -1,8 +1,7 @@
-
-<?= css(['assets/css/bootstrap-custom.css']) ?>
-<?= css(['assets/css/index.css']) ?>
-<?= js(['assets/js/functions-polyfills.js']) ?>
-<?= js(['assets/js/mapbox-utils-ap.js']) ?>
+<?= css(['assets/css/bootstrap-custom.css?v=' . option('assets.version')]) ?>
+<?= css(['assets/css/index.css?v=' . option('assets.version')]) ?>
+<?= js(['assets/js/functions-polyfills.js?v=' . option('assets.version')]) ?>
+<?= js(['assets/js/mapbox-utils-ap.js?v=' . option('assets.version')]) ?>
 
 <!-- jQuery -->
 <!-- <script src="<?= $kirby->url('assets') ?>/lib/jquery-3.6.0.min.js"></script> -->
@@ -38,4 +37,3 @@ will expose a global variable named 'turf'
 for later: https://turfjs.org/docs/#simplify
 -->
 <script src="<?= $kirby->url('assets') ?>/lib/turf-6.5.0.min.js"></script>
-

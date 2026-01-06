@@ -9,11 +9,15 @@ return [
   "whoops" => true,
   "languages" => true,
   "panel.install" => false,
-
   "routes" => require_once "routes.php",
-
+  // 'api' => [
+  //   'slug' => 'restapi',
+  //   // 'basicAuth' => true,
+  // ],
   // "hooks" => require_once "hooks.php", // currently []
-
+  "assets" => [
+    "version" => "0.0.12",
+  ],
   "thumbs" => [
     "presets" => [
       "default" => ["width" => 1024, "quality" => 80],
