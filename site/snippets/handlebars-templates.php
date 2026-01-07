@@ -20,10 +20,12 @@ place
       <h2 class="font-sans-m font-weight-400 mb-1"><span class="double-dot"></span> {{place.name}}</h2>
     </div>    
     {{#if place.tripPlaceFrom}}
-      <p class="m-0 font-sans-s color-grey">&rarr; from {{place.tripPlaceFrom}}</p>
-    {{/if}}
-    {{#if place.tripTransport}}
-      <p class="m-0 font-sans-s color-grey">Transport: {{place.tripTransport}}</p>
+      <p class="m-0 font-sans-s color-grey">
+        &rarr; from {{place.tripPlaceFrom}}
+        {{#if place.tripTransport}}
+          by {{place.tripTransport}}
+        {{/if}}
+      </p>
     {{/if}}
   </div>
 </script>
@@ -40,30 +42,50 @@ bars
   <div class="box-wrapper" style="width: 300px;">
     <div class="box my-1">
       <h2 class="font-sans-m font-weight-400 mr-2 mb-2"><span class="double-dot"></span> {{place.name}}</h2>
+
+      <div class="font-sans-s mb-2">
+        &rarr; from {{place.tripPlaceFrom}}
+        {{#if place.tripTransport}}
+          by {{place.tripTransport}}
+        {{/if}}
+      </div>
+
       {{#if place.tripComments}}
         <p class="m-0 font-sans-s color-grey">{{place.tripComments}}</p>
       {{/if}}
-      <div class="font-sans-s">&rarr; from {{place.tripPlaceFrom}}</div>
+
       <div class="stats mt-2">
-        <div class="font-sans-s">Transport: {{place.tripTransport}}</div>
-        <div class="bar"><div class="fill" style="width: {{bars.transport}}%;"></div></div>
+        <!--  
+          <div class="font-sans-s">Transport: {{place.tripTransport}}</div>
+          <div class="bar"><div class="fill" style="width: {{bars.transport}}%;"></div></div>
+          -->
         <div class="font-sans-s">Trip</div>
         <div class="bar"><div class="fill" style="width: {{bars.trip}}%;"></div></div>
         <div class="font-sans-s">Permanence</div>
         <div class="bar"><div class="fill" style="width: {{bars.permanence}}%;"></div></div>
         <a id="close-leg-button" class="pointer" onclick="navigationAction('close-leg');">&times;</a>
       </div>
+
+      <div class="action-buttons mt-4 mb-1">
+        <a class="button small green-dark grey-light one-of-two" onclick="navigationAction('highlight-prev-leg');">Prev</a>
+        <a class="button small green-dark grey-light one-of-two" onclick="navigationAction('highlight-next-leg');">Next</a>
+      </div>
+
     </div>
+    
+    <!--  
     <div class="action-buttons">
       <a class="button small green-dark one-of-two" onclick="navigationAction('highlight-prev-leg');">Prev</a>
       <a class="button small green-dark one-of-two" onclick="navigationAction('highlight-next-leg');">Next</a>
     </div>
+    -->
   </div>
 </script>
 
 <!-- 
 BOX WITH GENERAL STORY INFO
 text – string
+quote – string
 name – string
 -->
 <script id="hb-storyinfocontents" type="text/x-handlebars-template">
@@ -71,7 +93,10 @@ name – string
     <div class="box my-1">
       <!-- <h2 class="font-sans-m">{{title}}</h2> -->
       {{#if text}}
-        <p class="m-0 font-sans-s color-grey">{{text}}</p>
+        <p class="m-0 font-sans-s">{{text}}</p>
+      {{/if}}
+      {{#if quote}}
+        <p class="m-0 mt-2 font-sans-s">{{quote}}</p>
       {{/if}}
     </div>
     <div class="action-buttons">

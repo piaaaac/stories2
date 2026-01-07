@@ -157,15 +157,24 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
     // --- Add layers
 
+    var green1 = "#37B678";
+    var green = "#29a468";
+    var greenDark = "#135d4a";
+
+
     // Only for when adding the layer
     var lineColorRule = [
       "case",
       ["==", ["get", "legIndex"], state.activeLegIndex],
-      "#37B678", // match → highlight
+      green, // match → highlight
       "rgba(173, 173, 160, 0.5)" // otherwise → grey
     ];
+    var circleOpacityRule = [
+      "case", ["==", ["get", "legIndex"], state.activeLegIndex - 1], 1, 0
+    ];
     if (state.activeLegIndex === null) {
-      lineColorRule = "#37B678"; // highlight all
+      lineColorRule = green; // highlight all
+      circleOpacityRule = 1;
     }
 
     map.addLayer({
@@ -173,11 +182,11 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
       type: "line",
       source: "routeDS",
       layout: {
-        // "line-join": "round",
-        // "line-cap": "round",
+        "line-join": "round",
+        "line-cap": "round",
       },
       paint: {
-        "line-width": 3,
+        "line-width": 2,
         "line-dasharray": ["get", "dasharray"],
         "line-color": lineColorRule,
         "line-opacity": 1,
@@ -212,6 +221,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
         ],
         "circle-color": "#fff",
         "circle-stroke-color": "#222",
+        "circle-opacity": circleOpacityRule,
       }
     });
 
@@ -251,6 +261,9 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
       map.setPaintProperty('route', 'line-color', "#37B678");
       map.setPaintProperty('points', 'circle-color', "#fff");
       map.setPaintProperty('points', 'circle-stroke-color', "#222");
+      map.setPaintProperty('points', 'circle-opacity', 1);
+      map.setPaintProperty('points', 'circle-stroke-opacity', 1);
+
       map.setPaintProperty('pointsDot', 'circle-opacity', 0);
 
       if (zoom) {
@@ -259,7 +272,8 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
       // Info box
       var markup = templateStoryInfoContents({
-        "text": "<?= $page->title() ?> travelled through !!! 21 places on foot, by car and by truck. The trip took 21 days.",
+        "text": `<?= $page->title() ?> travelled through <?= $page->legs()->toStructure()->count() ?> places.`,
+        "quote": `<?= $page->reasonDeparture()->isNotEmpty() ? $page->reasonDeparture()->kti() : '' ?>`,
         "name": "<?= $page->title() ?>",
       });
       document.querySelector("#box-container").innerHTML = markup;
@@ -272,6 +286,14 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
       ]);
       map.setPaintProperty('points', "circle-color", "#fff");
       map.setPaintProperty('points', "circle-stroke-color", "#222");
+      map.setPaintProperty('points', 'circle-opacity', [
+        "match", ["get", "legIndex"],
+        [state.activeLegIndex, state.activeLegIndex - 1], 1, 0,
+      ]);
+      map.setPaintProperty('points', 'circle-stroke-opacity', [
+        "match", ["get", "legIndex"],
+        [state.activeLegIndex, state.activeLegIndex - 1], 1, 0,
+      ]);
       map.setPaintProperty('pointsDot', 'circle-opacity', [
         "case", ["==", ["get", "legIndex"], state.activeLegIndex], 1, 0,
       ]);
@@ -456,11 +478,12 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
   }
 
   function paddingValues() {
+    var margin = Math.max(window.innerWidth * 0.1, 100);
     return {
-      top: 80,
-      bottom: 80,
-      left: state.activeLegIndex == null ? 280 : 360,
-      right: 80
+      top: margin,
+      bottom: margin,
+      left: margin + (state.activeLegIndex == null ? 280 : 360),
+      right: margin,
     };
 
   }

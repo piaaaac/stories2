@@ -2,10 +2,6 @@ Title: Omar
 
 ----
 
-Storyid: 7
-
-----
-
 Age: 16
 
 ----
@@ -30,7 +26,27 @@ Jobarrival: student
 
 ----
 
-Reasondeparture: 
+Departureplace: 
+
+----
+
+Departurecountry: 
+
+----
+
+Reasondeparture: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id leo ut orci cursus. Nunc blandit velit in dolor ultrices, id rutrum tortor consectetur. Vivamus nec iaculis massa. Vivamus auctor mauris vitae purus maximus tincidunt. Duis pretium aliquet bibendum. Mauris nunc enim, tristique sit amet placerat, dapibus at nibh. Praesent quis nisl rhoncus, convallis magna in, porta augue.
+
+----
+
+Departurelat: 
+
+----
+
+Departurelon: 
+
+----
+
+Legs: 
 
 ----
 
@@ -39,6 +55,14 @@ Text:
 ----
 
 Notes: 
+
+----
+
+Cachedsvg: 
+
+----
+
+Storyid: 7
 
 ----
 

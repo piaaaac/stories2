@@ -82,10 +82,11 @@ $stateLabel = [
               &nbsp; | &nbsp;
               <a href="<?= $storyPage->url() ?>" target="_blank">View story</a>
             </p>
-            <div class="d-flex align-items-center justify-content-between">
+            <a class="d-flex align-items-center justify-content-between no-u pointer"
+              onclick="togglePagesList()">
               <h1><?= $storyPage->title() ?></h1>
-              <a class="no-u" href="javascript:;" onclick="togglePagesList()">▼</a>
-            </div>
+              <span>▼</span>
+            </a>
             <div id="pages-list" style="display: none;">
               <hr />
               <?php foreach (page("stories")->childrenAndDrafts() as $sp): ?>
@@ -143,7 +144,7 @@ $stateLabel = [
                 <p class="font-weight-600"
                   onmouseover="highlightLeg(<?= $i + 1 ?>);"
                   onmouseout="highlightLeg(null);">
-                  <span><?= $startPlace ?></span> &rarr; <span><?= $legTo->place()->value() ?></span>
+                  <span><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></span>
                 </p>
                 <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
                 <div>
@@ -167,36 +168,50 @@ $stateLabel = [
 
       <?php endfor ?>
 
+      <?php if ($numLegs): ?>
 
-      <!---------------------------------- GEOJSON2SVG -->
-      <div class="container-fluid mt-5">
-        <div class="row">
-          <div class="col-12">
-            <div class="svg-square-container">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="svg-map-target"
-                viewBox="0 0 800 800"
-                preserveAspectRatio="xMidYMid meet"
-                width="800"
-                height="800"
-                x="0"
-                y="0"
-                class="geojson2svg-test"
-                style="display: block;"></svg>
-            </div>
-            <div class="my-2">
-              <a class="button small green-dark" id="save-svg-button">Save SVG</a>
-              <span class="font-sans-s">Homepage and other route previews on the site</span>
-            </div>
-            <div class="my-2">
-              <a class="button small green-dark" id="save-png-button">Save PNG</a>
-              <span class="font-sans-s">Previews in the panel and when sharing on social media</span>
+        <!---------------------------------- GEOJSON2SVG -->
+        <div class="container-fluid mt-5">
+          <div class="row">
+            <div class="col-12">
+              <div class="svg-square-container">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="svg-map-target"
+                  viewBox="0 0 800 800"
+                  preserveAspectRatio="xMidYMid meet"
+                  width="800"
+                  height="800"
+                  x="0"
+                  y="0"
+                  class="geojson2svg-test"
+                  style="display: block;"></svg>
+              </div>
+              <div class="my-2">
+                <a class="button small green-dark" id="save-svg-button">Save SVG</a>
+                <span class="font-sans-s">Homepage and other route previews on the site</span>
+              </div>
+              <div class="my-2">
+                <a class="button small green-dark" id="save-png-button">Save PNG</a>
+                <span class="font-sans-s">Previews in the panel and when sharing on social media</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!---------------------------------- GEOJSON2SVG -->
+        <!---------------------------------- GEOJSON2SVG -->
+
+      <?php else: ?>
+
+        <div class="container-fluid mt-5">
+          <div class="row">
+            <div class="col-12">
+              <p>This story has no line yet.</p>
+              <p><a class="button small green-dark" href="<?= $site->pagePanelUrl($storyPage->id(), true) ?>">Add places</a></p>
+            </div>
+          </div>
+        </div>
+
+      <?php endif ?>
 
       <div class="spacer py-5"></div>
 
@@ -215,7 +230,7 @@ $stateLabel = [
 
 
   <script>
-    const lineStore = new Map();
+    var numLegs = <?= $numLegs ?>;
 
     // -----------------------------
     // MAPBOX INIT
@@ -233,6 +248,10 @@ $stateLabel = [
     });
 
     var geoJsonRoute = getBasicRoute();
+
+    if (numLegs === 0) {
+      alert("This story has no legs defined yet.");
+    }
 
     // --- prepare data for mapbox
     var mbRoute = {
@@ -542,33 +561,16 @@ $stateLabel = [
 
     }
 
-
-    // function buildGeoJSON() {
-    //   return {
-    //     "type": "geojson",
-    //     "data": {
-    //       "type": "FeatureCollection",
-    //       "features": [...lineStore.values()].map(line => ({
-    //         "type": "Feature",
-    //         "id": line.id,
-    //         "properties": line.meta,
-    //         "geometry": {
-    //           "type": "LineString",
-    //           "coordinates": line.coords
-    //         }
-    //       }))
-    //     }
-    //   };
-    // }
-
-
     function getBasicRoute() {
+      if (!numLegs) {
+        return null;
+      }
 
       // --- data from kirby
-      var startLon = <?= $storyPage->departureLon()->value() ?>;
-      var startLat = <?= $storyPage->departureLat()->value() ?>;
-      var startPlace = `<?= $storyPage->departurePlace()->value() ?>`;
-      var legs = <?= $storyPage->legs()->toStructure()->toJson() ?>;
+      var startLon = <?= $storyPage->departureLon()->value() ?? "null" ?>;
+      var startLat = <?= $storyPage->departureLat()->value() ?? "null" ?>;
+      var startPlace = `<?= $storyPage->departurePlace()->value() ?? "null" ?>`;
+      var legs = <?= $storyPage->legs()->toStructure()->toJson() ?? "null" ?>;
       console.log("legs", legs)
 
       // --- prepare data for mapbox

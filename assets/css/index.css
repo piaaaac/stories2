@@ -1651,6 +1651,7 @@ body.menu-xs-open #menu-xs {
 
 body#story-tools {
   background-color: rgba(0, 0, 255, 0.1);
+  background-color: #b8d4f0;
 }
 
 body#story-tools .structure {

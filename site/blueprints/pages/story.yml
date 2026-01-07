@@ -37,18 +37,6 @@ sections:
         label: Job at arrival
         type: text
         width: 1/2
-      reasonDeparture:
-        label: Reason of departure
-        type: text
-        width: 1/2
-      utilLink:
-        type: info
-        width: 1/2
-        translate: false
-        text: >
-          <a href="{{ site.url }}/story-tools?story={{ page.slug }}" rel="noopener">
-            Route editor ↗
-          </a>
 
       departurePlace:
         label: Departure place
@@ -57,6 +45,11 @@ sections:
       departureCountry:
         extends: fields/countrySelect
         width: 1/4
+
+      reasonDeparture:
+        label: Reason of departure
+        type: textarea
+        width: 1/2
 
       departureLat:
         type: number
@@ -69,12 +62,23 @@ sections:
         width: 1/4
         translate: false
 
+      utilLink:
+        type: info
+        width: 1/2
+        label: " Route editor tool"
+        translate: false
+        text: >
+          <a href="{{ site.url }}/story-tools?story={{ page.slug }}" rel="noopener">
+            Open in editor tool ↗
+          </a>
+
       legs:
         label: Trip places
         type: structure
         fields:
           place:
             type: text
+            label: Place name
             width: 1/4
           country:
             extends: fields/countrySelect
@@ -82,11 +86,13 @@ sections:
           lat:
             type: number
             step: .00000001
+            label: Latitude
             width: 1/4
             translate: false
           lon:
             type: number
             step: .00000001
+            label: Longitude
             width: 1/4
             translate: false
           transport:
