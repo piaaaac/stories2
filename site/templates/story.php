@@ -96,27 +96,36 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
     // --- Handle map events
 
-    map.on('click', 'route', function(e) {
-      var data = e.features[0].properties;
-      console.log("click point", data)
-      // popupHover.remove();
-      highlightLeg(data.index);
-    });
+    // point events
     map.on('click', 'points', function(e) {
+
+      console.log("event: ", e)
+      e.originalEvent.stopPropagation();
+
       var data = e.features[0].properties;
       console.log("click point", data)
-      // popupHover.remove();
       highlightLeg(data.index);
     });
-    // map.on('mouseenter', 'points', function (e) {
     map.on('mouseover', 'points', function(e) {
       map.getCanvas().style.cursor = 'pointer';
       mapPopup(e, popupHover);
     });
-    // map.on('mouseleave', 'points', function () {
     map.on('mouseout', 'points', function() {
       map.getCanvas().style.cursor = '';
       popupHover.remove();
+    });
+
+    // route events
+    map.on('click', 'routeSensi', function(e) {
+      var data = e.features[0].properties;
+      console.log("click on route", data)
+      highlightLeg(data.legIndex);
+    });
+    map.on('mouseover', 'routeSensi', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseout', 'routeSensi', function() {
+      map.getCanvas().style.cursor = '';
     });
 
     // Add source and layer whenever base style is loaded
@@ -172,6 +181,21 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
         "line-dasharray": ["get", "dasharray"],
         "line-color": lineColorRule,
         "line-opacity": 1,
+      }
+    });
+
+    map.addLayer({
+      id: "routeSensi",
+      type: "line",
+      source: "routeDS",
+      layout: {
+        // "line-join": "round",
+        // "line-cap": "round",
+      },
+      paint: {
+        "line-width": 30,
+        "line-color": "red",
+        "line-opacity": 0,
       }
     });
 

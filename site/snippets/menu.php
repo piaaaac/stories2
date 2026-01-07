@@ -134,7 +134,10 @@ $items = [
   // ---------------------------------------------------------------------------
 
   const currentMapVisibility = localStorage.getItem("mapVisible") === "true";
-  const toggleEl = document.getElementById("map-checkbox").checked = currentMapVisibility;
+  const toggleEl = document.getElementById("map-checkbox");
+  if (toggleEl) {
+    toggleEl.checked = currentMapVisibility;
+  }
 
   function handleSwitchChange(el) {
     // use el.checked ...

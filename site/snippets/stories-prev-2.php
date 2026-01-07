@@ -25,13 +25,13 @@
       $subtitle = "$from, $fromCountry → $to, $toCountry";
     ?>
       <div class="col-sm-6 col-lg-4">
-        <a href="<?= $url ?>" class="d-block">
+        <a href="<?= $url ?>" class="d-block bg-white-hover">
           <div class="svg-square-container p-3 mb-3 mt-1">
             <?php if ($story->cachedSvg()->isNotEmpty()): ?>
               <?= $story->cachedSvg()->value() ?>
             <?php endif ?>
             <div class="absolute-story-info">
-              <div class="font-ser-l font-w-600 mb-1"><?= $title ?></div>
+              <div class="font-ser-l font-w-600 mb-1 outlined-mintcream"><?= $title ?></div>
               <div class="font-sans-m color-grey"><?= $subtitle ?></div>
             </div>
           </div>

@@ -168,6 +168,11 @@ input:invalid, textarea:invalid {
   background-color: white;
 }
 
+.bg-white-hover:hover {
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
 .no-u {
   text-decoration: none;
 }
@@ -199,6 +204,10 @@ input:invalid, textarea:invalid {
 .hover-white-soft-bg:hover {
   background-color: rgba(255, 255, 255, 0.3);
   color: black !important;
+}
+
+.outlined-mintcream {
+  text-shadow: -1px -1px 0 mintcream, 1px -1px 0 mintcream, -1px 1px 0 mintcream, 1px 1px 0 mintcream;
 }
 
 .space-large {
