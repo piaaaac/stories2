@@ -161,13 +161,20 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     var green = "#29a468";
     var greenDark = "#135d4a";
 
+    var lineWidthRule = [
+      "interpolate", ["linear"],
+      ["zoom"],
+      3, 1.5,
+      6, 2,
+      9, 6,
+    ];
 
     // Only for when adding the layer
     var lineColorRule = [
       "case",
       ["==", ["get", "legIndex"], state.activeLegIndex],
       green, // match → highlight
-      "rgba(173, 173, 160, 0.5)" // otherwise → grey
+      "rgba(173, 173, 160, 0.8)" // otherwise → grey
     ];
     var circleOpacityRule = [
       "case", ["==", ["get", "legIndex"], state.activeLegIndex - 1], 1, 0
@@ -186,7 +193,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
         "line-cap": "round",
       },
       paint: {
-        "line-width": 2,
+        "line-width": lineWidthRule,
         "line-dasharray": ["get", "dasharray"],
         "line-color": lineColorRule,
         "line-opacity": 1,

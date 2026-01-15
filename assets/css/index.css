@@ -1256,17 +1256,17 @@ a.green {
 }
 
 .button.green-dark {
-  background-color: #135d4a;
+  background-color: #0f673f;
   color: white;
   border: none;
 }
 
 .button.green-dark:hover, .button.green-dark.active {
-  background-color: #0f4839;
+  background-color: #0c5131;
 }
 
 .button.green-dark:active {
-  background-color: #061d17;
+  background-color: #052416;
 }
 
 .button.green-light {

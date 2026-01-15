@@ -2,39 +2,38 @@
 // Mapbox line styles
 // --------------------------------
 
+// LABELS VIA FRAGA
+// On foot · Air transport · Sea transport · Land transport
+
 var lineStyles = {
-  wheels: {
-    dashArray: [1],
-  },
-  walk: {
-    dashArray: [1, 2],
-  },
-  dotted: {
-    dashArray: [0, 2],
-  },
-  full: {
-    dashArray: [4],
-  },
+  walk: { dashArray: [0, 3] }, // OK
+  ground: { dashArray: [1] },
+  sea: { dashArray: [6, 5] }, // OK
+  air: { dashArray: [1] },
+  other: { dashArray: [1] },
 };
 
 function kirbyTransportToDashArray(kirbyTransport) {
   var lineStyle;
   switch (kirbyTransport) {
     case "plane":
+      lineStyle = "air";
+      break;
     case "boat":
-      lineStyle = "dotted";
-    // case "bus":
-    // case "car":
-    // case "truck":
-    // case "train":
-    // case "taxi":
-    //   lineStyle = "wheels";
-    //   break;
-    // case "walk":
-    //   lineStyle = "walk";
-    //   break;
+      lineStyle = "sea";
+      break;
+    case "bus":
+    case "car":
+    case "truck":
+    case "train":
+    case "taxi":
+      lineStyle = "ground";
+      break;
+    case "walk":
+      lineStyle = "walk";
+      break;
     default:
-      lineStyle = "full";
+      lineStyle = "other";
       break;
   }
 
