@@ -138,31 +138,44 @@ $stateLabel = [
 
         <div class="leg-item">
 
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-6 my-2">
-                <p class="font-weight-600"
-                  onmouseover="highlightLeg(<?= $i + 1 ?>);"
-                  onmouseout="highlightLeg(null);">
-                  <span><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></span>
-                </p>
-                <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
-                <div>
-                  <label>
-                    <div class="switch small">
-                      <input type="checkbox" <?= $geojsonUse ? "checked" : "" ?> id="leg-<?= $i ?>-use" onchange="handleSwitchChange(this);">
-                      <span class="slider round"></span>
-                    </div>
-                    <span class="ml-2">Use route line</span>
-                  </label>
+          <form method="POST" action="/update-leg-geojson">
+
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-6 my-2">
+                  <p class="font-weight-600"
+                    onmouseover="highlightLeg(<?= $i + 1 ?>);"
+                    onmouseout="highlightLeg(null);">
+                    <span><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></span>
+                  </p>
+                  <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
+                  <div>
+                    <label>
+                      <div class="switch small">
+                        <input type="checkbox" name="use" <?= $geojsonUse ? "checked" : "" ?> id="leg-<?= $i ?>-use">
+                        <span class="slider round"></span>
+                      </div>
+                      <span class="ml-2">Use route line</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="col-6 my-2">
+                <div class="col-6 my-2">
+
+                  <?php /*  
+                <!-- OLD -->
                 <textarea id="<?= $targetId ?>"><?= $geojsonLeg ?></textarea>
                 <button onclick="previewGeoJson('<?= $targetId ?>')">&nbsp;&raquo;&nbsp;</button>
+                */ ?>
+
+                  <textarea id="<?= $targetId ?>" name="geojson"><?= $geojsonLeg ?></textarea>
+                  <input type="hidden" name="storyUid" value="<?= $storyPage->uid() ?>">
+                  <input type="hidden" name="legIndex" value="<?= $i ?>">
+                  <button type="submit" class="button very-small green-dark">Save</button>
+
+                </div>
               </div>
             </div>
-          </div>
+          </form>
 
         </div>
 
@@ -222,7 +235,7 @@ $stateLabel = [
         <div id="buttons-container">
           <a class="button small grey-light" href="https://geojson.io" target="_blank">Open geojson.io</a>
           <!-- <a class="button small green-dark" onclick="showGeoJson()">GeoJson</a> -->
-          <a class="button small green-dark border-red">Save</a>
+          <!-- <a class="button small green-dark border-red">Save</a> -->
         </div>
       </div>
     </div>
@@ -363,7 +376,6 @@ $stateLabel = [
       }
 
       try {
-        // const res = await fetch('<?= $site->url() . "/api/save-svg" ?>', {
         const res = await fetch('<?= url("save-story-svg") ?>', {
           method: 'POST',
           headers: {
@@ -634,11 +646,6 @@ $stateLabel = [
         ]);
       }
 
-    }
-
-    function handleSwitchChange(el) {
-      // use el.checked ...
-      console.log(`Switch '${el.id}' changed: ${el.checked}`);
     }
 
     function showGeoJson() {

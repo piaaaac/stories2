@@ -15,6 +15,9 @@ $verdino: mintcream;
 $verde_fraga: #0f673f;
 $verde: #29a468;
 $verdone: $verde_fraga;
+$azzurrello: #d6e0fe;
+
+$page-bg-color: $azzurrello;
 
 // -----------------------------------------------------------------------------
 // External files import
@@ -44,7 +47,7 @@ $verdone: $verde_fraga;
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: $verdino;
+  background-color: $page-bg-color;
   color: black;
   &.media-open {
     overflow: hidden;
@@ -278,7 +281,9 @@ $m: 15px;
   text-decoration-line: none;
   border-radius: $border-radius;
   padding: 0 $space;
-  transition: background-color 200ms, color 200ms;
+  transition:
+    background-color 200ms,
+    color 200ms;
   &:hover,
   &.active {
     background-color: grey;
@@ -288,6 +293,13 @@ $m: 15px;
     height: $button-h-s;
     width: auto;
     padding: 0 10px;
+    text-transform: none;
+    @include font-sans-s;
+  }
+  &.very-small {
+    height: 23px;
+    width: auto;
+    padding: 0 5px;
     text-transform: none;
     @include font-sans-s;
   }
@@ -464,6 +476,9 @@ section.map-area {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
   svg {
     width: 100%;
     height: 100%;
@@ -534,11 +549,13 @@ nav#menu-header {
   top: 0;
   left: 0;
   right: 0;
-  transition: background-color 400ms, padding 400ms;
+  transition:
+    background-color 400ms,
+    padding 400ms;
   padding: 0;
-  background-color: $verdino;
+  background-color: $page-bg-color;
   &.top {
-    background-color: $verdino;
+    background-color: $page-bg-color;
     // padding: 7px 0;
   }
   .wrapper {
@@ -622,6 +639,7 @@ body#story-tools {
     .left-items {
       width: 50%;
       .leg-item {
+        position: relative;
         textarea {
           width: 100%;
           height: 200px;
@@ -630,8 +648,8 @@ body#story-tools {
         }
         button {
           position: absolute;
-          top: 0;
-          right: 0;
+          top: 5px;
+          right: 15px;
         }
       }
     }

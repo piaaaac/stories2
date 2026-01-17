@@ -58,6 +58,8 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
   console.log("basicRouteDS", basicRouteDS)
   console.log("pointsDS", pointsDS)
 
+  var recentlyClickedPoint = false;
+
   mapboxgl.accessToken = mbToken;
   const map = new mapboxgl.Map({
     container: 'map-container',
@@ -101,6 +103,10 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
       console.log("event: ", e)
       e.originalEvent.stopPropagation();
+      recentlyClickedPoint = true;
+      setTimeout(() => {
+        recentlyClickedPoint = false;
+      }, 300);
 
       var data = e.features[0].properties;
       console.log("click point", data)
@@ -119,7 +125,9 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     map.on('click', 'routeSensi', function(e) {
       var data = e.features[0].properties;
       console.log("click on route", data)
-      highlightLeg(data.legIndex);
+      if (!recentlyClickedPoint) {
+        highlightLeg(data.legIndex);
+      }
     });
     map.on('mouseover', 'routeSensi', function(e) {
       map.getCanvas().style.cursor = 'pointer';
@@ -166,7 +174,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
       ["zoom"],
       3, 1.5,
       6, 2,
-      9, 6,
+      9, 4.5,
     ];
 
     // Only for when adding the layer
@@ -385,6 +393,8 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
         }
       }
 
+      console.log("DEBUG", leg.geojsonleg);
+
       var place = {
         "name": leg.place,
         "lon": leg.lon,
@@ -485,7 +495,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
   }
 
   function paddingValues() {
-    var margin = Math.max(window.innerWidth * 0.1, 100);
+    var margin = Math.max(window.innerWidth * 0.07, 100);
     return {
       top: margin,
       bottom: margin,

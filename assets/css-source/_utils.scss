@@ -3,8 +3,11 @@
 // -----------------------------------------------------------------------------
 
 @mixin text-outline($color: black, $size: 1px) {
-  text-shadow: -#{$size} -#{$size} 0 #{$color}, #{$size} -#{$size} 0 #{$color},
-    -#{$size} #{$size} 0 #{$color}, #{$size} #{$size} 0 #{$color};
+  text-shadow:
+    -#{$size} -#{$size} 0 #{$color},
+    #{$size} -#{$size} 0 #{$color},
+    -#{$size} #{$size} 0 #{$color},
+    #{$size} #{$size} 0 #{$color};
 }
 
 // -----------------------------------------------------------------------------
@@ -65,6 +68,10 @@
 
 .outlined-mintcream {
   @include text-outline(mintcream, 1px);
+}
+
+.outlined-azzurrello {
+  @include text-outline($azzurrello, 1px);
 }
 
 // -----------------------------------------------------------------------------

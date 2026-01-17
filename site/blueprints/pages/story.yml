@@ -69,7 +69,7 @@ sections:
         translate: false
         text: >
           <a href="{{ site.url }}/story-tools?story={{ page.slug }}" rel="noopener">
-            Open in editor tool ↗
+            Open in route editor ↗
           </a>
 
       legs:
@@ -131,6 +131,8 @@ sections:
             type: textarea
           geojsonLeg:
             type: textarea
+            spellcheck: false
+            translate: false
             width: 3/4
             translate: false
           geojsonUse:

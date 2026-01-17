@@ -210,6 +210,10 @@ input:invalid, textarea:invalid {
   text-shadow: -1px -1px 0 mintcream, 1px -1px 0 mintcream, -1px 1px 0 mintcream, 1px 1px 0 mintcream;
 }
 
+.outlined-azzurrello {
+  text-shadow: -1px -1px 0 #d6e0fe, 1px -1px 0 #d6e0fe, -1px 1px 0 #d6e0fe, 1px 1px 0 #d6e0fe;
+}
+
 .space-large {
   height: 110px;
 }
@@ -868,7 +872,7 @@ label .text {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: mintcream;
+  background-color: #d6e0fe;
   color: black;
   font-family: "Inter", sans-serif;
 }
@@ -1255,6 +1259,42 @@ a.green {
   }
 }
 
+.button.very-small {
+  height: 23px;
+  width: auto;
+  padding: 0 5px;
+  text-transform: none;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.46em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  .button.very-small {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button.very-small {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) {
+  .button.very-small {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .button.very-small {
+    font-size: 14px;
+  }
+}
+
 .button.green-dark {
   background-color: #0f673f;
   color: white;
@@ -1421,6 +1461,10 @@ section.map-area .info #box-container .box-wrapper .action-buttons .button {
   overflow: hidden;
 }
 
+.svg-square-container:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .svg-square-container svg {
   width: 100%;
   height: 100%;
@@ -1495,11 +1539,11 @@ nav#menu-header {
   right: 0;
   transition: background-color 400ms, padding 400ms;
   padding: 0;
-  background-color: mintcream;
+  background-color: #d6e0fe;
 }
 
 nav#menu-header.top {
-  background-color: mintcream;
+  background-color: #d6e0fe;
 }
 
 nav#menu-header .wrapper {
@@ -1665,6 +1709,10 @@ body#story-tools .structure .left-items {
   width: 50%;
 }
 
+body#story-tools .structure .left-items .leg-item {
+  position: relative;
+}
+
 body#story-tools .structure .left-items .leg-item textarea {
   width: 100%;
   height: 200px;
@@ -1674,8 +1722,8 @@ body#story-tools .structure .left-items .leg-item textarea {
 
 body#story-tools .structure .left-items .leg-item button {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 15px;
 }
 
 body#story-tools .structure .right-mapbox-preview {
