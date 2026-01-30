@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 *:not(i), *:not(i)::before, *:not(i)::after {
   margin: 0;
@@ -162,6 +163,14 @@ input:invalid, textarea:invalid {
 
 .color-unlisted {
   color: #64a1de;
+}
+
+.opacity-20 {
+  opacity: 0.2;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .bg-white {
@@ -359,6 +368,38 @@ input:invalid, textarea:invalid {
   }
 }
 
+.font-sans-m {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.16em;
+  font-stretch: normal;
+}
+
+@media (min-width: 576px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .font-sans-m {
+    font-size: 20px;
+  }
+}
+
 .font-sans-s {
   font-family: "Inter", sans-serif;
   font-size: 14px;
@@ -391,35 +432,35 @@ input:invalid, textarea:invalid {
   }
 }
 
-.font-sans-m {
+.font-sans-xs {
   font-family: "Inter", sans-serif;
-  font-size: 20px;
+  font-size: 11px;
   letter-spacing: 0;
-  line-height: 1.16em;
+  line-height: 1.2em;
   font-stretch: normal;
 }
 
 @media (min-width: 576px) {
-  .font-sans-m {
-    font-size: 20px;
+  .font-sans-xs {
+    font-size: 11px;
   }
 }
 
 @media (min-width: 768px) {
-  .font-sans-m {
-    font-size: 20px;
+  .font-sans-xs {
+    font-size: 11px;
   }
 }
 
 @media (min-width: 992px) {
-  .font-sans-m {
-    font-size: 20px;
+  .font-sans-xs {
+    font-size: 11px;
   }
 }
 
 @media (min-width: 1200px) {
-  .font-sans-m {
-    font-size: 20px;
+  .font-sans-xs {
+    font-size: 11px;
   }
 }
 
@@ -1743,6 +1784,48 @@ body#story-tools .structure .right-mapbox-preview #mapbox-container #buttons-con
   top: 10px;
   right: 10px;
   max-width: 100%;
+}
+
+#message-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(15px);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms;
+  border: 1px solid white;
+}
+
+#message-container::before {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+#message-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#message-container.error {
+  border: 1px solid red;
+}
+
+#message-container.error::before {
+  content: "⚠";
+}
+
+#message-container.success {
+  border: 1px solid green;
+}
+
+#message-container.success::before {
+  content: "✓";
 }
 
 .container-fluid {

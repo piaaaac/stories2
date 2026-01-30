@@ -138,16 +138,24 @@ $stateLabel = [
 
         <div class="leg-item">
 
-          <form method="POST" action="/update-leg-geojson">
+          <form id="leg-geojson-form-<?= $i ?>" class="leg-geojson-form">
 
             <div class="container-fluid">
               <div class="row">
                 <div class="col-6 my-2">
-                  <p class="font-weight-600"
+                  <div
                     onmouseover="highlightLeg(<?= $i + 1 ?>);"
-                    onmouseout="highlightLeg(null);">
-                    <span><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></span>
-                  </p>
+                    onmouseout="highlightLeg(null);"
+                    onclick="fitBoundsForLeg(<?= $i ?>);">
+                    <p class="font-weight-600"><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></p>
+                    <p class="font-sans-xs opacity-20">
+                      <a onclick="copyGeojsonPoint(<?= $startLon ?>, <?= $startLat ?>)">(Point)</a> [<?= $startLon ?>, <?= $startLat ?>] <?= $startPlace ?>
+                      <br />
+                      <a onclick="copyGeojsonPoint(<?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Point)</a> [<?= $arrivalLon ?>, <?= $arrivalLat ?>] <?= $legTo->place()->value() ?>
+                      <br />
+                      <a onclick="copyGeojsonLine(<?= $startLon ?>, <?= $startLat ?>, <?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Line)</a>
+                    </p>
+                  </div>
                   <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
                   <div>
                     <label>
@@ -170,6 +178,7 @@ $stateLabel = [
                   <textarea id="<?= $targetId ?>" name="geojson"><?= $geojsonLeg ?></textarea>
                   <input type="hidden" name="storyUid" value="<?= $storyPage->uid() ?>">
                   <input type="hidden" name="legIndex" value="<?= $i ?>">
+                  <input type="hidden" name="textareaId" value="<?= $targetId ?>">
                   <button type="submit" class="button very-small green-dark">Save</button>
 
                 </div>
@@ -234,15 +243,53 @@ $stateLabel = [
       <div id="mapbox-container">
         <div id="buttons-container">
           <a class="button small grey-light" href="https://geojson.io" target="_blank">Open geojson.io</a>
-          <!-- <a class="button small green-dark" onclick="showGeoJson()">GeoJson</a> -->
-          <!-- <a class="button small green-dark border-red">Save</a> -->
+          <a class="button small green-dark" onclick="fitBounds(state.geojsonRoute)">Fit</a>
         </div>
       </div>
     </div>
   </div>
 
+  <div id="message-container" class=""></div>
+  <!--   
+  <div id="message-container" class="visible error">Error while saving</div>
+  <div id="message-container" class="visible success">Saved successfully.</div> 
+  -->
 
   <script>
+    copyGeojsonPoint = (lon, lat) => {
+      geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [lon, lat]
+          },
+          "properties": {}
+        }]
+      };
+      navigator.clipboard.writeText(JSON.stringify(geojson));
+      showMessage("point copied, paste it on geojson.io", "success");
+    }
+    copyGeojsonLine = (lon1, lat1, lon2, lat2) => {
+      geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [lon1, lat1],
+              [lon2, lat2]
+            ]
+          },
+          "properties": {}
+        }]
+      };
+      navigator.clipboard.writeText(JSON.stringify(geojson));
+      showMessage("line copied, paste it on geojson.io", "success");
+    }
+
     var numLegs = <?= $numLegs ?>;
 
     // -----------------------------
@@ -251,6 +298,9 @@ $stateLabel = [
 
     const mbToken = "<?= option('mapbox.token') ?>";
     const mbStyle = "<?= option('mapbox.style.withBg') ?>";
+    const state = {}
+    state.geojsonRoute = getBasicRoute();
+
 
     mapboxgl.accessToken = mbToken;
     const map = new mapboxgl.Map({
@@ -260,8 +310,6 @@ $stateLabel = [
       zoom: 1,
     });
 
-    var geoJsonRoute = getBasicRoute();
-
     if (numLegs === 0) {
       alert("This story has no legs defined yet.");
     }
@@ -269,9 +317,33 @@ $stateLabel = [
     // --- prepare data for mapbox
     var mbRoute = {
       'type': 'geojson',
-      'data': geoJsonRoute
+      'data': state.geojsonRoute
     }
 
+    function fitBounds(geojson) {
+
+      // fit to bounds
+      var coordinates = [];
+      geojson.features.forEach(feature => {
+        feature.geometry.coordinates.forEach(coo => {
+          coordinates.push(coo)
+        })
+      })
+      var bounds = getBounds(coordinates)
+      map.fitBounds(bounds, {
+        padding: 90,
+      })
+    }
+
+    function fitBoundsForLeg(legIndex) {
+      // fit to bounds of a specific leg
+      var feature = state.geojsonRoute.features[legIndex];
+      var coordinates = feature.geometry.coordinates;
+      var bounds = getBounds(coordinates)
+      map.fitBounds(bounds, {
+        padding: 90,
+      })
+    }
 
     map.on('load', () => {
       map.addSource('route', mbRoute);
@@ -290,26 +362,108 @@ $stateLabel = [
         }
       });
 
-      console.log("geoJsonRoute", geoJsonRoute)
+      fitBounds(state.geojsonRoute);
+    });
 
-      // fit to bounds
-      var coordinates = [];
-      geoJsonRoute.features.forEach(feature => {
-        feature.geometry.coordinates.forEach(coo => {
-          coordinates.push(coo)
-        })
-      })
-      var bounds = getBounds(coordinates)
-      map.fitBounds(bounds, {
-        padding: 20,
-      })
+    // ---------------------------------- Save leg geojson -----------------------------
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      document.querySelectorAll(".leg-geojson-form").forEach(form => {
+
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          showMessage("Saving…");
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch("/update-leg-geojson", {
+              method: "POST",
+              body: formData
+            });
+
+            const result = await response.json();
+
+            // --- Handle non-OK HTTP status ---
+            if (!response.ok) {
+              showMessage(result.message || "Error saving", "error");
+              return;
+            }
+
+            // --- Handle API-level failure ---
+            if (result.status !== "success") {
+              showMessage(result.message || "Error saving", "error");
+              return;
+            }
+
+            // --- Handle missing geojson ---
+            if (!result.geojsonLegSaved || result.legIndex === undefined) {
+              showMessage("Saved but no geojson was returned", "success");
+              return;
+            }
+
+            // --- At this point we know we have everything we need ---
+            const resUpdate = updateLegOnMap({
+              geojsonLeg: JSON.parse(result.geojsonLegSaved),
+              legIndex: result.legIndex,
+            });
+            if (!resUpdate) {
+              showMessage("Saved but error updating map on frontend", "error");
+              return;
+            }
+
+            // put the returned geojson back into the textarea
+            const targetTextarea = form.querySelector(`textarea#${result.textareaId}`);
+            targetTextarea.value = result.geojsonLegSaved;
+
+            showMessage("Saved, map updated", "success");
+
+          } catch (err) {
+            showMessage("Network error", "error");
+          }
+
+        });
+
+      });
 
     });
 
+    function updateLegOnMap({
+      geojsonLeg,
+      legIndex
+    }) {
+      let legGeometry = geojsonLeg.geometry;
+      if (geojsonLeg.type == "FeatureCollection") {
+        legGeometry = geojsonLeg.features[0].geometry;
+      }
+      state.geojsonRoute.features[legIndex].geometry = legGeometry;
+      map.getSource("route").setData(state.geojsonRoute);
+      return true;
+    }
+
+    // --------------- Handle feedback messages after server-side actions ---------------
+
+    function showMessage(message, type = "") {
+      const container = document.getElementById("message-container");
+      container.textContent = message;
+      let styleClass = "";
+      if (type === "error") {
+        styleClass = "error";
+      } else if (type === "success") {
+        styleClass = "success";
+      }
+      container.className = "visible " + styleClass;
+      setTimeout(() => {
+        container.className = "";
+      }, 3000);
+    }
 
     // ---------------------------------- Test geojson2svg -----------------------------
 
-    const simplified = turf.simplify(geoJsonRoute, {
+    const simplified = turf.simplify(state.geojsonRoute, {
       tolerance: 0.05, // adjust for more/less simplification
       highQuality: false
     });
@@ -317,7 +471,7 @@ $stateLabel = [
     // via https://rawgit.com/gagan-bansal/geojson2svg/master/examples/world.html
 
     drawGeoJSON(simplified);
-    // drawGeoJSON(geoJsonRoute);
+    // drawGeoJSON(state.geojsonRoute);
 
     function drawGeoJSON(geojson) {
       var geojson3857 = reproject.reproject(
@@ -389,15 +543,14 @@ $stateLabel = [
         });
 
         const json = await res.json();
-        if (json.status === 'ok') {
-          console.log('SVG saved');
-          alert('SVG saved');
+        if (json.status === 'success') {
+          showMessage('SVG saved', 'success');
         } else {
           console.error('Error saving SVG:', json.message);
         }
       } catch (err) {
         console.error('Request failed:', err);
-        alert('SVG NOT saved. See console for details.');
+        showMessage('SVG NOT saved. See console for details.', 'error');
       }
     });
     // ---------------------------------- Save SVG -----------------------------
@@ -443,10 +596,19 @@ $stateLabel = [
       try {
         const result = await uploadCoverViaRoute("<?= $storyPage->uid() ?>", pngBlob);
         console.log("Uploaded!", result);
-        alert('PNG saved');
+        console.log("result should be parsed JSON", result);
+        if (result.status === "success") {
+          showMessage(result.message, 'success');
+        }
+
+
+        // update the cover image preview on the page
+        // document.querySelector(".cover-image-preview img").src = result.url;
+
+
       } catch (err) {
         console.error(err);
-        alert('PNG NOT saved. See console for details.');
+        showMessage('PNG NOT saved. See console for details.', 'error');
       }
 
       // Or Download (for testing)
@@ -510,6 +672,7 @@ $stateLabel = [
 
       const json = await res.json();
       console.log(json);
+      return json;
     }
 
     // save PNG ----------------------------------------------------------------
@@ -586,7 +749,7 @@ $stateLabel = [
       console.log("legs", legs)
 
       // --- prepare data for mapbox
-      var geoJson = {
+      var geojson = {
         'type': 'FeatureCollection',
         'features': []
       };
@@ -623,14 +786,14 @@ $stateLabel = [
           },
           'geometry': geometry,
         }
-        geoJson.features.push(feature);
+        geojson.features.push(feature);
         console.log("feature", feature)
       }
 
-      return geoJson;
+      return geojson;
 
 
-      // map.getSource('route').setData(geoJson);
+      // map.getSource('route').setData(geojson);
 
     }
 
@@ -646,11 +809,6 @@ $stateLabel = [
         ]);
       }
 
-    }
-
-    function showGeoJson() {
-      var geoJsonRoute = getBasicRoute();
-      console.log(JSON.stringify(geoJsonRoute));
     }
   </script>
 

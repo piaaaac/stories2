@@ -88,6 +88,22 @@ $font-sans: "Inter", sans-serif;
   @include font-ser-m;
 }
 
+@mixin font-sans-m {
+  @include font-style(
+    $font-fam: $font-sans,
+    $xs: 20px,
+    $sm: 20px,
+    $md: 20px,
+    $lg: 20px,
+    $xl: 20px,
+    $letter-sp: 0,
+    $line-h: 1.16em
+  );
+}
+.font-sans-m {
+  @include font-sans-m;
+}
+
 @mixin font-sans-s {
   @include font-style(
     $font-fam: $font-sans,
@@ -104,20 +120,20 @@ $font-sans: "Inter", sans-serif;
   @include font-sans-s;
 }
 
-@mixin font-sans-m {
+@mixin font-sans-xs {
   @include font-style(
     $font-fam: $font-sans,
-    $xs: 20px,
-    $sm: 20px,
-    $md: 20px,
-    $lg: 20px,
-    $xl: 20px,
+    $xs: 11px,
+    $sm: 11px,
+    $md: 11px,
+    $lg: 11px,
+    $xl: 11px,
     $letter-sp: 0,
-    $line-h: 1.16em
+    $line-h: 1.2em
   );
 }
-.font-sans-m {
-  @include font-sans-m;
+.font-sans-xs {
+  @include font-sans-xs;
 }
 
 // -----------------------------------------------------------------------------

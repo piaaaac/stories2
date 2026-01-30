@@ -673,6 +673,43 @@ body#story-tools {
   }
 }
 
+#message-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  // transform: translateX(-50%);
+  transform: translateX(15px);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms;
+  border: 1px solid white;
+  &::before {
+    display: inline-block;
+    margin-right: 8px;
+  }
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &.error {
+    border: 1px solid red;
+    &::before {
+      content: "⚠";
+    }
+  }
+  &.success {
+    border: 1px solid green;
+    &::before {
+      content: "✓";
+    }
+  }
+}
+
 // ------------------------------------------------------------------------
 // Layout
 // ------------------------------------------------------------------------

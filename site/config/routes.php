@@ -37,7 +37,7 @@ return [
         ]);
 
         return [
-          'status' => 'ok',
+          'status' => 'success',
           'message' => 'File saved',
           'url'     => $file->url()
         ];
@@ -48,7 +48,7 @@ return [
         move_uploaded_file($upload['tmp_name'], $target);
 
         return [
-          'status' => 'ok',
+          'status' => 'success',
           'message' => 'File overwritten',
           'url'     => $page->file('cover.png')->url()
         ];
@@ -91,7 +91,7 @@ return [
           ]);
 
           return [
-            'status'  => 'ok',
+            'status'  => 'success',
             'message' => 'SVG saved.'
           ];
         } catch (Exception $e) {
@@ -127,6 +127,9 @@ return [
       $legIndex  = intval(get("legIndex"));
       $newUse = get('use') === 'on' ? true : false;
       $newGeojson = get('geojson');
+      // Decode → encode removes all whitespace safely
+      $minifiedGeojson = json_encode(json_decode($newGeojson, true));
+
       $structure = $storyPage->legs()->toStructure();
 
       // For debugging
@@ -140,6 +143,7 @@ return [
       //     "new" => $newGeojson,
       //     "currentuse" => $currentUse,
       //     "newuse" => $newUse,
+      //     "minified" => $minified,
       //   ]
       // ];
 
@@ -147,24 +151,31 @@ return [
       $i = 0;
       foreach ($structure as $item) {
         if ($i === $legIndex) {
-          $newItems[] = $item->toArray() + ['geojsonLeg' => $newGeojson, 'geojsonUse' => $newUse];
+          $newItems[] = $item->toArray() + ['geojsonLeg' => $minifiedGeojson, 'geojsonUse' => $newUse];
         } else {
           $newItems[] = $item->toArray();
         }
         $i++;
       }
 
-      $storyPage->update([
+      $updatedPage = $storyPage->update([
         'legs' => Yaml::encode($newItems)
       ]);
 
-      // return [
-      //   'status' => 'ok',
-      //   'updatedLeg' => $legIndex
-      // ];
+      $structureItem = $updatedPage->legs()->toStructure()->nth($legIndex);
 
-      $go = site()->url() . "/story-tools?story=" . $storyPage->slug();
-      go($go);
+
+
+      return [
+        'status' => 'success',
+        'message' => "Leg $legIndex updated successfully",
+        'geojsonLegSaved' => $structureItem->geojsonLeg()->value(),
+        'legIndex' => $legIndex,
+        'textareaId' => get('textareaId'),
+      ];
+
+      // $go = site()->url() . "/story-tools?story=" . $storyPage->slug();
+      // go($go);
     }
   ],
 
