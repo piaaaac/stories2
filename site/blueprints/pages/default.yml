@@ -1,37 +1,52 @@
 title: Default
-preset: page
 
-fields:
-  cover:
-    label: Cover image
-    type: files
-    help: This image will be displayed at the top of the page.
-    layout: cards
-    multiple: false
-    size: huge
-    image:
-      cover: true
-      ratio: 16/8
+tabs:
+  content:
+    columns:
+      - width: 2/3
+        sections:
+          meta1:
+            type: fields
+            fields:
+              cover:
+                label: Cover image
+                type: files
+                help: This image will be displayed at the top of the page.
+                layout: cards
+                multiple: false
+                size: huge
+                image:
+                  cover: true
+                  ratio: 16/8
 
-  tags:
-    label: Tags
-    type: tags
-    query: page.siblings.pluck("tags", ",", true)
-    translate: false
-    width: 1/2
+              tags:
+                label: Tags
+                type: tags
+                query: page.siblings.pluck("tags", ",", true)
+                translate: false
+                width: 1/2
 
-  places:
-    label: Places
-    type: tags
-    query: page.siblings.pluck("places", ",", true)
-    translate: false
-    width: 1/2
+              places:
+                label: Places
+                type: tags
+                query: page.siblings.pluck("places", ",", true)
+                translate: false
+                width: 1/2
 
-  blocks:
-    extends: fields/content-blocks
+              blocks:
+                extends: fields/content-blocks
 
-  updated:
-    type: date
-    time: true
-    default: now
-    disabled: true
+              updated:
+                type: date
+                time: true
+                default: now
+                disabled: true
+
+      - width: 1/3
+        sections:
+          files:
+            type: files
+          pages:
+            type: pages
+
+  seo: seo/page

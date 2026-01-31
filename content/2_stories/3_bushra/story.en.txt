@@ -133,6 +133,70 @@ Cachedsvg: <svg xmlns="http://www.w3.org/2000/svg" id="svg-map-target" viewBox="
 
 ----
 
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: - file://xZnYMPheICd4Hcqr
+
+----
+
+Twittercardtype: 
+
+----
+
+Twitterauthor: 
+
+----
+
+Robotsindex: true
+
+----
+
+Robotsfollow: true
+
+----
+
+Robotsarchive: true
+
+----
+
+Robotsimageindex: true
+
+----
+
+Robotssnippet: true
+
+----
+
+Metainherit: 
+
+----
+
 Cachedapicalls: 
 
 ----
@@ -142,3 +206,7 @@ Storyid: 4
 ----
 
 Uuid: wfvdpn2XQM1Rf26Q
+
+----
+
+Updated: 2026-01-31 21:36:14

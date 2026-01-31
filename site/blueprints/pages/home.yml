@@ -1,10 +1,26 @@
 title: Home
-preset: page
-fields:
-  textAbout:
-    label: Text About
-    extends: fields/writer-field
 
-  textAboutAuthors:
-    label: Text Authors
-    extends: fields/writer-field
+tabs:
+  content:
+    columns:
+      - width: 2/3
+        sections:
+          meta1:
+            type: fields
+            fields:
+              textAbout:
+                label: Text About
+                extends: fields/writer-field
+
+              textAboutAuthors:
+                label: Text Authors
+                extends: fields/writer-field
+
+      - width: 1/3
+        sections:
+          files:
+            type: files
+          pages:
+            type: pages
+
+  seo: seo/page

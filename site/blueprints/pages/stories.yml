@@ -1,22 +1,26 @@
 title: Stories
-columns:
-  - width: 1/1
-    sections:
-      # meta:
-      #   type: fields
-      #   fields:
-      #     intro:
-      #       type: textarea
+tabs:
+  content:
+    columns:
+      - width: 1/1
+        sections:
+          # meta:
+          #   type: fields
+          #   fields:
+          #     intro:
+          #       type: textarea
 
-      items:
-        headline: Stories
-        type: pages
-        template: story
-        empty: No items
-        layout: cards
-        image:
-          back: mintcream
-          ratio: 4/3
-        img:
-          query: page.image.findBy("name", "cover")
-          # cover: true
+          items:
+            headline: Stories
+            type: pages
+            template: story
+            empty: No items
+            layout: cards
+            image:
+              back: mintcream
+              ratio: 4/3
+            img:
+              query: page.image.findBy("name", "cover")
+              # cover: true
+
+  seo: seo/page

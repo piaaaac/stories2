@@ -34,6 +34,17 @@ return [
 
   // Kirby SEO plugin settings
   "tobimori.seo.canonicalBase" => "https://movinglines.org",
+  "tobimori.seo.sitemap.active" => true,
   "tobimori.seo.lang" => "en_US",
+
+  // this is for google link debugger
+  "tobimori.seo.robots" => [
+    "active" => true,
+    "content" => [
+      "facebookexternalhit" => ["Disallow" => []],
+      "Twitterbot" => ["Disallow" => []],
+      "Googlebot" => ["Disallow" => ["/nogooglebot/"]],
+    ],
+  ],
 
 ];
