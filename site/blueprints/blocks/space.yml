@@ -1,0 +1,21 @@
+name: Space
+# preview: fields
+wysiwyg: true
+fields:
+  spaceSize:
+    type: toggles
+    label: Space size
+    options:
+      one: "50px"
+      two: "100px"
+      three: "150px"
+      custom: other
+    default: one
+    required: true
+    width: 1/2
+  customMargin:
+    label: Custom margin
+    type: text
+    when:
+      spaceSize: custom
+    width: 1/2

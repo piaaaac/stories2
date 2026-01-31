@@ -1,0 +1,33 @@
+name: Blocks wrapper
+preview: fields
+wysiwyg: true
+icon: dashboard
+tabs:
+  main:
+    fields:
+      contentBlocks:
+        extends: fields/content-blocks-nested
+        label: Content blocks
+  # --- block options --------------
+  settings:
+    fields:
+      # grid:
+      #   extends: fields/block_settings_grid
+      #   width: 1/2
+      #   grow: false
+      bordertop:
+        label: Border top
+        type: toggle
+        width: 1/2
+      borderbottom:
+        label: Border bottom
+        type: toggle
+        width: 1/2
+      paddingtop:
+        extends: fields/block_settings_padding
+        label: Padding top
+      paddingbottom:
+        extends: fields/block_settings_padding
+        label: Padding bottom
+      bgcolor:
+        extends: fields/block_settings_bgColor

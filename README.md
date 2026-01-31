@@ -1,13 +1,12 @@
-# Stories 2
+# Moving Lines
 
+01.02.24 --- Updated to Kirby 4
 
+### Links from Silvia
 
-01.02.24
-Updated to Kirby 4
-- check canonical link in config.php
+- https://datawrapper.dwcdn.net/niqGJ/2/
+- https://medium.com/peopleonthemove/live-people-dead-and-missing-crossing-europe-since-january-2014-to-date-a28f2404fee0
 
+### TODO
 
-#### Uses:
-
-- Kirby as CMS
-- Parcel for compiling js (folder `dev/` > `assets/js/`) 
+- [ ] check canonical link in config.php

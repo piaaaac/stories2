@@ -5,7 +5,7 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <?php snippet("header", ["tallMenu" => true]) ?>
 
-<?php snippet("menu", ["subtitle" => "Stories crossing borders"]) ?>
+<?php snippet("menu", ["subtitle" => "Stories crossing borders", "transparentAtTop" => true]) ?>
 
 <div class="container-fluid">
   <div class="row">
@@ -24,14 +24,6 @@ $articles = page("articles")->children()->listed()->limit(3);
 <?php /* snippet("stories-prev", ["stories" => $stories]) */ ?>
 <?php snippet("stories-prev-2", ["stories" => $stories]) ?>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 mt-5 mb-4">
-      <?= $page->text()->kt() ?>
-    </div>
-  </div>
-</div>
-
 <div class="full-w-btn">
   <a href="<?= page("stories")->url() ?>">
     <?php
@@ -43,6 +35,7 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <div class="space-large"></div>
 
+<?php /*  
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 mb-5">
@@ -63,18 +56,19 @@ $articles = page("articles")->children()->listed()->limit(3);
 </div>
 
 <div class="space-large"></div>
+*/ ?>
 
 <section id="about">
-  <div class="container-fluid">
+  <div class="container-fluid texts">
     <div class="row">
       <div class="col-lg-6">
         <div class="block-font-sans-m">
-          <?= $page->textAbout()->kt() ?>
+          <?= $page->textAbout() ?>
         </div>
       </div>
       <div class="col-lg-4 offset-lg-2">
         <div class="block-font-sans-s">
-          <?= $page->textAboutAuthors()->kt() ?>
+          <?= $page->textAboutAuthors() ?>
         </div>
       </div>
     </div>

@@ -1,0 +1,24 @@
+title: Collection
+columns:
+  - width: 1/1
+    sections:
+      meta:
+        type: fields
+        fields:
+          breadcrumbText:
+            type: text
+            label: Breadcrumb text
+            help: This text will be used in the breadcrumb navigation.
+
+      items:
+        headline: Articles
+        type: pages
+        template:
+          - article
+          - default
+        empty: No items
+        layout: cards
+        # img:
+        #   cover: true
+        #   back: black
+        #   query: page.image.toFile

@@ -1,0 +1,24 @@
+name: Accordion
+preview: fields
+wysiwyg: true
+tabs:
+  main:
+    fields:
+      faqItems:
+        type: structure
+        fields:
+          itemHeader:
+            label: Header
+            extends: fields/writer-field
+          itemContent:
+            label: Content
+            extends: fields/writer-field
+  # --- block options --------------
+  settings:
+    fields:
+      paddingtop:
+        extends: fields/poplar_settings_padding
+        label: Padding top
+      paddingbottom:
+        extends: fields/poplar_settings_padding
+        label: Padding bottom

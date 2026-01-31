@@ -14,11 +14,17 @@
 // Color & style utilities
 // -----------------------------------------------------------------------------
 
+.color-black {
+  color: black;
+}
 .color-white {
   color: white;
 }
 .color-white-50 {
   color: rgba(white, 0.5);
+}
+.color-bg_color_dark {
+  color: $bg_color_dark;
 }
 .color-listed {
   color: #a8d451;
@@ -43,7 +49,7 @@
   transition: background-color 0.3s ease;
 }
 .no-u {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .u-hover {
   text-decoration: none;
@@ -72,12 +78,8 @@
   }
 }
 
-.outlined-mintcream {
-  @include text-outline(mintcream, 1px);
-}
-
-.outlined-azzurrello {
-  @include text-outline($azzurrello, 1px);
+.outlined-page_bg_color {
+  @include text-outline($page_bg_color, 1px);
 }
 
 // -----------------------------------------------------------------------------

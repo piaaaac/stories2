@@ -10,14 +10,9 @@ $menu-h: 70px;
 $border-radius: 3px;
 $space: 20px;
 
-$verdino: #ecfaf3;
-$verdino: mintcream;
-$verde_fraga: #0f673f;
-$verde: #29a468;
-$verdone: $verde_fraga;
-$azzurrello: #ced8eb;
-
-$page-bg-color: $azzurrello;
+$green_fraga: #0f673f;
+$page_bg_color: #ced8eb;
+$bg_color_dark: #2e3e64;
 
 // -----------------------------------------------------------------------------
 // External files import
@@ -47,18 +42,24 @@ $page-bg-color: $azzurrello;
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: $page-bg-color;
+  background-color: $page_bg_color;
   color: black;
   &.media-open {
     overflow: hidden;
   }
   font-family: $font-sans;
+  &[data-template="home"] {
+    main {
+      // gradient at top of element
+      background: linear-gradient(to bottom, white 0px, $page_bg_color 220px);
+    }
+  }
 }
 
 main {
-  margin-top: $menu-h;
+  padding-top: $menu-h;
   &.tall-menu {
-    margin-top: 105px;
+    padding-top: 105px;
   }
 }
 
@@ -82,17 +83,34 @@ a {
   text-decoration-line: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 15%;
-  color: inherit;
+  text-decoration: none;
+  color: $green_fraga;
+
   transition: color 170ms;
-  &.green {
-    color: $verde;
-    text-decoration-line: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+ul {
+  margin: 60px 30px;
+  li {
+    margin-bottom: 0.5em;
+    margin-left: 1em;
   }
 }
 
 // -----------------------------------------------------------------------------
 // REUSABLE PIECES
 // -----------------------------------------------------------------------------
+
+img.cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  border-radius: 10px;
+}
 
 // --- article preview
 
@@ -109,7 +127,7 @@ a {
     padding-right: 15%;
     margin-top: 15px;
     .title {
-      // color: $verde;
+      // color: $green_fraga;
       text-decoration-line: none;
     }
   }
@@ -212,7 +230,7 @@ $m: 15px;
           //     padding-right: 15%;
           //     margin-top: 15px;
           //     .title {
-          //       color: $verde;
+          //       color: $green_fraga;
           //       text-decoration-line: none;
           //     }
           //   }
@@ -242,14 +260,74 @@ $m: 15px;
   }
 }
 
+.badge {
+  @include font-sans-xs;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 4px 8px;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+  &.badge-primary {
+    background-color: $bg_color_dark;
+    color: white;
+    &:hover {
+      background-color: black;
+    }
+  }
+  &.badge-secondary {
+    background-color: rgba($bg_color_dark, 0.2);
+    color: black;
+    &:hover {
+      background-color: rgba($bg_color_dark, 0.3);
+    }
+  }
+  & + .badge {
+    margin-left: 3px;
+  }
+}
+
 .full-w-btn {
   overflow: hidden;
-  // background-color: $verdone;
-  background-color: #18725b;
+  position: relative;
+  background-color: black;
   color: white;
-  color: #baf7ca;
   height: $menu-h;
   transition: background-color 170ms;
+  background-color: black;
+  color: white;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  @include media-breakpoint-down(xs) {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  a {
+    color: white;
+  }
+  // use before and after to put gradient covers on the sides
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to right, black, rgba(0, 0, 0, 0));
+    z-index: 1;
+  }
+  &::after {
+    right: 0;
+    transform: rotateZ(180deg);
+  }
+  &::before {
+    left: 0;
+  }
 
   // Grain
   // via https://www.fxhash.xyz/article/all-about-that-grain
@@ -312,27 +390,27 @@ $m: 15px;
     @include font-sans-s;
   }
   &.green-dark {
-    background-color: $verdone;
+    background-color: $green_fraga;
     color: white;
     border: none;
     &:hover,
     &.active {
-      background-color: darken($verdone, 5%);
+      background-color: darken($green_fraga, 5%);
     }
     &:active {
-      background-color: darken($verdone, 15%);
+      background-color: darken($green_fraga, 15%);
     }
   }
   &.green-light {
-    background-color: $verde;
+    background-color: $green_fraga;
     color: white;
     border: none;
     &:hover,
     &.active {
-      background-color: darken($verde, 5%);
+      background-color: darken($green_fraga, 5%);
     }
     &:active {
-      background-color: darken($verde, 15%);
+      background-color: darken($green_fraga, 15%);
     }
   }
   &.grey-light {
@@ -397,6 +475,7 @@ section.map-area {
             padding: 7px 13px;
             font-size: 22px;
             text-decoration: none;
+            color: black;
             &:hover {
               opacity: 0.7;
             }
@@ -434,7 +513,7 @@ section.map-area {
   .fill {
     height: 0;
     border: 0;
-    border-bottom: $bh solid $verde;
+    border-bottom: $bh solid $green_fraga;
     border-radius: $bh / 2;
     overflow: hidden;
   }
@@ -469,6 +548,7 @@ section.map-area {
 }
 .story-leg-info {
   // background-color: #c6f5d2;
+  z-index: 10;
 }
 
 // -----------------------------------------------------------------------------
@@ -496,6 +576,7 @@ section.map-area {
   }
   .absolute-story-info {
     position: absolute;
+    color: black;
     top: 10px;
     left: 15px;
     right: 15px;
@@ -559,14 +640,11 @@ nav#menu-header {
   top: 0;
   left: 0;
   right: 0;
-  transition:
-    background-color 400ms,
-    padding 400ms;
+  transition: all 300ms;
   padding: 0;
-  background-color: $page-bg-color;
-  &.top {
-    background-color: $page-bg-color;
-    // padding: 7px 0;
+  background-color: $page_bg_color;
+  &.transparent-at-top.at-top {
+    background-color: transparent;
   }
   .wrapper {
     height: $menu-h;
@@ -639,7 +717,7 @@ nav#menu-header {
 // ------------------------------------------------------------------------
 
 body#story-tools {
-  background-color: $page-bg-color;
+  background-color: $page_bg_color;
   .structure {
     height: 100vh;
     display: flex;
@@ -649,7 +727,7 @@ body#story-tools {
       width: 50%;
       .leg-item {
         position: relative;
-        padding: 10px 0;
+        padding: 20px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         textarea {
           width: 100%;
@@ -723,11 +801,23 @@ body#story-tools {
     }
   }
   &.success {
-    border: 2px solid $verde;
-    background: $verde;
+    border: 2px solid $green_fraga;
+    background: $green_fraga;
     color: white;
     &::before {
       content: "✓";
+    }
+  }
+}
+
+// ------------------------------------------------------------------------
+// Blocks
+// ------------------------------------------------------------------------
+
+.blocks {
+  .block {
+    &.text-block {
+      // magic here
     }
   }
 }
@@ -737,7 +827,6 @@ body#story-tools {
 // ------------------------------------------------------------------------
 
 .container-fluid {
-  // max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 30px;
@@ -745,6 +834,9 @@ body#story-tools {
   @include media-breakpoint-down(xs) {
     padding-left: 15px;
     padding-right: 15px;
+  }
+  &.texts {
+    max-width: 1100px;
   }
 }
 

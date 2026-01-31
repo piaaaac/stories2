@@ -1,0 +1,40 @@
+Title: UNHCR updates Serbia’s policies on refugees’ integration, rights and obligations
+
+----
+
+Cover: 
+
+----
+
+Tags: policies
+
+----
+
+Places: Serbia, Hungary
+
+----
+
+Blocks: [{"content":{"text":"<h3>Serbia has introduced a new set of policy updates aimed at strengthening the integration of refugees and asylum seekers, following close cooperation with the UN Refugee Agency (UNHCR). The revised framework focuses on improving access to essential services, clarifying legal protections, and outlining clearer responsibilities for individuals seeking long‑term residence in the country.</h3><p>According to officials involved in the process, the updates are designed to bring Serbia’s practices closer to international standards while responding to the realities on the ground. Over the past decade, Serbia has served as both a transit and host country for people fleeing conflict, persecution, and instability. The new measures aim to ensure that those who remain in Serbia can build stable, self‑reliant lives.</p><p>A central component of the updated policies is expanded support for integration. Refugees will have improved access to language courses, vocational training, and employment counseling, helping them enter the labor market more quickly. Local municipalities will also receive additional guidance on how to support newcomers, with an emphasis on community‑level inclusion and cooperation with civil society organizations.</p><p>The reforms also clarify the rights of refugees regarding healthcare, education, and legal assistance. UNHCR representatives noted that the changes are intended to reduce administrative barriers and ensure that asylum seekers can navigate the system more easily. At the same time, the policy package outlines obligations for refugees, including compliance with residency rules, participation in integration programs, and adherence to Serbian laws.</p><p>Government officials emphasized that the updates reflect Serbia’s commitment to humane and responsible migration management. UNHCR welcomed the reforms as a positive step toward creating a more predictable and supportive environment for people seeking protection.</p><p>As implementation begins, both the government and UNHCR have highlighted the importance of continued collaboration with local communities, NGOs, and international partners. The success of the new policies, they say, will depend on sustained investment in integration programs and ongoing dialogue between all stakeholders.</p>"},"id":"7009ea18-9e96-4496-a7ad-99378aef3555","isHidden":false,"type":"text"}]
+
+----
+
+Updated: 2026-01-31 20:02:57
+
+----
+
+Text:
+
+Serbia has introduced a new set of policy updates aimed at strengthening the integration of refugees and asylum seekers, following close cooperation with the UN Refugee Agency (UNHCR). The revised framework focuses on improving access to essential services, clarifying legal protections, and outlining clearer responsibilities for individuals seeking long‑term residence in the country.
+According to officials involved in the process, the updates are designed to bring Serbia’s practices closer to international standards while responding to the realities on the ground. Over the past decade, Serbia has served as both a transit and host country for people fleeing conflict, persecution, and instability. The new measures aim to ensure that those who remain in Serbia can build stable, self‑reliant lives.
+A central component of the updated policies is expanded support for integration. Refugees will have improved access to language courses, vocational training, and employment counseling, helping them enter the labor market more quickly. Local municipalities will also receive additional guidance on how to support newcomers, with an emphasis on community‑level inclusion and cooperation with civil society organizations.
+The reforms also clarify the rights of refugees regarding healthcare, education, and legal assistance. UNHCR representatives noted that the changes are intended to reduce administrative barriers and ensure that asylum seekers can navigate the system more easily. At the same time, the policy package outlines obligations for refugees, including compliance with residency rules, participation in integration programs, and adherence to Serbian laws.
+Government officials emphasized that the updates reflect Serbia’s commitment to humane and responsible migration management. UNHCR welcomed the reforms as a positive step toward creating a more predictable and supportive environment for people seeking protection.
+As implementation begins, both the government and UNHCR have highlighted the importance of continued collaboration with local communities, NGOs, and international partners. The success of the new policies, they say, will depend on sustained investment in integration programs and ongoing dialogue between all stakeholders.
+
+----
+
+Date: 2023-01-22
+
+----
+
+Uuid: JRAfVVzCGj6EaAQt

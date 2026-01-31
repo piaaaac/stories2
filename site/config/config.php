@@ -10,6 +10,7 @@ return [
   "languages" => true,
   "panel.install" => false,
   "routes" => require_once "routes.php",
+  "hooks" => require_once "hooks.php",
   // 'api' => [
   //   'slug' => 'restapi',
   //   // 'basicAuth' => true,

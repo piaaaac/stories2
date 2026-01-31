@@ -1,19 +1,10 @@
 title: Home
 preset: page
 fields:
-  
-  text:
-    label: Text
-    type: textarea
-    size: small
-
   textAbout:
-    label: Text
-    type: textarea
-    size: small
+    label: Text About
+    extends: fields/writer-field
 
   textAboutAuthors:
-    label: Text
-    type: textarea
-    size: small
-
+    label: Text Authors
+    extends: fields/writer-field

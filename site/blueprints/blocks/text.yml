@@ -1,0 +1,20 @@
+# name: field.blocks.text.name
+# icon: text
+# wysiwyg: true
+# preview: text
+# fields:
+#   text:
+#     extends: fields/writer-field
+
+name: field.blocks.text.name
+# preview: fields
+wysiwyg: true
+fields:
+  paddingtop:
+    extends: fields/block_settings_padding
+    label: Padding top
+  paddingbottom:
+    extends: fields/block_settings_padding
+    label: Padding bottom
+  text:
+    extends: fields/writer-field

@@ -5,9 +5,11 @@
  * 
  * @param subtitle – string subtitle under logo
  * @param showSwitch – bool show template switcher
+ * @param transparentAtTop – bool whether menu is transparent at top of page
  *
  */
 $showSwitch = $showSwitch ?? false;
+$transparentAtTop = $transparentAtTop ?? false;
 
 $items = [
   (object)[
@@ -16,18 +18,24 @@ $items = [
     "uid" => page("stories")->uid(),
     "onclick" => "",
   ],
-  // (object)[
-  //   "text" => "Reading",
-  //   "url" => page("articles")->url(),
-  //   "uid" => page("articles")->uid(),
-  //   "onclick" => "",
-  // ],
+  (object)[
+    "text" => "Borders",
+    "url" => page("articles")->url(),
+    "uid" => page("articles")->uid(),
+    "onclick" => "",
+  ],
   (object)[
     "text" => "About",
-    "url" => "#",
-    "uid" => "",
-    "onclick" => "about();",
+    "url" => page("about")->url(),
+    "uid" => page("about")->uid(),
+    "onclick" => "",
   ],
+  // (object)[
+  //   "text" => "Action",
+  //   "url" => "#",
+  //   "uid" => "",
+  //   "onclick" => "action();",
+  // ],
 ];
 ?>
 
@@ -46,14 +54,14 @@ $items = [
   // });
 </script>
 
-<nav id="menu-header" class="top">
+<nav id="menu-header" class="<?= $transparentAtTop ? "transparent-at-top" : "" ?> at-top">
   <div class="container-fluid">
     <div class="row">
 
       <div class="col-12 wrapper d-flex align-items-center justify-content-between">
         <div class="left">
           <h2 class="d-inline font-weight-600">
-            <a href="<?= $site->url() ?>" class="no-u">
+            <a href="<?= $site->url() ?>" class="no-u color-black">
               Moving Lines
             </a>
             <?php if ($page->template()->name() === "story"): ?>
@@ -69,7 +77,7 @@ $items = [
               $item->{"active"} = $page->uid() === $item->uid;
             ?>
               <a
-                class="item <?= $item->active ? " active" : "" ?>"
+                class="item color-black <?= $item->active ? " active" : "" ?>"
                 href="<?= $item->url ?>"
                 onclick="<?= $item->onclick ? $item->onclick : "" ?>"><?= $item->text ?></a>
             <?php endforeach ?>
@@ -128,6 +136,16 @@ $items = [
     $("button.hamburger").toggleClass("is-active", !isOpen);
   }
 
+  // Mark #menu-header with a class when body is scrolled by a certain amount
+  $(window).on("scroll", function() {
+    var scrollTop = $(window).scrollTop();
+    var threshold = 70;
+    if (scrollTop > threshold) {
+      $("#menu-header").removeClass("at-top");
+    } else {
+      $("#menu-header").addClass("at-top");
+    }
+  });
 
   // ---------------------------------------------------------------------------
   // Handle map visibility

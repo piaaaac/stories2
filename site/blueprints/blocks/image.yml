@@ -1,0 +1,87 @@
+name: field.blocks.image.name
+icon: image
+preview: image
+fields:
+  image:
+    label: field.blocks.image.name
+    type: files
+    query: model.images
+    multiple: false
+    image:
+      back: black
+    uploads:
+      template: blocks/image
+
+  breakpoint:
+    type: select
+    options:
+      none: None
+      sm: (sm) Small
+      md: (md) Medium
+      lg: (lg) Large
+      xl: (xl) Extra large
+    default: none
+    width: 1/2
+  imageSmall:
+    label: Image below breakpoint
+    type: files
+    query: model.images
+    multiple: false
+    image:
+      back: black
+    uploads:
+      template: blocks/image
+    width: 1/2
+
+  gridstyle:
+    label: Grid style
+    type: select
+    options:
+      fullWidth: Full page width
+      wide: Text width +
+      textWidth: Text width
+    default: wide
+
+  ratio:
+    label: field.blocks.image.ratio
+    type: select
+    placeholder: Auto
+    width: 1/2
+    options:
+      1/1: "1:1"
+      16/9: "16:9"
+      10/8: "10:8"
+      21/9: "21:9"
+      7/5: "7:5"
+      4/3: "4:3"
+      5/3: "5:3"
+      3/2: "3:2"
+      3/1: "3:1"
+  crop:
+    label: field.blocks.image.crop
+    type: toggle
+    width: 1/2
+
+  alt:
+    label: field.blocks.image.alt
+    type: text
+    icon: title
+    width: 1/2
+
+  caption:
+    label: field.blocks.image.caption
+    type: writer
+    icon: text
+    inline: true
+    width: 1/2
+  # caption:
+  #   label: field.blocks.image.caption
+  #   type: textarea
+  #   icon: text
+  #   inline: true
+  #   width: 1/2
+
+  link:
+    label: field.blocks.image.link
+    type: text
+    icon: url

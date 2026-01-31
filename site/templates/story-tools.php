@@ -1,9 +1,6 @@
 <?php
-/*  
-#006600 - darker color that works well for lines in HP
-#44783b - last fede fraga green
-*/
-$lineColor = "#44783b";
+// $lineColor = "#006600"; // --- darker color that works well for lines in HP
+$lineColor = "#44783b"; // --- last green_fraga
 
 if (!$kirby->user()) {
   die("You must log in to see this page. <a href='" . url('/panel') . "'>Do</a>");
@@ -45,7 +42,7 @@ $stateLabel = [
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TOOL <?= $storyPage->title() ?></title>
+  <title>Route Editor | <?= $storyPage->title() ?></title>
 
   <!-- css + js -->
   <?= css(['assets/css/bootstrap-custom.css']) ?>
@@ -67,12 +64,13 @@ $stateLabel = [
   <script src="<?= $kirby->url('assets') ?>/lib/geojson2svg-master/dist/geojson2svg.min.js"></script>
   <script src="<?= $kirby->url('assets') ?>/lib/reproject/reproject.min.js"></script>
   <script src="<?= $kirby->url('assets') ?>/lib/proj4js/2.2.2/proj4.js"></script>
-
-  <style>
-    .leg-editor {
-      display: flex;
-    }
-  </style>
+  <!--  
+    <style>
+      .leg-editor {
+        display: flex;
+      }
+    </style>
+    -->
 </head>
 
 <body id="story-tools">

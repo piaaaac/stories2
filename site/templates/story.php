@@ -1,4 +1,7 @@
 <?php
+// $lineColor = "#006600"; // --- darker color that works well for lines in HP
+$lineColor = "#44783b"; // --- last green_fraga
+
 $from = getFromPlace($page);
 $fromCountry = getFromCountry($page);
 $to = getToPlace($page);
@@ -34,6 +37,8 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
   kirbyData.legs = legs = <?= $page->legs()->toStructure()->toJson() ?>;
   console.log("kirbyData", kirbyData)
 
+  var lineColor = "<?= $lineColor ?>";
+
   var state = {
     loadCount: 0,
     storyPlaces: getStoryPlacesFromKirbyData(kirbyData),
@@ -67,7 +72,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     center: [state.storyPlaces[0].lon, state.storyPlaces[0].lon],
     zoom: 5,
     attributionControl: false,
-    logoPosition: 'top-right',
+    logoPosition: 'bottom-right',
   });
 
   // --------------------------------
@@ -79,7 +84,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     // --- Stiled attribution
     map.addControl(new mapboxgl.AttributionControl({
       compact: true,
-    }), 'top-right');
+    }), 'bottom-right');
 
     // --- Add data + layers
     addAdditionalSourceAndLayer();
@@ -165,10 +170,6 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
     // --- Add layers
 
-    var green1 = "#37B678";
-    var green = "#29a468";
-    var greenDark = "#135d4a";
-
     var lineWidthRule = [
       "interpolate", ["linear"],
       ["zoom"],
@@ -181,14 +182,14 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
     var lineColorRule = [
       "case",
       ["==", ["get", "legIndex"], state.activeLegIndex],
-      green, // match → highlight
+      lineColor, // match → highlight
       "rgba(173, 173, 160, 0.8)" // otherwise → grey
     ];
     var circleOpacityRule = [
       "case", ["==", ["get", "legIndex"], state.activeLegIndex - 1], 1, 0
     ];
     if (state.activeLegIndex === null) {
-      lineColorRule = green; // highlight all
+      lineColorRule = lineColor; // highlight all
       circleOpacityRule = 1;
     }
 
@@ -273,7 +274,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
     if (state.activeLegIndex === null) {
       // All segments fully visible
-      map.setPaintProperty('route', 'line-color', "#37B678");
+      map.setPaintProperty('route', 'line-color', lineColor);
       map.setPaintProperty('points', 'circle-color', "#fff");
       map.setPaintProperty('points', 'circle-stroke-color', "#222");
       map.setPaintProperty('points', 'circle-opacity', 1);
@@ -297,7 +298,7 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
       // Highlight one segment
       map.setPaintProperty('route', "line-color", [
-        "case", ["==", ["get", "legIndex"], state.activeLegIndex], "#37B678", "rgba(173, 173, 160, 0.5)",
+        "case", ["==", ["get", "legIndex"], state.activeLegIndex], lineColor, "rgba(173, 173, 160, 0.5)",
       ]);
       map.setPaintProperty('points', "circle-color", "#fff");
       map.setPaintProperty('points', "circle-stroke-color", "#222");

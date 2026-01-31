@@ -24,12 +24,12 @@ $tallMenu = $tallMenu ?? false;
   <script>
     window.siteUrl = '<?= $site->url() ?>';
     window.currentPage = '<?= $page->uid() ?>';
-    window.currentTemplate = '<?= $page->template() ?>';
+    window.currentTemplate = '<?= $page->template()->name() ?>';
   </script>
 
   <?= js(['assets/js/common.js']) ?>
 
 </head>
 
-<body>
+<body data-template="<?= $page->template()->name() ?>">
   <main class="<?= $tallMenu ? 'tall-menu' : '' ?>">

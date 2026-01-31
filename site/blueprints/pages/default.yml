@@ -1,8 +1,37 @@
-title: Default Page
+title: Default
 preset: page
-fields:
-  text:
-    label: Text
-    type: textarea
-    size: large
 
+fields:
+  cover:
+    label: Cover image
+    type: files
+    help: This image will be displayed at the top of the page.
+    layout: cards
+    multiple: false
+    size: huge
+    image:
+      cover: true
+      ratio: 16/8
+
+  tags:
+    label: Tags
+    type: tags
+    query: page.siblings.pluck("tags", ",", true)
+    translate: false
+    width: 1/2
+
+  places:
+    label: Places
+    type: tags
+    query: page.siblings.pluck("places", ",", true)
+    translate: false
+    width: 1/2
+
+  blocks:
+    extends: fields/content-blocks
+
+  updated:
+    type: date
+    time: true
+    default: now
+    disabled: true

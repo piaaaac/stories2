@@ -1,0 +1,33 @@
+Title: USA / Mexico
+
+----
+
+Cover: - file://JDHlH2oenKP0Tzvd
+
+----
+
+Tags: ICE
+
+----
+
+Places: USA, Mexico
+
+----
+
+Blocks: [{"content":{"text":"<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id leo ut orci cursus. Nunc blandit velit in dolor ultrices, id rutrum tortor consectetur. Vivamus nec iaculis massa. Vivamus auctor mauris vitae purus maximus tincidunt. Duis pretium aliquet bibendum. Mauris nunc enim, tristique sit amet placerat, dapibus at nibh. Praesent quis nisl rhoncus, convallis magna in, porta augue.</h3><p>Aliquam pharetra ac nisl ultricies viverra. Praesent a consectetur magna. Vestibulum elementum in magna eu posuere. Sed in quam volutpat, pellentesque diam sed, eleifend velit. Ut eu dui elit. Vestibulum vel suscipit magna. Duis sagittis tristique laoreet.</p><p>Phasellus facilisis lorem enim vestibulum, vitae sodales nunc tempus. Vivamus metus odio, condimentum dictum ex nec, viverra vehicula ligula. Nunc pulvinar, leo ac condimentum vehicula, mauris odio egestas nunc, iaculis tristique orci metus at nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum, nisl quis euismod mattis, lorem risus sagittis dui, et porttitor ante quam id augue. Cras facilisis dignissim dignissim. Maecenas eget rutrum enim. Ut vulputate tincidunt erat sit amet faucibus. In volutpat sagittis tortor, eget tempor orci vestibulum et. Etiam sed porta orci.</p>"},"id":"40390ff7-e076-4c5c-a99e-359b12561b39","isHidden":false,"type":"text"}]
+
+----
+
+Created: 2026-01-31 17:40:00
+
+----
+
+Updated: 2026-01-31 18:50:00
+
+----
+
+Text: 
+
+----
+
+Uuid: zR3COGfwb8QGPDA9

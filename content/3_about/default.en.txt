@@ -1,0 +1,29 @@
+Title: About
+
+----
+
+Cover: - file://HyDAYIzL7AzzSNqE
+
+----
+
+Tags: 
+
+----
+
+Places: 
+
+----
+
+Blocks: [{"content":{"text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit. Ut in sapien magna. Mauris lacus ex, pretium nec odio sit amet, gravida faucibus nisi. Fusce vel nisi scelerisque, gravida purus at, hendrerit purus. Nulla efficitur lorem sit amet scelerisque sagittis. Vestibulum sit amet pellentesque nibh. Nulla id mollis est. In non vestibulum dui, at malesuada quam.</p><p>Ut in sapien magna. Mauris lacus ex, pretium nec odio sit amet, gravida faucibus nisi. Fusce vel nisi scelerisque, gravida purus at, hendrerit purus. Nulla efficitur lorem sit amet scelerisque sagittis. Vestibulum sit amet pellentesque nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit.</p>"},"id":"099b11d8-a6fd-4e11-b685-f08640374b01","isHidden":false,"type":"text"},{"content":{"spacesize":"one","custommargin":""},"id":"413cf403-27a1-4788-aa60-47893a92262a","isHidden":false,"type":"space"},{"content":{"text":"<h4>AUTHORS</h4><p><a href=\"https://medium.com/@Viou\" target=\"_blank\">Silvia Costantini</a>, journalist. Silvia ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit. Ut in sapien magna.</p><p><a href=\"https://www.behance.net/FedericaFragapane\" target=\"_blank\">Federica Fragapane</a>, information designer based in nulla efficitur lorem sit amet scelerisque sagittis. Vestibulum sit amet pellentesque nibh. Nulla id mollis est. In non vestibulum dui, at malesuada quam. Phasellus fermentum tempor purus ac tincidunt.</p><p><a href=\"https://alexpiacentini.com\" target=\"_blank\">Alex Piacentini</a>, digital designer, developer. Fusce vel nisi scelerisque, gravida purus at, hendrerit purus. Nulla efficitur lorem sit amet scelerisque sagittis. Vestibulum sit amet pellentesque nibh. Nulla id mollis est. In non vestibulum dui, at malesuada quam.</p>"},"id":"f0610d21-dd4f-438e-9f6f-f29603db2266","isHidden":false,"type":"text"}]
+
+----
+
+Updated: 2026-01-31 20:26:40
+
+----
+
+Created: 2026-01-31 19:35:00
+
+----
+
+Uuid: fawUyVhR3RfXqLB6

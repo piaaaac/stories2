@@ -145,12 +145,20 @@ input:invalid, textarea:invalid {
   background-color: #f0dddd;
 }
 
+.color-black {
+  color: black;
+}
+
 .color-white {
   color: white;
 }
 
 .color-white-50 {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.color-bg_color_dark {
+  color: #2e3e64;
 }
 
 .color-listed {
@@ -183,7 +191,7 @@ input:invalid, textarea:invalid {
 }
 
 .no-u {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .u-hover {
@@ -215,11 +223,7 @@ input:invalid, textarea:invalid {
   color: black !important;
 }
 
-.outlined-mintcream {
-  text-shadow: -1px -1px 0 mintcream, 1px -1px 0 mintcream, -1px 1px 0 mintcream, 1px 1px 0 mintcream;
-}
-
-.outlined-azzurrello {
+.outlined-page_bg_color {
   text-shadow: -1px -1px 0 #ced8eb, 1px -1px 0 #ced8eb, -1px 1px 0 #ced8eb, 1px 1px 0 #ced8eb;
 }
 
@@ -504,6 +508,7 @@ h1 {
   letter-spacing: -0.02em;
   line-height: 1.17em;
   font-stretch: normal;
+  font-weight: 400;
 }
 
 @media (min-width: 576px) {
@@ -628,6 +633,14 @@ h4 {
   h4 {
     font-size: 20px;
   }
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 60px;
 }
 
 .block-font-sans-s,
@@ -922,12 +935,16 @@ body.media-open {
   overflow: hidden;
 }
 
+body[data-template="home"] main {
+  background: linear-gradient(to bottom, white 0px, #ced8eb 220px);
+}
+
 main {
-  margin-top: 70px;
+  padding-top: 70px;
 }
 
 main.tall-menu {
-  margin-top: 105px;
+  padding-top: 105px;
 }
 
 hr {
@@ -954,13 +971,30 @@ a {
   text-decoration-line: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 15%;
-  color: inherit;
+  text-decoration: none;
+  color: #0f673f;
   transition: color 170ms;
 }
 
-a.green {
-  color: #29a468;
-  text-decoration-line: none;
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  margin: 60px 30px;
+}
+
+ul li {
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+}
+
+img.cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  border-radius: 10px;
 }
 
 .article-prev {
@@ -1171,13 +1205,113 @@ a.green {
   opacity: 1;
 }
 
+.badge {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 1.2em;
+  font-stretch: normal;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
+@media (min-width: 576px) {
+  .badge {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) {
+  .badge {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 992px) {
+  .badge {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .badge {
+    font-size: 11px;
+  }
+}
+
+.badge:hover {
+  text-decoration: none;
+}
+
+.badge.badge-primary {
+  background-color: #2e3e64;
+  color: white;
+}
+
+.badge.badge-primary:hover {
+  background-color: black;
+}
+
+.badge.badge-secondary {
+  background-color: rgba(46, 62, 100, 0.2);
+  color: black;
+}
+
+.badge.badge-secondary:hover {
+  background-color: rgba(46, 62, 100, 0.3);
+}
+
+.badge + .badge {
+  margin-left: 3px;
+}
+
 .full-w-btn {
   overflow: hidden;
-  background-color: #18725b;
+  position: relative;
+  background-color: black;
   color: white;
-  color: #baf7ca;
   height: 70px;
   transition: background-color 170ms;
+  background-color: black;
+  color: white;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 575.98px) {
+  .full-w-btn {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.full-w-btn a {
+  color: white;
+}
+
+.full-w-btn::before, .full-w-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background: linear-gradient(to right, black, rgba(0, 0, 0, 0));
+  z-index: 1;
+}
+
+.full-w-btn::after {
+  right: 0;
+  transform: rotateZ(180deg);
+}
+
+.full-w-btn::before {
+  left: 0;
 }
 
 .full-w-btn a {
@@ -1363,17 +1497,17 @@ a.green {
 }
 
 .button.green-light {
-  background-color: #29a468;
+  background-color: #0f673f;
   color: white;
   border: none;
 }
 
 .button.green-light:hover, .button.green-light.active {
-  background-color: #24905b;
+  background-color: #0c5131;
 }
 
 .button.green-light:active {
-  background-color: #1a6741;
+  background-color: #052416;
 }
 
 .button.grey-light {
@@ -1440,6 +1574,7 @@ section.map-area .info #box-container .box-wrapper .box #close-leg-button {
   padding: 7px 13px;
   font-size: 22px;
   text-decoration: none;
+  color: black;
 }
 
 section.map-area .info #box-container .box-wrapper .box #close-leg-button:hover {
@@ -1472,7 +1607,7 @@ section.map-area .info #box-container .box-wrapper .action-buttons .button {
 .bar .fill {
   height: 0;
   border: 0;
-  border-bottom: 3px solid #29a468;
+  border-bottom: 3px solid #0f673f;
   border-radius: 1.5px;
   overflow: hidden;
 }
@@ -1505,6 +1640,10 @@ section.map-area .info #box-container .box-wrapper .action-buttons .button {
   padding: 3px 15px 3px !important;
 }
 
+.story-leg-info {
+  z-index: 10;
+}
+
 .svg-square-container {
   width: 100%;
   position: relative;
@@ -1528,6 +1667,7 @@ section.map-area .info #box-container .box-wrapper .action-buttons .button {
 
 .svg-square-container .absolute-story-info {
   position: absolute;
+  color: black;
   top: 10px;
   left: 15px;
   right: 15px;
@@ -1591,13 +1731,13 @@ nav#menu-header {
   top: 0;
   left: 0;
   right: 0;
-  transition: background-color 400ms, padding 400ms;
+  transition: all 300ms;
   padding: 0;
   background-color: #ced8eb;
 }
 
-nav#menu-header.top {
-  background-color: #ced8eb;
+nav#menu-header.transparent-at-top.at-top {
+  background-color: transparent;
 }
 
 nav#menu-header .wrapper {
@@ -1764,7 +1904,7 @@ body#story-tools .structure .left-items {
 
 body#story-tools .structure .left-items .leg-item {
   position: relative;
-  padding: 10px 0;
+  padding: 20px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -1844,8 +1984,8 @@ body#story-tools .structure .right-mapbox-preview #mapbox-container #buttons-con
 }
 
 #message-container.success {
-  border: 2px solid #29a468;
-  background: #29a468;
+  border: 2px solid #0f673f;
+  background: #0f673f;
   color: white;
 }
 
@@ -1865,4 +2005,8 @@ body#story-tools .structure .right-mapbox-preview #mapbox-container #buttons-con
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+.container-fluid.texts {
+  max-width: 1100px;
 }
