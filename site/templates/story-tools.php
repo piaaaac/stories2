@@ -143,17 +143,20 @@ $stateLabel = [
             <div class="container-fluid">
               <div class="row">
                 <div class="col-6 my-2">
-                  <div
-                    onmouseover="highlightLeg(<?= $i + 1 ?>);"
-                    onmouseout="highlightLeg(null);"
-                    onclick="fitBoundsForLeg(<?= $i ?>);">
-                    <p class="font-weight-600"><?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?></p>
+                  <div>
+                    <p
+                      class="font-weight-600 pointer"
+                      onmouseover="highlightLeg(<?= $i + 1 ?>);"
+                      onmouseout="highlightLeg(null);"
+                      onclick="fitBoundsForLeg(<?= $i ?>);">
+                      <?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?>
+                    </p>
                     <p class="font-sans-xs opacity-20">
-                      <a onclick="copyGeojsonPoint(<?= $startLon ?>, <?= $startLat ?>)">(Point)</a> [<?= $startLon ?>, <?= $startLat ?>] <?= $startPlace ?>
+                      <a class="pointer" onclick="copyGeojsonPoint(<?= $startLon ?>, <?= $startLat ?>)">(Point)</a> [<?= $startLon ?>, <?= $startLat ?>] <?= $startPlace ?>
                       <br />
-                      <a onclick="copyGeojsonPoint(<?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Point)</a> [<?= $arrivalLon ?>, <?= $arrivalLat ?>] <?= $legTo->place()->value() ?>
+                      <a class="pointer" onclick="copyGeojsonPoint(<?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Point)</a> [<?= $arrivalLon ?>, <?= $arrivalLat ?>] <?= $legTo->place()->value() ?>
                       <br />
-                      <a onclick="copyGeojsonLine(<?= $startLon ?>, <?= $startLat ?>, <?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Line)</a>
+                      <a class="pointer" onclick="copyGeojsonLine(<?= $startLon ?>, <?= $startLat ?>, <?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Line)</a>
                     </p>
                   </div>
                   <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
@@ -210,12 +213,16 @@ $stateLabel = [
                   style="display: block;"></svg>
               </div>
               <div class="my-2">
+                <a class="button small green-dark" onclick="refresh()">Reload</a>
+                <span class="font-sans-s">Updates the image with latest lines settings</span>
+              </div>
+              <div class="my-2">
                 <a class="button small green-dark" id="save-svg-button">Save SVG</a>
-                <span class="font-sans-s">Homepage and other route previews on the site</span>
+                <span class="font-sans-s">Appears in homepage and other line previews on the site</span>
               </div>
               <div class="my-2">
                 <a class="button small green-dark" id="save-png-button">Save PNG</a>
-                <span class="font-sans-s">Previews in the panel and when sharing on social media</span>
+                <span class="font-sans-s">For the panel and sharing on social media</span>
               </div>
             </div>
           </div>
@@ -256,40 +263,6 @@ $stateLabel = [
   -->
 
   <script>
-    copyGeojsonPoint = (lon, lat) => {
-      geojson = {
-        "type": "FeatureCollection",
-        "features": [{
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [lon, lat]
-          },
-          "properties": {}
-        }]
-      };
-      navigator.clipboard.writeText(JSON.stringify(geojson));
-      showMessage("point copied, paste it on geojson.io", "success");
-    }
-    copyGeojsonLine = (lon1, lat1, lon2, lat2) => {
-      geojson = {
-        "type": "FeatureCollection",
-        "features": [{
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [lon1, lat1],
-              [lon2, lat2]
-            ]
-          },
-          "properties": {}
-        }]
-      };
-      navigator.clipboard.writeText(JSON.stringify(geojson));
-      showMessage("line copied, paste it on geojson.io", "success");
-    }
-
     var numLegs = <?= $numLegs ?>;
 
     // -----------------------------
@@ -299,8 +272,9 @@ $stateLabel = [
     const mbToken = "<?= option('mapbox.token') ?>";
     const mbStyle = "<?= option('mapbox.style.withBg') ?>";
     const state = {}
-    state.geojsonRoute = getBasicRoute();
 
+    const legObjects = getLegObjects();
+    state.geojsonRoute = getInitialRoute2(legObjects);
 
     mapboxgl.accessToken = mbToken;
     const map = new mapboxgl.Map({
@@ -308,7 +282,11 @@ $stateLabel = [
       style: mbStyle,
       center: [17.77091423340742, 36.0515231640615],
       zoom: 1,
+      attributionControl: false, // Disable default
     });
+    map.addControl(new mapboxgl.AttributionControl({
+      compact: true
+    }));
 
     if (numLegs === 0) {
       alert("This story has no legs defined yet.");
@@ -365,6 +343,23 @@ $stateLabel = [
       fitBounds(state.geojsonRoute);
     });
 
+    function getBasicLineString(legIndex) {
+      var leg = legObjects[legIndex];
+      console.log("getBasicLineString for leg:", legIndex, leg);
+      const geojson = {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [leg.from.lon, leg.from.lat],
+            [leg.to.lon, leg.to.lat],
+          ]
+        },
+        "properties": {}
+      };
+      return geojson;
+    }
+
     // ---------------------------------- Save leg geojson -----------------------------
 
 
@@ -386,6 +381,7 @@ $stateLabel = [
             });
 
             const result = await response.json();
+            console.log("Result from saving leg geojson:", result);
 
             // --- Handle non-OK HTTP status ---
             if (!response.ok) {
@@ -405,9 +401,14 @@ $stateLabel = [
               return;
             }
 
-            // --- At this point we know we have everything we need ---
+            // --- At this point we can update the map ---
+            const use = result.newUse === "1" || result.newUse === true || result.newUse === "true";
+            let newGeojson = JSON.parse(result.geojsonLegSaved);
+            if (!use) {
+              newGeojson = getBasicLineString(result.legIndex);
+            }
             const resUpdate = updateLegOnMap({
-              geojsonLeg: JSON.parse(result.geojsonLegSaved),
+              geojsonLeg: newGeojson,
               legIndex: result.legIndex,
             });
             if (!resUpdate) {
@@ -418,11 +419,11 @@ $stateLabel = [
             // put the returned geojson back into the textarea
             const targetTextarea = form.querySelector(`textarea#${result.textareaId}`);
             targetTextarea.value = result.geojsonLegSaved;
-
             showMessage("Saved, map updated", "success");
 
           } catch (err) {
-            showMessage("Network error", "error");
+            console.error("Error (38745923)", err);
+            showMessage("Something went wrong. See console for details (38745923)", "error");
           }
 
         });
@@ -456,9 +457,10 @@ $stateLabel = [
         styleClass = "success";
       }
       container.className = "visible " + styleClass;
-      setTimeout(() => {
+      clearTimeout(state.msgTimeout);
+      state.msgTimeout = setTimeout(() => {
         container.className = "";
-      }, 3000);
+      }, 5000);
     }
 
     // ---------------------------------- Test geojson2svg -----------------------------
@@ -544,13 +546,13 @@ $stateLabel = [
 
         const json = await res.json();
         if (json.status === 'success') {
-          showMessage('SVG saved', 'success');
+          showMessage(json.message, 'success');
         } else {
           console.error('Error saving SVG:', json.message);
         }
       } catch (err) {
-        console.error('Request failed:', err);
-        showMessage('SVG NOT saved. See console for details.', 'error');
+        console.error('Request failed (23754123):', err);
+        showMessage('SVG NOT saved. See console for details (23754123).', 'error');
       }
     });
     // ---------------------------------- Save SVG -----------------------------
@@ -684,6 +686,40 @@ $stateLabel = [
     // FUNCTIONS
     // -----------------------------
 
+    copyGeojsonPoint = (lon, lat) => {
+      geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [lon, lat]
+          },
+          "properties": {}
+        }]
+      };
+      navigator.clipboard.writeText(JSON.stringify(geojson));
+      showMessage("point copied, paste it on geojson.io", "success");
+    }
+    copyGeojsonLine = (lon1, lat1, lon2, lat2) => {
+      geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [lon1, lat1],
+              [lon2, lat2]
+            ]
+          },
+          "properties": {}
+        }]
+      };
+      navigator.clipboard.writeText(JSON.stringify(geojson));
+      showMessage("line copied, paste it on geojson.io", "success");
+    }
+
     function togglePagesList() {
       var listEl = document.getElementById("pages-list");
       if (listEl.style.display === "none") {
@@ -736,9 +772,20 @@ $stateLabel = [
 
     }
 
-    function getBasicRoute() {
+
+
+
+
+
+
+
+
+
+
+
+    function getLegObjects() {
       if (!numLegs) {
-        return null;
+        return [];
       }
 
       // --- data from kirby
@@ -746,7 +793,38 @@ $stateLabel = [
       var startLat = <?= $storyPage->departureLat()->value() ?? "null" ?>;
       var startPlace = `<?= $storyPage->departurePlace()->value() ?? "null" ?>`;
       var legs = <?= $storyPage->legs()->toStructure()->toJson() ?? "null" ?>;
-      console.log("legs", legs)
+
+      // --- prepare js objects
+      var legObjects = [];
+      for (var i = 0; i < legs.length; i++) {
+        var lonFrom = (i > 0) ? (legs[i - 1].lon) : (startLon)
+        var latFrom = (i > 0) ? (legs[i - 1].lat) : (startLat)
+        var lonTo = legs[i].lon
+        var latTo = legs[i].lat
+        var legObject = {
+          from: {
+            lon: lonFrom,
+            lat: latFrom,
+            name: (i > 0) ? (legs[i - 1].place) : (startPlace),
+          },
+          to: {
+            lon: lonTo,
+            lat: latTo,
+            name: legs[i].place,
+          },
+          transport: legs[i].transport,
+          useGeojson: legs[i].geojsonuse === "true" || legs[i].geojsonuse === true,
+          geojsonLeg: legs[i].geojsonleg,
+        };
+        legObjects.push(legObject);
+      }
+      return legObjects;
+    }
+
+    function getInitialRoute2(legObjects) {
+      if (legObjects.length === 0) {
+        return null;
+      }
 
       // --- prepare data for mapbox
       var geojson = {
@@ -754,48 +832,98 @@ $stateLabel = [
         'features': []
       };
 
-      for (var i = 0; i < legs.length; i++) {
-        var lonFrom = (i > 0) ? (legs[i - 1].lon) : (startLon)
-        var latFrom = (i > 0) ? (legs[i - 1].lat) : (startLat)
-        var lonTo = legs[i].lon
-        var latTo = legs[i].lat
-
+      legObjects.forEach((leg, i) => {
         var geometry = {
           'type': 'LineString',
           'coordinates': [
-            [lonFrom, latFrom],
-            [lonTo, latTo],
+            [leg.from.lon, leg.from.lat],
+            [leg.to.lon, leg.to.lat],
           ],
         };
-        if (legs[i].geojsonuse == "true" && legs[i].geojsonleg != "") {
-          console.log(legs[i], "using geojson for leg " + i);
+        if (leg.useGeojson) {
+          // console.log(leg, "using geojson for leg " + i);
           try {
-            var geojsonLeg = JSON.parse(legs[i].geojsonleg);
-            console.log("geojsonLeg", geojsonLeg)
+            var geojsonLeg = JSON.parse(leg.geojsonLeg);
+            // console.log("geojsonLeg", geojsonLeg)
             geometry = geojsonLeg.features[0].geometry;
           } catch (e) {
-            console.error("Error parsing geojson for leg " + i, e);
+            console.error("Error parsing geojson for leg " + i, leg, e);
           }
         }
 
         var feature = {
           'type': 'Feature',
           'properties': {
-            "dasharray": kirbyTransportToDashArray(legs[i].transport),
+            "dasharray": kirbyTransportToDashArray(leg.transport),
             "legIndex": i + 1,
           },
           'geometry': geometry,
         }
         geojson.features.push(feature);
-        console.log("feature", feature)
-      }
-
+        // console.log("feature", feature)
+      });
       return geojson;
-
-
-      // map.getSource('route').setData(geojson);
-
     }
+
+
+
+
+    // function getInitialRoute() {
+    //   if (!numLegs) {
+    //     return null;
+    //   }
+
+    //   // --- data from kirby
+    //   var startLon = <?= $storyPage->departureLon()->value() ?? "null" ?>;
+    //   var startLat = <?= $storyPage->departureLat()->value() ?? "null" ?>;
+    //   var startPlace = `<?= $storyPage->departurePlace()->value() ?? "null" ?>`;
+    //   var legs = <?= $storyPage->legs()->toStructure()->toJson() ?? "null" ?>;
+    //   console.log("legs", legs)
+
+    //   // --- prepare data for mapbox
+    //   var geojson = {
+    //     'type': 'FeatureCollection',
+    //     'features': []
+    //   };
+
+    //   for (var i = 0; i < legs.length; i++) {
+    //     var lonFrom = (i > 0) ? (legs[i - 1].lon) : (startLon)
+    //     var latFrom = (i > 0) ? (legs[i - 1].lat) : (startLat)
+    //     var lonTo = legs[i].lon
+    //     var latTo = legs[i].lat
+
+    //     var geometry = {
+    //       'type': 'LineString',
+    //       'coordinates': [
+    //         [lonFrom, latFrom],
+    //         [lonTo, latTo],
+    //       ],
+    //     };
+    //     if (legs[i].geojsonuse == "true" && legs[i].geojsonleg != "") {
+    //       console.log(legs[i], "using geojson for leg " + i);
+    //       try {
+    //         var geojsonLeg = JSON.parse(legs[i].geojsonleg);
+    //         console.log("geojsonLeg", geojsonLeg)
+    //         geometry = geojsonLeg.features[0].geometry;
+    //       } catch (e) {
+    //         console.error("Error parsing geojson for leg " + i, e);
+    //       }
+    //     }
+
+    //     var feature = {
+    //       'type': 'Feature',
+    //       'properties': {
+    //         "dasharray": kirbyTransportToDashArray(legs[i].transport),
+    //         "legIndex": i + 1,
+    //       },
+    //       'geometry': geometry,
+    //     }
+    //     geojson.features.push(feature);
+    //     console.log("feature", feature)
+    //   }
+
+    //   return geojson;
+    // }
 
 
     function highlightLeg(index) {
@@ -809,6 +937,10 @@ $stateLabel = [
         ]);
       }
 
+    }
+
+    function refresh() {
+      location.reload();
     }
   </script>
 

@@ -29,28 +29,29 @@ return [
       $upload = $_FILES['file'];
 
       // Save as cover.png (overwrite if exists)
+      $filename = 'cover.png';
       try {
         $file = $page->createFile([
           'source'   => $upload['tmp_name'],
-          'filename' => 'cover.png',
+          'filename' => $filename,
           'template' => 'image'
         ]);
 
         return [
           'status' => 'success',
-          'message' => 'File saved',
+          'message' => "$filename saved",
           'url'     => $file->url()
         ];
       } catch (Exception $e) {
 
         // If file exists, overwrite manually
-        $target = $page->root() . '/cover.png';
+        $target = $page->root() . '/' . $filename;
         move_uploaded_file($upload['tmp_name'], $target);
 
         return [
           'status' => 'success',
-          'message' => 'File overwritten',
-          'url'     => $page->file('cover.png')->url()
+          'message' => "Updated: $filename",
+          'url'     => $page->file($filename)->url()
         ];
       }
     }
@@ -92,7 +93,7 @@ return [
 
           return [
             'status'  => 'success',
-            'message' => 'SVG saved.'
+            'message' => 'SVG correctly updated.'
           ];
         } catch (Exception $e) {
           return [
@@ -171,6 +172,7 @@ return [
         'message' => "Leg $legIndex updated successfully",
         'geojsonLegSaved' => $structureItem->geojsonLeg()->value(),
         'legIndex' => $legIndex,
+        'newUse' => $structureItem->geojsonUse()->value(),
         'textareaId' => get('textareaId'),
       ];
 
