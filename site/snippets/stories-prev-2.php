@@ -30,10 +30,24 @@
             <?php if ($story->cachedSvg()->isNotEmpty()): ?>
               <?= $story->cachedSvg()->value() ?>
             <?php endif ?>
+
+            <?php /*  TOP-BOTTOM VERSION
             <div class="absolute-story-info">
               <div class="font-ser-l font-w-600 mb-1 outlined-azzurrello"><?= $title ?></div>
               <div class="font-sans-m color-grey"><?= $subtitle ?></div>
             </div>
+            */ ?>
+
+            <?php /*  ALL BOTTOM VERSION
+            */ ?>
+            <div class="absolute-story-info">
+              <div></div>
+              <div>
+                <div class="font-ser-l font-w-600 mb-1 outlined-azzurrello"><?= $title ?></div>
+                <div class="font-sans-m color-grey"><?= $subtitle ?></div>
+              </div>
+            </div>
+
           </div>
         </a>
       </div>

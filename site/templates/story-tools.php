@@ -1,6 +1,12 @@
 <?php
+/*  
+#006600 - darker color that works well for lines in HP
+#44783b - last fede fraga green
+*/
+$lineColor = "#44783b";
+
 if (!$kirby->user()) {
-  die('You must log in to see this page.');
+  die("You must log in to see this page. <a href='" . url('/panel') . "'>Do</a>");
 }
 
 $storySlug = $_GET["story"];
@@ -88,7 +94,7 @@ $stateLabel = [
               <span>▼</span>
             </a>
             <div id="pages-list" style="display: none;">
-              <hr />
+              <hr class="bleed" />
               <?php foreach (page("stories")->childrenAndDrafts() as $sp): ?>
                 <a class="d-block hover-white-soft-bg no-u" href="<?= $site->url() ?>/story-tools?story=<?= $sp->slug() ?>">
                   <div class="d-flex align-items-center justify-content-between">
@@ -103,7 +109,7 @@ $stateLabel = [
                 </a>
               <?php endforeach ?>
             </div>
-            <hr />
+            <hr class="bleed" />
           </div>
         </div>
       </div>
@@ -151,23 +157,25 @@ $stateLabel = [
                       onclick="fitBoundsForLeg(<?= $i ?>);">
                       <?= $startPlace ?> &rarr; <?= $legTo->place()->value() ?> by <?= $legTo->transport()->value() ?>
                     </p>
-                    <p class="font-sans-xs opacity-20">
-                      <a class="pointer" onclick="copyGeojsonPoint(<?= $startLon ?>, <?= $startLat ?>)">(Point)</a> [<?= $startLon ?>, <?= $startLat ?>] <?= $startPlace ?>
-                      <br />
-                      <a class="pointer" onclick="copyGeojsonPoint(<?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Point)</a> [<?= $arrivalLon ?>, <?= $arrivalLat ?>] <?= $legTo->place()->value() ?>
-                      <br />
-                      <a class="pointer" onclick="copyGeojsonLine(<?= $startLon ?>, <?= $startLat ?>, <?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Line)</a>
-                    </p>
+                    <div class="opacity-50">
+                      <p class="font-sans-xs mb-1"><a class="pointer" onclick="copyGeojsonPoint(<?= $startLon ?>, <?= $startLat ?>)">(Point)</a> [<?= $startLon ?>, <?= $startLat ?>] <?= $startPlace ?></p>
+                      <p class="font-sans-xs mb-1"><a class="pointer" onclick="copyGeojsonPoint(<?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Point)</a> [<?= $arrivalLon ?>, <?= $arrivalLat ?>] <?= $legTo->place()->value() ?></p>
+                      <p class="font-sans-xs mb-1"><a class="pointer" onclick="copyGeojsonLine(<?= $startLon ?>, <?= $startLat ?>, <?= $arrivalLon ?>, <?= $arrivalLat ?>)">(Line)</a></p>
+                    </div>
                   </div>
-                  <p><a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a></p>
+                  <!--                   
+                  <p>
+                    <a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">generate route line</a>
+                  </p>
+                   -->
                   <div>
-                    <label>
+                    <!-- <label>
                       <div class="switch small">
                         <input type="checkbox" name="use" <?= $geojsonUse ? "checked" : "" ?> id="leg-<?= $i ?>-use">
                         <span class="slider round"></span>
                       </div>
                       <span class="ml-2">Use route line</span>
-                    </label>
+                    </label> -->
                   </div>
                 </div>
                 <div class="col-6 my-2">
@@ -182,7 +190,22 @@ $stateLabel = [
                   <input type="hidden" name="storyUid" value="<?= $storyPage->uid() ?>">
                   <input type="hidden" name="legIndex" value="<?= $i ?>">
                   <input type="hidden" name="textareaId" value="<?= $targetId ?>">
-                  <button type="submit" class="button very-small green-dark">Save</button>
+                  <div class="buttons">
+                    <div>
+                      Route
+                      <a class="" href="<?= $apiCall ?>" onclick="handleRouteApiCall(event, '<?= $targetId ?>', '<?= $apiCall ?>')">↻</a>
+                    </div>
+                    <div>
+                      <label>
+                        <div class="switch small">
+                          <input type="checkbox" name="use" <?= $geojsonUse ? "checked" : "" ?> id="leg-<?= $i ?>-use">
+                          <span class="slider round"></span>
+                        </div>
+                        <!-- <span class="ml-2">Use route line</span> -->
+                      </label>
+                      <button type="submit" class="button very-small green-dark">Save</button>
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -198,8 +221,8 @@ $stateLabel = [
         <!---------------------------------- GEOJSON2SVG -->
         <div class="container-fluid mt-5">
           <div class="row">
-            <div class="col-12">
-              <div class="svg-square-container">
+            <div class="col-6">
+              <div class="svg-square-container p-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="svg-map-target"
@@ -212,17 +235,19 @@ $stateLabel = [
                   class="geojson2svg-test"
                   style="display: block;"></svg>
               </div>
-              <div class="my-2">
+            </div>
+            <div class="col-6">
+              <div class="mb-4">
                 <a class="button small green-dark" onclick="refresh()">Reload</a>
-                <span class="font-sans-s">Updates the image with latest lines settings</span>
+                <p class="font-sans-xs py-2">Updates the image with latest lines settings</p>
               </div>
-              <div class="my-2">
+              <div class="mb-4">
                 <a class="button small green-dark" id="save-svg-button">Save SVG</a>
-                <span class="font-sans-s">Appears in homepage and other line previews on the site</span>
+                <p class="font-sans-xs py-2">Appears in homepage and other line previews on the site</p>
               </div>
-              <div class="my-2">
+              <div class="mb-4">
                 <a class="button small green-dark" id="save-png-button">Save PNG</a>
-                <span class="font-sans-s">For the panel and sharing on social media</span>
+                <p class="font-sans-xs py-2">For the panel and sharing on social media</p>
               </div>
             </div>
           </div>
@@ -334,7 +359,7 @@ $stateLabel = [
           'line-cap': 'round',
         },
         'paint': {
-          'line-color': '#37B678',
+          'line-color': '<?= $lineColor ?>',
           'line-width': 3,
           'line-dasharray': ['get', 'dasharray'],
         }
@@ -464,7 +489,8 @@ $stateLabel = [
     }
 
     // ---------------------------------- Test geojson2svg -----------------------------
-
+    // 
+    // 
     const simplified = turf.simplify(state.geojsonRoute, {
       tolerance: 0.05, // adjust for more/less simplification
       highQuality: false
@@ -485,7 +511,7 @@ $stateLabel = [
           height: 800
         },
         attributes: {
-          'style': 'stroke:#006600; fill: none;stroke-width:1.5px;',
+          'style': 'stroke:<?= $lineColor ?>; fill: none;stroke-width:1.5px;',
           'vector-effect': 'non-scaling-stroke',
         },
         explode: false,
@@ -555,6 +581,8 @@ $stateLabel = [
         showMessage('SVG NOT saved. See console for details (23754123).', 'error');
       }
     });
+    // 
+    // 
     // ---------------------------------- Save SVG -----------------------------
 
     function getSvgElementBBox(svgEl) {
@@ -929,11 +957,11 @@ $stateLabel = [
     function highlightLeg(index) {
       if (index === null) {
         // All segments fully visible
-        map.setPaintProperty('route', 'line-color', "#37B678");
+        map.setPaintProperty('route', 'line-color', "<?= $lineColor ?>");
       } else {
         // Dim all segments except the active one
         map.setPaintProperty('route', "line-color", [
-          "case", ["==", ["get", "legIndex"], index], "#37B678", "rgba(173, 173, 160, 0.5)",
+          "case", ["==", ["get", "legIndex"], index], "<?= $lineColor ?>", "rgba(173, 173, 160, 0.5)",
         ]);
       }
 

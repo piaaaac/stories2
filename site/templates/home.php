@@ -7,6 +7,18 @@ $articles = page("articles")->children()->listed()->limit(3);
 
 <?php snippet("menu", ["subtitle" => "Stories crossing borders"]) ?>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center font-ser-xl font-weight-400 my-5">
+        <span class="d-inline-block" style="max-width: 30em;">
+          These lines represent the journeys of asylum seekers who for various reasons left their hometown in search for a better life.
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
 <div class="spacer py-4"></div>
 
 <?php /* snippet("stories-prev", ["stories" => $stories]) */ ?>
