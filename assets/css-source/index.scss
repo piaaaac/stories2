@@ -347,9 +347,9 @@ $m: 15px;
     justify-content: center;
   }
   &:hover {
-    background-color: #073e30;
+    background-color: darken($bg_color_dark, 15%);
     a {
-      color: #c6f5d2;
+      // color: #c6f5d2;
     }
   }
 }

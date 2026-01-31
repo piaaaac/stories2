@@ -1354,11 +1354,7 @@ img.cover-image {
 }
 
 .full-w-btn:hover {
-  background-color: #073e30;
-}
-
-.full-w-btn:hover a {
-  color: #c6f5d2;
+  background-color: #161e30;
 }
 
 .button {
