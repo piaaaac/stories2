@@ -686,8 +686,8 @@ nav#menu-header {
   right: -100%;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-  background-color: grey;
+  overflow-y: auto;
+  background-color: $page_bg_color;
   padding: $menu-h 0;
   transition: right 400ms;
   @at-root body.menu-xs-open & {
@@ -703,10 +703,10 @@ nav#menu-header {
     text-decoration-line: none;
     text-align: center;
     display: block;
-    @include font-sans-m;
+    @include font-ser-xl;
     // text-transform: uppercase;
     &.small {
-      @include font-sans-m;
+      @include font-ser-xl;
     }
   }
 }

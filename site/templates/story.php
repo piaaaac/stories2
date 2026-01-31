@@ -7,6 +7,8 @@ $fromCountry = getFromCountry($page);
 $to = getToPlace($page);
 $toCountry = getToCountry($page);
 $subtitle = "$from, $fromCountry → $to, $toCountry";
+
+$statsUrl = $kirby->url("assets") . "/images/placeholder-story-stats.svg";
 ?>
 
 <?php snippet("header", ["tallMenu" => true]) ?>
@@ -23,6 +25,23 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
         <div class="col-12">
           <div id="box-container"></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="mt-5">
+  <div class="container-fluid texts">
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="mb-4">The trip</h4>
+        <img src="<?= $statsUrl ?>" alt="" class="img-fluid my-3" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id leo ut orci cursus. Nunc blandit velit in dolor ultrices, id rutrum tortor consectetur. Vivamus nec iaculis massa. Vivamus auctor mauris vitae purus maximus tincidunt. Duis pretium aliquet bibendum. Mauris nunc enim, tristique sit amet placerat, dapibus at nibh. Praesent quis nisl rhoncus, convallis magna in, porta augue.</p>
+        <p>Aliquam pharetra ac nisl ultricies viverra. Praesent a consectetur magna. Vestibulum elementum in magna eu posuere. Sed in quam volutpat, pellentesque diam sed, eleifend velit. Ut eu dui elit. Vestibulum vel suscipit magna. Duis sagittis tristique laoreet.</p>
+        <p>Phasellus facilisis lorem enim vestibulum, vitae sodales nunc tempus. Vivamus metus odio, condimentum dictum ex nec, viverra vehicula ligula. Nunc pulvinar, leo ac condimentum vehicula, mauris odio egestas nunc, iaculis tristique orci metus at nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum, nisl quis euismod mattis, lorem risus sagittis dui, et porttitor ante quam id augue. Cras facilisis dignissim dignissim. Maecenas eget rutrum enim. Ut vulputate tincidunt erat sit amet faucibus. In volutpat sagittis tortor, eget tempor orci vestibulum et. Etiam sed porta orci.</p>
+      </div>
+      <div class="col-lg-5 offset-lg-1">
+        <img src="https://placehold.co/600x400/9eaac2/acb8ce?text=Images" alt="" class="img-fluid mb-4" />
       </div>
     </div>
   </div>

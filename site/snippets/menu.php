@@ -116,10 +116,15 @@ $items = [
 </nav>
 
 <div id="menu-xs">
-  <a class="item" href="page.php">Menu-item</a>
-  <a class="item" href="page.php">Menu-item</a>
-  <a class="item" href="page.php">Menu-item</a>
-  <a class="item" href="page.php">Menu-item</a>
+  <?php foreach ($items as $item):
+    // add new key to object via https://stackoverflow.com/a/32581773/2501713
+    $item->{"active"} = $page->uid() === $item->uid;
+  ?>
+    <a
+      class="item color-black <?= $item->active ? " active" : "" ?>"
+      href="<?= $item->url ?>"
+      onclick="<?= $item->onclick ? $item->onclick : "" ?>"><?= $item->text ?></a>
+  <?php endforeach ?>
 </div>
 
 <script>

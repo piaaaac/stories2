@@ -14,7 +14,7 @@ $stories = page("stories")->children()->listed();
   </div>
 </div>
 
-<?php snippet("stories-prev-2", ["stories" => $stories]) ?>
+<?php snippet("stories-prev-2", ["stories" => $stories, "style" => "small"]) ?>
 
 <script>
 

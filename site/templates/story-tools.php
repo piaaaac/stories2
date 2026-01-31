@@ -82,11 +82,11 @@ $stateLabel = [
         <div class="row">
           <div class="col-12 my-5">
             <p>
-              <a href="<?= $site->pagePanelUrl($storyPage->id(), true) ?>">↖ Edit in the panel</a>
+              <a class="color-black" href="<?= $site->pagePanelUrl($storyPage->id(), true) ?>">↖ Edit in the panel</a>
               &nbsp; | &nbsp;
-              <a href="<?= $storyPage->url() ?>" target="_blank">View story</a>
+              <a class="color-black" href="<?= $storyPage->url() ?>" target="_blank">View story</a>
             </p>
-            <a class="d-flex align-items-center justify-content-between no-u pointer"
+            <a class="d-flex align-items-center justify-content-between no-u pointer color-black"
               onclick="togglePagesList()">
               <h1><?= $storyPage->title() ?></h1>
               <span>▼</span>
@@ -94,7 +94,7 @@ $stateLabel = [
             <div id="pages-list" style="display: none;">
               <hr class="bleed" />
               <?php foreach (page("stories")->childrenAndDrafts() as $sp): ?>
-                <a class="d-block hover-white-soft-bg no-u" href="<?= $site->url() ?>/story-tools?story=<?= $sp->slug() ?>">
+                <a class="d-block hover-white-soft-bg no-u color-black" href="<?= $site->url() ?>/story-tools?story=<?= $sp->slug() ?>">
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
                       <img src="<?= getPageThumb($sp) ?>" alt="" style="width: 50px; height: 50px; object-fit: cover;">
