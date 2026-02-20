@@ -9,6 +9,41 @@ $toCountry = getToCountry($page);
 $subtitle = "$from, $fromCountry → $to, $toCountry";
 
 $statsUrl = $kirby->url("assets") . "/images/placeholder-story-stats.svg";
+
+$totals = [
+  "places" => $page->legs()->toStructure()->count() + 1,
+  "countries" => [],
+  "travelDays" => 0,
+  "stayDays" => 0,
+  "totalDays" => 0,
+  "daysSequence" => "",
+];
+foreach ($page->legs()->toStructure() as $leg) {
+  // countries
+  $legCountry = getToCountry($leg);
+  if (!in_array($legCountry, $totals["countries"])) {
+    $totals["countries"][] = $legCountry;
+  }
+  // days
+  $legDays = (int)$leg->durationDays()->value();
+  $legHours = (int)$leg->durationHours()->value();
+  $stayDays = (int)$leg->stayDays()->value();
+  $stayHours = (int)$leg->stayHours()->value();
+  $totals["travelDays"] += $legDays + ($legHours / 24);
+  $totals["stayDays"] += $stayDays + ($stayHours / 24);
+  $totals["totalDays"] += $legDays + ($legHours / 24) + $stayDays + ($stayHours / 24);
+  // sequence
+  for ($i = 0; $i < $legDays; $i++) {
+    $tr = $legDays + ceil($legHours / 24);
+    $st = $stayDays + ceil($stayHours / 24);
+
+    // repeat "°" n times to indicate travel days
+    $totals["daysSequence"] .= str_repeat("● ", $tr);
+    // repeat "." n times to indicate stay days
+    $totals["daysSequence"] .= str_repeat("○ ", $st);
+  }
+}
+// kill($totals);
 ?>
 
 <?php snippet("header", ["tallMenu" => true]) ?>
@@ -34,17 +69,32 @@ $statsUrl = $kirby->url("assets") . "/images/placeholder-story-stats.svg";
   <div class="container-fluid texts">
     <div class="row">
       <div class="col-lg-6">
-        <h4 class="mb-4">The trip</h4>
+        <h4 class="mb-4"><?= $page->title() ?>'s trip</h4>
         <img src="<?= $statsUrl ?>" alt="" class="img-fluid my-3" />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id leo ut orci cursus. Nunc blandit velit in dolor ultrices, id rutrum tortor consectetur. Vivamus nec iaculis massa. Vivamus auctor mauris vitae purus maximus tincidunt. Duis pretium aliquet bibendum. Mauris nunc enim, tristique sit amet placerat, dapibus at nibh. Praesent quis nisl rhoncus, convallis magna in, porta augue.</p>
-        <p>Aliquam pharetra ac nisl ultricies viverra. Praesent a consectetur magna. Vestibulum elementum in magna eu posuere. Sed in quam volutpat, pellentesque diam sed, eleifend velit. Ut eu dui elit. Vestibulum vel suscipit magna. Duis sagittis tristique laoreet.</p>
-        <p>Phasellus facilisis lorem enim vestibulum, vitae sodales nunc tempus. Vivamus metus odio, condimentum dictum ex nec, viverra vehicula ligula. Nunc pulvinar, leo ac condimentum vehicula, mauris odio egestas nunc, iaculis tristique orci metus at nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum, nisl quis euismod mattis, lorem risus sagittis dui, et porttitor ante quam id augue. Cras facilisis dignissim dignissim. Maecenas eget rutrum enim. Ut vulputate tincidunt erat sit amet faucibus. In volutpat sagittis tortor, eget tempor orci vestibulum et. Etiam sed porta orci.</p>
+
+        <div class="my-4 font-sans-xs color-green" style="letter-spacing: -0.1em;"><?= $totals["daysSequence"] ?></div>
+
+        <div class="my-4"><?= $page->text()->kt() ?></div>
+
       </div>
-      <div class="col-lg-5 offset-lg-1">
-        <img src="https://placehold.co/600x400/9eaac2/acb8ce?text=Images" alt="" class="img-fluid mb-4" />
-      </div>
+
+      <?php
+      $imgNum = rand(0, 4);
+      if ($imgNum > 0):
+      ?>
+        <div class="col-lg-5 offset-lg-1">
+          <h4 class="mb-4"><?= "$imgNum image" . ($imgNum > 1 ? "s" : "") ?></h4>
+          <?php for ($i = 0; $i < $imgNum; $i++): ?>
+            <img src="https://placehold.co/600x400/9eaac2/acb8ce?text=Images" alt="" class="img-fluid mb-4" />
+          <?php endfor; ?>
+        </div>
+      <?php endif ?>
+
     </div>
   </div>
+
+  <div class="blocks"><?= $page->blocks()->toBlocks() ?></div>
+
 </section>
 
 <script>

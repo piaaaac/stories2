@@ -1,4 +1,4 @@
-Title: Marwa
+Title: Mehwish
 
 ----
 
@@ -54,7 +54,7 @@ Legs:
   lat: 41.016667
   lon: 28.966667
   transport: plane
-  durationday: ""
+  durationDays: ""
   durationhours: ""
   staydays: 7
   stayhours: ""
@@ -68,7 +68,7 @@ Legs:
   lat: 38.41273
   lon: 27.13838
   transport: bus
-  durationday: ""
+  durationDays: ""
   durationhours: ""
   staydays: 21
   stayhours: ""
@@ -81,7 +81,7 @@ Legs:
   lat: 39.1
   lon: 26.55
   transport: boat
-  durationday: ""
+  durationDays: ""
   durationhours: 3
   staydays: 240
   stayhours: ""
@@ -156,7 +156,7 @@ Legs:
   lat: 40.640278
   lon: 22.935556
   transport: boat
-  durationday: ""
+  durationDays: ""
   durationhours: 7
   staydays: 365
   stayhours: ""
@@ -283,7 +283,7 @@ Legs:
   lat: 41.33
   lon: 19.82
   transport: walk
-  durationday: ""
+  durationDays: ""
   durationhours: 10
   staydays: 10
   stayhours: ""
@@ -296,7 +296,7 @@ Legs:
   lat: 42.435833
   lon: 19.260556
   transport: bus
-  durationday: ""
+  durationDays: ""
   durationhours: 10
   staydays: 10
   stayhours: ""
@@ -309,7 +309,7 @@ Legs:
   lat: 43.866667
   lon: 18.416667
   transport: walk
-  durationday: 1
+  durationDays: 1
   durationhours: ""
   staydays: ""
   stayhours: ""
@@ -322,7 +322,7 @@ Legs:
   lat: 44.816667
   lon: 15.866667
   transport: bus
-  durationday: ""
+  durationDays: ""
   durationhours: 7
   staydays: 30
   stayhours: ""
@@ -335,7 +335,7 @@ Legs:
   lat: 45.8
   lon: 15.966667
   transport: walk
-  durationday: ""
+  durationDays: ""
   durationhours: 2
   staydays: 210
   stayhours: ""
@@ -348,7 +348,7 @@ Legs:
   lat: 45.650278
   lon: 13.770278
   transport: walk
-  durationday: 4
+  durationDays: 4
   durationhours: ""
   staydays: ""
   stayhours: ""

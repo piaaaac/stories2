@@ -1,0 +1,9 @@
+type: toggles
+label: Container type
+default: content
+options:
+  containertexts: Text width container
+  containerfull: Wide container
+  none: No container, full width
+width: 1/2
+# grow: false

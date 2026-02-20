@@ -6,15 +6,16 @@ tabs:
   main:
     fields:
       contentBlocks:
-        extends: fields/content-blocks-nested
-        label: Content blocks
+        extends: fields/content_blocks_nested
   # --- block options --------------
   settings:
     fields:
-      # grid:
-      #   extends: fields/block_settings_grid
-      #   width: 1/2
-      #   grow: false
+      grid:
+        extends: fields/block_settings_grid
+        width: 1/2
+        grow: false
+      bgcolor:
+        extends: fields/block_settings_bgcolor
       bordertop:
         label: Border top
         type: toggle
@@ -29,5 +30,3 @@ tabs:
       paddingbottom:
         extends: fields/block_settings_padding
         label: Padding bottom
-      bgcolor:
-        extends: fields/block_settings_bgColor

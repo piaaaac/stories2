@@ -1,0 +1,10 @@
+# --- option "data-bg-color"
+type: toggles
+label: Background
+default: none
+options:
+  none: None
+  white: White
+  black: Black
+width: 1/2
+# grow: false

@@ -10,6 +10,70 @@ Textaboutauthors: <h4>AUTHORS</h4><p><a href="https://medium.com/@Viou" target="
 
 ----
 
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: 
+
+----
+
+Twittercardtype: 
+
+----
+
+Twitterauthor: 
+
+----
+
+Robotsindex: true
+
+----
+
+Robotsfollow: true
+
+----
+
+Robotsarchive: true
+
+----
+
+Robotsimageindex: true
+
+----
+
+Robotssnippet: true
+
+----
+
+Metainherit: 
+
+----
+
 Text: 
 
 ----
@@ -18,4 +82,4 @@ Uuid: ghBID5Ul1GYN7uwV
 
 ----
 
-Updated: 2026-01-31 19:15:37
+Updated: 2026-02-06 10:24:19

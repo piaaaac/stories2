@@ -46,7 +46,7 @@ tabs:
             type: text
             width: 1/4
           departureCountry:
-            extends: fields/countrySelect
+            extends: fields/country_select
             width: 1/4
 
           reasonDeparture:
@@ -84,7 +84,7 @@ tabs:
                 label: Place name
                 width: 1/4
               country:
-                extends: fields/countrySelect
+                extends: fields/country_select
                 width: 1/4
               lat:
                 type: number
@@ -110,7 +110,7 @@ tabs:
                   taxi: taxi
                   plane: plane
                 translate: false
-              durationDay:
+              durationDays:
                 type: number
                 label: trip duration (days)
                 width: 1/4
@@ -154,6 +154,10 @@ tabs:
             size: small
             width: 1/2
             translate: false
+
+          blocks:
+            extends: fields/content_blocks
+
 
       files:
         type: files

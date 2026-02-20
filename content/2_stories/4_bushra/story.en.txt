@@ -54,7 +54,7 @@ Legs:
   lat: 37.143611
   lon: 42.681911
   transport: car
-  durationday: ""
+  durationDays: ""
   durationhours: 10
   staydays: 730
   stayhours: ""
@@ -68,7 +68,7 @@ Legs:
   lat: 41.016667
   lon: 28.966667
   transport: bus
-  durationday: 1
+  durationDays: 1
   durationhours: ""
   staydays: 4
   stayhours: ""
@@ -82,7 +82,7 @@ Legs:
   lat: 45.466944
   lon: 9.19
   transport: train
-  durationday: ""
+  durationDays: ""
   durationhours: ""
   staydays: 2
   stayhours: ""
@@ -96,7 +96,7 @@ Legs:
   lat: 52.516667
   lon: 13.383333
   transport: train
-  durationday: ""
+  durationDays: ""
   durationhours: ""
   staydays: 180
   stayhours: ""
@@ -110,7 +110,7 @@ Legs:
   lat: 45.650278
   lon: 13.770278
   transport: train
-  durationday: ""
+  durationDays: ""
   durationhours: 2
   staydays: ""
   stayhours: ""

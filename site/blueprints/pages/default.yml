@@ -34,7 +34,7 @@ tabs:
                 width: 1/2
 
               blocks:
-                extends: fields/content-blocks
+                extends: fields/content_blocks
 
               updated:
                 type: date

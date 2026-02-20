@@ -1,0 +1,13 @@
+# --- option "data-padding...."
+type: toggles
+label: Padding
+options: 
+  none: "0"
+  one: "25px"
+  two: "50px"
+  three: "75px"
+  four: "100px"
+default: one
+# required: true
+width: 1/2
+# grow: false

@@ -41,7 +41,7 @@ $bg_color_dark: #2e3e64;
 
 body {
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
   background-color: $page_bg_color;
   color: black;
   &.media-open {
@@ -818,6 +818,57 @@ body#story-tools {
   .block {
     &.text-block {
       // magic here
+    }
+
+    // --- spacing & block options
+
+    &[data-paddingbottom="none"]:not(.poplar_space) {
+      padding-bottom: 0px;
+    }
+    &[data-paddingbottom="one"]:not(.poplar_space) {
+      padding-bottom: 25px;
+    }
+    &[data-paddingbottom="two"]:not(.poplar_space) {
+      padding-bottom: 50px;
+    }
+    &[data-paddingbottom="three"]:not(.poplar_space) {
+      padding-bottom: 75px;
+    }
+    &[data-paddingbottom="four"]:not(.poplar_space) {
+      padding-bottom: 100px;
+    }
+    &[data-paddingtop="none"]:not(.poplar_space) {
+      padding-top: 0px;
+    }
+    &[data-paddingtop="one"]:not(.poplar_space) {
+      padding-top: 25px;
+    }
+    &[data-paddingtop="two"]:not(.poplar_space) {
+      padding-top: 50px;
+    }
+    &[data-paddingtop="three"]:not(.poplar_space) {
+      padding-top: 75px;
+    }
+    &[data-paddingtop="four"]:not(.poplar_space) {
+      padding-top: 100px;
+    }
+
+    // --- option "data-grid"
+
+    &[data-grid="containertexts"],
+    &[data-grid="containerfull"],
+    &[data-grid="none"] {
+      // handled in the template, using bootstrap container
+      display: block;
+    }
+
+    // --- option "data-bgcolor"
+
+    &[data-bgcolor="white"] {
+      background-color: #fff;
+    }
+    &[data-bgcolor="black"] {
+      background-color: #000;
     }
   }
 }

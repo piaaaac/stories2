@@ -20,6 +20,9 @@
 .color-white {
   color: white;
 }
+.color-green {
+  color: $green_fraga !important;
+}
 .color-white-50 {
   color: rgba(white, 0.5);
 }
@@ -56,6 +59,9 @@
   &:hover {
     text-decoration: underline;
   }
+}
+.rounded {
+  border-radius: 15px;
 }
 .pointer {
   cursor: pointer;
