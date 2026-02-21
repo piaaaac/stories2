@@ -17,7 +17,7 @@ return [
   // ],
   // "hooks" => require_once "hooks.php", // currently []
   "assets" => [
-    "version" => "0.0.14",
+    "version" => "0.0.17",
   ],
   "thumbs" => [
     "presets" => [

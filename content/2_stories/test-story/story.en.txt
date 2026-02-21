@@ -73,6 +73,14 @@ Notes:
 
 ----
 
+Storyimages:
+
+- file://O4WoE5XUBbKafAWi
+- file://gm59uK8lDEFIdDCw
+- file://YCvq5LnUDbPKN7in
+
+----
+
 Blocks: [{"content":{"contentblocks":"[{\"content\":{\"text\":\"<!-- Timeline -->\\n<div style=\\\"min-height:360px\\\" id=\\\"datawrapper-vis-niqGJ\\\">\\n<script type=\\\"text/javascript\\\" defer src=\\\"https://datawrapper.dwcdn.net/niqGJ/embed.js\\\" charset=\\\"utf-8\\\" data-target=\\\"#datawrapper-vis-niqGJ\\\"></script><noscript><img src=\\\"https://datawrapper.dwcdn.net/niqGJ/full.png\\\" alt=\\\"Western Mediterranean Route, since 2025 - Dead and Missing\\\" /></noscript>\\n</div>\"},\"id\":\"0442afc1-9ae7-488a-947f-dd0f70e3c4fd\",\"isHidden\":false,\"type\":\"markdown\"}]","grid":"containertexts","bgcolor":"none","bordertop":"false","borderbottom":"false","paddingtop":"four","paddingbottom":"four"},"id":"2f91779a-2f9b-4e48-8ee8-f8dc4b19dbd0","isHidden":false,"type":"blocks_wrapper"},{"content":{"contentblocks":"[{\"content\":{\"text\":\"<!-- Map -->\\n<iframe title=\\\"Mehwish\\\" aria-label=\\\"Symbol map\\\" id=\\\"datawrapper-chart-tg24m\\\" src=\\\"https://datawrapper.dwcdn.net/tg24m/12/\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" style=\\\"width: 0; min-width: 100% !important; border: none;\\\" height=\\\"670\\\" data-external=\\\"1\\\"></iframe><script type=\\\"text/javascript\\\">window.addEventListener(\\\"message\\\",function(a){if(void 0!==a.data[\\\"datawrapper-height\\\"]){var e=document.querySelectorAll(\\\"iframe\\\");for(var t in a.data[\\\"datawrapper-height\\\"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data[\\\"datawrapper-height\\\"][t]+\\\"px\\\";r.style.height=d}}});</script>\"},\"id\":\"5e691ff7-16d9-43a4-af57-d77504673b96\",\"isHidden\":false,\"type\":\"markdown\"}]","grid":"containertexts","bgcolor":"none","bordertop":"false","borderbottom":"false","paddingtop":"four","paddingbottom":"four"},"id":"f90e7b12-ceac-47a5-bfaf-8a8fc76bd4bd","isHidden":false,"type":"blocks_wrapper"},{"content":{"contentblocks":"[{\"content\":{\"text\":\"<!-- Timeline -->\\n<div style=\\\"min-height:360px\\\" id=\\\"datawrapper-vis-niqGJ\\\">\\n<script type=\\\"text/javascript\\\" defer src=\\\"https://datawrapper.dwcdn.net/niqGJ/embed.js\\\" charset=\\\"utf-8\\\" data-target=\\\"#datawrapper-vis-niqGJ\\\"></script><noscript><img src=\\\"https://datawrapper.dwcdn.net/niqGJ/full.png\\\" alt=\\\"Western Mediterranean Route, since 2025 - Dead and Missing\\\" /></noscript>\\n</div>\"},\"id\":\"0442afc1-9ae7-488a-947f-dd0f70e3c4fd\",\"isHidden\":false,\"type\":\"markdown\"}]","grid":"containerfull","bgcolor":"none","bordertop":"false","borderbottom":"false","paddingtop":"four","paddingbottom":"four"},"id":"c3224ac0-e177-4699-a462-6e8f5f2a1594","isHidden":false,"type":"blocks_wrapper"},{"content":{"contentblocks":"[{\"content\":{\"text\":\"<!-- Map -->\\n<iframe title=\\\"Mehwish\\\" aria-label=\\\"Symbol map\\\" id=\\\"datawrapper-chart-tg24m\\\" src=\\\"https://datawrapper.dwcdn.net/tg24m/12/\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" style=\\\"width: 0; min-width: 100% !important; border: none;\\\" height=\\\"670\\\" data-external=\\\"1\\\"></iframe><script type=\\\"text/javascript\\\">window.addEventListener(\\\"message\\\",function(a){if(void 0!==a.data[\\\"datawrapper-height\\\"]){var e=document.querySelectorAll(\\\"iframe\\\");for(var t in a.data[\\\"datawrapper-height\\\"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data[\\\"datawrapper-height\\\"][t]+\\\"px\\\";r.style.height=d}}});</script>\"},\"id\":\"5e691ff7-16d9-43a4-af57-d77504673b96\",\"isHidden\":false,\"type\":\"markdown\"}]","grid":"containerfull","bgcolor":"none","bordertop":"false","borderbottom":"false","paddingtop":"four","paddingbottom":"four"},"id":"d4241606-8ac1-465a-af34-2f34cd7b850c","isHidden":false,"type":"blocks_wrapper"}]
 
 ----
@@ -145,8 +153,16 @@ Metainherit:
 
 ----
 
+Images:
+
+- file://gm59uK8lDEFIdDCw
+- file://YCvq5LnUDbPKN7in
+- file://O4WoE5XUBbKafAWi
+
+----
+
 Uuid: TDHkiyo4YIjjcBLo
 
 ----
 
-Updated: 2026-02-20 15:14:09
+Updated: 2026-02-20 22:13:04

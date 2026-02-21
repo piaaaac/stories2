@@ -446,6 +446,108 @@ $m: 15px;
 }
 
 // -----------------------------------------------------------------------------
+// STORY PAGE
+// -----------------------------------------------------------------------------
+
+// v2
+.story-images {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  img {
+    height: 120px;
+    border-radius: 5px;
+  }
+}
+
+// v1
+// .story-images {
+//   --count: 1; /* set this from JS or inline style */
+//   position: relative;
+//   width: 100%;
+//   aspect-ratio: 4 / 3;
+//   overflow: hidden;
+//   img {
+//     position: absolute;
+//     border-radius: 5px;
+//     max-width: 100%;
+//     max-height: 100%;
+//     width: var(--w);
+//     height: var(--h);
+//     transform-origin: center;
+//     transform: scale(calc(1 - (var(--i) * 0.05)));
+//   }
+// }
+
+// V1
+.trip-symbols {
+  @include font-sans-xs;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 2px;
+  // default: large
+  --ts-size: 9px;
+  --ts-border: 1.5px;
+  &[data-style="small"] {
+    --ts-size: 5px;
+    --ts-border: 1px;
+  }
+  &[data-style="medium"] {
+    --ts-size: 7px;
+    --ts-border: 1px;
+  }
+  span {
+    display: inline-block;
+    color: $green_fraga;
+    height: var(--ts-size);
+    width: var(--ts-size);
+    border-radius: 50%;
+  }
+  span.tr {
+    border: var(--ts-border) solid $green_fraga;
+    background-color: $green_fraga;
+  }
+  span.st {
+    border: var(--ts-border) solid $bg_color_dark;
+    background-color: transparent;
+  }
+}
+
+// V2
+// .trip-symbols {
+//   @include font-sans-xs;
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+//   flex-wrap: wrap;
+//   gap: 2px;
+//   span.tr {
+//     display: inline-block;
+//     color: $green_fraga;
+//     border: 0;
+//     height: 3px;
+//     width: 4px;
+//     margin-bottom: 1px;
+//     border-bottom: 2px solid $green_fraga;
+//   }
+//   span.st {
+//     display: inline-block;
+//     color: $bg_color_dark;
+//     border: 0;
+//     height: 4px;
+//     width: 3px;
+//     margin-right: 1px;
+//     border-right: 2px solid $bg_color_dark;
+//   }
+// }
+
+// -----------------------------------------------------------------------------
 // STORY MAPBOX
 // -----------------------------------------------------------------------------
 

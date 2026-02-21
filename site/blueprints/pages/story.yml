@@ -154,6 +154,16 @@ tabs:
             size: small
             width: 1/2
             translate: false
+          
+          storyImages:
+            label: Images
+            type: files
+            layout: cards
+            multiple: true
+            size: medium
+            image:
+              cover: false
+              ratio: 1/1
 
           blocks:
             extends: fields/content_blocks

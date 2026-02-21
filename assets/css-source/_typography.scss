@@ -168,6 +168,11 @@ h4 {
   @include font-style-label;
   font-weight: 600;
 }
+h5 {
+  @include font-sans-s;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 
 p,
 h1,

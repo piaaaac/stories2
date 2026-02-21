@@ -10,19 +10,27 @@ $subtitle = "$from, $fromCountry → $to, $toCountry";
 
 $statsUrl = $kirby->url("assets") . "/images/placeholder-story-stats.svg";
 
+$trItem = "<span class='tr'></span>";
+$stItem = "<span class='st'></span>";
 $totals = [
   "places" => $page->legs()->toStructure()->count() + 1,
   "countries" => [],
+  "transports" => [],
   "travelDays" => 0,
   "stayDays" => 0,
   "totalDays" => 0,
-  "daysSequence" => "",
+  "daysSequence" => [],
 ];
 foreach ($page->legs()->toStructure() as $leg) {
   // countries
-  $legCountry = getToCountry($leg);
+  $legCountry = $leg->country()->value();
   if (!in_array($legCountry, $totals["countries"])) {
     $totals["countries"][] = $legCountry;
+  }
+  // transports
+  $legTransport = $leg->transport()->value();
+  if (!in_array($legTransport, $totals["transports"])) {
+    $totals["transports"][] = $legTransport;
   }
   // days
   $legDays = (int)$leg->durationDays()->value();
@@ -32,18 +40,24 @@ foreach ($page->legs()->toStructure() as $leg) {
   $totals["travelDays"] += $legDays + ($legHours / 24);
   $totals["stayDays"] += $stayDays + ($stayHours / 24);
   $totals["totalDays"] += $legDays + ($legHours / 24) + $stayDays + ($stayHours / 24);
-  // sequence
-  for ($i = 0; $i < $legDays; $i++) {
-    $tr = $legDays + ceil($legHours / 24);
-    $st = $stayDays + ceil($stayHours / 24);
 
-    // repeat "°" n times to indicate travel days
-    $totals["daysSequence"] .= str_repeat("● ", $tr);
-    // repeat "." n times to indicate stay days
-    $totals["daysSequence"] .= str_repeat("○ ", $st);
-  }
+  // sequence
+  $tr = $legDays + ceil($legHours / 24);
+  $st = $stayDays + ceil($stayHours / 24);
+
+  // repeat n times to indicate travel days
+  $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, $tr, $trItem));
+  // repeat n times to indicate stay days
+  $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, $st, $stItem));
 }
 // kill($totals);
+$tripDotsSize = "large";
+if ((int)$totals["totalDays"] > 30) {
+  $tripDotsSize = "medium";
+}
+if ((int)$totals["totalDays"] > 60) {
+  $tripDotsSize = "small";
+}
 ?>
 
 <?php snippet("header", ["tallMenu" => true]) ?>
@@ -69,24 +83,37 @@ foreach ($page->legs()->toStructure() as $leg) {
   <div class="container-fluid texts">
     <div class="row">
       <div class="col-lg-6">
-        <h4 class="mb-4"><?= $page->title() ?>'s trip</h4>
-        <img src="<?= $statsUrl ?>" alt="" class="img-fluid my-3" />
+        <h5 class="mb-4"><?= $page->title() ?>'s trip</h5>
+        <!-- <img src="<?= $statsUrl ?>" alt="" class="img-fluid my-3" /> -->
 
-        <div class="my-4 font-sans-xs color-green" style="letter-spacing: -0.1em;"><?= $totals["daysSequence"] ?></div>
+        <div><?= count($totals["countries"]) ?> Countries: <?= implode(", ", $totals["countries"]) ?></div>
+        <div>Transports: <?= implode(", ", $totals["transports"]) ?></div>
+
+        <div>
+          <?= round($totals["totalDays"]) ?> total days
+          (<?= round($totals["travelDays"]) ?> travel,
+          <?= round($totals["stayDays"]) ?> stay days)
+        </div>
+        <div class="trip-symbols my-4" data-style="<?= $tripDotsSize ?>" style="letter-spacing: -0.1em;">
+          <?= implode(" ", $totals["daysSequence"]) ?>
+        </div>
 
         <div class="my-4"><?= $page->text()->kt() ?></div>
 
       </div>
 
       <?php
-      $imgNum = rand(0, 4);
+      $images = $page->storyImages()->toFiles();
+      $imgNum = $images->count();
       if ($imgNum > 0):
       ?>
         <div class="col-lg-5 offset-lg-1">
-          <h4 class="mb-4"><?= "$imgNum image" . ($imgNum > 1 ? "s" : "") ?></h4>
-          <?php for ($i = 0; $i < $imgNum; $i++): ?>
-            <img src="https://placehold.co/600x400/9eaac2/acb8ce?text=Images" alt="" class="img-fluid mb-4" />
-          <?php endfor; ?>
+          <h5 class="mb-4"><?= "$imgNum image" . ($imgNum > 1 ? "s" : "") ?></h5>
+          <div class="story-images" style="--count: <?= $imgNum ?>">
+            <?php foreach ($images as $i => $image): ?>
+              <img src="<?= $image->thumb(["height" => 400])->url() ?>" />
+            <?php endforeach; ?>
+          </div>
         </div>
       <?php endif ?>
 
@@ -142,6 +169,7 @@ foreach ($page->legs()->toStructure() as $leg) {
     zoom: 5,
     attributionControl: false,
     logoPosition: 'bottom-right',
+    scrollZoom: false,
   });
 
   // --------------------------------
@@ -149,6 +177,8 @@ foreach ($page->legs()->toStructure() as $leg) {
   // --------------------------------
 
   map.on('load', () => {
+
+    // map.scrollZoom.disable();
 
     // --- Stiled attribution
     map.addControl(new mapboxgl.AttributionControl({
@@ -598,10 +628,10 @@ foreach ($page->legs()->toStructure() as $leg) {
     }
     if (bool === true) {
       state.currentMapStyle = mbStyleWithBg;
-      map.scrollZoom.enable();
+      // map.scrollZoom.enable();
     } else {
       state.currentMapStyle = mbStyleEmpty;
-      map.scrollZoom.disable();
+      // map.scrollZoom.disable();
     }
     map.setStyle(state.currentMapStyle);
     localStorage.setItem("mapVisible", String(bool));
