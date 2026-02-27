@@ -37,6 +37,10 @@ bars
   transport – number (0-100)
   trip      – number (0-100)
   permanence – number (0-100)
+stats
+  tripDays - number
+  stayDays - number
+  noTripData - number
 -->
 <script id="hb-leginfocontents" type="text/x-handlebars-template">
   <div class="box-wrapper" style="width: 300px;">
@@ -44,10 +48,11 @@ bars
       <h2 class="font-sans-m font-weight-400 mr-2 mb-2"><span class="double-dot"></span> {{place.name}}</h2>
 
       <div class="font-sans-s mb-2">
-        &rarr; from {{place.tripPlaceFrom}}
+        Traveled
         {{#if place.tripTransport}}
           by {{place.tripTransport}}
         {{/if}}
+        from {{place.tripPlaceFrom}}
       </div>
 
       {{#if place.tripComments}}
@@ -59,10 +64,32 @@ bars
           <div class="font-sans-s">Transport: {{place.tripTransport}}</div>
           <div class="bar"><div class="fill" style="width: {{bars.transport}}%;"></div></div>
           -->
-        <div class="font-sans-s">Trip</div>
-        <div class="bar"><div class="fill" style="width: {{bars.trip}}%;"></div></div>
-        <div class="font-sans-s">Permanence</div>
-        <div class="bar"><div class="fill" style="width: {{bars.permanence}}%;"></div></div>
+        <!-- <div class="bar"><div class="fill" style="width: {{bars.trip}}%;"></div></div> -->
+        
+        <div class="font-sans-s">
+          {{#if stats.noTripData}}
+            Unknown travel duration
+          {{else}}          
+            {{stats.tripDays}} {{pluralize stats.tripDays "day" "days"}} traveling
+          {{/if}}
+          {{#if stats.stayDays}}
+            , {{stats.stayDays}} {{pluralize stats.stayDays "day" "days"}} permanence
+          {{/if}}
+          
+        </div>
+        
+        <div class="trip-symbols mt-2" data-style="small">
+          {{#repeat stats.tripDays}}
+            <span class='tr'></span>
+          {{/repeat}}
+          {{#repeat stats.noTripData}}
+            <span class='tr-nodata'></span>
+          {{/repeat}}
+          {{#repeat stats.stayDays}}
+            <span class='st'></span>
+          {{/repeat}}
+        </div>
+
         <a id="close-leg-button" class="pointer" onclick="navigationAction('close-leg');">&times;</a>
       </div>
 
@@ -109,6 +136,22 @@ name – string
 
 <!-- handlebars helpers -->
 <script>
+  Handlebars.registerHelper('pluralize', function(count, singular, plural) {
+    return count === 1 ? singular : plural;
+  });
+
+  // If count = 5, this outputs five <span> elements, with this equal to the index (0–4).
+  // {{#repeat count}}
+  //   <span>{{this}}</span>
+  // {{/repeat}}
+  Handlebars.registerHelper('repeat', function(n, block) {
+    let out = '';
+    for (let i = 0; i < n; i++) {
+      out += block.fn(i);
+    }
+    return out;
+  });
+
   // --- via https://stackoverflow.com/a/8206299
   Handlebars.registerHelper('cleanUrl', function(url) {
     url = url || '';

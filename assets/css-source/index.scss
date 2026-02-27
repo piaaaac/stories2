@@ -513,6 +513,14 @@ $m: 15px;
     border: var(--ts-border) solid $green_fraga;
     background-color: $green_fraga;
   }
+  span.tr-nodata {
+    border: none;
+    border-radius: 1px;
+    margin-top: calc((var(--ts-size) - 1px) / 2);
+    height: 1px;
+    margin-bottom: calc((var(--ts-size) - 1px) / 2);
+    background-color: $green_fraga;
+  }
   span.st {
     border: var(--ts-border) solid $bg_color_dark;
     background-color: transparent;

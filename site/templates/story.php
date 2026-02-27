@@ -2,16 +2,20 @@
 // $lineColor = "#006600"; // --- darker color that works well for lines in HP
 $lineColor = "#44783b"; // --- last green_fraga
 
+// --- Prepare story data
+
 $from = getFromPlace($page);
 $fromCountry = getFromCountry($page);
 $to = getToPlace($page);
 $toCountry = getToCountry($page);
 $subtitle = "$from, $fromCountry → $to, $toCountry";
 
-$statsUrl = $kirby->url("assets") . "/images/placeholder-story-stats.svg";
+// --- Stats 
 
 $trItem = "<span class='tr'></span>";
+$ndItem = "<span class='tr-nodata'></span>";
 $stItem = "<span class='st'></span>";
+$legStats = [];
 $totals = [
   "places" => $page->legs()->toStructure()->count() + 1,
   "countries" => [],
@@ -22,10 +26,14 @@ $totals = [
   "daysSequence" => [],
 ];
 foreach ($page->legs()->toStructure() as $leg) {
+  $legStat = [];
+
   // countries
-  $legCountry = $leg->country()->value();
-  if (!in_array($legCountry, $totals["countries"])) {
-    $totals["countries"][] = $legCountry;
+  $legCountryCode = $leg->country()->value();
+  $legCountry = site()->countries()->toStructure()->findBy('code', $legCountryCode);
+  $legCountryName = $legCountry ? $legCountry->name() : null;
+  if ($legCountryName && !in_array($legCountryName, $totals["countries"])) {
+    $totals["countries"][] = $legCountryName;
   }
   // transports
   $legTransport = $leg->transport()->value();
@@ -37,18 +45,23 @@ foreach ($page->legs()->toStructure() as $leg) {
   $legHours = (int)$leg->durationHours()->value();
   $stayDays = (int)$leg->stayDays()->value();
   $stayHours = (int)$leg->stayHours()->value();
-  $totals["travelDays"] += $legDays + ($legHours / 24);
-  $totals["stayDays"] += $stayDays + ($stayHours / 24);
-  $totals["totalDays"] += $legDays + ($legHours / 24) + $stayDays + ($stayHours / 24);
+  $totals["travelDays"] += $legDays + ceil($legHours / 24);
+  $totals["stayDays"] += $stayDays + ceil($stayHours / 24);
+  $totals["totalDays"] += $legDays + ceil($legHours / 24) + $stayDays + ceil($stayHours / 24);
 
   // sequence
   $tr = $legDays + ceil($legHours / 24);
   $st = $stayDays + ceil($stayHours / 24);
-
-  // repeat n times to indicate travel days
-  $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, $tr, $trItem));
-  // repeat n times to indicate stay days
+  if ($tr == 0) {
+    $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, 1, $ndItem));
+    $legStat["noTripData"] = 1;
+  } else {
+    $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, $tr, $trItem));
+    $legStat["tripDays"] = $tr;
+  }
   $totals["daysSequence"] = array_merge($totals["daysSequence"], array_fill(0, $st, $stItem));
+  $legStat["stayDays"] = $st;
+  $legStats[] = $legStat;
 }
 // kill($totals);
 $tripDotsSize = "large";
@@ -79,21 +92,27 @@ if ((int)$totals["totalDays"] > 60) {
   </div>
 </section>
 
+<div class="debug" style="position: fixed; bottom: 20px; left: 20px; z-index: 10;">
+  <?php
+  $siblings = $page->siblings()->listed();
+  $prevPage = $page->hasPrev($siblings) ? $page->prev($siblings) : $siblings->last();
+  $nextPage = $page->hasNext($siblings) ? $page->next($siblings) : $siblings->first();
+  ?>
+  <a href="<?= $prevPage->url() ?>" class="button small grey-light one-of-two">Prev</a>
+  <a href="<?= $nextPage->url() ?>" class="button small grey-light one-of-two">Next</a>
+</div>
+
 <section id="about" class="mt-5">
   <div class="container-fluid texts">
     <div class="row">
       <div class="col-lg-6">
         <h5 class="mb-4"><?= $page->title() ?>'s trip</h5>
-        <!-- <img src="<?= $statsUrl ?>" alt="" class="img-fluid my-3" /> -->
-
-        <div><?= count($totals["countries"]) ?> Countries: <?= implode(", ", $totals["countries"]) ?></div>
-        <div>Transports: <?= implode(", ", $totals["transports"]) ?></div>
 
         <div>
-          <?= round($totals["totalDays"]) ?> total days
-          (<?= round($totals["travelDays"]) ?> travel,
-          <?= round($totals["stayDays"]) ?> stay days)
+          <?= $page->title() ?> travelled by <?= implode(", ", $totals["transports"]) ?> and passed through <?= count($totals["countries"]) ?> countries: <?= implode(", ", $totals["countries"]) ?>.
+          The trip lasted in total <?= round($totals["totalDays"]) ?> days, <?= round($totals["travelDays"]) ?> of which spent traveling and <?= round($totals["stayDays"]) ?> of which spent staying in places.
         </div>
+
         <div class="trip-symbols my-4" data-style="<?= $tripDotsSize ?>" style="letter-spacing: -0.1em;">
           <?= implode(" ", $totals["daysSequence"]) ?>
         </div>
@@ -133,6 +152,9 @@ if ((int)$totals["totalDays"] > 60) {
   kirbyData.legs = legs = <?= $page->legs()->toStructure()->toJson() ?>;
   console.log("kirbyData", kirbyData)
 
+  var legStats = <?= json_encode($legStats) ?>;
+  console.log("legStats", legStats);
+
   var lineColor = "<?= $lineColor ?>";
 
   var state = {
@@ -165,8 +187,8 @@ if ((int)$totals["totalDays"] > 60) {
   const map = new mapboxgl.Map({
     container: 'map-container',
     style: mbStyleEmpty,
-    center: [state.storyPlaces[0].lon, state.storyPlaces[0].lon],
-    zoom: 5,
+    center: [state.storyPlaces[0].lon, state.storyPlaces[0].lat],
+    zoom: 7,
     attributionControl: false,
     logoPosition: 'bottom-right',
     scrollZoom: false,
@@ -416,13 +438,20 @@ if ((int)$totals["totalDays"] > 60) {
       // Info box
       var e = state.storyPlaces[state.activeLegIndex];
       console.log("highlightLeg", e);
+      // merge object with defaults to 0 values for missing keys
+      var stats = Object.assign({
+        "tripDays": 0,
+        "stayDays": 0,
+        "noTripData": 0,
+      }, legStats[state.activeLegIndex] || {});
       var markup = templateLegInfoContents({
         "place": e,
         "bars": {
           "transport": 33,
           "trip": 80,
           "permanence": 40,
-        }
+        },
+        "stats": stats,
       });
       document.querySelector("#box-container").innerHTML = markup;
 

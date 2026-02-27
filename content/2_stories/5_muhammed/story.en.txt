@@ -54,7 +54,7 @@ Legs:
   lat: 34.532778
   lon: 69.165833
   transport: bus
-  durationDays: 1
+  durationdays: 1
   durationhours: ""
   staydays: 3
   stayhours: ""
@@ -68,7 +68,7 @@ Legs:
   lat: 31.607778
   lon: 65.705278
   transport: ""
-  durationDays: ""
+  durationdays: ""
   durationhours: 10
   staydays: 1
   stayhours: ""
@@ -82,7 +82,7 @@ Legs:
   lat: 30.96
   lon: 61.86
   transport: car
-  durationDays: ""
+  durationdays: ""
   durationhours: 10
   staydays: 1
   stayhours: ""
@@ -96,7 +96,7 @@ Legs:
   lat: 35.683333
   lon: 51.416667
   transport: car
-  durationDays: 7
+  durationdays: 7
   durationhours: ""
   staydays: 3
   stayhours: ""
@@ -110,7 +110,7 @@ Legs:
   lat: 41.016667
   lon: 28.966667
   transport: car
-  durationDays: 10
+  durationdays: 10
   durationhours: ""
   staydays: 120
   stayhours: ""
@@ -126,7 +126,7 @@ Legs:
   lat: 41.7725
   lon: 26.27973
   transport: walk
-  durationDays: 15
+  durationdays: 15
   durationhours: ""
   staydays: 45
   stayhours: ""
@@ -140,7 +140,7 @@ Legs:
   lat: 44.820556
   lon: 20.462222
   transport: car
-  durationDays: 1
+  durationdays: 1
   durationhours: ""
   staydays: 90
   stayhours: ""
@@ -156,7 +156,7 @@ Legs:
   lat: 45.183333
   lon: 15.8
   transport: bus
-  durationDays: 3
+  durationdays: 3
   durationhours: ""
   staydays: 4
   stayhours: ""
@@ -170,7 +170,7 @@ Legs:
   lat: 45.71197
   lon: 13.84675
   transport: walk
-  durationDays: 11
+  durationdays: 11
   durationhours: ""
   staydays: ""
   stayhours: ""
@@ -184,7 +184,7 @@ Legs:
   lat: 45.183333
   lon: 15.8
   transport: car
-  durationDays: ""
+  durationdays: ""
   durationhours: 8
   staydays: 20
   stayhours: ""
@@ -198,7 +198,7 @@ Legs:
   lat: 45.515778
   lon: 14.926833
   transport: truck
-  durationDays: 8
+  durationdays: 8
   durationhours: ""
   staydays: ""
   stayhours: ""
@@ -212,7 +212,7 @@ Legs:
   lat: 45.183333
   lon: 15.8
   transport: car
-  durationDays: ""
+  durationdays: ""
   durationhours: 5
   staydays: 30
   stayhours: ""
@@ -226,7 +226,7 @@ Legs:
   lat: 45.8
   lon: 13.533333
   transport: truck
-  durationDays: ""
+  durationdays: ""
   durationhours: 8
   staydays: ""
   stayhours: ""
@@ -242,6 +242,14 @@ Text: Muhammed aliquam pharetra ac nisl ultricies viverra. Praesent a consectetu
 ----
 
 Notes: 
+
+----
+
+Storyimages: 
+
+----
+
+Blocks: 
 
 ----
 
@@ -289,10 +297,6 @@ Twitterauthor:
 
 ----
 
-Metainherit: 
-
-----
-
 Robotsindex: true
 
 ----
@@ -313,6 +317,10 @@ Robotssnippet: true
 
 ----
 
+Metainherit: 
+
+----
+
 Cachedapicalls: 
 
 ----
@@ -325,4 +333,4 @@ Uuid: OFcDOlnZViN0A85u
 
 ----
 
-Updated: 2026-02-06 10:30:20
+Updated: 2026-02-27 22:14:35

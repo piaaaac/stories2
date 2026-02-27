@@ -11,13 +11,18 @@ return [
   "panel.install" => false,
   "routes" => require_once "routes.php",
   "hooks" => require_once "hooks.php",
+  "url" => [
+    "https://movinglines.org",
+    "https://www.movinglines.org",
+    "https://stories2.test",
+  ],
   // 'api' => [
   //   'slug' => 'restapi',
   //   // 'basicAuth' => true,
   // ],
   // "hooks" => require_once "hooks.php", // currently []
   "assets" => [
-    "version" => "0.0.17",
+    "version" => "0.0.18",
   ],
   "thumbs" => [
     "presets" => [

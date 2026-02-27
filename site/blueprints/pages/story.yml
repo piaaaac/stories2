@@ -82,21 +82,21 @@ tabs:
               place:
                 type: text
                 label: Place name
-                width: 1/4
+                width: 1/2
               country:
                 extends: fields/country_select
-                width: 1/4
+                width: 1/2
               lat:
                 type: number
                 step: .00000001
                 label: Latitude
-                width: 1/4
+                width: 1/2
                 translate: false
               lon:
                 type: number
                 step: .00000001
                 label: Longitude
-                width: 1/4
+                width: 1/2
                 translate: false
               transport:
                 type: select

@@ -1657,6 +1657,15 @@ img.cover-image {
   background-color: #0f673f;
 }
 
+.trip-symbols span.tr-nodata {
+  border: none;
+  border-radius: 1px;
+  margin-top: calc((var(--ts-size) - 1px) / 2);
+  height: 1px;
+  margin-bottom: calc((var(--ts-size) - 1px) / 2);
+  background-color: #0f673f;
+}
+
 .trip-symbols span.st {
   border: var(--ts-border) solid #2e3e64;
   background-color: transparent;
