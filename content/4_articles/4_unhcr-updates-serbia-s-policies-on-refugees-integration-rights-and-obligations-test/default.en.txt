@@ -18,7 +18,71 @@ Blocks: [{"content":{"text":"<h3>Serbia has introduced a new set of policy updat
 
 ----
 
-Updated: 2026-01-31 20:02:57
+Updated: 2026-01-31 21:54:31
+
+----
+
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: 
+
+----
+
+Twittercardtype: 
+
+----
+
+Twitterauthor: 
+
+----
+
+Robotsindex: true
+
+----
+
+Robotsfollow: true
+
+----
+
+Robotsarchive: true
+
+----
+
+Robotsimageindex: true
+
+----
+
+Robotssnippet: true
+
+----
+
+Metainherit: 
 
 ----
 

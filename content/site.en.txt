@@ -386,7 +386,7 @@ Countries:
   code: MK
   name: North Macedonia
 - 
-  code: "NO"
+  code: 'NO'
   name: Norway
 - 
   code: OM
@@ -580,7 +580,7 @@ Countries:
 - 
   code: ZW
   name: Zimbabwe
-  
+
 ----
 
 Metatemplate: Moving Lines
@@ -603,7 +603,7 @@ Ogsitename: Moving Lines
 
 ----
 
-Ogimage: - file://B4MRootxkV6BOG4L
+Ogimage: - file://pA5HBs3fNcmjyROi
 
 ----
 

@@ -1,8 +1,4 @@
-Title: Articles
-
-----
-
-Breadcrumbtext: Borders
+Title: Stories
 
 ----
 
@@ -70,12 +66,8 @@ Metainherit:
 
 ----
 
-Breadcrumb: Borders collection
+Uuid: xazbqxl6yZnl0KDd
 
 ----
 
-Uuid: q8ntsuC65dZ4tuzr
-
-----
-
-Updated: 2026-01-31 21:53:55
+Updated: 2026-02-20 22:39:50
