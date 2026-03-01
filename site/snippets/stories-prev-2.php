@@ -10,7 +10,7 @@
 $style = $style ?? "large";
 ?>
 
-<div class="container-fluid <?= $style === "small" ? "texts" : "" ?>">
+<div class="container-fluid <?= $style === "small" ? "texts-plus" : "" ?>">
   <div class="row">
     <?php foreach ($stories as $story):
       if ($story->legs()->toStructure()->isEmpty()) {
@@ -31,7 +31,7 @@ $style = $style ?? "large";
 
         <div class="col-sm-6 col-xl-4">
           <a href="<?= $url ?>" class="d-block">
-            <div class="svg-square-container p-5 mb-3 mt-1">
+            <div class="svg-square-container padding-proportional-s <div class=" svg-square-container p-5 mb-3 mt-1"> -->
               <?php if ($story->cachedSvg()->isNotEmpty()): ?>
                 <?= $story->cachedSvg()->value() ?>
               <?php endif ?>
@@ -59,19 +59,24 @@ $style = $style ?? "large";
 
       <?php elseif ($style === "small"): ?>
 
-        <div class="col-6 col-sm-3 col-xl-2">
-          <a href="<?= $url ?>" class="d-block">
-            <div class="svg-square-container p-4 p-sm-3 p-md-4 mb-3 mt-1">
-              <?php if ($story->cachedSvg()->isNotEmpty()): ?>
-                <?= $story->cachedSvg()->value() ?>
-              <?php endif ?>
+        <div class="col-lg-6">
+          <a href="<?= $url ?>" class="d-block no-u story-prev-small">
+            <div class="row">
+              <div class="col-6 col-sm-3 col-xl-4">
+                <div class="svg-square-container padding-proportional-s mb-3 mt-1">
+                  <!-- <div class="svg-square-container p-4 p-sm-3 p-md-4 mb-3 mt-1"> -->
+                  <?php if ($story->cachedSvg()->isNotEmpty()): ?>
+                    <?= $story->cachedSvg()->value() ?>
+                  <?php endif ?>
+                </div>
+              </div>
+              <div class="col-6 col-sm-9 col-xl-6 align-self-center">
+                <div class="story-details color-black mb-4">
+                  <div class="font-ser-l font-w-600 mb-1 outlined-page_bg_color"><?= $title ?></div>
+                  <div class="font-sans-m color-grey outlined-page_bg_color"><?= $subtitle ?></div>
+                </div>
+              </div>
             </div>
-          </a>
-        </div>
-        <div class="col-6 col-sm-9 col-xl-10 align-self-center">
-          <a href="<?= $url ?>" class="d-block color-black no-u mb-4">
-            <div class="font-ser-l font-w-600 mb-1 outlined-page_bg_color"><?= $title ?></div>
-            <div class="font-sans-m color-grey outlined-page_bg_color"><?= $subtitle ?></div>
           </a>
         </div>
 

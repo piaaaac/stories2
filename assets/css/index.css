@@ -239,38 +239,47 @@ input:invalid, textarea:invalid {
   height: 110px;
 }
 
+.font-w-100,
 .font-weight-100 {
   font-weight: 100;
 }
 
+.font-w-200,
 .font-weight-200 {
   font-weight: 200;
 }
 
+.font-w-300,
 .font-weight-300 {
   font-weight: 300;
 }
 
+.font-w-400,
 .font-weight-400 {
   font-weight: 400;
 }
 
+.font-w-500,
 .font-weight-500 {
   font-weight: 500;
 }
 
+.font-w-600,
 .font-weight-600 {
   font-weight: 600;
 }
 
+.font-w-700,
 .font-weight-700 {
   font-weight: 700;
 }
 
+.font-w-800,
 .font-weight-800 {
   font-weight: 800;
 }
 
+.font-w-900,
 .font-weight-900 {
   font-weight: 900;
 }
@@ -1807,6 +1816,23 @@ section.map-area .info #box-container .box-wrapper .action-buttons .button {
   align-items: stretch;
 }
 
+.svg-square-container.padding-proportional-s {
+  padding: 10%;
+}
+
+.story-prev-small {
+  pointer-events: none;
+}
+
+.story-prev-small .svg-square-container,
+.story-prev-small .story-details {
+  pointer-events: auto;
+}
+
+.story-prev-small:hover .svg-square-container {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 div#svg-container {
   line-height: 0;
 }
@@ -2190,4 +2216,8 @@ body#story-tools .structure .right-mapbox-preview #mapbox-container #buttons-con
 
 .container-fluid.texts {
   max-width: 1100px;
+}
+
+.container-fluid.texts-plus {
+  max-width: 1300px;
 }

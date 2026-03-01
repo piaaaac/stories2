@@ -279,6 +279,7 @@ if ((int)$totals["totalDays"] > 60) {
     var bounds = getBounds(coordinates)
     map.fitBounds(bounds, {
       padding: paddingValues(),
+      duration: 4000,
     });
   }
 
@@ -470,6 +471,7 @@ if ((int)$totals["totalDays"] > 60) {
         }
         map.fitBounds(bbox, {
           padding: paddingValues(),
+          duration: 3000,
         });
       }
     }

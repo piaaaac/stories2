@@ -697,6 +697,24 @@ section.map-area {
     justify-content: space-between;
     align-items: stretch;
   }
+  &.padding-proportional-s {
+    padding: 10%;
+  }
+}
+
+.story-prev-small {
+  pointer-events: none;
+  // background-color: rgba(255, 0, 0, 0.1);
+  .svg-square-container,
+  .story-details {
+    // background-color: rgba(231, 128, 110, 0.1);
+    pointer-events: auto;
+  }
+  &:hover {
+    .svg-square-container {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
 }
 
 // Older
@@ -998,6 +1016,9 @@ body#story-tools {
   }
   &.texts {
     max-width: 1100px;
+  }
+  &.texts-plus {
+    max-width: 1300px;
   }
 }
 
