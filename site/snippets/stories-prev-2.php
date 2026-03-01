@@ -51,7 +51,6 @@ $style = $style ?? "large";
                   <div class="font-sans-m color-grey outlined-page_bg_color"><?= $subtitle ?></div>
                 </div>
               </div>
-
             </div>
           </a>
         </div>
