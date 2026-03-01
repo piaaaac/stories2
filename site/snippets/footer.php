@@ -10,7 +10,7 @@
   <div class="container-fluid texts mb-4">
     <div class="row">
       <div class="col-12 mb-3">
-        <p>
+        <p class="font-sans-s">
           Moving Lines: Stories Crossing Borders is an independent project.
           <br />Want to contribute? <a href="">Get in touch.</a>
         </p>
