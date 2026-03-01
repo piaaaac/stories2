@@ -147,118 +147,118 @@ img.cover-image {
 
 // --- story preview
 
-$m: 15px;
-.squares {
-  border-top: 1px solid black;
-  margin-bottom: -1px;
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  position: relative;
-  // border: 1px solid red;
-  .squares-wrapper {
-    left: -$m;
-    position: relative;
-    min-width: calc(100% + #{$m * 2});
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-    .square {
-      position: relative;
-      width: calc(33.333% - 1px);
-      min-width: calc(33.333% - 1px);
-      border-right: 1px solid black;
-      border-bottom: 1px solid black;
-      .square-content-wrapper {
-        padding-top: 100%;
-        position: relative;
-        .bg {
-          // background: grey;
-          background-image: url("../images/blurred-map.jpg");
-          background-size: cover;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transition: opacity 800ms;
-        }
-        .svg-cont {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          // background-color: yellow;
-          svg {
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .content {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: $m;
-          &.story {
-            .from-bot-l {
-              position: absolute;
-              bottom: $m;
-              left: $m;
-              @include font-sans-s;
-            }
-            .to-bot-r {
-              position: absolute;
-              bottom: $m;
-              right: $m;
-              @include font-sans-s;
-            }
-          }
-          // &.article {
-          //   display: flex;
-          //   justify-content: space-between;
-          //   flex-flow: column nowrap;
-          //   .tags, .places {
-          //     @include font-sans-s;
-          //   }
-          //   .title-wrapper {
-          //     padding-right: 15%;
-          //     margin-top: 15px;
-          //     .title {
-          //       color: $green_fraga;
-          //       text-decoration-line: none;
-          //     }
-          //   }
-          //   .tags {
-          //     text-transform: uppercase;
-          //     &::before {
-          //       display: inline-block;
-          //       content: "";
-          //       margin-right: 0.5em;
-          //       height: 0.8em;
-          //       width: 0.8em;
-          //       border-radius: 0.5em;
-          //       background-color: black;
-          //     }
-          //   }
-          // }
-        }
-      }
-      &:hover {
-        .square-content-wrapper {
-          .bg {
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
-}
+// $m: 15px;
+// .squares {
+//   border-top: 1px solid black;
+//   margin-bottom: -1px;
+//   width: 100%;
+//   min-width: 100%;
+//   max-width: 100%;
+//   overflow: hidden;
+//   position: relative;
+//   // border: 1px solid red;
+//   .squares-wrapper {
+//     left: -$m;
+//     position: relative;
+//     min-width: calc(100% + #{$m * 2});
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: flex-start;
+//     justify-content: flex-start;
+//     .square {
+//       position: relative;
+//       width: calc(33.333% - 1px);
+//       min-width: calc(33.333% - 1px);
+//       border-right: 1px solid black;
+//       border-bottom: 1px solid black;
+//       .square-content-wrapper {
+//         padding-top: 100%;
+//         position: relative;
+//         .bg {
+//           // background: grey;
+//           background-image: url("../images/blurred-map.jpg");
+//           background-size: cover;
+//           position: absolute;
+//           top: 0;
+//           bottom: 0;
+//           left: 0;
+//           right: 0;
+//           opacity: 0;
+//           transition: opacity 8000ms;
+//         }
+//         .svg-cont {
+//           width: 100%;
+//           height: 100%;
+//           position: absolute;
+//           top: 0;
+//           left: 0;
+//           // background-color: yellow;
+//           svg {
+//             width: 100%;
+//             height: 100%;
+//           }
+//         }
+//         .content {
+//           position: absolute;
+//           top: 0;
+//           bottom: 0;
+//           left: 0;
+//           right: 0;
+//           padding: $m;
+//           &.story {
+//             .from-bot-l {
+//               position: absolute;
+//               bottom: $m;
+//               left: $m;
+//               @include font-sans-s;
+//             }
+//             .to-bot-r {
+//               position: absolute;
+//               bottom: $m;
+//               right: $m;
+//               @include font-sans-s;
+//             }
+//           }
+//           // &.article {
+//           //   display: flex;
+//           //   justify-content: space-between;
+//           //   flex-flow: column nowrap;
+//           //   .tags, .places {
+//           //     @include font-sans-s;
+//           //   }
+//           //   .title-wrapper {
+//           //     padding-right: 15%;
+//           //     margin-top: 15px;
+//           //     .title {
+//           //       color: $green_fraga;
+//           //       text-decoration-line: none;
+//           //     }
+//           //   }
+//           //   .tags {
+//           //     text-transform: uppercase;
+//           //     &::before {
+//           //       display: inline-block;
+//           //       content: "";
+//           //       margin-right: 0.5em;
+//           //       height: 0.8em;
+//           //       width: 0.8em;
+//           //       border-radius: 0.5em;
+//           //       background-color: black;
+//           //     }
+//           //   }
+//           // }
+//         }
+//       }
+//       &:hover {
+//         .square-content-wrapper {
+//           .bg {
+//             opacity: 1;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 .badge {
   @include font-sans-xs;
@@ -675,7 +675,7 @@ section.map-area {
   border-radius: 10px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
-  transition: all 300ms;
+  transition: background-color 600ms;
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }

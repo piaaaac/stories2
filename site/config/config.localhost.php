@@ -1,6 +1,6 @@
 <?php
 return [
-    "url" => "https://stories2.test",
+    "url" => "https://movinglines.test",
     "debug" => true,
     "whoops" => true,
 ];

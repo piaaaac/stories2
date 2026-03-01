@@ -31,20 +31,19 @@ $style = $style ?? "large";
 
         <div class="col-sm-6 col-xl-4">
           <a href="<?= $url ?>" class="d-block">
-            <div class="svg-square-container padding-proportional-s <div class=" svg-square-container p-5 mb-3 mt-1"> -->
+            <div class="svg-square-container p-5 mb-3 mt-1">
               <?php if ($story->cachedSvg()->isNotEmpty()): ?>
                 <?= $story->cachedSvg()->value() ?>
               <?php endif ?>
 
               <?php /*  TOP-BOTTOM VERSION
-            <div class="absolute-story-info">
-              <div class="font-ser-l font-w-600 mb-1 outlined-page_bg_color"><?= $title ?></div>
-              <div class="font-sans-m color-grey"><?= $subtitle ?></div>
-            </div>
-            */ ?>
+              <div class="absolute-story-info">
+                <div class="font-ser-l font-w-600 mb-1 outlined-page_bg_color"><?= $title ?></div>
+                <div class="font-sans-m color-grey"><?= $subtitle ?></div>
+              </div>
+              */ ?>
 
-              <?php /*  ALL BOTTOM VERSION
-            */ ?>
+              <?php /*  ALL BOTTOM VERSION */ ?>
               <div class="absolute-story-info">
                 <div></div>
                 <div>

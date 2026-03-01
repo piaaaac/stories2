@@ -14,7 +14,7 @@ return [
   "url" => [
     "https://movinglines.org",
     "https://www.movinglines.org",
-    "https://stories2.test",
+    "https://movinglines.test",
   ],
   // 'api' => [
   //   'slug' => 'restapi',
